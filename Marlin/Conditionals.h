@@ -375,10 +375,10 @@
       #define X_PROBE_OFFSET_FROM_EXTRUDER 0
     #endif
     #ifndef Y_PROBE_OFFSET_FROM_EXTRUDER
-      #define Y_PROBE_OFFSET_FROM_EXTRUDER 0
+      #define Y_PROBE_OFFSET_FROM_EXTRUDER 15
     #endif
     #ifndef Z_PROBE_OFFSET_FROM_EXTRUDER
-      #define Z_PROBE_OFFSET_FROM_EXTRUDER 0
+      #define Z_PROBE_OFFSET_FROM_EXTRUDER -2
     #endif
     #ifndef XY_TRAVEL_SPEED
       #define XY_TRAVEL_SPEED 4000
