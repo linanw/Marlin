@@ -29,7 +29,7 @@
 /**
  * Marlin release version identifier
  */
-#define SHORT_BUILD_VERSION "1.1.0-RC6"
+#define SHORT_BUILD_VERSION "1.1.1-RC6"
 
 /**
  * Verbose version identifier which should contain a reference to the location
@@ -60,7 +60,7 @@
  * has a distinct Github fork— the Source Code URL should just be the main
  * Marlin repository.
  */
-#define SOURCE_CODE_URL "https://github.com/MarlinFirmware/Marlin"
+#define SOURCE_CODE_URL "https://github.com/Robo3D/R2-Mini-Marlin"
 
 /**
  * Default generic printer UUID.
