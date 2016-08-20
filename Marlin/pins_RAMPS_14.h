@@ -51,7 +51,7 @@
 #define LARGE_FLASH true
 
 #ifdef IS_RAMPS_13
-  #define SERVO0_PIN        7 // RAMPS_13 // Will conflict with BTN_EN2 on LCD_I2C_VIKI
+  #define SERVO0_PIN        -1 // RAMPS_13 // Will conflict with BTN_EN2 on LCD_I2C_VIKI
 #else
   #define SERVO0_PIN       11
 #endif
@@ -70,14 +70,14 @@
 #define Y_STEP_PIN         60
 #define Y_DIR_PIN          61
 #define Y_ENABLE_PIN       56
-#define Y_MIN_PIN          14
-#define Y_MAX_PIN          15
+#define Y_MIN_PIN          15
+#define Y_MAX_PIN          14
 
 #define Z_STEP_PIN         46
 #define Z_DIR_PIN          48
 #define Z_ENABLE_PIN       62
-#define Z_MIN_PIN          18
-#define Z_MAX_PIN          19
+#define Z_MIN_PIN          19
+#define Z_MAX_PIN          18
 
 #define E0_STEP_PIN        26
 #define E0_DIR_PIN         28
@@ -105,14 +105,14 @@
 #endif
 
 #if MB(RAMPS_14_EFF) || MB(RAMPS_13_EFF) || ENABLED(IS_RAMPS_EFB)
-  #define FAN_PIN           9 // (Sprinter config)
+  #define FAN_PIN           7 // (Sprinter config)
   #if MB(RAMPS_14_EFF) || MB(RAMPS_13_EFF)
     #define CONTROLLERFAN_PIN  -1 // Pin used for the fan to cool controller
   #endif
 #elif MB(RAMPS_14_EEF) || MB(RAMPS_14_SF) || MB(RAMPS_13_EEF) || MB(RAMPS_13_SF)
-  #define FAN_PIN           8
+  #define FAN_PIN           7
 #else
-  #define FAN_PIN           4 // IO pin. Buffer needed
+  #define FAN_PIN           7 // IO pin. Buffer needed
 #endif
 
 #define PS_ON_PIN          12
@@ -135,8 +135,8 @@
 
 #define HEATER_2_PIN       -1
 
-#define TEMP_0_PIN         13   // ANALOG NUMBERING
-#define TEMP_1_PIN         15   // ANALOG NUMBERING
+#define TEMP_0_PIN         13   // ANALOG NUMBERING default 13
+#define TEMP_1_PIN         15   // ANALOG NUMBERING default 15p
 #define TEMP_2_PIN         -1   // ANALOG NUMBERING
 
 #if MB(RAMPS_14_EFF) || MB(RAMPS_14_EEF) || MB(RAMPS_14_SF) || MB(RAMPS_13_EFF) || MB(RAMPS_13_EEF) || MB(RAMPS_13_SF)
@@ -145,7 +145,7 @@
   #define HEATER_BED_PIN    8    // BED
 #endif
 
-#define TEMP_BED_PIN         14   // ANALOG NUMBERING
+#define TEMP_BED_PIN         -1   // ANALOG NUMBERING default 14
 
 #if ENABLED(Z_PROBE_SLED)
   #define SLED_PIN           -1
