@@ -101,7 +101,7 @@
 
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
   // define digital pin 4 for the filament runout sensor. Use the RAMPS 1.4 digital input 4 on the servos connector
-  #define FILRUNOUT_PIN     4
+  #define FILRUNOUT_PIN     20
 #endif
 
 #if MB(RAMPS_14_EFF) || MB(RAMPS_13_EFF) || ENABLED(IS_RAMPS_EFB)
