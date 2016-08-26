@@ -29,7 +29,7 @@
 /**
  * Marlin release version identifier
  */
-#define SHORT_BUILD_VERSION "1.1.1-RC6"
+#define SHORT_BUILD_VERSION "1.1.2"
 
 /**
  * Verbose version identifier which should contain a reference to the location
@@ -42,7 +42,7 @@
  * here we define this default string as the date where the latest release
  * version was tagged.
  */
-#define STRING_DISTRIBUTION_DATE "2016-04-24 12:00"
+#define STRING_DISTRIBUTION_DATE "2016-08-25 12:00"
 
 /**
  * @todo: Missing documentation block
@@ -52,7 +52,7 @@
 /**
  * Defines a generic printer name to be output to the LCD after booting Marlin.
  */
-#define MACHINE_NAME "R2 Mini"
+#define MACHINE_NAME "Robo C2"
 
 /**
  * The SOURCE_CODE_URL is the location where users will find the Marlin Source
@@ -60,7 +60,7 @@
  * has a distinct Github fork— the Source Code URL should just be the main
  * Marlin repository.
  */
-#define SOURCE_CODE_URL "https://github.com/Robo3D/R2-Mini-Marlin"
+#define SOURCE_CODE_URL "https://github.com/Robo3D/R2-Mini-Marlin/Marlin"
 
 /**
  * Default generic printer UUID.
