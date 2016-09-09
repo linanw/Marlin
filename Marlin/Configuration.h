@@ -231,7 +231,7 @@
 
 // Comment the following line to disable PID and enable bang-bang.
 #define PIDTEMP
-#define BANG_MAX 255 // limits current to nozzle while in bang-bang mode; 255=full current
+#define BANG_MAX 150 // limits current to nozzle while in bang-bang mode; 255=full current
 #define PID_MAX BANG_MAX // limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
 #if ENABLED(PIDTEMP)
   //#define PID_AUTOTUNE_MENU // Add PID Autotune to the LCD "Temperature" menu to run M303 and apply the result.
@@ -246,9 +246,12 @@
   #define K1 0.95 //smoothing factor within the PID
 
   // RoboC2
-  #define  DEFAULT_Kp 20.61
-  #define  DEFAULT_Ki 1.25
-  #define  DEFAULT_Kd 85.08
+  //#define  DEFAULT_Kp 8.05
+  //#define  DEFAULT_Ki 0.45
+  //#define  DEFAULT_Kd 40.21
+    #define  DEFAULT_Kp 24.12
+  #define  DEFAULT_Ki 1.42
+  #define  DEFAULT_Kd 102.57
 
 #endif // PIDTEMP
 
@@ -465,7 +468,7 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = false; // set to true to invert the l
 // :[-1,1]
 #define X_HOME_DIR -1
 #define Y_HOME_DIR 1
-#define Z_HOME_DIR 1
+#define Z_HOME_DIR -1
 
 #define min_software_endstops true // If true, axis won't move to coordinates less than HOME_POS.
 #define max_software_endstops true  // If true, axis won't move to coordinates greater than the defined lengths below.
@@ -478,7 +481,7 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = false; // set to true to invert the l
 #define Z_MIN_POS 0
 #define X_MAX_POS 122
 #define Y_MAX_POS 124
-#define Z_MAX_POS 140
+#define Z_MAX_POS 150
 
 //===========================================================================
 //========================= Filament Runout Sensor ==========================
@@ -618,7 +621,7 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = false; // set to true to invert the l
 
   // A Mechanical Probe is any probe that either doesn't deploy or needs manual deployment
   // For example any setup that uses the nozzle itself as a probe.
-  //#define MECHANICAL_PROBE
+ // #define MECHANICAL_PROBE
 
   // If you've enabled AUTO_BED_LEVELING_FEATURE and are using the Z Probe for Z Homing,
   // it is highly recommended you also enable Z_SAFE_HOMING below!

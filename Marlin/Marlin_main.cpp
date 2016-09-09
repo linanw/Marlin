@@ -6518,6 +6518,7 @@ void process_next_command() {
       #if ENABLED(AUTO_BED_LEVELING_FEATURE) || ENABLED(MESH_BED_LEVELING)
         case 29: // G29 Detailed Z probe, probes the bed at 3 or more points.
           gcode_G29();
+          plan_bed_level_matrix.set_to_identity();  //Reset the plane ("erase" all leveling data)
           break;
       #endif
 

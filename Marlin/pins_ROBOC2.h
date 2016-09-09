@@ -105,7 +105,7 @@
 
 
 #define HEATER_0_PIN       10   // EXTRUDER 1
-#define HEATER_1_PIN        9   // EXTRUDER 2 (FAN On Sprinter)
+#define HEATER_1_PIN       9   // EXTRUDER 2 (FAN On Sprinter)
 
 #define TEMP_0_PIN         13   // ANALOG NUMBERING default 13
 #define TEMP_1_PIN         15   // ANALOG NUMBERING default 15p

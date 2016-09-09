@@ -187,6 +187,11 @@ void Config_StoreSettings()  {
   EEPROM_WRITE_VAR(i, max_e_jerk);
   EEPROM_WRITE_VAR(i, home_offset);
 
+//Save G29 Matrix
+#ifdef SAVE_G29_CORRECTION_MATRIX
+  EEPROM_WRITE_VAR(i,plan_bed_level_matrix);
+#endif
+
   uint8_t mesh_num_x = 3;
   uint8_t mesh_num_y = 3;
   #if ENABLED(MESH_BED_LEVELING)
@@ -386,7 +391,9 @@ void Config_RetrieveSettings() {
     #else
       for (uint8_t q = 0; q < mesh_num_x * mesh_num_y; q++) EEPROM_READ_VAR(i, dummy);
     #endif // MESH_BED_LEVELING
-
+    #ifdef SAVE_G29_CORRECTION_MATRIX
+        EEPROM_READ_VAR(i,plan_bed_level_matrix);
+    #endif //G29 Matrix
     #if DISABLED(AUTO_BED_LEVELING_FEATURE)
       float zprobe_zoffset = 0;
     #endif
@@ -534,6 +541,9 @@ void Config_ResetDefault() {
       if (i < COUNT(axis_scaling))
         axis_scaling[i] = 1;
     #endif
+  #ifdef SAVE_G29_CORRECTION_MATRIX
+    plan_bed_level_matrix.set_to_identity();
+  #endif
   }
 
   // steps per sq second need to be updated to agree with the units per sq second
