@@ -231,7 +231,7 @@
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
-#define TEMP_SENSOR_BED 0
+#define TEMP_SENSOR_BED 1
 
 // This makes temp sensor 1 a redundant sensor for sensor 0. If the temperatures difference between these sensors is to high the print will be aborted.
 //#define TEMP_SENSOR_1_AS_REDUNDANT
@@ -637,9 +637,9 @@
 #define X_MIN_POS 0
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
-#define X_MAX_POS 165
-#define Y_MAX_POS 190
-#define Z_MAX_POS 200
+#define X_MAX_POS 191
+#define Y_MAX_POS 191
+#define Z_MAX_POS 230
 
 //===========================================================================
 //========================= Filament Runout Sensor ==========================
