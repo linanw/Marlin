@@ -248,6 +248,16 @@
 #if ENABLED(M100_FREE_MEMORY_WATCHER)
   void gcode_M100();
 #endif
+void gcode_M302();
+void gcode_G92();
+void gcode_M302();
+void line_to_destination();
+void gcode_M106();
+void gcode_M48();
+void gcode_M106();
+void gcode_M18_M84();
+void gcode_M118();
+void gcode_M1188();
 
 #if ENABLED(SDSUPPORT)
   CardReader card;
@@ -871,6 +881,25 @@ void loop() {
   if (commands_in_queue < BUFSIZE) get_available_commands();
 
   #if ENABLED(SDSUPPORT)
+  int testcode=0;
+  if ((READ(X_MIN_PIN))==1 && (testcode == 0) && !(card.sdprinting))
+     {
+       delay(1000);
+       SERIAL_PROTOCOLLN("ROBO Z Axis Test");
+       gcode_M1188();
+       gcode_M302();
+       gcode_G92();
+       gcode_M302();
+       current_position[E_AXIS] = 0;
+       destination[E_AXIS] = 20;
+       line_to_destination();
+       gcode_M106();
+       gcode_M118();
+       gcode_M48();
+       gcode_M106();
+       gcode_M18_M84();
+       testcode=0;
+      }
     card.checkautostart(false);
   #endif
 
@@ -909,6 +938,7 @@ void loop() {
   }
   checkHitEndstops();
   idle();
+  
 }
 
 void gcode_line_error(const char* err, bool doFlush = true) {
@@ -3972,7 +4002,7 @@ inline void gcode_M42() {
    */
   inline void gcode_M48() {
 
-    if (!axis_homed[X_AXIS] || !axis_homed[Y_AXIS] || !axis_homed[Z_AXIS]) {
+    if (!axis_homed[Z_AXIS]) {
       axis_unhomed_error();
       return;
     }
@@ -4953,6 +4983,20 @@ inline void gcode_M115() {
  */
 inline void gcode_M117() {
   lcd_setstatus(current_command_args);
+}
+
+/**
+ * M118: Home Z
+ */
+inline void gcode_M118() {
+  HOMEAXIS(Z);
+}
+
+/**
+ * M1188: Home Z
+ */
+inline void gcode_M1188() {
+  lcd_setstatus("Start Robo Z Axis Test");
 }
 
 /**
