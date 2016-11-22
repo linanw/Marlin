@@ -891,7 +891,7 @@ void loop() {
        gcode_G92();
        gcode_M302();
        current_position[E_AXIS] = 0;
-       destination[E_AXIS] = 20;
+       destination[E_AXIS] = 120;
        line_to_destination();
        gcode_M106();
        gcode_M118();
