@@ -885,20 +885,25 @@ void loop() {
   if ((READ(X_MIN_PIN))==1 && (testcode == 0) && !(card.sdprinting))
      {
        delay(1000);
-       SERIAL_PROTOCOLLN("ROBO Z Axis Test");
-       gcode_M1188();
+       SERIAL_PROTOCOLLN("ROBO Z Axis Test Start");
        gcode_M302();
        gcode_G92();
        gcode_M302();
        current_position[E_AXIS] = 0;
        destination[E_AXIS] = 120;
        line_to_destination();
+       delay(100);
        gcode_M106();
+       delay(100);
        gcode_M118();
+       delay(100);
        gcode_M48();
+       delay(100);
        gcode_M106();
+       delay(100);
        gcode_M18_M84();
        testcode=0;
+       SERIAL_PROTOCOLLN("ROBO Z Axis Test Done");
       }
     card.checkautostart(false);
   #endif
