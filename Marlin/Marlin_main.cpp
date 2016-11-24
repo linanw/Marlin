@@ -905,7 +905,7 @@ void loop() {
        testcode=0;
        SERIAL_PROTOCOLLN("ROBO Z Axis Test Done");
       }
-  if ((READ(Z_MIN_PIN))==1 && (testcode == 0) && !(card.sdprinting))
+  if ((READ(Z_MAX_PIN))==1 && (testcode == 0) && !(card.sdprinting))
      {
        delay(1000);
        SERIAL_PROTOCOLLN("ROBO Z Axis Move");
