@@ -905,6 +905,16 @@ void loop() {
        testcode=0;
        SERIAL_PROTOCOLLN("ROBO Z Axis Test Done");
       }
+  if ((READ(Z_MIN_PIN))==1 && (testcode == 0) && !(card.sdprinting))
+     {
+       delay(1000);
+       SERIAL_PROTOCOLLN("ROBO Z Axis Move");
+       current_position[Z_AXIS] = 0;
+       destination[Z_AXIS] = 50;
+       line_to_destination();
+       delay(100);
+       testcode=0;
+      }
     card.checkautostart(false);
   #endif
 
