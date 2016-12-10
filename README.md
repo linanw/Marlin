@@ -8,8 +8,8 @@ Requirements:
 - ZMAX limit switch
 
 Procedure:
--Trigger XMIN limit switch to start "Extruder Test"
--Trigger ZMAX limit switch to move Z Axis down 50mm
+- Trigger XMIN limit switch to start "Extruder Test"
+- Trigger ZMAX limit switch to move Z Axis down 50mm
 
 Modes of Operation:
 QuickTest Mode - Test without Z Probe Deviation
@@ -20,5 +20,5 @@ QuickTest.hex - ExtruderTestRig firmware in QuickTest Mode
 FullTest.hex - ExtruderTestRig firmware in FullTest Mode
 
 Extra Terminal Commands
--m1000 'Enable Quick Test Mode'
--m1001 'Enable Full Test Mode'
+- m1000 'Enable Quick Test Mode'
+- m1001 'Enable Full Test Mode'
