@@ -16,8 +16,8 @@ Modes of Operation:
 - FullTest Mode - Test with Z Probe Deviation
 
 Hex Files:
-QuickTest.hex - ExtruderTestRig firmware in QuickTest Mode
-FullTest.hex - ExtruderTestRig firmware in FullTest Mode
+- QuickTest.hex - ExtruderTestRig firmware in QuickTest Mode
+- FullTest.hex - ExtruderTestRig firmware in FullTest Mode
 
 Extra Terminal Commands
 - m1000 'Enable Quick Test Mode'
