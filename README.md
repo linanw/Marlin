@@ -1,9 +1,9 @@
 Extruder Test Rig Firmware (Marlin)
 
 Requirements:
--ROBO Electronics Board
--Z Axis Assembly
--Extruder Assembly
+- ROBO Electronics Board
+- Z Axis Assembly
+- Extruder Assembly
 - XMIN limit switch
 - ZMAX limit switch
 
