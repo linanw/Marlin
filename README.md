@@ -12,8 +12,8 @@ Procedure:
 - Trigger ZMAX limit switch to move Z Axis down 50mm
 
 Modes of Operation:
-QuickTest Mode - Test without Z Probe Deviation
-FullTest Mode - Test with Z Probe Deviation
+- QuickTest Mode - Test without Z Probe Deviation
+- FullTest Mode - Test with Z Probe Deviation
 
 Hex Files:
 QuickTest.hex - ExtruderTestRig firmware in QuickTest Mode
