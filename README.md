@@ -1,4 +1,4 @@
-Extruder Test Rig Firmware (Marlin)
+<b>Extruder Test Rig Firmware (Marlin)</b>
 
 Requirements:
 - ROBO Electronics Board
