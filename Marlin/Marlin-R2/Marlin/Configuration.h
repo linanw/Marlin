@@ -599,7 +599,7 @@
 // @section extruder
 
 #define DISABLE_E false // For all extruders
-#define DISABLE_INACTIVE_EXTRUDER true //disable only inactive extruders and keep active extruder enabled
+#define DISABLE_INACTIVE_EXTRUDER false //disable only inactive extruders and keep active extruder enabled
 
 // @section machine
 
@@ -637,8 +637,8 @@
 #define X_MIN_POS 0
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
-#define X_MAX_POS 191
-#define Y_MAX_POS 191
+#define X_MAX_POS 200
+#define Y_MAX_POS 200
 #define Z_MAX_POS 230
 
 //===========================================================================
@@ -708,7 +708,7 @@
 
   #if ENABLED(AUTO_BED_LEVELING_GRID)
 
-    #define LEFT_PROBE_BED_POSITION 5
+    #define LEFT_PROBE_BED_POSITION 10
     #define RIGHT_PROBE_BED_POSITION 185
     #define FRONT_PROBE_BED_POSITION 30
     #define BACK_PROBE_BED_POSITION 160
