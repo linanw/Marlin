@@ -368,8 +368,8 @@
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
   //R2 24V Heater PCBA into 3mm Aluminum plate
-  #define  DEFAULT_bedKp 170.91
-  #define  DEFAULT_bedKi 33.44
+  #define  DEFAULT_bedKp 177.86
+  #define  DEFAULT_bedKi 34.80
   #define  DEFAULT_bedKd 218.40
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
@@ -594,7 +594,7 @@
 //    |           |
 //    O-- FRONT --+
 //  (0,0)
-#define X_PROBE_OFFSET_FROM_EXTRUDER 2  // X offset: -left  +right  [of the nozzle]
+#define X_PROBE_OFFSET_FROM_EXTRUDER 0  // X offset: -left  +right  [of the nozzle]
 #define Y_PROBE_OFFSET_FROM_EXTRUDER 30  // Y offset: -front +behind [the nozzle]
 #define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
 
@@ -807,8 +807,8 @@
  *   The result is a mesh, best for large or uneven beds.
  */
 //#define AUTO_BED_LEVELING_3POINT
-//#define AUTO_BED_LEVELING_LINEAR
-#define AUTO_BED_LEVELING_BILINEAR
+#define AUTO_BED_LEVELING_LINEAR
+//#define AUTO_BED_LEVELING_BILINEAR
 
 /**
  * Enable detailed logging of G28, G29, M48, etc.
