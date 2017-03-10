@@ -1,4 +1,5 @@
-/**
+/** C2 Marlin for R2 (3.3.17)
+ *  
  * Marlin 3D Printer Firmware
  * Copyright (C) 2016 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
@@ -65,11 +66,6 @@
 #if ENABLED(HAVE_TMCDRIVER)
   #include <SPI.h>
   #include <TMC26XStepper.h>
-#endif
-
-#if ENABLED(HAVE_TMC2130DRIVER)
-  #include <SPI.h>
-  #include <Trinamic_TMC2130.h>
 #endif
 
 #if ENABLED(HAVE_L6470DRIVER)
