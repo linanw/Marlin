@@ -170,7 +170,9 @@
 #elif MB(SAINSMART_2IN1)
   #include "pins_SAINSMART_2IN1.h"
 #elif MB(ROBOC2)
-   #include "pins_ROBOC2.h"
+  #include "pins_ROBOC2.h"
+#elif MB(ROBOMB)
+  #include "pins_ROBOMB.h"  
 #else
   #error Unknown MOTHERBOARD value set in Configuration.h
 #endif

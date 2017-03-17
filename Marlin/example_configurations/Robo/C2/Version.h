@@ -35,7 +35,7 @@
   /**
    * Marlin release version identifier
    */
-  #define SHORT_BUILD_VERSION "1.1.5-R2"
+  #define SHORT_BUILD_VERSION "1.1.5-C2"
   #define FIRMWARE_VERSION "1.1.5"
 
   /**
@@ -64,12 +64,12 @@
   /**
    * @todo: Missing documentation block
    */
-  #define PROTOCOL_VERSION "R2"
+  #define PROTOCOL_VERSION "C2"
 
   /**
    * Defines a generic printer name to be output to the LCD after booting Marlin.
    */
-  #define MACHINE_NAME "RoboR2"
+  #define MACHINE_NAME "RoboC2"
 
   /**
    * The SOURCE_CODE_URL is the location where users will find the Marlin Source

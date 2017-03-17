@@ -29,6 +29,7 @@
 
 #include "planner.h"
 #include "thermistortables.h"
+#include "HeatedBed.h"
 
 #include "MarlinConfig.h"
 

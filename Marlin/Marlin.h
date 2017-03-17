@@ -224,6 +224,8 @@ void reset_bed_level();
 void kill(const char*);
 
 void quickstop_stepper();
+void disable_all_heaters();
+void current_temperature_bed();
 
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
   void handle_filament_runout();
