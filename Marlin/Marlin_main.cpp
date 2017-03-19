@@ -211,6 +211,7 @@
  * M221 - Set Flow Percentage: S<percent>
  * M226 - Wait until the specified pin reaches the state required: P<pin number> S<pin state>
  * M240 - Trigger a camera to take a photograph
+ * M248 - Heated Bed Check S<1 = Heated Bed Check> E<1 = Enable, 0 = Disable>
  * M250 - Set LCD contrast C<contrast value> (value 0..63)
  * M280 - Set servo position absolute. P: servo index, S: angle or microseconds
  * M300 - Play beep sound S<frequency Hz> P<duration ms>

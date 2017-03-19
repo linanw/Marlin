@@ -3,17 +3,11 @@
  * Author: Dan Thompson (danthompson41@gmail.com)
  * Date: 4/8/2016
  * Useful functions from Marlin_main.cpp, so that they can be used elsewhere.
- * Adapted from Dan Thompson's work
+ * Adapted from Dan Thompson's work at Voxel8
  */
 
 #ifndef G_CODE_UTILITY_H_
 #define G_CODE_UTILITY_H_
-
-//===========================================================================
-//=============================== Definitions ===============================
-//===========================================================================
-
-#define MM_TO_UM (1000)
 
 //===========================================================================
 //============================= Public Functions ============================

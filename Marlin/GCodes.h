@@ -8,7 +8,7 @@
  * work if you count on the linker (ex, using the normal .cpp with an h file
  * interface). Directly including the code in an H file is the easiest way to
  * do this.
- * Adapted from Dan Thompson's work
+ * Adapted from Dan Thompson's work at Voxel8
  */
 
 #ifndef G_CODES_H_
@@ -32,22 +32,16 @@
  * Implemented Codes
  * -----------------
  *
- *
  * "M" Codes
  *
- * M251 - Queries small pneumatics cartridge to retrieve Syringe status
- * M252 - Clear error state on I2C peripherals (cartridges and holder)
- * M253 - Queries cartridge to see if 24 volts are present or not.
-          FFF: Returns whether hot end is active
-          Pneumatics: Returns whether solenoid is active
- * M272 - Set axis steps-per-unit for one or more axes, X, Y, Z, and E using
- *        the default ball-bar units
+ * M248 - Queries the thermistor of the heated bed to see if it is connected.
+ *        Protects from homing when bed is not attached, useful for protecting
+ *        the printer from starting a print job without the bed attached.
 */
 
 //===========================================================================
 //============================= Public Functions ============================
 //===========================================================================
-
 
 /*
 * M248 - Enable / Disable Protections
