@@ -107,7 +107,7 @@
    * WATCH_BED_TEMP_INCREASE. (WATCH_BED_TEMP_INCREASE should not be below 2.)
    */
   #define WATCH_BED_TEMP_PERIOD 100                // Seconds
-  #define WATCH_BED_TEMP_INCREASE 10               // Degrees Celsius
+  #define WATCH_BED_TEMP_INCREASE 2              // Degrees Celsius
 #endif
 
 #if ENABLED(PIDTEMP)
