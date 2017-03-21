@@ -1,5 +1,4 @@
-/** C2 Marlin for R2 (3.3.17)
- *  
+/**
  * Marlin 3D Printer Firmware
  * Copyright (C) 2016 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *

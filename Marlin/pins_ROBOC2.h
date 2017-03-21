@@ -94,11 +94,11 @@
 #define HEATER_1_PIN       9   // EXTRUDER 2 (FAN On Sprinter)
 
 #define TEMP_0_PIN         13   // ANALOG NUMBERING default 13
-#define TEMP_1_PIN         15   // ANALOG NUMBERING default 15
+#define TEMP_1_PIN         15   // ANALOG NUMBERING default 15p
 
-#define HEATER_BED_PIN      8    // BED
+#define HEATER_BED_PIN      -1    // BED
 
-#define TEMP_BED_PIN       14   // ANALOG NUMBERING default 14
+#define TEMP_BED_PIN       -1   // ANALOG NUMBERING default 14
 
 #define LCD_PINS_RS 16
     #define LCD_PINS_ENABLE 17

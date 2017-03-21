@@ -1,7 +1,7 @@
-# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Marlin.ino.cpp"
-# 1 "C:\\Program Files (x86)\\Arduino//"
+# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Marlin.ino.cpp"
+# 1 "C:\\Users\\Allen\\Downloads\\Marlin-RC\\Marlin-RC\\Marlin//"
 # 1 "<command-line>"
-# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Marlin.ino.cpp"
+# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Marlin.ino.cpp"
 # 1 "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino/Arduino.h" 1
 /*
   Arduino.h - Main include file for the Arduino SDK
@@ -8751,167 +8751,101 @@ static const uint8_t A15 = 69;
 // SERIAL_PORT_HARDWARE_OPEN  Hardware serial ports which are open for use.  Their RX & TX
 //                            pins are NOT connected to anything by default.
 # 250 "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino/Arduino.h" 2
-# 2 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Marlin.ino.cpp" 2
-# 1 "C:\\Users\\Allen\\Documents\\GitHub\\C2 Production\\Marlin-C2\\Marlin\\Marlin.ino"
-# 1 "C:\\Users\\Allen\\Documents\\GitHub\\C2 Production\\Marlin-C2\\Marlin\\Marlin.ino"
+# 2 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Marlin.ino.cpp" 2
+# 1 "C:\\Users\\Allen\\Downloads\\Marlin-RC\\Marlin-RC\\Marlin\\Marlin.ino"
+# 1 "C:\\Users\\Allen\\Downloads\\Marlin-RC\\Marlin-RC\\Marlin\\Marlin.ino"
 /**
-
  * Marlin 3D Printer Firmware
-
  * Copyright (C) 2016 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
-
  *
-
  * Based on Sprinter and grbl.
-
  * Copyright (C) 2011 Camiel Gubbels / Erik van der Zalm
-
  *
-
  * This program is free software: you can redistribute it and/or modify
-
  * it under the terms of the GNU General Public License as published by
-
  * the Free Software Foundation, either version 3 of the License, or
-
  * (at your option) any later version.
-
  *
-
  * This program is distributed in the hope that it will be useful,
-
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
-
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-
  * GNU General Public License for more details.
-
  *
-
  * You should have received a copy of the GNU General Public License
-
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
  *
-
  */
-# 23 "C:\\Users\\Allen\\Documents\\GitHub\\C2 Production\\Marlin-C2\\Marlin\\Marlin.ino"
+
 /**
-
  * About Marlin
-
  *
-
  * This firmware is a mashup between Sprinter and grbl.
-
  *  - https://github.com/kliment/Sprinter
-
  *  - https://github.com/simen/grbl/tree
-
  *
-
  * It has preliminary support for Matthew Roberts advance algorithm
-
  *  - http://reprap.org/pipermail/reprap-dev/2011-May/003323.html
-
  */
-# 34 "C:\\Users\\Allen\\Documents\\GitHub\\C2 Production\\Marlin-C2\\Marlin\\Marlin.ino"
+
 /* All the implementation is done in *.cpp files to get better compatibility with avr-gcc without the Arduino IDE */
 /* Use this file to help the Arduino IDE find which Arduino libraries are needed and to keep documentation on GCode */
 
-# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\MarlinConfig.h" 1
+# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\MarlinConfig.h" 1
 /**
-
  * Marlin 3D Printer Firmware
-
  * Copyright (C) 2016 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
-
  *
-
  * Based on Sprinter and grbl.
-
  * Copyright (C) 2011 Camiel Gubbels / Erik van der Zalm
-
  *
-
  * This program is free software: you can redistribute it and/or modify
-
  * it under the terms of the GNU General Public License as published by
-
  * the Free Software Foundation, either version 3 of the License, or
-
  * (at your option) any later version.
-
  *
-
  * This program is distributed in the hope that it will be useful,
-
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
-
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-
  * GNU General Public License for more details.
-
  *
-
  * You should have received a copy of the GNU General Public License
-
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
  *
-
  */
-# 26 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\MarlinConfig.h"
-# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\fastio.h" 1
-/**
 
+
+
+
+# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\fastio.h" 1
+/**
  * Marlin 3D Printer Firmware
-
  * Copyright (C) 2016 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
-
  *
-
  * Based on Sprinter and grbl.
-
  * Copyright (C) 2011 Camiel Gubbels / Erik van der Zalm
-
  *
-
  * This program is free software: you can redistribute it and/or modify
-
  * it under the terms of the GNU General Public License as published by
-
  * the Free Software Foundation, either version 3 of the License, or
-
  * (at your option) any later version.
-
  *
-
  * This program is distributed in the hope that it will be useful,
-
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
-
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-
  * GNU General Public License for more details.
-
  *
-
  * You should have received a copy of the GNU General Public License
-
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
  *
-
  */
-# 23 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\fastio.h"
-/**
 
+/**
   This code contributed by Triffid_Hunter and modified by Kliment
-
   why double up on these macros? see http://gcc.gnu.org/onlinedocs/cpp/Stringification.html
-
 */
+
+
+
 
 # 1 "c:\\program files (x86)\\arduino\\hardware\\tools\\avr\\avr\\include\\avr\\io.h" 1 3
 /* Copyright (c) 2002,2003,2005,2006,2007 Marek Michalkiewicz, Joerg Wunsch
@@ -9008,29 +8942,26 @@ static const uint8_t A15 = 69;
     The size of the EEPROM page.
     
 */
-# 32 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\fastio.h" 2
+# 32 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\fastio.h" 2
 
 /**
-
   utility functions
-
 */
+
+
 
 
 
 /**
-
   magic I/O routines
-
   now you can simply SET_OUTPUT(STEP); WRITE(STEP, 1); WRITE(STEP, 0);
-
 */
-# 46 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\fastio.h"
+
 /// Read a pin
 
 /// write to a pin
 // On some boards pins > 0x100 are used. These are not converted to atomic actions. An critical section is needed.
-# 68 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\fastio.h"
+# 68 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\fastio.h"
 /// toggle a pin
 
 
@@ -9059,6 +8990,8 @@ static const uint8_t A15 = 69;
 
 /// set pin as input wrapper
 
+/// set pin as input with pullup wrapper
+
 /// set pin as output wrapper
 
 
@@ -9074,15 +9007,11 @@ static const uint8_t A15 = 69;
 
 
 /**
-
   ports and functions
 
-
-
   added as necessary or if I feel like it- not a comprehensive list!
-
 */
-# 955 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\fastio.h"
+# 955 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\fastio.h"
   // UART
 
 
@@ -9098,63 +9027,44 @@ static const uint8_t A15 = 69;
 
 
   // timers and PWM
-# 986 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\fastio.h"
+# 986 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\fastio.h"
   // change for your board
 
 
   /**
-
   pins
-
   */
-# 27 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\MarlinConfig.h" 2
-# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\macros.h" 1
+# 27 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\MarlinConfig.h" 2
+# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\macros.h" 1
 /**
-
  * Marlin 3D Printer Firmware
-
  * Copyright (C) 2016 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
-
  *
-
  * Based on Sprinter and grbl.
-
  * Copyright (C) 2011 Camiel Gubbels / Erik van der Zalm
-
  *
-
  * This program is free software: you can redistribute it and/or modify
-
  * it under the terms of the GNU General Public License as published by
-
  * the Free Software Foundation, either version 3 of the License, or
-
  * (at your option) any later version.
-
  *
-
  * This program is distributed in the hope that it will be useful,
-
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
-
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-
  * GNU General Public License for more details.
-
  *
-
  * You should have received a copy of the GNU General Public License
-
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
  *
-
  */
-# 33 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\macros.h"
+# 33 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\macros.h"
 // Bracket code that shouldn't be interrupted
 
 
 
+
+
+// Clock speed factor
 
 
 // Remove compiler warning on an unused variable
@@ -9171,69 +9081,43 @@ static const uint8_t A15 = 69;
 
 
 // Macros for maths shortcuts
-
-
-
-
-
-
-
+# 64 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\macros.h"
 // Macros to contrain values
 
 
 
 // Macros to support option testing
-# 78 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\macros.h"
+# 83 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\macros.h"
 // Macros for initializing arrays
-# 89 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\macros.h"
+# 94 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\macros.h"
 // Macros for adding
-# 102 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\macros.h"
+# 107 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\macros.h"
 // Macros for subtracting
-# 28 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\MarlinConfig.h" 2
-# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\boards.h" 1
+# 28 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\MarlinConfig.h" 2
+# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\boards.h" 1
 /**
-
  * Marlin 3D Printer Firmware
-
  * Copyright (C) 2016 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
-
  *
-
  * Based on Sprinter and grbl.
-
  * Copyright (C) 2011 Camiel Gubbels / Erik van der Zalm
-
  *
-
  * This program is free software: you can redistribute it and/or modify
-
  * it under the terms of the GNU General Public License as published by
-
  * the Free Software Foundation, either version 3 of the License, or
-
  * (at your option) any later version.
-
  *
-
  * This program is distributed in the hope that it will be useful,
-
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
-
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-
  * GNU General Public License for more details.
-
  *
-
  * You should have received a copy of the GNU General Public License
-
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
  *
-
  */
-# 29 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\MarlinConfig.h" 2
-# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Version.h" 1
+# 29 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\MarlinConfig.h" 2
+# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Version.h" 1
 /**
  * Marlin 3D Printer Firmware
  * Copyright (C) 2016 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
@@ -9323,8 +9207,8 @@ static const uint8_t A15 = 69;
    * The WEBSITE_URL is the location where users can get more information such as
    * documentation about a specific Marlin release.
    */
-# 30 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\MarlinConfig.h" 2
-# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Configuration.h" 1
+# 30 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\MarlinConfig.h" 2
+# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Configuration.h" 1
 /**
  * Marlin 3D Printer Firmware
  * Copyright (C) 2016 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
@@ -9376,8 +9260,6 @@ static const uint8_t A15 = 69;
  *
  * Note: Update also Version.h !
  */
-
-
 
 
 //===========================================================================
@@ -9434,14 +9316,23 @@ static const uint8_t A15 = 69;
 //#define SHOW_CUSTOM_BOOTSCREEN
 // @section machine
 
-// SERIAL_PORT selects which serial port should be used for communication with the host.
-// This allows the connection of wireless adapters (for instance) to non-default port pins.
-// Serial port 0 is still used by the Arduino bootloader regardless of this setting.
-// :[0,1,2,3,4,5,6,7]
+/**
+ * Select which serial port on the board will be used for communication with the host.
+ * This allows the connection of wireless adapters (for instance) to non-default port pins.
+ * Serial port 0 is always used by the Arduino bootloader regardless of this setting.
+ *
+ * :[0, 1, 2, 3, 4, 5, 6, 7]
+ */
 
 
-// This determines the communication speed of the printer
-// :[2400,9600,19200,38400,57600,115200,250000]
+/**
+ * This setting determines the communication speed of the printer.
+ *
+ * 250000 works in most cases, but you might try a lower speed if
+ * you commonly experience drop-outs during host printing.
+ *
+ * :[2400, 9600, 19200, 38400, 57600, 115200, 250000]
+ */
 
 
 // Enable the Bluetooth serial interface on AT90USB devices
@@ -9455,15 +9346,18 @@ static const uint8_t A15 = 69;
 
 // Optional custom name for your RepStrap or other custom machine
 // Displayed in the LCD "Ready" message
-//#define CUSTOM_MACHINE_NAME "3D Printer"
+//#define CUSTOM_MACHINE_NAME "Robo C2"
 
 // Define this to set a unique identifier for this printer, (Used by some programs to differentiate between machines)
 // You can use an online service to generate a random UUID. (eg http://www.uuidgenerator.net/version4)
 //#define MACHINE_UUID "00000000-0000-0000-0000-000000000000"
 
 // This defines the number of extruders
-// :[1,2,3,4]
+// :[1, 2, 3, 4]
 
+
+// Enable if your E steppers or extruder gear ratios are not identical
+//#define DISTINCT_E_FACTORS
 
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
 //#define SINGLENOZZLE
@@ -9498,69 +9392,79 @@ static const uint8_t A15 = 69;
 //#define HOTEND_OFFSET_X {0.0, 20.00} // (in mm) for each extruder, offset of the hotend on the X axis
 //#define HOTEND_OFFSET_Y {0.0, 5.00}  // (in mm) for each extruder, offset of the hotend on the Y axis
 
-//// The following define selects which power supply you have. Please choose the one that matches your setup
-// 1 = ATX
-// 2 = X-Box 360 203Watts (the blue wire connected to PS_ON and the red wire to VCC)
-// :{1:'ATX',2:'X-Box 360'}
-
-
-// Define this to have the electronics keep the power supply off on startup. If you don't know what this is leave it.
-//#define PS_DEFAULT_OFF
-
+/**
+ * Select your power supply here. Use 0 if you haven't connected the PS_ON_PIN
+ *
+ * 0 = No Power Switch
+ * 1 = ATX
+ * 2 = X-Box 360 203Watts (the blue wire connected to PS_ON and the red wire to VCC)
+ *
+ * :{ 0:'No power switch', 1:'ATX', 2:'X-Box 360' }
+ */
+# 201 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Configuration.h"
 // @section temperature
 
 //===========================================================================
 //============================= Thermal Settings ============================
 //===========================================================================
-//
-//--NORMAL IS 4.7kohm PULLUP!-- 1kohm pullup can be used on hotend sensor, using correct resistor and table
-//
-//// Temperature sensor settings:
-// -3 is thermocouple with MAX31855 (only for sensor 0)
-// -2 is thermocouple with MAX6675 (only for sensor 0)
-// -1 is thermocouple with AD595
-// 0 is not used
-// 1 is 100k thermistor - best choice for EPCOS 100k (4.7k pullup)
-// 2 is 200k thermistor - ATC Semitec 204GT-2 (4.7k pullup)
-// 3 is Mendel-parts thermistor (4.7k pullup)
-// 4 is 10k thermistor !! do not use it for a hotend. It gives bad resolution at high temp. !!
-// 5 is 100K thermistor - ATC Semitec 104GT-2 (Used in ParCan & J-Head) (4.7k pullup)
-// 6 is 100k EPCOS - Not as accurate as table 1 (created using a fluke thermocouple) (4.7k pullup)
-// 7 is 100k Honeywell thermistor 135-104LAG-J01 (4.7k pullup)
-// 71 is 100k Honeywell thermistor 135-104LAF-J01 (4.7k pullup)
-// 8 is 100k 0603 SMD Vishay NTCS0603E3104FXT (4.7k pullup)
-// 9 is 100k GE Sensing AL03006-58.2K-97-G1 (4.7k pullup)
-// 10 is 100k RS thermistor 198-961 (4.7k pullup)
-// 11 is 100k beta 3950 1% thermistor (4.7k pullup)
-// 12 is 100k 0603 SMD Vishay NTCS0603E3104FXT (4.7k pullup) (calibrated for Makibox hot bed)
-// 13 is 100k Hisens 3950  1% up to 300°C for hotend "Simple ONE " & "Hotend "All In ONE"
-// 20 is the PT100 circuit found in the Ultimainboard V2.x
-// 60 is 100k Maker's Tool Works Kapton Bed Thermistor beta=3950
-// 66 is 4.7M High Temperature thermistor from Dyze Design
-// 70 is the 100K thermistor found in the bq Hephestos 2
-//
-//    1k ohm pullup tables - This is not normal, you would have to have changed out your 4.7k for 1k
-//                          (but gives greater accuracy and more stable PID)
-// 51 is 100k thermistor - EPCOS (1k pullup)
-// 52 is 200k thermistor - ATC Semitec 204GT-2 (1k pullup)
-// 55 is 100k thermistor - ATC Semitec 104GT-2 (Used in ParCan & J-Head) (1k pullup)
-//
-// 1047 is Pt1000 with 4k7 pullup
-// 1010 is Pt1000 with 1k pullup (non standard)
-// 147 is Pt100 with 4k7 pullup
-// 110 is Pt100 with 1k pullup (non standard)
-// 998 and 999 are Dummy Tables. They will ALWAYS read 25°C or the temperature defined below.
-//     Use it for Testing or Development purposes. NEVER for production machine.
-//#define DUMMY_THERMISTOR_998_VALUE 25
-//#define DUMMY_THERMISTOR_999_VALUE 100
-// :{ '0': "Not used",'1':"100k / 4.7k - EPCOS",'2':"200k / 4.7k - ATC Semitec 204GT-2",'3':"Mendel-parts / 4.7k",'4':"10k !! do not use for a hotend. Bad resolution at high temp. !!",'5':"100K / 4.7k - ATC Semitec 104GT-2 (Used in ParCan & J-Head)",'6':"100k / 4.7k EPCOS - Not as accurate as Table 1",'7':"100k / 4.7k Honeywell 135-104LAG-J01",'8':"100k / 4.7k 0603 SMD Vishay NTCS0603E3104FXT",'9':"100k / 4.7k GE Sensing AL03006-58.2K-97-G1",'10':"100k / 4.7k RS 198-961",'11':"100k / 4.7k beta 3950 1%",'12':"100k / 4.7k 0603 SMD Vishay NTCS0603E3104FXT (calibrated for Makibox hot bed)",'13':"100k Hisens 3950  1% up to 300°C for hotend 'Simple ONE ' & hotend 'All In ONE'",'20':"PT100 (Ultimainboard V2.x)",'51':"100k / 1k - EPCOS",'52':"200k / 1k - ATC Semitec 204GT-2",'55':"100k / 1k - ATC Semitec 104GT-2 (Used in ParCan & J-Head)",'60':"100k Maker's Tool Works Kapton Bed Thermistor beta=3950",'66':"Dyze Design 4.7M High Temperature thermistor",'70':"the 100K thermistor found in the bq Hephestos 2",'71':"100k / 4.7k Honeywell 135-104LAF-J01",'147':"Pt100 / 4.7k",'1047':"Pt1000 / 4.7k",'110':"Pt100 / 1k (non-standard)",'1010':"Pt1000 / 1k (non standard)",'-3':"Thermocouple + MAX31855 (only for sensor 0)",'-2':"Thermocouple + MAX6675 (only for sensor 0)",'-1':"Thermocouple + AD595",'998':"Dummy 1",'999':"Dummy 2" }
+
+/**
+ * --NORMAL IS 4.7kohm PULLUP!-- 1kohm pullup can be used on hotend sensor, using correct resistor and table
+ * 
+ * Temperature sensors available:
+ *
+ *    -3 : thermocouple with MAX31855 (only for sensor 0)
+ *    -2 : thermocouple with MAX6675 (only for sensor 0)
+ *    -1 : thermocouple with AD595
+ *     0 : not used
+ *     1 : 100k thermistor - best choice for EPCOS 100k (4.7k pullup)
+ *     2 : 200k thermistor - ATC Semitec 204GT-2 (4.7k pullup)
+ *     3 : Mendel-parts thermistor (4.7k pullup)
+ *     4 : 10k thermistor !! do not use it for a hotend. It gives bad resolution at high temp. !!
+ *     5 : 100K thermistor - ATC Semitec 104GT-2 (Used in ParCan & J-Head) (4.7k pullup)
+ *     6 : 100k EPCOS - Not as accurate as table 1 (created using a fluke thermocouple) (4.7k pullup)
+ *     7 : 100k Honeywell thermistor 135-104LAG-J01 (4.7k pullup)
+ *    71 : 100k Honeywell thermistor 135-104LAF-J01 (4.7k pullup)
+ *     8 : 100k 0603 SMD Vishay NTCS0603E3104FXT (4.7k pullup)
+ *     9 : 100k GE Sensing AL03006-58.2K-97-G1 (4.7k pullup)
+ *    10 : 100k RS thermistor 198-961 (4.7k pullup)
+ *    11 : 100k beta 3950 1% thermistor (4.7k pullup)
+ *    12 : 100k 0603 SMD Vishay NTCS0603E3104FXT (4.7k pullup) (calibrated for Makibox hot bed)
+ *    13 : 100k Hisens 3950  1% up to 300°C for hotend "Simple ONE " & "Hotend "All In ONE"
+ *    20 : the PT100 circuit found in the Ultimainboard V2.x
+ *    60 : 100k Maker's Tool Works Kapton Bed Thermistor beta=3950
+ *    66 : 4.7M High Temperature thermistor from Dyze Design
+ *    70 : the 100K thermistor found in the bq Hephestos 2
+ * 
+ *       1k ohm pullup tables - This is atypical, and requires changing out the 4.7k pullup for 1k.
+ *                              (but gives greater accuracy and more stable PID)
+ *    51 : 100k thermistor - EPCOS (1k pullup)
+ *    52 : 200k thermistor - ATC Semitec 204GT-2 (1k pullup)
+ *    55 : 100k thermistor - ATC Semitec 104GT-2 (Used in ParCan & J-Head) (1k pullup)
+ * 
+ *  1047 : Pt1000 with 4k7 pullup
+ *  1010 : Pt1000 with 1k pullup (non standard)
+ *   147 : Pt100 with 4k7 pullup
+ *   110 : Pt100 with 1k pullup (non standard)
+ *
+ *         Use these for Testing or Development purposes. NEVER for production machine.
+ *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
+ *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
+ *
+ * :{ '0': "Not used", '1':"100k / 4.7k - EPCOS", '2':"200k / 4.7k - ATC Semitec 204GT-2", '3':"Mendel-parts / 4.7k", '4':"10k !! do not use for a hotend. Bad resolution at high temp. !!", '5':"100K / 4.7k - ATC Semitec 104GT-2 (Used in ParCan & J-Head)", '6':"100k / 4.7k EPCOS - Not as accurate as Table 1", '7':"100k / 4.7k Honeywell 135-104LAG-J01", '8':"100k / 4.7k 0603 SMD Vishay NTCS0603E3104FXT", '9':"100k / 4.7k GE Sensing AL03006-58.2K-97-G1", '10':"100k / 4.7k RS 198-961", '11':"100k / 4.7k beta 3950 1%", '12':"100k / 4.7k 0603 SMD Vishay NTCS0603E3104FXT (calibrated for Makibox hot bed)", '13':"100k Hisens 3950  1% up to 300°C for hotend 'Simple ONE ' & hotend 'All In ONE'", '20':"PT100 (Ultimainboard V2.x)", '51':"100k / 1k - EPCOS", '52':"200k / 1k - ATC Semitec 204GT-2", '55':"100k / 1k - ATC Semitec 104GT-2 (Used in ParCan & J-Head)", '60':"100k Maker's Tool Works Kapton Bed Thermistor beta=3950", '66':"Dyze Design 4.7M High Temperature thermistor", '70':"the 100K thermistor found in the bq Hephestos 2", '71':"100k / 4.7k Honeywell 135-104LAF-J01", '147':"Pt100 / 4.7k", '1047':"Pt1000 / 4.7k", '110':"Pt100 / 1k (non-standard)", '1010':"Pt1000 / 1k (non standard)", '-3':"Thermocouple + MAX31855 (only for sensor 0)", '-2':"Thermocouple + MAX6675 (only for sensor 0)", '-1':"Thermocouple + AD595",'998':"Dummy 1", '999':"Dummy 2" }
+ */
 
 
 
 
 
 
-// This makes temp sensor 1 a redundant sensor for sensor 0. If the temperatures difference between these sensors is to high the print will be aborted.
+// Dummy thermistor constant temperature readings, for use with 998 and 999
+
+
+
+// Use temp sensor 1 as a redundant sensor with sensor 0. If the readings
+// from the two sensors differ too much the print will be aborted.
 //#define TEMP_SENSOR_1_AS_REDUNDANT
 
 
@@ -9612,12 +9516,16 @@ static const uint8_t A15 = 69;
                                   // is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
 
 
-
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
   // Robo C2 19V
 
 
 
+
+  // Ultimaker
+  //#define  DEFAULT_Kp 22.2
+  //#define  DEFAULT_Ki 1.08
+  //#define  DEFAULT_Kd 114
 
   // MakerGear
   //#define  DEFAULT_Kp 7.0
@@ -9651,7 +9559,7 @@ static const uint8_t A15 = 69;
 // all forms of bed control obey this (PID, bang-bang, bang-bang with hysteresis)
 // setting this to anything other than 255 enables a form of PWM to the bed just like HEATER_BED_DUTY_CYCLE_DIVIDER did,
 // so you shouldn't use it unless you are OK with PWM on your bed.  (see the comment on enabling PIDTEMPBED)
-# 350 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Configuration.h"
+# 379 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Configuration.h"
 // @section extruder
 
 // This option prevents extrusion if the temperature is below EXTRUDE_MINTEMP.
@@ -9662,6 +9570,7 @@ static const uint8_t A15 = 69;
 
 
 // This option prevents a single extrusion longer than EXTRUDE_MAXLENGTH.
+// Note that for Bowden Extruders a too-small value here may prevent loading.
 
 
 
@@ -9691,9 +9600,13 @@ static const uint8_t A15 = 69;
 // @section machine
 
 // Uncomment one of these options to enable CoreXY, CoreXZ, or CoreYZ kinematics
+// either in the usual order or reversed
 //#define COREXY
 //#define COREXZ
 //#define COREYZ
+//#define COREYX
+//#define COREZX
+//#define COREZY
 
 // Enable this option for Toshiba steppers
 //#define CONFIG_STEPPERS_TOSHIBA
@@ -9715,17 +9628,71 @@ static const uint8_t A15 = 69;
 
 
 // coarse Endstop Settings
-# 426 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Configuration.h"
+# 460 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Configuration.h"
 // Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
-# 436 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Configuration.h"
+# 469 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Configuration.h"
+// Enable this feature if all enabled endstop pins are interrupt-capable.
+// This will remove the need to poll the interrupt pins, saving many CPU cycles.
+//#define ENDSTOP_INTERRUPTS_FEATURE
+
 //=============================================================================
 //============================== Movement Settings ============================
 //=============================================================================
 // @section motion
-# 449 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Configuration.h"
-// "Jerk" specifies the minimum speed change that requires acceleration.
-// When changing speed and direction, if the difference is less than the
-// value set here, it may happen instantaneously.
+
+/**
+ * Default Settings
+ *
+ * These settings can be reset by M502
+ *
+ * You can set distinct factors for each E stepper, if needed.
+ * If fewer factors are given, the last will apply to the rest.
+ *
+ * Note that if EEPROM is enabled, saved values will override these.
+ */
+
+/**
+ * Default Axis Steps Per Unit (steps/mm)
+ * Override with M92
+ *                                      X, Y, Z, E0 [, E1[, E2[, E3]]]
+ */
+
+
+/**
+ * Default Max Feed Rate (mm/s)
+ * Override with M203
+ *                                      X, Y, Z, E0 [, E1[, E2[, E3]]]
+ */
+
+
+/**
+ * Default Max Acceleration (change/s) change = mm/s
+ * (Maximum start speed for accelerated moves)
+ * Override with M201
+ *                                      X, Y, Z, E0 [, E1[, E2[, E3]]]
+ */
+
+
+/**
+ * Default Acceleration (change/s) change = mm/s
+ * Override with M204
+ *
+ *   M204 P    Acceleration
+ *   M204 R    Retract Acceleration
+ *   M204 T    Travel Acceleration
+ */
+
+
+
+
+/**
+ * Default Jerk (mm/s)
+ *
+ * "Jerk" specifies the minimum speed change that requires acceleration.
+ * When changing speed and direction, if the difference is less than the
+ * value set here, it may happen instantaneously.
+ */
+
 
 
 
@@ -9741,7 +9708,7 @@ static const uint8_t A15 = 69;
 // Probes are sensors/switches that are activated / deactivated before/after use.
 //
 // Allen Key Probes, Servo Probes, Z-Sled Probes, FIX_MOUNTED_PROBE, etc.
-// You must activate one of these to use AUTO_BED_LEVELING_FEATURE below.
+// You must activate one of these to use Auto Bed Leveling below.
 //
 // Use M851 to set the Z probe vertical offset from the nozzle. Store with M500.
 //
@@ -9753,6 +9720,7 @@ static const uint8_t A15 = 69;
 
 
 // The BLTouch probe emulates a servo probe.
+// The default connector is SERVO 0. Set Z_ENDSTOP_SERVO_NR below to override.
 //#define BLTOUCH
 
 // Z Servo Probe, such as an endstop switch on a rotating arm.
@@ -9784,7 +9752,6 @@ static const uint8_t A15 = 69;
 
 
 
-
 // X and Y axis travel speed (mm/m) between probes
 
 // Speed for the first approach when double-probing (with PROBE_DOUBLE_TOUCH)
@@ -9798,9 +9765,6 @@ static const uint8_t A15 = 69;
 // Allen Key Probe is defined in the Delta example configurations.
 //
 
-// Enable Z_MIN_PROBE_ENDSTOP to use _both_ a Z Probe and a Z-min-endstop on the same machine.
-// With this option the Z_MIN_PROBE_PIN will only be used for probing, never for homing.
-//
 // *** PLEASE READ ALL INSTRUCTIONS BELOW FOR SAFETY! ***
 //
 // To continue using the Z-min-endstop for homing, be sure to disable Z_SAFE_HOMING.
@@ -9819,14 +9783,22 @@ static const uint8_t A15 = 69;
 //
 // Normally-closed switches are advised and are the default.
 //
+
+//
 // The Z_MIN_PROBE_PIN sets the Arduino pin to use. (See your board's pins file.)
 // Since the RAMPS Aux4->D32 pin maps directly to the Arduino D32 pin, D32 is the
-// default pin for all RAMPS-based boards. Some other boards map differently.
-// To set or change the pin for your board, edit the appropriate pins_XXXXX.h file.
+// default pin for all RAMPS-based boards. Most boards use the X_MAX_PIN by default.
+// To use a different pin you can override it here.
 //
 // WARNING:
 // Setting the wrong pin may have unexpected and potentially disastrous consequences.
 // Use with caution and do your homework.
+//
+//#define Z_MIN_PROBE_PIN X_MAX_PIN
+
+//
+// Enable Z_MIN_PROBE_ENDSTOP to use _both_ a Z Probe and a Z-min-endstop on the same machine.
+// With this option the Z_MIN_PROBE_PIN will only be used for probing, never for homing.
 //
 //#define Z_MIN_PROBE_ENDSTOP
 
@@ -9836,19 +9808,23 @@ static const uint8_t A15 = 69;
 
 // To use a probe you must enable one of the two options above!
 
-// This option disables the use of the Z_MIN_PROBE_PIN
-// To enable the Z probe pin but disable its use, uncomment the line below. This only affects a
-// Z probe switch if you have a separate Z min endstop also and have activated Z_MIN_PROBE_ENDSTOP above.
-// If you're using the Z MIN endstop connector for your Z probe, this has no effect.
-//#define DISABLE_Z_MIN_PROBE_ENDSTOP
-
 // Enable Z Probe Repeatability test to see how accurate your probe is
 
 
-//
-// Minimum heights for the probe to deploy/stow and travel.
-// These values specify the distance from the NOZZLE to the BED.
-//
+/**
+ * Z probes require clearance when deploying, stowing, and moving between
+ * probe points to avoid hitting the bed and other hardware.
+ * Servo-mounted probes require extra space for the arm to rotate.
+ * Inductive probes need space to keep from triggering early.
+ *
+ * Use these settings to specify the distance (mm) to raise the probe (or
+ * lower the bed). The values set here apply over and above any (negative)
+ * probe Z Offset set with Z_PROBE_OFFSET_FROM_EXTRUDER, M851, or the LCD.
+ * Only integer values >= 1 are valid here.
+ *
+ * Example: `M851 Z-5` with a CLEARANCE of 4  =>  9mm from bed to nozzle.
+ *     But: `M851 Z+1` with a CLEARANCE of 2  =>  2mm from bed to nozzle.
+ */
 
 
 
@@ -9859,7 +9835,7 @@ static const uint8_t A15 = 69;
 
 
 // For Inverting Stepper Enable Pins (Active Low) use 0, Non Inverting (Active High) use 1
-// :{0:'Low',1:'High'}
+// :{ 0:'Low', 1:'High' }
 
 
 
@@ -9887,7 +9863,7 @@ static const uint8_t A15 = 69;
 
 // @section extruder
 
-// For direct drive set to true, for geared extruder set to false.
+// For direct drive extruder v9 set to true, for geared extruder set to false.
 
 
 
@@ -9900,7 +9876,7 @@ static const uint8_t A15 = 69;
 
 // ENDSTOP SETTINGS:
 // Sets direction of endstops when homing; 1=MAX, -1=MIN
-// :[-1,1]
+// :[-1, 1]
 
 
 
@@ -9922,7 +9898,7 @@ static const uint8_t A15 = 69;
 //========================= Filament Runout Sensor ==========================
 //===========================================================================
 //#define FILAMENT_RUNOUT_SENSOR // Uncomment for defining a filament runout sensor such as a mechanical or opto endstop to check the existence of filament
-                                 // In RAMPS uses servo pin 2. Can be changed in pins file. For other boards pin definition should be made.
+                                 // RAMPS-based boards use SERVO3_PIN. For other boards you may need to define FIL_RUNOUT_PIN.
                                  // It is assumed that when logic high = filament available
                                  //                    when logic  low = filament ran out
 
@@ -9936,46 +9912,80 @@ static const uint8_t A15 = 69;
 //===========================================================================
 
 //#define MESH_BED_LEVELING    // Enable mesh bed leveling.
-# 679 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Configuration.h"
+# 772 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Configuration.h"
 //===========================================================================
-//============================ Bed Auto Leveling ============================
+//============================ Auto Bed Leveling ============================
 //===========================================================================
-
 // @section bedlevel
 
+/**
+ * Select one form of Auto Bed Leveling below.
+ *
+ *  If you're also using the Probe for Z Homing, it's
+ *  highly recommended to enable Z_SAFE_HOMING also!
+ *
+ * - 3POINT
+ *   Probe 3 arbitrary points on the bed (that aren't collinear)
+ *   You specify the XY coordinates of all 3 points.
+ *   The result is a single tilted plane. Best for a flat bed.
+ *
+ * - LINEAR
+ *   Probe several points in a grid.
+ *   You specify the rectangle and the density of sample points.
+ *   The result is a single tilted plane. Best for a flat bed.
+ *
+ * - BILINEAR
+ *   Probe several points in a grid.
+ *   You specify the rectangle and the density of sample points.
+ *   The result is a mesh, best for large or uneven beds.
+ */
+//#define AUTO_BED_LEVELING_3POINT
+//#define AUTO_BED_LEVELING_LINEAR
 
 
-// Enable this feature to get detailed logging of G28, G29, M48, etc.
-// Logging is off by default. Enable this logging feature with 'M111 S32'.
-// NOTE: Requires a huge amount of PROGMEM.
-//#define DEBUG_LEVELING_FEATURE
+/**
+ * Enable detailed logging of G28, G29, M48, etc.
+ * Turn on with the command 'M111 S32'.
+ * NOTE: Requires a lot of PROGMEM!
+ */
 
 
 
-  // There are 2 different ways to specify probing locations:
-  //
-  // - "grid" mode
-  //   Probe several points in a rectangular grid.
-  //   You specify the rectangle and the density of sample points.
-  //   This mode is preferred because there are more measurements.
-  //
-  // - "3-point" mode
-  //   Probe 3 arbitrary points on the bed (that aren't collinear)
-  //   You specify the XY coordinates of all 3 points.
 
-  // Enable this to sample the bed in a grid (least squares solution).
-  // Note: this feature generates 10KB extra code size.
-# 718 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Configuration.h"
-    // Set the number of grid points per dimension.
-    // You probably don't need more than 3 (squared=9).
-# 735 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Configuration.h"
-  //#define Z_PROBE_END_SCRIPT "G1 Z10 F12000\nG1 X15 Y330\nG1 Z0.5\nG1 Z10" // These commands will be executed in the end of G29 routine.
-                                                                             // Useful to retract a deployable Z probe.
-
-  // If you've enabled AUTO_BED_LEVELING_FEATURE and are using the Z Probe for Z Homing,
-  // it is highly recommended you also enable Z_SAFE_HOMING below!
+  // Set the number of grid points per dimension.
 
 
+
+  // Set the boundaries for probing (where the probe can reach).
+
+
+
+
+
+  // The Z probe minimum outer margin (to validate G29 parameters).
+
+
+  // Probe along the Y axis, advancing X after each column
+  //#define PROBE_Y_FIRST
+
+
+
+    // Gradually reduce leveling correction until a set height is reached,
+    // at which point movement will be level to the machine's XY plane.
+    // The height can be set with M420 Z<height>
+
+
+    // 
+    // Experimental Subdivision of the grid by Catmull-Rom method.
+    // Synthesizes intermediate points to produce a more detailed mesh.
+    // 
+    //#define ABL_BILINEAR_SUBDIVISION
+# 859 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Configuration.h"
+/**
+ * Commands to execute at the end of G29 probing.
+ * Useful to retract or move the Z probe out of the way.
+ */
+//#define Z_PROBE_END_SCRIPT "G1 Z10 F12000\nG1 X15 Y330\nG1 Z0.5\nG1 Z10"
 
 
 // @section homing
@@ -10056,7 +10066,7 @@ static const uint8_t A15 = 69;
 // @section temperature
 
 // Preheat Constants
-# 830 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Configuration.h"
+# 952 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Configuration.h"
 //
 // Nozzle Park -- EXPERIMENTAL
 //
@@ -10116,7 +10126,7 @@ static const uint8_t A15 = 69;
 // may change to add new functionality like different wipe patterns.
 //
 //#define NOZZLE_CLEAN_FEATURE
-# 902 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Configuration.h"
+# 1024 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Configuration.h"
 //
 // Print job timer
 //
@@ -10144,7 +10154,7 @@ static const uint8_t A15 = 69;
 //  - Total time printing
 //
 // This information can be viewed by the M78 command.
-
+//#define PRINTCOUNTER
 
 //=============================================================================
 //============================= LCD and SD support ============================
@@ -10158,9 +10168,9 @@ static const uint8_t A15 = 69;
 // Here you may choose the language used by Marlin on the LCD menus, the following
 // list of languages are available:
 //    en, an, bg, ca, cn, cz, de, el, el-gr, es, eu, fi, fr, gl, hr, it,
-//    kana, kana_utf8, nl, pl, pt, pt_utf8, pt-br, pt-br_utf8, ru, test
+//    kana, kana_utf8, nl, pl, pt, pt_utf8, pt-br, pt-br_utf8, ru, tr, uk, test
 //
-// :{'en':'English','an':'Aragonese','bg':'Bulgarian','ca':'Catalan','cn':'Chinese','cz':'Czech','de':'German','el':'Greek','el-gr':'Greek (Greece)','es':'Spanish','eu':'Basque-Euskera','fi':'Finnish','fr':'French','gl':'Galician','hr':'Croatian','it':'Italian','kana':'Japanese','kana_utf8':'Japanese (UTF8)','nl':'Dutch','pl':'Polish','pt':'Portuguese','pt-br':'Portuguese (Brazilian)','pt-br_utf8':'Portuguese (Brazilian UTF8)','pt_utf8':'Portuguese (UTF8)','ru':'Russian','test':'TEST'}
+// :{ 'en':'English', 'an':'Aragonese', 'bg':'Bulgarian', 'ca':'Catalan', 'cn':'Chinese', 'cz':'Czech', 'de':'German', 'el':'Greek', 'el-gr':'Greek (Greece)', 'es':'Spanish', 'eu':'Basque-Euskera', 'fi':'Finnish', 'fr':'French', 'gl':'Galician', 'hr':'Croatian', 'it':'Italian', 'kana':'Japanese', 'kana_utf8':'Japanese (UTF8)', 'nl':'Dutch', 'pl':'Polish', 'pt':'Portuguese', 'pt-br':'Portuguese (Brazilian)', 'pt-br_utf8':'Portuguese (Brazilian UTF8)', 'pt_utf8':'Portuguese (UTF8)', 'ru':'Russian', 'tr':'Turkish', 'uk':'Ukrainian', 'test':'TEST' }
 //
 
 
@@ -10184,7 +10194,7 @@ static const uint8_t A15 = 69;
 //
 // See https://github.com/MarlinFirmware/Marlin/wiki/LCD-Language
 //
-// :['JAPANESE','WESTERN','CYRILLIC']
+// :['JAPANESE', 'WESTERN', 'CYRILLIC']
 //
 
 
@@ -10207,7 +10217,7 @@ static const uint8_t A15 = 69;
 // SD Card support is disabled by default. If your controller has an SD slot,
 // you must uncomment the following option or it won't work.
 //
-
+//#define SDSUPPORT
 
 //
 // SD CARD: SPI SPEED
@@ -10496,6 +10506,14 @@ static const uint8_t A15 = 69;
 //define BlinkM/CyzRgb Support
 //#define BLINKM
 
+// Support for an RGB LED using 3 separate pins with optional PWM
+//#define RGB_LED
+
+
+
+
+
+
 /********************************************************************** R/C SERVO support
 t
 * Sponsored by TrinityLabs, Reworked by codexmas
@@ -10533,104 +10551,91 @@ r
  **********************************************************************/
 // Uncomment below to enable
 //#define FILAMENT_WIDTH_SENSOR
-# 31 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\MarlinConfig.h" 2
-# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_LCD.h" 1
+# 31 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\MarlinConfig.h" 2
+# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_LCD.h" 1
 /**
-
  * Marlin 3D Printer Firmware
-
  * Copyright (C) 2016 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
-
  *
-
  * Based on Sprinter and grbl.
-
  * Copyright (C) 2011 Camiel Gubbels / Erik van der Zalm
-
  *
-
  * This program is free software: you can redistribute it and/or modify
-
  * it under the terms of the GNU General Public License as published by
-
  * the Free Software Foundation, either version 3 of the License, or
-
  * (at your option) any later version.
-
  *
-
  * This program is distributed in the hope that it will be useful,
-
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
-
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-
  * GNU General Public License for more details.
-
  *
-
  * You should have received a copy of the GNU General Public License
-
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
  *
-
  */
-# 23 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_LCD.h"
+
 /**
-
  * Conditionals_LCD.h
-
  * Conditionals that need to be set before Configuration_adv.h or pins.h
-
  */
-# 76 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_LCD.h"
+# 76 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_LCD.h"
   // Generic support for SSD1306 / SH1106 OLED based LCDs.
-# 130 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_LCD.h"
+# 130 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_LCD.h"
   /**
-
    * I2C PANELS
-
    */
-# 143 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_LCD.h"
+# 143 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_LCD.h"
   // PANELOLU2 LCD with status LEDs, separate encoder and click inputs
-# 160 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_LCD.h"
+# 160 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_LCD.h"
   // Panucatt VIKI LCD with status LEDs, integrated click & L/R/U/P buttons, separate encoder inputs
-# 182 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_LCD.h"
+# 182 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_LCD.h"
   // Shift register panels
   // ---------------------
   // 2 wire Non-latching LCD SR from:
   // https://bitbucket.org/fmalpartida/new-liquidcrystal/wiki/schematics#!shiftregister-connection
-# 239 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_LCD.h"
+# 239 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_LCD.h"
     /* Custom characters defined in the first 8 characters of the LCD */
-# 251 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_LCD.h"
+# 251 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_LCD.h"
   /**
-
    * Default LCD contrast for dogm-like LCD displays
-
    */
-# 281 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_LCD.h"
+# 281 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_LCD.h"
   /**
-
    * Extruders have some combination of stepper motors and hotends
-
    * so we separate these concepts into the defines:
-
    *
-
    *  EXTRUDERS    - Number of Selectable Tools
-
    *  HOTENDS      - Number of hotends, whether connected or separate
-
    *  E_STEPPERS   - Number of actual E stepper motors
-
    *  TOOL_E_INDEX - Index to use when getting/setting the tool state
-
-   *  
-
+   *
    */
-# 32 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\MarlinConfig.h" 2
-# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Configuration_adv.h" 1
+# 319 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_LCD.h"
+  /**
+   * Distinct E Factors – Disable by commenting out DISTINCT_E_FACTORS
+   */
+# 331 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_LCD.h"
+  /**
+   * The BLTouch Probe emulates a servo probe
+   * and uses "special" angles for its state.
+   */
+# 363 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_LCD.h"
+  /**
+   * Set a flag for a servo probe
+   */
+
+
+  /**
+   * Set a flag for any enabled probe
+   */
+
+
+  /**
+   * Clear probe pin settings when no probe is selected
+   */
+# 32 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\MarlinConfig.h" 2
+# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Configuration_adv.h" 1
 /**
  * Marlin 3D Printer Firmware
  * Copyright (C) 2016 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
@@ -10684,7 +10689,7 @@ r
 //===========================================================================
 //=============================Thermal Settings  ============================
 //===========================================================================
-# 62 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Configuration_adv.h"
+# 62 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Configuration_adv.h"
 /**
  * Thermal Protection protects your printer from damage and fire if a
  * thermistor falls out or temperature sensors fail in any way.
@@ -10794,9 +10799,11 @@ r
 
 // @section extruder
 
-//  extruder run-out prevention.
-//if the machine is idle, and the temperature over MINTEMP, every couple of SECONDS some filament is extruded
+// Extruder runout prevention.
+// If the machine is idle and the temperature over MINTEMP
+// then extrude some filament every couple of SECONDS.
 //#define EXTRUDER_RUNOUT_PREVENT
+
 
 
 
@@ -10829,12 +10836,27 @@ r
 
 // @section extruder
 
-// Extruder cooling fans
-// Configure fan pin outputs to automatically turn on/off when the associated
-// extruder temperature is above/below EXTRUDER_AUTO_FAN_TEMPERATURE.
-// Multiple extruders can be assigned to the same pin in which case
-// the fan will turn on when any selected extruder is above the threshold.
+/**
+ * Extruder cooling fans
+ *
+ * Extruder auto fans automatically turn on when their extruders'
+ * temperatures go above EXTRUDER_AUTO_FAN_TEMPERATURE.
+ *
+ * Your board's pins file specifies the recommended pins. Override those here
+ * or set to -1 to disable completely.
+ *
+ * Multiple extruders can be assigned to the same pin in which case
+ * the fan will turn on when any selected extruder is above the threshold.
+ */
 
+
+
+
+
+
+
+// Define a pin to turn case light on/off
+//#define CASE_LIGHT_PIN 4
 
 
 
@@ -10878,13 +10900,13 @@ r
 // Uncomment this option to use a separate stepper driver for each Z axis motor.
 // The next unused E driver will be assigned to the second Z stepper.
 //#define Z_DUAL_STEPPER_DRIVERS
-# 275 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Configuration_adv.h"
+# 292 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Configuration_adv.h"
 // Enable this for dual x-carriage printers.
 // A dual x-carriage design has the advantage that the inactive extruder can be parked which
 // prevents hot-end ooze contaminating the print. It also reduces the weight of each x-carriage
 // allowing faster printing speeds. Connect your X2 stepper to the first unused E plug.
 //#define DUAL_X_CARRIAGE
-# 314 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Configuration_adv.h"
+# 331 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Configuration_adv.h"
 // @section homing
 
 //homing hits the endstop, then retracts by this distance, before it tries to slowly bump again:
@@ -10913,7 +10935,7 @@ r
 // Default stepper release if idle. Set to 0 to deactivate.
 // Steppers will shut down DEFAULT_STEPPER_DEACTIVE_TIME seconds after the last move when DISABLE_INACTIVE_? is true.
 // Time can be set by M18 and M84.
-# 351 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Configuration_adv.h"
+# 368 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Configuration_adv.h"
 // @section lcd
 
 
@@ -10971,38 +10993,11 @@ r
 // Include a page of printer information in the LCD Main Menu
 //#define LCD_INFO_MENU
 
-
-
-  // Some RAMPS and other boards don't detect when an SD card is inserted. You can work
-  // around this by connecting a push button or single throw switch to the pin defined
-  // as SD_DETECT_PIN in your board's pins definitions.
-  // This setting should be disabled unless you are using a push button, pulling the pin to ground.
-  // Note: This is always disabled for ULTIPANEL (except ELB_FULL_GRAPHIC_CONTROLLER).
-
-
-
-
-
-
-  // if a file is deleted, it frees a block. hence, the order is not purely chronological. To still have auto0.g accessible, there is again the option to do that.
-  // using:
-  //#define MENU_ADDAUTOSTART
-
-  // Show a progress bar on HD44780 LCDs for SD printing
-  //#define LCD_PROGRESS_BAR
-# 439 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Configuration_adv.h"
-  // This allows hosts to request long names for files and folders with M33
-  //#define LONG_FILENAME_HOST_SUPPORT
-
-  // This option allows you to abort SD printing when any endstop is triggered.
-  // This feature must be enabled with "M540 S1" or from the LCD menu.
-  // To have any effect, endstops must be enabled during SD printing.
-  //#define ABORT_ON_ENDSTOP_HIT_FEATURE_ENABLED
-
-
-
-// for dogm lcd displays you can choose some additional fonts:
-# 460 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Configuration_adv.h"
+// On the Info Screen, display XY with one decimal place when possible
+//#define LCD_DECIMAL_SMALL_XY
+# 469 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Configuration_adv.h"
+// Some additional options are available for graphical displays:
+# 484 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Configuration_adv.h"
 // @section safety
 
 // The hardware watchdog should reset the microcontroller disabling all outputs,
@@ -11029,6 +11024,28 @@ r
 
 
 
+//
+// Ensure Smooth Moves
+//
+// Enable this option to prevent the machine from stuttering when printing multiple short segments.
+// This feature uses two strategies to eliminate stuttering:
+//
+// 1. During short segments a Graphical LCD update may take so much time that the planner buffer gets
+//    completely drained. When this happens pauses are introduced between short segments, and print moves
+//    will become jerky until a longer segment provides enough time for the buffer to be filled again.
+//    This jerkiness negatively affects print quality. The ENSURE_SMOOTH_MOVES option addresses the issue
+//    by pausing the LCD until there's enough time to safely update.
+//
+//    NOTE: This will cause the Info Screen to lag and controller buttons may become unresponsive.
+//          Enable ALWAYS_ALLOW_MENU to keep the controller responsive.
+//
+// 2. No block is allowed to take less time than MIN_BLOCK_TIME. That's the time it takes in the main
+//    loop to add a new block to the buffer, check temperatures, etc., including all blocked time due to
+//    interrupts (without LCD update). By enforcing a minimum time-per-move, the buffer is prevented from
+//    draining.
+//
+//#define ENSURE_SMOOTH_MOVES
+# 540 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Configuration_adv.h"
 // @section extruder
 
 // extruder advance constant (s2/mm3)
@@ -11045,9 +11062,20 @@ r
 
 
 
-// Implementation of a linear pressure control
-// Assumption: advance = k * (delta velocity)
-// K=0 means advance disabled. A good value for a gregs wade extruder will be around K=75
+/**
+ * Implementation of linear pressure control
+ *
+ * Assumption: advance = k * (delta velocity)
+ * K=0 means advance disabled.
+ * To get a rough start value for calibration, measure your "free filament length"
+ * between the hobbed bolt and the nozzle (in cm). Use the formula below that fits
+ * your setup, where L is the "free filament length":
+ *
+ * Filament diameter           |   1.75mm  |    3.0mm   |
+ * ----------------------------|-----------|------------|
+ * Stiff filament (PLA)        | K=47*L/10 | K=139*L/10 |
+ * Softer filament (ABS, nGen) | K=88*L/10 | K=260*L/10 |
+ */
 //#define LIN_ADVANCE
 
 
@@ -11075,6 +11103,12 @@ r
 
 // Support for G5 with XYZE destination and IJPQ offsets. Requires ~2666 bytes.
 //#define BEZIER_CURVE_SUPPORT
+
+// G38.2 and G38.3 Probe Target
+//#define G38_PROBE_TARGET
+
+
+
 
 // Moves (or segments) with fewer steps than this will be joined with the next move
 
@@ -11114,7 +11148,7 @@ r
 // For ADVANCED_OK (M105) you need 32 bytes.
 // For debug-echo: 128 bytes for the optimal speed.
 // Other output doesn't need to be that speedy.
-// :[0,2,4,8,16,32,64,128,256]
+// :[0, 2, 4, 8, 16, 32, 64, 128, 256]
 
 
 // Enable an emergency-command parser to intercept certain commands as they
@@ -11141,9 +11175,9 @@ r
 // the moves are than replaced by the firmware controlled ones.
 
 //#define FWRETRACT  //ONLY PARTIALLY TESTED
-# 609 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Configuration_adv.h"
+# 680 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Configuration_adv.h"
 // Add support for experimental filament exchange support M600; requires display
-# 638 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Configuration_adv.h"
+# 709 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Configuration_adv.h"
 /****************************************************************************** * enable this section if you have TMC26X motor drivers.
 .
  * you need to import the TMC26XStepper library into the Arduino IDE for this
@@ -11152,16 +11186,33 @@ r
 // @section tmc
 
 //#define HAVE_TMCDRIVER
-# 700 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Configuration_adv.h"
-/****************************************************************************** * enable this section if you have L6470  motor drivers.
-.
- * you need to import the L6470 library into the Arduino IDE for this
- ******************************************************************************/
+# 772 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Configuration_adv.h"
+// @section TMC2130
 
-// @section l6470
+
+/**
+ * Enable this for SilentStepStick Trinamic TMC2130 SPI-configurable stepper drivers.
+ *
+ * To use TMC2130 drivers in SPI mode, you'll also need the TMC2130 Arduino library
+ * (https://github.com/makertum/Trinamic_TMC2130).
+ *
+ * To use TMC2130 stepper drivers in SPI mode connect your SPI2130 pins to
+ * the hardware SPI interface on your board and define the required CS pins
+ * in your `pins_MYBOARD.h` file. (e.g., RAMPS 1.4 uses AUX3 pins `X_CS_PIN 53`, `Y_CS_PIN 49`, etc.).
+ */
+
+//#define HAVE_TMC2130DRIVER
+# 979 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Configuration_adv.h"
+// @section L6470
+
+/**
+ * Enable this section if you have L6470 motor drivers.
+ * You need to import the L6470 library into the Arduino IDE for this.
+ * (https://github.com/ameyer/Arduino-L6470)
+ */
 
 //#define HAVE_L6470DRIVER
-# 772 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Configuration_adv.h"
+# 1053 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Configuration_adv.h"
 /**
  * TWI/I2C BUS
  *
@@ -11171,73 +11222,69 @@ r
  *
  * ; Example #1
  * ; This macro send the string "Marlin" to the slave device with address 0x63 (99)
- * ; It uses multiple M155 commands with one B<base 10> arg
- * M155 A99  ; Target slave address
- * M155 B77  ; M
- * M155 B97  ; a
- * M155 B114 ; r
- * M155 B108 ; l
- * M155 B105 ; i
- * M155 B110 ; n
- * M155 S1   ; Send the current buffer
+ * ; It uses multiple M260 commands with one B<base 10> arg
+ * M260 A99  ; Target slave address
+ * M260 B77  ; M
+ * M260 B97  ; a
+ * M260 B114 ; r
+ * M260 B108 ; l
+ * M260 B105 ; i
+ * M260 B110 ; n
+ * M260 S1   ; Send the current buffer
  *
  * ; Example #2
  * ; Request 6 bytes from slave device with address 0x63 (99)
- * M156 A99 B5
+ * M261 A99 B5
  *
  * ; Example #3
- * ; Example serial output of a M156 request
+ * ; Example serial output of a M261 request
  * echo:i2c-reply: from:99 bytes:5 data:hello
  */
 
 // @section i2cbus
 
 //#define EXPERIMENTAL_I2CBUS
-# 33 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\MarlinConfig.h" 2
-# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\pins.h" 1
+
+
 /**
-
- * Marlin 3D Printer Firmware
-
- * Copyright (C) 2016 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
-
- *
-
- * Based on Sprinter and grbl.
-
- * Copyright (C) 2011 Camiel Gubbels / Erik van der Zalm
-
- *
-
- * This program is free software: you can redistribute it and/or modify
-
- * it under the terms of the GNU General Public License as published by
-
- * the Free Software Foundation, either version 3 of the License, or
-
- * (at your option) any later version.
-
- *
-
- * This program is distributed in the hope that it will be useful,
-
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
-
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-
- * GNU General Public License for more details.
-
- *
-
- * You should have received a copy of the GNU General Public License
-
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
- *
-
+ * Add M43 command for pins info and testing
  */
-# 173 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\pins.h"
-# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\pins_ROBOC2.h" 1
+//#define PINS_DEBUGGING
+
+/**
+ * Auto-report temperatures with M155 S<seconds>
+ */
+//#define AUTO_REPORT_TEMPERATURES
+
+/**
+ * Include capabilities in M115 output
+ */
+//#define EXTENDED_CAPABILITIES_REPORT
+# 33 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\MarlinConfig.h" 2
+# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\pins.h" 1
+/**
+ * Marlin 3D Printer Firmware
+ * Copyright (C) 2016 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ *
+ * Based on Sprinter and grbl.
+ * Copyright (C) 2011 Camiel Gubbels / Erik van der Zalm
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+# 176 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\pins.h"
+# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\pins_ROBOC2.h" 1
 /**
 
    Marlin 3D Printer Firmware
@@ -11279,42 +11326,48 @@ r
 
 
 */
-# 174 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\pins.h" 2
+# 103 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\pins_ROBOC2.h"
+//
+// LCD / Controller
+//
+# 177 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\pins.h" 2
 
 
 
 
 // Define certain undefined pins
-# 277 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\pins.h"
+# 287 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\pins.h"
 // Marlin needs to account for pins that equal -1
 
 
+//
+// Assign auto fan pins if needed
+//
+# 306 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\pins.h"
 // List of pins which to ignore when asked to change by gcode, 0 and 1 are RX and TX, do not mess with those!
-# 330 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\pins.h"
+# 370 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\pins.h"
 //
 // Assign endstop pins for boards with only 3 connectors
 //
-# 363 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\pins.h"
+# 403 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\pins.h"
 //
 // Disable unused endstop / probe pins
 //
-# 401 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\pins.h"
+# 441 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\pins.h"
 //
 // Dual X-carriage, Dual Y, Dual Z support
 //
-# 412 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\pins.h"
+# 452 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\pins.h"
 // The X2 axis, if any, should be the next open extruder port
-# 426 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\pins.h"
+# 466 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\pins.h"
 // The Y2 axis, if any, should be the next open extruder port
-# 440 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\pins.h"
+# 480 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\pins.h"
 // The Z2 axis, if any, should be the next open extruder port
-# 464 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\pins.h"
+# 504 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\pins.h"
 /**
-
  * Define SPI Pins: SCK, MISO, MOSI, SS
-
  */
-# 34 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\MarlinConfig.h" 2
+# 34 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\MarlinConfig.h" 2
 
 
 
@@ -11337,68 +11390,54 @@ r
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-# 38 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\MarlinConfig.h" 2
-# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_post.h" 1
+# 38 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\MarlinConfig.h" 2
+# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_post.h" 1
 /**
-
  * Marlin 3D Printer Firmware
-
  * Copyright (C) 2016 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
-
  *
-
  * Based on Sprinter and grbl.
-
  * Copyright (C) 2011 Camiel Gubbels / Erik van der Zalm
-
  *
-
  * This program is free software: you can redistribute it and/or modify
-
  * it under the terms of the GNU General Public License as published by
-
  * the Free Software Foundation, either version 3 of the License, or
-
  * (at your option) any later version.
-
  *
-
  * This program is distributed in the hope that it will be useful,
-
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
-
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-
  * GNU General Public License for more details.
-
  *
-
  * You should have received a copy of the GNU General Public License
-
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
  *
-
  */
-# 23 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_post.h"
+
 /**
-
  * Conditionals_post.h
-
  * Defines that depend on configuration but are not editable.
-
  */
 
 
 
 
-
-
-
   /**
-
    * Axis lengths and center
+   */
 
+
+
+
+
+
+
+  /**
+   * CoreXY, CoreXZ, and CoreYZ - and their reverse
+   */
+# 73 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_post.h"
+  /**
+   * SCARA cannot use SLOWDOWN and requires QUICKHOME
    */
 
 
@@ -11406,85 +11445,45 @@ r
 
 
   /**
-
-   * CoreXY and CoreXZ
-
-   */
-# 64 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_post.h"
-  /**
-
-   * SCARA
-
-   */
-
-
-
-  /**
-
    * Set the home position based on settings or manual overrides
-
    */
-# 113 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_post.h"
+# 122 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_post.h"
   /**
-
-   * The BLTouch Probe emulates a servo probe
-
-   */
-# 128 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_post.h"
-  /**
-
    * Auto Bed Leveling and Z Probe Repeatability Test
-
    */
 
 
-  // Boundaries for probing based on set limits
-
-
-
-
-
-
-
   /**
-
    * Z Sled Probe requires Z_SAFE_HOMING
-
    */
 
 
-  /**
 
+
+  /**
    * DELTA should ignore Z_SAFE_HOMING and SLOWDOWN
-
    */
 
 
 
-  /**
 
+
+  /**
    * Safe Homing Options
-
    */
-
-
-
-
-
-
-
+# 159 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_post.h"
   /**
-
    * Host keep alive
-
    */
+
+
 
 
   /**
-
    * MAX_STEP_FREQUENCY differs for TOSHIBA
-
    */
+
+
 
 
 
@@ -11497,429 +11496,302 @@ r
 
 
   /**
-
    * Advance calculated values
-
    */
-
-
-
-
-
-
-
+# 194 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_post.h"
   /**
-
    * Set defaults for missing (newer) options
-
    */
-# 221 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_post.h"
+# 210 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_post.h"
   // Power Signal Control Definitions
   // By default use ATX definition
-# 235 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_post.h"
+# 224 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_post.h"
   /**
-
    * Temp Sensor defines
-
    */
-# 301 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_post.h"
+# 294 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_post.h"
   /**
-
    * Flags for PID handling
-
    */
 
-  /**
 
+
+  /**
    * Default hotend offsets, if not defined
-
    */
-# 322 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_post.h"
+# 315 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_post.h"
   /**
-
    * ARRAY_BY_EXTRUDERS based on EXTRUDERS
-
    */
 
-  /**
 
+
+  /**
    * ARRAY_BY_HOTENDS based on HOTENDS
-
    */
 
-  /**
 
+
+  /**
    * Z_DUAL_ENDSTOPS endstop reassignment
-
    */
-# 404 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_post.h"
+# 399 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_post.h"
   /**
-
    * Set ENDSTOPPULLUPS for active endstop switches
-
    */
-# 431 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_post.h"
+# 423 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_post.h"
   /**
-
    * Shorthand for pin tests, used wherever needed
-
    */
-# 529 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_post.h"
+# 525 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_post.h"
   /**
-
    * This setting is also used by M109 when trying to calculate
-
    * a ballpark safe margin to prevent wait-forever situation.
-
    */
 
-  /**
 
+
+
+  /**
    * Helper Macros for heaters and extruder fan
-
    */
-# 559 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_post.h"
+# 555 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_post.h"
   /**
-
    * Up to 3 PWM fans
-
    */
-# 584 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_post.h"
+# 580 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_post.h"
   /**
-
    * Servos and probes
-
    */
-# 602 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_post.h"
+# 598 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_post.h"
   /**
-
    * Bed Probe dependencies
-
    */
-# 633 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_post.h"
+# 632 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_post.h"
   /**
-
    * Delta radius/rod trimmers
-
    */
-# 660 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_post.h"
+# 656 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_post.h"
   /**
-
-   * When not using other bed leveling...
-
+   * Set ABL options based on the specific type of leveling
    */
-
-
+# 671 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_post.h"
   /**
-
    * Buzzer/Speaker
-
    */
-# 686 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\Conditionals_post.h"
+# 690 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_post.h"
   /**
-
-   * Z_HOMING_HEIGHT / Z_PROBE_TRAVEL_HEIGHT
-
+   * Z_HOMING_HEIGHT / Z_CLEARANCE_BETWEEN_PROBES
    */
-# 39 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\MarlinConfig.h" 2
-# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h" 1
-/**
+# 711 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\Conditionals_post.h"
+    // Boundaries for probing based on set limits
 
+
+
+
+
+
+  // Stepper pulse duration, in cycles
+# 39 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\MarlinConfig.h" 2
+# 1 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h" 1
+/**
  * Marlin 3D Printer Firmware
-
  * Copyright (C) 2016 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
-
  *
-
  * Based on Sprinter and grbl.
-
  * Copyright (C) 2011 Camiel Gubbels / Erik van der Zalm
-
  *
-
  * This program is free software: you can redistribute it and/or modify
-
  * it under the terms of the GNU General Public License as published by
-
  * the Free Software Foundation, either version 3 of the License, or
-
  * (at your option) any later version.
-
  *
-
  * This program is distributed in the hope that it will be useful,
-
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
-
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-
  * GNU General Public License for more details.
-
  *
-
  * You should have received a copy of the GNU General Public License
-
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
  *
-
  */
-# 23 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h"
-/**
 
+/**
  * SanityCheck.h
-
  *
-
  * Test configuration values for errors at compile-time.
-
  */
-# 29 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h"
-/**
 
+/**
  * Due to the high number of issues related with old versions of Arduino IDE
-
  * we now prevent Marlin from compiling with older toolkits.
-
  */
 
-/**
 
+
+
+/**
  * We try our best to include sanity checks for all the changes configuration
-
  * directives because people have a tendency to use outdated config files with
-
  * the bleding edge source code, but sometimes this is not enough. This check
-
  * will force a minimum config file revision, otherwise Marlin will not build.
-
  */
-
-
-
- /**
-
+# 51 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
+/**
  * Warnings for old configurations
-
  */
-# 142 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h"
+# 160 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
 /**
-
  * Marlin release, version and default string
-
  */
-# 163 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h"
+# 181 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
 /**
-
  * Dual Stepper Drivers
-
  */
-# 176 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h"
+# 194 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
 /**
-
  * Progress Bar
-
  */
-# 191 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h"
+# 207 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
 /**
-
  * Delta requirements
-
  */
-# 207 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h"
+# 223 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
 /**
-
  * Babystepping
-
  */
-# 222 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h"
+# 238 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
 /**
-
  * Filament Runout needs a pin and either SD Support or Auto print start detection
-
  */
-
-
-
-
-
-
+# 249 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
 /**
-
  * Filament Change with Extruder Runout Prevention
-
  */
 
 
-/**
 
+
+/**
  * Individual axis homing is useless for DELTAS
-
  */
 
 
-/**
 
+
+/**
  * Options only for EXTRUDERS > 1
-
  */
-# 268 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h"
+# 284 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
 /**
-
  * Only one type of extruder allowed
-
  */
 
 
 
-/**
 
+
+/**
  * Single Stepper Dual Extruder with switching servo
-
  */
-# 289 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h"
+# 305 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
 /**
-
  * Mixing Extruder requirements
-
  */
-# 304 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h"
+# 320 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
 /**
-
  * Limited number of servos
-
  */
 
 
 
 
-
-
 /**
-
  * Servo deactivation depends on servo endstops
-
  */
 
 
-/**
 
+
+/**
  * Required LCD language
-
  */
 
 
-/**
 
+
+/**
  * Bed Heating Options - PID vs Limit Switching
-
  */
 
 
-/**
 
+
+/**
+ * Allow only one bed leveling option to be defined
+ */
+# 378 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
+/**
  * Mesh Bed Leveling
-
  */
-# 351 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h"
+# 391 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
 /**
-
  * Probes
-
  */
 
+
+  /**
+   * Allow only one probe option to be defined
+   */
+# 429 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
+  /**
+   * Z_PROBE_SLED is incompatible with DELTA
+   */
 
 
 
 
   /**
-
    * NUM_SERVOS is required for a Z servo probe
-
    */
-
-
-
-
-
-
+# 447 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
   /**
-
-   * A probe needs a pin
-
+   * Require pin options and pins to be defined
    */
-
-
+# 466 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
   /**
-
-   * Require a Z min pin
-
-   */
-# 383 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h"
-     // Z_MIN_PIN and Z_MIN_PROBE_PIN can't co-exist when Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
-# 392 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h"
-  /**
-
-   * Make sure the plug is enabled if it's used
-
-   */
-
-
-  /**
-
-   * Only allow one probe option to be defined
-
-   */
-
-
-
-
-  /**
-
-   * Don't allow nonsense probe-pin settings
-
-   */
-
-
-
-
-
-
-  /**
-
-   * Require a Z probe pin if Z_MIN_PROBE_ENDSTOP is enabled.
-
-   */
-# 441 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h"
-  /**
-
    * Make sure Z raise values are set
-
    */
-# 467 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h"
+# 492 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
 /**
+ * Homing Bump
+ */
 
+
+
+
+/**
  * Make sure Z_SAFE_HOMING point is reachable
-
  */
-# 486 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h"
+# 518 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
 /**
-
  * Auto Bed Leveling
-
  */
+
+
+
+
+
+
   /**
-
-   * Delta has limited bed leveling options
-
+   * Delta and SCARA have limited bed leveling options
    */
-
-
+# 538 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
   /**
-
    * Check if Probe_Offset * Grid Points is greater than Probing Range
-
    */
+
+
       // Be sure points are in the right order
 
 
@@ -11927,104 +11799,108 @@ r
 
 
       // Make sure probing points are reachable
-# 541 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h"
+# 581 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
 /**
-
  * Advance Extrusion
-
  */
 
 
-/**
 
+
+/**
  * Filament Width Sensor
-
  */
 
 
-/**
 
+
+/**
  * ULTIPANEL encoder
-
  */
-
-
-
-
-
-
+# 606 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
 /**
-
  * SAV_3DGLCD display options
-
  */
 
 
-/**
 
+
+/**
  * Don't set more than one kinematic type
-
  */
-
-
-
-
-
+# 666 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
 /**
-
  * Allen Key
-
  * Deploying the Allen Key probe uses big moves in z direction. Too dangerous for an unhomed z-axis.
-
  */
 
-/**
 
+
+
+/**
  * Dual X Carriage requirements
-
  */
-# 610 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h"
+# 693 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
 /**
-
  * Make sure auto fan pins don't conflict with the fan pin
-
  */
-# 643 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h"
+# 726 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
 /**
-
  * Test Heater, Temp Sensor, and Extruder Pins; Sensor Type must also be set.
-
  */
-# 704 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h"
+# 787 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
 /**
+ * Temperature status LEDs
+ */
 
+
+
+
+/**
  * Basic 2-nozzle duplication mode
-
  */
-# 721 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h"
+# 811 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
 /**
-
  * Test Extruder Pins
-
  */
-# 738 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h"
+# 828 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
 /**
-
  * Endstops
-
  */
-# 755 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\SanityCheck.h"
+# 859 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
 /**
-
  * emergency-command parser
-
  */
+
+
 
 
 /**
-
  * I2C bus
-
  */
-# 40 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build2a5e2ca346d3c26d2a745a12554f4505.tmp\\sketch\\MarlinConfig.h" 2
-# 38 "C:\\Users\\Allen\\Documents\\GitHub\\C2 Production\\Marlin-C2\\Marlin\\Marlin.ino" 2
+# 877 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
+/**
+ * G38 Probe Target
+ */
+# 888 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
+/**
+ * RGB_LED Requirements
+ */
+# 899 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
+/**
+ * Auto Fan check for PWM pins
+ */
+# 916 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\SanityCheck.h"
+/**
+ * Make sure only one display is enabled
+ *
+ * Note: BQ_LCD_SMART_CONTROLLER => REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+ *       REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER => REPRAP_DISCOUNT_SMART_CONTROLLER
+ *       SAV_3DGLCD => U8GLIB_SH1106 => ULTIMAKERCONTROLLER
+ *       miniVIKI => ULTIMAKERCONTROLLER
+ *       VIKI2 => ULTIMAKERCONTROLLER
+ *       ELB_FULL_GRAPHIC_CONTROLLER => ULTIMAKERCONTROLLER
+ *       PANEL_ONE => ULTIMAKERCONTROLLER
+ */
+# 40 "C:\\Users\\Allen\\AppData\\Local\\Temp\\build403d8c384ed1bd0d8fb01cb7fb3d105a.tmp\\sketch\\MarlinConfig.h" 2
+# 38 "C:\\Users\\Allen\\Downloads\\Marlin-RC\\Marlin-RC\\Marlin\\Marlin.ino" 2
