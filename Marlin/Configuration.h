@@ -231,7 +231,7 @@
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
-#define TEMP_SENSOR_BED 8
+#define TEMP_SENSOR_BED 12
 
 // This makes temp sensor 1 a redundant sensor for sensor 0. If the temperatures difference between these sensors is to high the print will be aborted.
 //#define TEMP_SENSOR_1_AS_REDUNDANT
@@ -523,7 +523,7 @@
 
 
 // X and Y axis travel speed (mm/m) between probes
-#define XY_PROBE_SPEED 8000
+#define XY_PROBE_SPEED 6000
 // Speed for the first approach when double-probing (with PROBE_DOUBLE_TOUCH)
 #define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
 // Speed for the "accurate" probe of each point
@@ -722,16 +722,16 @@
 
   #if ENABLED(AUTO_BED_LEVELING_GRID)
 
-    #define LEFT_PROBE_BED_POSITION 20
-    #define RIGHT_PROBE_BED_POSITION 176
+    #define LEFT_PROBE_BED_POSITION 10
+    #define RIGHT_PROBE_BED_POSITION 186
     #define FRONT_PROBE_BED_POSITION 30
-    #define BACK_PROBE_BED_POSITION 176
+    #define BACK_PROBE_BED_POSITION 186
 
     #define MIN_PROBE_EDGE 10 // The Z probe minimum square sides can be no smaller than this.
 
     // Set the number of grid points per dimension.
     // You probably don't need more than 3 (squared=9).
-    #define AUTO_BED_LEVELING_GRID_POINTS 3
+    #define AUTO_BED_LEVELING_GRID_POINTS 4
 
   #else  // !AUTO_BED_LEVELING_GRID
 
