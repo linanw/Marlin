@@ -452,7 +452,7 @@
 //=============================================================================
 // @section motion
 
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,800,152.3}  // default steps per unit for Robo C2
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,800,145.5}  // default steps per unit for Robo C2
 #define DEFAULT_MAX_FEEDRATE          {300, 300, 6, 25}    // (mm/sec)
 #define DEFAULT_MAX_ACCELERATION      {1300,1300,100,3000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
 
