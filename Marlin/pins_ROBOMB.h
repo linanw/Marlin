@@ -36,7 +36,7 @@
   #define DEFAULT_SOURCE_CODE_URL "https://github.com/Robo3D/Marlin R2 Branch"
 #endif
 
-#define IS_ROBOC2
+#define IS_ROBOR2
 
 #define LARGE_FLASH true
 
@@ -69,9 +69,9 @@
 #define E0_DIR_PIN         28
 #define E0_ENABLE_PIN      24
 
-#define E1_STEP_PIN        36
-#define E1_DIR_PIN         34
-#define E1_ENABLE_PIN      30
+//#define E1_STEP_PIN        36
+//#define E1_DIR_PIN         34
+//#define E1_ENABLE_PIN      30
 
 #define SDPOWER            -1
 #define SDSS               53

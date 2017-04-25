@@ -49,7 +49,7 @@
  *
  * Note: Update also Version.h !
  */
-#define CONFIGURATION_H_VERSION 010106
+#define CONFIGURATION_H_VERSION 010107
 
 #define USE_AUTOMATIC_VERSIONING
 
@@ -289,9 +289,9 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
   // Robo R2 24V
-  #define  DEFAULT_Kp 37.93
-  #define  DEFAULT_Ki 3.33
-  #define  DEFAULT_Kd 108.12
+  #define  DEFAULT_Kp 23.75
+  #define  DEFAULT_Ki 1.75
+  #define  DEFAULT_Kd 80
 
   // Robo C2 19V
   //#define  DEFAULT_Kp 23.75
@@ -330,10 +330,8 @@
 // all forms of bed control obey this (PID, bang-bang, bang-bang with hysteresis)
 // setting this to anything other than 255 enables a form of PWM to the bed just like HEATER_BED_DUTY_CYCLE_DIVIDER did,
 // so you shouldn't use it unless you are OK with PWM on your bed.  (see the comment on enabling PIDTEMPBED)
-#define MAX_BED_POWER 255 // limits duty cycle to bed; 255=full current
+#define MAX_BED_POWER 200 // limits duty cycle to bed; 255=full current
 
-// Define to prevent printing without heated bed.
-#define HEATED_BED_PRESENT_CHECK
 
 #if ENABLED(PIDTEMPBED)
 
@@ -463,9 +461,9 @@
 // "Jerk" specifies the minimum speed change that requires acceleration.
 // When changing speed and direction, if the difference is less than the
 // value set here, it may happen instantaneously.
-#define DEFAULT_XYJERK                13.0    // (mm/sec)
+#define DEFAULT_XYJERK                 13.0    // (mm/sec)
 #define DEFAULT_ZJERK                  0.3    // (mm/sec)
-#define DEFAULT_EJERK                  5.0    // (mm/sec)
+#define DEFAULT_EJERK                  5       // (mm/sec)
 
 
 //===========================================================================
@@ -834,11 +832,11 @@
 
 // Preheat Constants
 #define PREHEAT_1_TEMP_HOTEND 200
-#define PREHEAT_1_TEMP_BED     70
+#define PREHEAT_1_TEMP_BED     60
 #define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
 
 #define PREHEAT_2_TEMP_HOTEND 230
-#define PREHEAT_2_TEMP_BED    100
+#define PREHEAT_2_TEMP_BED    80
 #define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
 
 //
@@ -1003,7 +1001,7 @@
 // SD Card support is disabled by default. If your controller has an SD slot,
 // you must uncomment the following option or it won't work.
 //
-#define SDSUPPORT
+//#define SDSUPPORT
 
 //
 // SD CARD: SPI SPEED
@@ -1020,7 +1018,7 @@
 //
 // Use CRC checks and retries on the SD communication.
 //
-#define SD_CHECK_AND_RETRY
+//#define SD_CHECK_AND_RETRY
 
 //
 // ENCODER SETTINGS
@@ -1309,7 +1307,7 @@
 // Delay (in microseconds) before the next move will start, to give the servo time to reach its target angle.
 // 300ms is a good value but you can try less delay.
 // If the servo can't reach the requested position, increase it.
-#define SERVO_DELAY 300
+//#define SERVO_DELAY 300
 
 // Servo deactivation
 //

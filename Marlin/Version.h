@@ -35,8 +35,8 @@
   /**
    * Marlin release version identifier
    */
-  #define SHORT_BUILD_VERSION "1.1.7-R2"
-  #define FIRMWARE_VERSION "1.1.7"
+  #define SHORT_BUILD_VERSION "1.1.0-R2.1.1.8"
+  #define FIRMWARE_VERSION "1.1.8"
 
   /**
    * Verbose version identifier which should contain a reference to the location
@@ -58,8 +58,8 @@
    * but not limited to: ADD, DELETE RENAME OR REPURPOSE any directive/option on
    * the configuration files.
    */
-  #define REQUIRED_CONFIGURATION_H_VERSION 010106
-  #define REQUIRED_CONFIGURATION_ADV_H_VERSION 010103
+  #define REQUIRED_CONFIGURATION_H_VERSION 010107
+  #define REQUIRED_CONFIGURATION_ADV_H_VERSION 010104
 
   /**
    * @todo: Missing documentation block
@@ -77,7 +77,7 @@
    * has a distinct Github fork— the Source Code URL should just be the main
    * Marlin repository.
    */
-  #define SOURCE_CODE_URL "https://github.com/Robo3D/Marlin-C2"
+  #define SOURCE_CODE_URL "https://github.com/Robo3D/Marlin-R2"
 
   /**
    * Default generic printer UUID.
