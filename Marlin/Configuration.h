@@ -289,9 +289,9 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
   // Robo R2 24V
-  #define  DEFAULT_Kp 26.92
-  #define  DEFAULT_Ki 2.06
-  #define  DEFAULT_Kd 87.98
+  #define  DEFAULT_Kp 23.8
+  #define  DEFAULT_Ki 1.7
+  #define  DEFAULT_Kd 85.0
 
   // Robo C2 19V
   //#define  DEFAULT_Kp 23.75
