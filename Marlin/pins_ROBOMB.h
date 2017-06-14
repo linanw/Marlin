@@ -69,9 +69,9 @@
 #define E0_DIR_PIN         28
 #define E0_ENABLE_PIN      24
 
-//#define E1_STEP_PIN        36
-//#define E1_DIR_PIN         34
-//#define E1_ENABLE_PIN      30
+#define E1_STEP_PIN        36
+#define E1_DIR_PIN         34
+#define E1_ENABLE_PIN      30
 
 #define SDPOWER            -1
 #define SDSS               53
@@ -85,9 +85,9 @@
 #endif
 
 
-#define CONTROLLERFAN_PIN  -1 // Pin used for the fan to cool controller
-#define FAN_PIN             7
-#define PS_ON_PIN          12
+#define CONTROLLERFAN_PIN  5 // Pin used for the fan to cool controller
+#define FAN_PIN            6
+#define PS_ON_PIN          -1
 
 
 #define HEATER_0_PIN       10   // EXTRUDER 1
