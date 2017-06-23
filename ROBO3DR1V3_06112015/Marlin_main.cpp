@@ -184,6 +184,7 @@
 #ifdef SDSUPPORT
 CardReader card;
 #endif
+int testcode=0;
 float homing_feedrate[] = HOMING_FEEDRATE;
 bool axis_relative_modes[] = AXIS_RELATIVE_MODES;
 int feedmultiply=100; //100->1 200->2
@@ -560,6 +561,47 @@ void loop()
   manage_inactivity();
   checkHitEndstops();
   lcd_update();
+  
+//SECRET START - Austin Smith 2/24/16
+  if ((READ(X_MIN_PIN))==1 && (testcode == 0) && (READ(Y_MIN_PIN))==0 && !(card.sdprinting) && (READ(X_ENABLE_PIN))==1)
+     {
+       testcode = 1;
+       delay(200);
+       if ((READ(X_MIN_PIN))==1)
+          {
+            testcode=0;
+          }
+          else
+          {
+            testcode = 2;
+          }
+      }
+        while (testcode == 2)
+        {
+             if ((READ(Y_MIN_PIN))==0)
+             {
+               delay(2000);
+               if ((READ(Y_MIN_PIN))==1)
+               {
+                 card.initsd();
+                 card.ls();
+                 card.openFile("robo~1.gco",true);
+                 card.startFileprint();
+                 starttime=millis();  
+                 testcode=0;
+               }
+               else
+               {
+               testcode=0;
+               }
+             }
+             else
+             {
+               testcode=0;
+             }
+         }
+//SECRET START - Austin Smith 2/24/16
+
 }
 
 void get_command()
@@ -854,7 +896,14 @@ static void set_bed_level_equation_lsq(double *plane_equation_coefficients)
     current_position[Z_AXIS] = corrected_position.z;
 
     // put the bed at 0 so we don't go below it.
-    current_position[Z_AXIS] = zprobe_zoffset;
+    if (zprobe_zoffset < 0)
+    {
+    current_position[Z_AXIS] = zprobe_zoffset; // in the lsq we reach here after raising the extruder due to the loop structure
+    }
+    else
+    {
+    current_position[Z_AXIS] = -zprobe_zoffset; // in the lsq we reach here after raising the extruder due to the loop structure
+    }
 
 
     plan_set_position(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS]);
@@ -883,7 +932,14 @@ static void set_bed_level_equation_3pts(float z_at_pt_1, float z_at_pt_2, float 
     current_position[Z_AXIS] = corrected_position.z;
 
     // put the bed at 0 so we don't go below it.
-    current_position[Z_AXIS] = zprobe_zoffset;
+    if (zprobe_zoffset < 0)
+    {
+    current_position[Z_AXIS] = zprobe_zoffset; // in the lsq we reach here after raising the extruder due to the loop structure
+    }
+    else
+    {
+    current_position[Z_AXIS] = -zprobe_zoffset; // in the lsq we reach here after raising the extruder due to the loop structure
+    }
 
 
     plan_set_position(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS]);
@@ -1356,6 +1412,7 @@ void process_commands()
             current_position[Y_AXIS] = destination[Y_AXIS];
 
             HOMEAXIS(Z);
+            
           }
                                                 // Let's see if X and Y are homed and probe is inside bed area.
           if(code_seen(axis_codes[Z_AXIS])) {
@@ -1373,6 +1430,7 @@ void process_commands()
               st_synchronize();
 
               HOMEAXIS(Z);
+              
             } else if (!((axis_known_position[X_AXIS]) && (axis_known_position[Y_AXIS]))) {
                 LCD_MESSAGEPGM(MSG_POSITION_UNKNOWN);
                 SERIAL_ECHO_START;
@@ -1393,9 +1451,16 @@ void process_commands()
           current_position[Z_AXIS]=code_value()+add_homeing[2];
         }
       }
-      #ifdef ENABLE_AUTO_BED_LEVELING
+     #ifdef ENABLE_AUTO_BED_LEVELING
         if((home_all_axis) || (code_seen(axis_codes[Z_AXIS]))) {
-          current_position[Z_AXIS] += zprobe_zoffset;  //Add Z_Probe offset (the distance is negative)
+          if (zprobe_zoffset < 0)
+    {
+    current_position[Z_AXIS] += zprobe_zoffset; // in the lsq we reach here after raising the extruder due to the loop structure
+    }
+    else
+    {
+    current_position[Z_AXIS] += -zprobe_zoffset; // in the lsq we reach here after raising the extruder due to the loop structure
+    }
         }
       #endif
       plan_set_position(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS]);
@@ -1409,6 +1474,23 @@ void process_commands()
       feedmultiply = saved_feedmultiply;
       previous_millis_cmd = millis();
       endstops_hit_on_purpose();
+      SERIAL_PROTOCOLPGM("X:");
+      SERIAL_PROTOCOL(current_position[X_AXIS]);
+      SERIAL_PROTOCOLPGM(" Y:");
+      SERIAL_PROTOCOL(current_position[Y_AXIS]);
+      SERIAL_PROTOCOLPGM(" Z:");
+      SERIAL_PROTOCOL(current_position[Z_AXIS]);
+      SERIAL_PROTOCOLPGM(" E:");
+      SERIAL_PROTOCOL(current_position[E_AXIS]);
+
+      SERIAL_PROTOCOLPGM(MSG_COUNT_X);
+      SERIAL_PROTOCOL(float(st_get_position(X_AXIS))/axis_steps_per_unit[X_AXIS]);
+      SERIAL_PROTOCOLPGM(" Y:");
+      SERIAL_PROTOCOL(float(st_get_position(Y_AXIS))/axis_steps_per_unit[Y_AXIS]);
+      SERIAL_PROTOCOLPGM(" Z:");
+      SERIAL_PROTOCOL(float(st_get_position(Z_AXIS))/axis_steps_per_unit[Z_AXIS]);
+
+      SERIAL_PROTOCOLLN("");
       break;
 
 #ifdef ENABLE_AUTO_BED_LEVELING
@@ -1552,6 +1634,24 @@ void process_commands()
             apply_rotation_xyz(plan_bed_level_matrix, x_tmp, y_tmp, z_tmp);         //Apply the correction sending the probe offset
             current_position[Z_AXIS] = z_tmp - real_z + current_position[Z_AXIS];   //The difference is added to current position and sent to planner.
             plan_set_position(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS]);
+
+      SERIAL_PROTOCOLPGM("X:");
+      SERIAL_PROTOCOL(current_position[X_AXIS]);
+      SERIAL_PROTOCOLPGM(" Y:");
+      SERIAL_PROTOCOL(current_position[Y_AXIS]);
+      SERIAL_PROTOCOLPGM(" Z:");
+      SERIAL_PROTOCOL(current_position[Z_AXIS]);
+      SERIAL_PROTOCOLPGM(" E:");
+      SERIAL_PROTOCOL(current_position[E_AXIS]);
+
+      SERIAL_PROTOCOLPGM(MSG_COUNT_X);
+      SERIAL_PROTOCOL(float(st_get_position(X_AXIS))/axis_steps_per_unit[X_AXIS]);
+      SERIAL_PROTOCOLPGM(" Y:");
+      SERIAL_PROTOCOL(float(st_get_position(Y_AXIS))/axis_steps_per_unit[Y_AXIS]);
+      SERIAL_PROTOCOLPGM(" Z:");
+      SERIAL_PROTOCOL(float(st_get_position(Z_AXIS))/axis_steps_per_unit[Z_AXIS]);
+
+      SERIAL_PROTOCOLLN("");
         }
         break;
 
@@ -2715,8 +2815,9 @@ void process_commands()
             SERIAL_PROTOCOL(zprobe_zoffset);
             SERIAL_PROTOCOLPGM("\n");
 		}
-
-
+   case 585:
+   SERIAL_PROTOCOLLN(READ(X_ENABLE_PIN));
+   
 	break;
 #endif
     #ifdef FILAMENTCHANGEENABLE
