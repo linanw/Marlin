@@ -40,11 +40,6 @@
 
 #define LARGE_FLASH true
 
-
-#define SERVO1_PIN          6
-#define SERVO2_PIN          5
-#define SERVO3_PIN          4
-
 #define X_STEP_PIN         54
 #define X_DIR_PIN          55
 #define X_ENABLE_PIN       38
@@ -86,7 +81,7 @@
 
 
 #define CONTROLLERFAN_PIN  5 // Pin used for the fan to cool controller
-#define FAN_PIN            6
+#define FAN_PIN            7
 #define PS_ON_PIN          -1
 
 
