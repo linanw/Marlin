@@ -29,6 +29,8 @@
 
 #include "planner.h"
 #include "thermistortables.h"
+#include "HeatedBed.h"
+
 #include "MarlinConfig.h"
 
 #if ENABLED(PID_EXTRUSION_SCALING)
