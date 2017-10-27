@@ -26,47 +26,17 @@
  * directive USE_AUTOMATIC_VERSIONING.
  */
 
-<<<<<<< HEAD
-/**
- * Marlin release version identifier
- */
-#define SHORT_BUILD_VERSION "1.1.2"
-=======
 #if ENABLED(USE_AUTOMATIC_VERSIONING)
->>>>>>> MarlinFirmware/1.1.x
 
   #include "_Version.h"
 
-<<<<<<< HEAD
-/**
- * The STRING_DISTRIBUTION_DATE represents when the binary file was built,
- * here we define this default string as the date where the latest release
- * version was tagged.
- */
-#define STRING_DISTRIBUTION_DATE "2016-08-25 12:00"
-=======
 #else
->>>>>>> MarlinFirmware/1.1.x
 
   /**
    * Marlin release version identifier
    */
   #define SHORT_BUILD_VERSION "1.1.6"
 
-<<<<<<< HEAD
-/**
- * Defines a generic printer name to be output to the LCD after booting Marlin.
- */
-#define MACHINE_NAME "Robo C2"
-
-/**
- * The SOURCE_CODE_URL is the location where users will find the Marlin Source
- * Code which is installed on the device. In most cases —unless the manufacturer
- * has a distinct Github fork— the Source Code URL should just be the main
- * Marlin repository.
- */
-#define SOURCE_CODE_URL "https://github.com/Robo3D/R2-Mini-Marlin/Marlin"
-=======
   /**
    * Verbose version identifier which should contain a reference to the location
    * from where the binary was downloaded or the source code was compiled.
@@ -79,7 +49,6 @@
    * version was tagged.
    */
   #define STRING_DISTRIBUTION_DATE "2017-10-10 12:00"
->>>>>>> MarlinFirmware/1.1.x
 
   /**
    * Required minimum Configuration.h and Configuration_adv.h file versions.

@@ -7499,21 +7499,12 @@ inline void gcode_M105() {
  *       Rxxx Wait for extruder(s) to reach temperature. Waits when heating and cooling.
  */
 
-<<<<<<< HEAD
-      #if ENABLED(AUTO_BED_LEVELING_FEATURE) || ENABLED(MESH_BED_LEVELING)
-        case 29: // G29 Detailed Z probe, probes the bed at 3 or more points.
-          gcode_G29();
-          plan_bed_level_matrix.set_to_identity();  //Reset the plane ("erase" all leveling data)
-          break;
-      #endif
-=======
 #ifndef MIN_COOLING_SLOPE_DEG
   #define MIN_COOLING_SLOPE_DEG 1.50
 #endif
 #ifndef MIN_COOLING_SLOPE_TIME
   #define MIN_COOLING_SLOPE_TIME 60
 #endif
->>>>>>> MarlinFirmware/1.1.x
 
 inline void gcode_M109() {
 

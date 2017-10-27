@@ -212,61 +212,10 @@ void MarlinSettings::postprocess() {
   // steps per s2 needs to be updated to agree with units per s2
   planner.reset_acceleration_rates();
 
-<<<<<<< HEAD
-void Config_StoreSettings()  {
-  float dummy = 0.0f;
-  char ver[4] = "000";
-  int i = EEPROM_OFFSET;
-  EEPROM_WRITE_VAR(i, ver); // invalidate data first
-  EEPROM_WRITE_VAR(i, axis_steps_per_unit);
-  EEPROM_WRITE_VAR(i, max_feedrate);
-  EEPROM_WRITE_VAR(i, max_acceleration_units_per_sq_second);
-  EEPROM_WRITE_VAR(i, acceleration);
-  EEPROM_WRITE_VAR(i, retract_acceleration);
-  EEPROM_WRITE_VAR(i, travel_acceleration);
-  EEPROM_WRITE_VAR(i, minimumfeedrate);
-  EEPROM_WRITE_VAR(i, mintravelfeedrate);
-  EEPROM_WRITE_VAR(i, minsegmenttime);
-  EEPROM_WRITE_VAR(i, max_xy_jerk);
-  EEPROM_WRITE_VAR(i, max_z_jerk);
-  EEPROM_WRITE_VAR(i, max_e_jerk);
-  EEPROM_WRITE_VAR(i, home_offset);
-
-//Save G29 Matrix
-#ifdef SAVE_G29_CORRECTION_MATRIX
-  EEPROM_WRITE_VAR(i,plan_bed_level_matrix);
-#endif
-
-  uint8_t mesh_num_x = 3;
-  uint8_t mesh_num_y = 3;
-  #if ENABLED(MESH_BED_LEVELING)
-    // Compile time test that sizeof(mbl.z_values) is as expected
-    typedef char c_assert[(sizeof(mbl.z_values) == (MESH_NUM_X_POINTS) * (MESH_NUM_Y_POINTS) * sizeof(dummy)) ? 1 : -1];
-    mesh_num_x = MESH_NUM_X_POINTS;
-    mesh_num_y = MESH_NUM_Y_POINTS;
-    EEPROM_WRITE_VAR(i, mbl.active);
-    EEPROM_WRITE_VAR(i, mbl.z_offset);
-    EEPROM_WRITE_VAR(i, mesh_num_x);
-    EEPROM_WRITE_VAR(i, mesh_num_y);
-    EEPROM_WRITE_VAR(i, mbl.z_values);
-  #else
-    uint8_t dummy_uint8 = 0;
-    dummy = 0.0f;
-    EEPROM_WRITE_VAR(i, dummy_uint8);
-    EEPROM_WRITE_VAR(i, dummy);
-    EEPROM_WRITE_VAR(i, mesh_num_x);
-    EEPROM_WRITE_VAR(i, mesh_num_y);
-    for (uint8_t q = 0; q < mesh_num_x * mesh_num_y; q++) EEPROM_WRITE_VAR(i, dummy);
-  #endif // MESH_BED_LEVELING
-
-  #if DISABLED(AUTO_BED_LEVELING_FEATURE)
-    float zprobe_zoffset = 0;
-=======
   // Make sure delta kinematics are updated before refreshing the
   // planner position so the stepper counts will be set correctly.
   #if ENABLED(DELTA)
     recalc_delta_settings(delta_radius, delta_diagonal_rod, delta_tower_angle_trim);
->>>>>>> MarlinFirmware/1.1.x
   #endif
 
   // Refresh steps_to_mm with the reciprocal of axis_steps_per_mm
@@ -454,18 +403,8 @@ void Config_StoreSettings()  {
     #if ABL_PLANAR
       EEPROM_WRITE(planner.bed_level_matrix);
     #else
-<<<<<<< HEAD
-      for (uint8_t q = 0; q < mesh_num_x * mesh_num_y; q++) EEPROM_READ_VAR(i, dummy);
-    #endif // MESH_BED_LEVELING
-    #ifdef SAVE_G29_CORRECTION_MATRIX
-        EEPROM_READ_VAR(i,plan_bed_level_matrix);
-    #endif //G29 Matrix
-    #if DISABLED(AUTO_BED_LEVELING_FEATURE)
-      float zprobe_zoffset = 0;
-=======
       dummy = 0.0;
       for (uint8_t q = 9; q--;) EEPROM_WRITE(dummy);
->>>>>>> MarlinFirmware/1.1.x
     #endif
 
     //
@@ -1232,24 +1171,6 @@ void Config_StoreSettings()  {
 /**
  * M502 - Reset Configuration
  */
-<<<<<<< HEAD
-
-void Config_ResetDefault() {
-  float tmp1[] = DEFAULT_AXIS_STEPS_PER_UNIT;
-  float tmp2[] = DEFAULT_MAX_FEEDRATE;
-  long tmp3[] = DEFAULT_MAX_ACCELERATION;
-  for (uint8_t i = 0; i < NUM_AXIS; i++) {
-    axis_steps_per_unit[i] = tmp1[i];
-    max_feedrate[i] = tmp2[i];
-    max_acceleration_units_per_sq_second[i] = tmp3[i];
-    #if ENABLED(SCARA)
-      if (i < COUNT(axis_scaling))
-        axis_scaling[i] = 1;
-    #endif
-  #ifdef SAVE_G29_CORRECTION_MATRIX
-    plan_bed_level_matrix.set_to_identity();
-  #endif
-=======
 void MarlinSettings::reset() {
   static const float tmp1[] PROGMEM = DEFAULT_AXIS_STEPS_PER_UNIT, tmp2[] PROGMEM = DEFAULT_MAX_FEEDRATE;
   static const uint32_t tmp3[] PROGMEM = DEFAULT_MAX_ACCELERATION;
@@ -1257,7 +1178,6 @@ void MarlinSettings::reset() {
     planner.axis_steps_per_mm[i]          = pgm_read_float(&tmp1[i < COUNT(tmp1) ? i : COUNT(tmp1) - 1]);
     planner.max_feedrate_mm_s[i]          = pgm_read_float(&tmp2[i < COUNT(tmp2) ? i : COUNT(tmp2) - 1]);
     planner.max_acceleration_mm_per_s2[i] = pgm_read_dword_near(&tmp3[i < COUNT(tmp3) ? i : COUNT(tmp3) - 1]);
->>>>>>> MarlinFirmware/1.1.x
   }
 
   planner.acceleration = DEFAULT_ACCELERATION;

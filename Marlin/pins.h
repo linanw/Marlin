@@ -114,6 +114,8 @@
   #include "pins_RUMBA.h"             // ATmega2560
 #elif MB(BQ_ZUM_MEGA_3D)
   #include "pins_BQ_ZUM_MEGA_3D.h"    // ATmega2560
+#elif MB(ROBO_MB)
+  #include "pins_ROBOMB.h"            // ATmega2560
 
 //
 // Other ATmega1280, ATmega2560
@@ -229,38 +231,8 @@
 #elif MB(TEENSY2)
   #include "pins_TEENSY2.h"           // AT90USB1286
 #elif MB(5DPRINT)
-<<<<<<< HEAD
-  #include "pins_5DPRINT.h"
-#elif MB(LEAPFROG)
-  #include "pins_LEAPFROG.h"
-#elif MB(BAM_DICE)
-  #include "pins_RAMPS_14.h"
-#elif MB(BAM_DICE_DUE)
-  #include "pins_BAM_DICE_DUE.h"
-#elif MB(FELIX2)
-  #include "pins_FELIX2.h"
-#elif MB(MKS_BASE)
-  #include "pins_MKS_BASE.h"
-#elif MB(RIGIDBOARD)
-  #include "pins_RIGIDBOARD.h"
-#elif MB(MEGACONTROLLER)
-  #include "pins_MEGACONTROLLER.h"
-#elif MB(BQ_ZUM_MEGA_3D)
-  #include "pins_BQ_ZUM_MEGA_3D.h"
-#elif MB(99)
-  #include "pins_99.h"
-#elif MB(AJ4P)
-  #include "pins_AJ4P.h"
-#elif MB(MKS_13)
-  #include "pins_MKS_13.h"
-#elif MB(SAINSMART_2IN1)
-  #include "pins_SAINSMART_2IN1.h"
-#elif MB(ROBOC2)
-  #include "pins_ROBOC2.h"
-=======
   #include "pins_5DPRINT.h"           // AT90USB1286
 
->>>>>>> MarlinFirmware/1.1.x
 #else
   #error "Unknown MOTHERBOARD value set in Configuration.h"
 #endif
