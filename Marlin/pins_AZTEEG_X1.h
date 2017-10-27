@@ -24,6 +24,6 @@
  * Azteeg X1 pin assignments
  */
 
-#define SANGUINOLOLU_V_1_2
+#define BOARD_NAME "Azteeg X1"
 
-#include "pins_SANGUINOLOLU_11.h"
+#include "pins_SANGUINOLOLU_12.h"

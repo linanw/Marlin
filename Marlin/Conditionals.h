@@ -22,8 +22,9 @@
 
 /**
  * Conditionals.h
- * Defines that depend on configuration but are not editable.
+ * OBSOLETE: Replaced by Conditionals_LCD.h and Conditionals_post.h
  */
+<<<<<<< HEAD
 
 #ifndef CONDITIONALS_H
 
@@ -751,3 +752,6 @@
 
 #endif //CONFIGURATION_LCD
 #endif //CONDITIONALS_H
+=======
+#error "Old configurations? Please delete all #include lines from Configuration.h and Configuration_adv.h."
+>>>>>>> MarlinFirmware/1.1.x
