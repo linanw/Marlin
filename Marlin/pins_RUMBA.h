@@ -28,12 +28,17 @@
   #error "Oops!  Make sure you have 'Arduino Mega' selected from the 'Tools -> Boards' menu."
 #endif
 
-#if E_STEPPERS > 3 || HOTENDS > 3
-  #error "RUMBA supports up to 3 hotends / E-steppers. Comment this line to keep going."
+#if HOTENDS > 3 || E_STEPPERS > 3
+  #error "RUMBA supports up to 3 hotends / E-steppers. Comment out this line to continue."
 #endif
 
 #define DEFAULT_MACHINE_NAME "Rumba"
 #define BOARD_NAME           "Rumba"
+
+//
+// Servos
+//
+#define SERVO0_PIN         5
 
 //
 // Limit Switches
@@ -80,32 +85,33 @@
 #define E2_ENABLE_PIN      39
 
 //
-// Misc. Functions
-//
-#define LED_PIN            13
-
-#define PS_ON_PIN          45
-#define KILL_PIN           46
-
-//
 // Temperature Sensors
 //
 #if TEMP_SENSOR_0 == -1
-  #define TEMP_0_PIN        6   // ANALOG NUMBERING - connector *K1* on RUMBA thermocouple ADD ON is used
+  #define TEMP_0_PIN        6   // Analog Input (connector *K1* on RUMBA thermocouple ADD ON is used)
 #else
-  #define TEMP_0_PIN       15   // ANALOG NUMBERING - default connector for thermistor *T0* on rumba board is used
+  #define TEMP_0_PIN       15   // Analog Input (default connector for thermistor *T0* on rumba board is used)
 #endif
 
 #if TEMP_SENSOR_1 == -1
-  #define TEMP_1_PIN        5   // ANALOG NUMBERING - connector *K2* on RUMBA thermocouple ADD ON is used
+  #define TEMP_1_PIN        5   // Analog Input (connector *K2* on RUMBA thermocouple ADD ON is used)
 #else
-  #define TEMP_1_PIN       14   // ANALOG NUMBERING - default connector for thermistor *T1* on rumba board is used
+  #define TEMP_1_PIN       14   // Analog Input (default connector for thermistor *T1* on rumba board is used)
 #endif
 
 #if TEMP_SENSOR_2 == -1
-  #define TEMP_2_PIN        7   // ANALOG NUMBERING - connector *K3* on RUMBA thermocouple ADD ON is used <-- this can not be used when TEMP_SENSOR_BED is defined as thermocouple
+  #define TEMP_2_PIN        7   // Analog Input (connector *K3* on RUMBA thermocouple ADD ON is used <-- this can't be used when TEMP_SENSOR_BED is defined as thermocouple)
 #else
-  #define TEMP_2_PIN       13   // ANALOG NUMBERING - default connector for thermistor *T2* on rumba board is used
+  #define TEMP_2_PIN       13   // Analog Input (default connector for thermistor *T2* on rumba board is used)
+#endif
+
+// optional for extruder 4 or chamber:
+//#define TEMP_X_PIN         12   // Analog Input (default connector for thermistor *T3* on rumba board is used)
+
+#if TEMP_SENSOR_BED == -1
+  #define TEMP_BED_PIN      7   // Analog Input (connector *K3* on RUMBA thermocouple ADD ON is used <-- this can't be used when TEMP_SENSOR_2 is defined as thermocouple)
+#else
+  #define TEMP_BED_PIN     11   // Analog Input (default connector for thermistor *THB* on rumba board is used)
 #endif
 
 //
@@ -120,16 +126,18 @@
 #define FAN_PIN             7
 #define FAN1_PIN            8
 
-//optional for extruder 4 or chamber:
-// #define TEMP_X_PIN         12   // ANALOG NUMBERING - default connector for thermistor *T3* on rumba board is used
-
-#if TEMP_SENSOR_BED == -1
-  #define TEMP_BED_PIN      7    // ANALOG NUMBERING - connector *K3* on RUMBA thermocouple ADD ON is used <-- this can not be used when TEMP_SENSOR_2 is defined as thermocouple
-#else
-  #define TEMP_BED_PIN     11    // ANALOG NUMBERING - default connector for thermistor *THB* on rumba board is used
-#endif
-
+//
+// Misc. Functions
+//
 #define SDSS               53
+#define LED_PIN            13
+#define PS_ON_PIN          45
+#define KILL_PIN           46
+#define CASE_LIGHT_PIN     45
+
+//
+// LCD / Controller
+//
 #define SD_DETECT_PIN      49
 #define BEEPER_PIN         44
 #define LCD_PINS_RS        19
@@ -142,5 +150,9 @@
 #define BTN_EN2            12
 #define BTN_ENC            43
 
-#define SERVO0_PIN         5
-
+//
+// M3/M4/M5 - Spindle/Laser Control
+//
+#define SPINDLE_LASER_PWM_PIN     4  // MUST BE HARDWARE PWM
+#define SPINDLE_LASER_ENABLE_PIN 14  // Pin should have a pullup!
+#define SPINDLE_DIR_PIN          15

@@ -40,11 +40,6 @@
 
 #define LARGE_FLASH true
 
-
-#define SERVO1_PIN          6
-#define SERVO2_PIN          5
-#define SERVO3_PIN          4
-
 #define X_STEP_PIN         54
 #define X_DIR_PIN          55
 #define X_ENABLE_PIN       38
@@ -69,32 +64,25 @@
 #define E0_DIR_PIN         28
 #define E0_ENABLE_PIN      24
 
-//#define E1_STEP_PIN        36
-//#define E1_DIR_PIN         34
-//#define E1_ENABLE_PIN      30
+#define E1_STEP_PIN        36
+#define E1_DIR_PIN         34
+#define E1_ENABLE_PIN      30
 
 #define SDPOWER            -1
 #define SDSS               53
-#define LED_PIN            13
+#define PS_ON_PIN          -1
 
-#define FILWIDTH_PIN        -1 // ANALOG NUMBERING NOT USING IN C2
+#define FILWIDTH_PIN        -1 // ANALOG NUMBERING NOT USING IN R2 or C2
 
-#if ENABLED(FILAMENT_RUNOUT_SENSOR)
-// define digital pin 4 for the filament runout sensor. Use the RAMPS 1.4 digital input 4 on the servos connector
-#define FILRUNOUT_PIN      45
-#endif
-
-
-#define CONTROLLERFAN_PIN  -1 // Pin used for the fan to cool controller
-#define FAN_PIN             7
-#define PS_ON_PIN          12
-
+#define LED_PIN            5
+#define FAN1_PIN           6 // Pin used for the fan to cool controller
+#define FAN_PIN            7
 
 #define HEATER_0_PIN       10   // EXTRUDER 1
 #define HEATER_1_PIN       9   // EXTRUDER 2 (FAN On Sprinter)
 
 #define TEMP_0_PIN         13   // ANALOG NUMBERING default 13
-#define TEMP_1_PIN         15   // ANALOG NUMBERING default 15p
+#define TEMP_1_PIN         15   // ANALOG NUMBERING default 15
 
 #define HEATER_BED_PIN      8    // BED
 

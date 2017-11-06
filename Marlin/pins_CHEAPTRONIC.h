@@ -64,9 +64,9 @@
 //
 // Temperature sensors
 //
-#define TEMP_0_PIN         15
-#define TEMP_1_PIN         14
-#define TEMP_BED_PIN       13
+#define TEMP_0_PIN         15   // Analog Input
+#define TEMP_1_PIN         14   // Analog Input
+#define TEMP_BED_PIN       13   // Analog Input
 
 //
 // Heaters / Fans
@@ -75,13 +75,12 @@
 #define HEATER_1_PIN       23 // EXTRUDER 2
 #define HEATER_BED_PIN     22
 
+//
+// LCD / Controller
+//
 // Cheaptronic v1.0 doesn't support LCD
 #define LCD_PINS_RS        -1
 #define LCD_PINS_ENABLE    -1
-#define LCD_PINS_D4        -1
-#define LCD_PINS_D5        -1
-#define LCD_PINS_D6        -1
-#define LCD_PINS_D7        -1
 
 // Cheaptronic v1.0 doesn't support keypad
 #define BTN_EN1            -1

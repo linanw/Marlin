@@ -91,35 +91,27 @@
 #define E2_ENABLE_PIN      23
 
 //
-// Misc. Functions
-//
-#define SDSS               53
-#define LED_PIN            13
-#define PS_ON_PIN          12
-#define SLED_PIN           -1
-
-//
 // Temperature Sensors
 //
 #if TEMP_SENSOR_0 == -1
-  #define TEMP_0_PIN       11 // ANALOG NUMBERING
+  #define TEMP_0_PIN       11   // Analog Input
 #else
-  #define TEMP_0_PIN       15 // ANALOG NUMBERING
+  #define TEMP_0_PIN       15   // Analog Input
 #endif
 #if TEMP_SENSOR_1 == -1
-  #define TEMP_1_PIN       10 // ANALOG NUMBERING
+  #define TEMP_1_PIN       10   // Analog Input
 #else
-  #define TEMP_1_PIN       13 // ANALOG NUMBERING
+  #define TEMP_1_PIN       13   // Analog Input
 #endif
 #if TEMP_SENSOR_2 == -1
-  #define TEMP_2_PIN        9 // ANALOG NUMBERING
+  #define TEMP_2_PIN        9   // Analog Input
 #else
-  #define TEMP_2_PIN       12 // ANALOG NUMBERING
+  #define TEMP_2_PIN       12   // Analog Input
 #endif
 #if TEMP_SENSOR_BED == -1
-  #define TEMP_BED_PIN      8 // ANALOG NUMBERING
+  #define TEMP_BED_PIN      8   // Analog Input
 #else
-  #define TEMP_BED_PIN     14 // ANALOG NUMBERING
+  #define TEMP_BED_PIN     14   // Analog Input
 #endif
 
 //
@@ -134,6 +126,14 @@
 #define FAN1_PIN            7
 
 //
+// Misc. Functions
+//
+#define SDSS               53
+#define LED_PIN            13
+#define PS_ON_PIN          12
+#define CASE_LIGHT_PIN     45   // Try the keypad connector
+
+//
 // LCD / Controller
 //
 #define BEEPER_PIN         61
@@ -143,18 +143,21 @@
 #define BTN_ENC            33
 
 #if ENABLED(REPRAPWORLD_GRAPHICAL_LCD)
-  #define LCD_PINS_RS      56 // CS chip select / SS chip slave select
-  #define LCD_PINS_ENABLE  51 // SID (MOSI)
-  #define LCD_PINS_D4      52 // SCK (CLK) clock
+
+  #define LCD_PINS_RS      56   // CS chip select / SS chip slave select
+  #define LCD_PINS_ENABLE  51   // SID (MOSI)
+  #define LCD_PINS_D4      52   // SCK (CLK) clock
   #define SD_DETECT_PIN    35
+
 #else
+
   #define LCD_PINS_RS      32
   #define LCD_PINS_ENABLE  31
   #define LCD_PINS_D4      14
   #define LCD_PINS_D5      30
   #define LCD_PINS_D6      39
   #define LCD_PINS_D7      15
-  
+
   #define SHIFT_CLK        43
   #define SHIFT_LD         35
   #define SHIFT_OUT        34
@@ -166,4 +169,28 @@
     #define SD_DETECT_PIN  -1
   #endif
 
+#endif
+
+//
+// M3/M4/M5 - Spindle/Laser Control
+//
+#if DISABLED(REPRAPWORLD_KEYPAD)       // try to use the keypad connector first
+  #define SPINDLE_LASER_PWM_PIN    44  // MUST BE HARDWARE PWM
+  #define SPINDLE_LASER_ENABLE_PIN 43  // Pin should have a pullup!
+  #define SPINDLE_DIR_PIN          42
+#elif EXTRUDERS <= 2
+  // Hijack the last extruder so that we can get the PWM signal off the Y breakout
+  // Move Y to the E2 plug. This makes dual Y steppers harder
+  #undef Y_ENABLE_PIN  //  4
+  #undef Y_STEP_PIN    //  5
+  #undef Y_DIR_PIN     // 17
+  #undef E2_ENABLE_PIN // 23
+  #undef E2_STEP_PIN   // 22
+  #undef E2_DIR_PIN    // 60
+  #define Y_ENABLE_PIN             23
+  #define Y_STEP_PIN               22
+  #define Y_DIR_PIN                60
+  #define SPINDLE_LASER_PWM_PIN     4  // MUST BE HARDWARE PWM
+  #define SPINDLE_LASER_ENABLE_PIN 17  // Pin should have a pullup!
+  #define SPINDLE_DIR_PIN           5
 #endif
