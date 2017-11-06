@@ -526,7 +526,7 @@
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
 
- // This block is an attemp to make switching the firmware from a single to a dual extruder maching as easy as changing the extruder count
+ // This block is an attempt to make switching the firmware from a single to a dual extruder machine as easy as changing the extruder count
 #ifdef EXTRUDERS
   #if EXTRUDERS == 1
     //Single
