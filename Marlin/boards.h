@@ -101,6 +101,11 @@
 #define BOARD_BQ_ZUM_MEGA_3D    503  // bq ZUM Mega 3D
 #define BOARD_ZRIB_V20          504  // zrib V2.0 control board (Chinese knock off RAMPS replica)
 
-#define MB(board) (MOTHERBOARD==BOARD_##board)
+//Robo Versioned Boards
+#define BOARD_VERSION_R2 1 //Robo R2
+#define BOARD_VERSION_C2 2 //Robo C2
 
+#define MB(board) (MOTHERBOARD==BOARD_##board)
+#define RBV(board_version) (ROBO_BOARD_VERSION==BOARD_VERSION_##board_version) 
 #endif // __BOARDS_H
+

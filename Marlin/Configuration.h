@@ -122,6 +122,13 @@
   #define MOTHERBOARD BOARD_ROBOMB
 #endif
 
+/*
+ * Options are R2 or C2
+ */  
+#ifndef ROBO_BOARD_VERSION 
+  #define ROBO_BOARD_VERSION BOARD_VERSION_R2
+#endif
+
 // Optional custom name for your RepStrap or other custom machine
 // Displayed in the LCD "Ready" message
 //#define CUSTOM_MACHINE_NAME "3D Printer"
@@ -283,6 +290,8 @@
  *
  * :{ '0': "Not used", '1':"100k / 4.7k - EPCOS", '2':"200k / 4.7k - ATC Semitec 204GT-2", '3':"Mendel-parts / 4.7k", '4':"10k !! do not use for a hotend. Bad resolution at high temp. !!", '5':"100K / 4.7k - ATC Semitec 104GT-2 (Used in ParCan & J-Head)", '6':"100k / 4.7k EPCOS - Not as accurate as Table 1", '7':"100k / 4.7k Honeywell 135-104LAG-J01", '8':"100k / 4.7k 0603 SMD Vishay NTCS0603E3104FXT", '9':"100k / 4.7k GE Sensing AL03006-58.2K-97-G1", '10':"100k / 4.7k RS 198-961", '11':"100k / 4.7k beta 3950 1%", '12':"100k / 4.7k 0603 SMD Vishay NTCS0603E3104FXT (calibrated for Makibox hot bed)", '13':"100k Hisens 3950  1% up to 300°C for hotend 'Simple ONE ' & hotend 'All In ONE'", '20':"PT100 (Ultimainboard V2.x)", '51':"100k / 1k - EPCOS", '52':"200k / 1k - ATC Semitec 204GT-2", '55':"100k / 1k - ATC Semitec 104GT-2 (Used in ParCan & J-Head)", '60':"100k Maker's Tool Works Kapton Bed Thermistor beta=3950", '66':"Dyze Design 4.7M High Temperature thermistor", '70':"the 100K thermistor found in the bq Hephestos 2", '71':"100k / 4.7k Honeywell 135-104LAF-J01", '147':"Pt100 / 4.7k", '1047':"Pt1000 / 4.7k", '110':"Pt100 / 1k (non-standard)", '1010':"Pt1000 / 1k (non standard)", '-3':"Thermocouple + MAX31855 (only for sensor 0)", '-2':"Thermocouple + MAX6675 (only for sensor 0)", '-1':"Thermocouple + AD595",'998':"Dummy 1", '999':"Dummy 2" }
  */
+
+
 #define TEMP_SENSOR_0 5
 #define TEMP_SENSOR_1 5
 #define TEMP_SENSOR_2 0
@@ -352,14 +361,18 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
   // Robo R2 24V
-  #define  DEFAULT_Kp 23.8
-  #define  DEFAULT_Ki 1.7
-  #define  DEFAULT_Kd 85.0
+  #if RBV(R2)
+    #define  DEFAULT_Kp 23.8
+    #define  DEFAULT_Ki 1.7
+    #define  DEFAULT_Kd 85.0
+  #endif
 
   // Robo C2 19V
-  //#define  DEFAULT_Kp 23.75
-  //#define  DEFAULT_Ki 1.48
-  //#define  DEFAULT_Kd 95.10
+  #if RBV(C2)
+    #define  DEFAULT_Kp 23.75
+    #define  DEFAULT_Ki 1.48
+    #define  DEFAULT_Kd 95.10
+  #endif
 
 #endif // PIDTEMP
 
@@ -775,17 +788,35 @@
 
 // @section machine
 
-// The size of the print bed
-#define X_BED_SIZE 196
-#define Y_BED_SIZE 196
+//Robo R2
+#if RBV(R2)
+  // The size of the print bed
+  #define X_BED_SIZE 196
+  #define Y_BED_SIZE 196
 
-// Travel limits (mm) after homing, corresponding to endstop positions.
-#define X_MIN_POS 0
-#define Y_MIN_POS 0
-#define Z_MIN_POS 0
-#define X_MAX_POS X_BED_SIZE
-#define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 260
+  // Travel limits (mm) after homing, corresponding to endstop positions.
+  #define X_MIN_POS 0
+  #define Y_MIN_POS 0
+  #define Z_MIN_POS 0
+  #define X_MAX_POS X_BED_SIZE
+  #define Y_MAX_POS Y_BED_SIZE
+  #define Z_MAX_POS 260
+#endif
+
+//Robo C2
+#if RBV(C2)
+  // The size of the print bed
+  #define X_BED_SIZE 125
+  #define Y_BED_SIZE 125
+
+  // Travel limits (mm) after homing, corresponding to endstop positions.
+  #define X_MIN_POS 0
+  #define Y_MIN_POS 0
+  #define Z_MIN_POS 0
+  #define X_MAX_POS X_BED_SIZE
+  #define Y_MAX_POS Y_BED_SIZE
+  #define Z_MAX_POS 160
+#endif
 
 // If enabled, axes won't move below MIN_POS in response to movement commands.
 //#define MIN_SOFTWARE_ENDSTOPS
