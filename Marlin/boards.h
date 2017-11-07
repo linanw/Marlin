@@ -104,7 +104,7 @@
 //Robo Versioned Boards
 #define BOARD_VERSION_R2 1 //Robo R2
 #define BOARD_VERSION_C2 2 //Robo C2
-#define BOARD_VERSION_R2_DUAL //Robo R2 with a Dual Extrusion Kit
+#define BOARD_VERSION_R2_DUAL 3//Robo R2 with a Dual Extrusion Kit
 
 #define MB(board) (MOTHERBOARD==BOARD_##board)
 #define RBV(board_version) (ROBO_BOARD_VERSION==BOARD_VERSION_##board_version) 
