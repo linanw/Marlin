@@ -35,8 +35,8 @@
   /**
    * Marlin release version identifier
    */
-  #define SHORT_BUILD_VERSION "1.1.5-C2"
-  #define FIRMWARE_VERSION "1.1.5"
+  #define SHORT_BUILD_VERSION "C2.1.1.9.beta"
+  #define FIRMWARE_VERSION "1.1.9.beta"
 
   /**
    * Verbose version identifier which should contain a reference to the location
@@ -58,8 +58,8 @@
    * but not limited to: ADD, DELETE RENAME OR REPURPOSE any directive/option on
    * the configuration files.
    */
-  #define REQUIRED_CONFIGURATION_H_VERSION 010105
-  #define REQUIRED_CONFIGURATION_ADV_H_VERSION 010102
+  #define REQUIRED_CONFIGURATION_H_VERSION 010107
+  #define REQUIRED_CONFIGURATION_ADV_H_VERSION 010104
 
   /**
    * @todo: Missing documentation block
