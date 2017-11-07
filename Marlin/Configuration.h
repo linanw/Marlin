@@ -501,7 +501,7 @@
 
 
 // X and Y axis travel speed (mm/m) between probes
-#define XY_PROBE_SPEED 6000
+#define XY_PROBE_SPEED 10000
 // Speed for the first approach when double-probing (with PROBE_DOUBLE_TOUCH)
 #define Z_PROBE_SPEED_FAST (HOMING_FEEDRATE_Z / 1.5)
 // Speed for the "accurate" probe of each point

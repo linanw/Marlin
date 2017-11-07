@@ -44,7 +44,7 @@
  *
  * Note: Update also Version.h !
  */
-#define CONFIGURATION_ADV_H_VERSION 010102
+#define CONFIGURATION_ADV_H_VERSION 010104
 
 // @section temperature
 
@@ -74,8 +74,8 @@
  * If you get false positives for "Thermal Runaway" increase THERMAL_PROTECTION_HYSTERESIS and/or THERMAL_PROTECTION_PERIOD
  */
 #if ENABLED(THERMAL_PROTECTION_HOTENDS)
-  #define THERMAL_PROTECTION_PERIOD 40        // Seconds
-  #define THERMAL_PROTECTION_HYSTERESIS 4     // Degrees Celsius
+  #define THERMAL_PROTECTION_PERIOD 100        // Seconds
+  #define THERMAL_PROTECTION_HYSTERESIS 10     // Degrees Celsius
 
   /**
    * Whenever an M104 or M109 increases the target temperature the firmware will wait for the
@@ -86,16 +86,16 @@
    * If you get false positives for "Heating failed" increase WATCH_TEMP_PERIOD and/or decrease WATCH_TEMP_INCREASE
    * WATCH_TEMP_INCREASE should not be below 2.
    */
-  #define WATCH_TEMP_PERIOD 20                // Seconds
-  #define WATCH_TEMP_INCREASE 2               // Degrees Celsius
+  #define WATCH_TEMP_PERIOD 100                // Seconds
+  #define WATCH_TEMP_INCREASE 10               // Degrees Celsius
 #endif
 
 /**
  * Thermal Protection parameters for the bed are just as above for hotends.
  */
 #if ENABLED(THERMAL_PROTECTION_BED)
-  #define THERMAL_PROTECTION_BED_PERIOD 20    // Seconds
-  #define THERMAL_PROTECTION_BED_HYSTERESIS 2 // Degrees Celsius
+  #define THERMAL_PROTECTION_BED_PERIOD 120    // Seconds
+  #define THERMAL_PROTECTION_BED_HYSTERESIS 10 // Degrees Celsius
 
   /**
    * Whenever an M140 or M190 increases the target temperature the firmware will wait for the
@@ -106,8 +106,8 @@
    * If you get too many "Heating failed" errors, increase WATCH_BED_TEMP_PERIOD and/or decrease
    * WATCH_BED_TEMP_INCREASE. (WATCH_BED_TEMP_INCREASE should not be below 2.)
    */
-  #define WATCH_BED_TEMP_PERIOD 60                // Seconds
-  #define WATCH_BED_TEMP_INCREASE 2               // Degrees Celsius
+  #define WATCH_BED_TEMP_PERIOD 100                // Seconds
+  #define WATCH_BED_TEMP_INCREASE 2              // Degrees Celsius
 #endif
 
 #if ENABLED(PIDTEMP)
@@ -194,12 +194,12 @@
 // When first starting the main fan, run it at full speed for the
 // given number of milliseconds.  This gets the fan spinning reliably
 // before setting a PWM value. (Does not work with software PWM for fan on Sanguinololu)
-//#define FAN_KICKSTART_TIME 100
+#define FAN_KICKSTART_TIME 100
 
 // This defines the minimal speed for the main fan, run in PWM mode
 // to enable uncomment and set minimal PWM speed for reliable running (1-255)
 // if fan speed is [1 - (FAN_MIN_PWM-1)] it is set to FAN_MIN_PWM
-//#define FAN_MIN_PWM 50
+#define FAN_MIN_PWM 50
 
 // @section extruder
 
@@ -380,7 +380,7 @@
 #define DIGIPOT_MOTOR_CURRENT {135,135,135,135,135} // Values 0-255 (RAMBO 135 = ~0.75A, 185 = ~1A)
 
 // Motor Current controlled via PWM (Overridable on supported boards with PWM-driven motor driver current)
-//#define PWM_MOTOR_CURRENT {1300, 1300, 1250} // Values in milliamps
+#define PWM_MOTOR_CURRENT {1300, 1300, 1250} // Values in milliamps
 
 // uncomment to enable an I2C based DIGIPOT like on the Azteeg X3 Pro
 //#define DIGIPOT_I2C
@@ -502,7 +502,7 @@
 // Implementation of a linear pressure control
 // Assumption: advance = k * (delta velocity)
 // K=0 means advance disabled. A good value for a gregs wade extruder will be around K=75
-#define LIN_ADVANCE
+//#define LIN_ADVANCE
 
 #if ENABLED(LIN_ADVANCE)
   #define LIN_ADVANCE_K 45
@@ -523,7 +523,7 @@
 // @section extras
 
 // Arc interpretation settings:
-#define ARC_SUPPORT  // Disabling this saves ~2738 bytes
+//#define ARC_SUPPORT  // Disabling this saves ~2738 bytes
 #define MM_PER_ARC_SEGMENT 1
 #define N_ARC_CORRECTION 25
 
@@ -535,7 +535,7 @@
 
 // The minimum pulse width (in µs) for stepping a stepper.
 // Set this if you find stepping unreliable, or if using a very fast CPU.
-#define MINIMUM_STEPPER_PULSE 0 // (µs) The smallest stepper pulse allowed
+#define MINIMUM_STEPPER_PULSE 1 // (µs) The smallest stepper pulse allowed
 
 // @section temperature
 
@@ -560,7 +560,7 @@
 
 // The ASCII buffer for serial input
 #define MAX_CMD_SIZE 96
-#define BUFSIZE 4
+#define BUFSIZE 16
 
 // Transfer Buffer Size
 // To save 386 bytes of PROGMEM (and TX_BUFFER_SIZE+3 bytes of RAM) set to 0.
