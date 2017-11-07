@@ -259,7 +259,7 @@
 // When temperature exceeds max temp, your heater will be switched off.
 // This feature exists to protect your hotend from overheating accidentally, but *NOT* from thermistor short/failure!
 // You should use MINTEMP for thermistor short/failure protection.
-#define HEATER_0_MAXTEMP 290
+#define HEATER_0_MAXTEMP 300
 #define HEATER_1_MAXTEMP 275
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
@@ -431,7 +431,7 @@
 // @section motion
 
 #define DEFAULT_AXIS_STEPS_PER_UNIT   {80.0395,80.0395,800.24,145.5}  // default steps per unit for Robo C2
-#define DEFAULT_MAX_FEEDRATE          {300, 300, 12, 25}    // (mm/sec)
+#define DEFAULT_MAX_FEEDRATE          {300, 300, 20, 25}    // (mm/sec)
 #define DEFAULT_MAX_ACCELERATION      {3000,3000,100,500}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
 
 #define DEFAULT_ACCELERATION          1000    // X, Y, Z and E acceleration in mm/s^2 for printing moves
@@ -503,9 +503,9 @@
 // X and Y axis travel speed (mm/m) between probes
 #define XY_PROBE_SPEED 6000
 // Speed for the first approach when double-probing (with PROBE_DOUBLE_TOUCH)
-#define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
+#define Z_PROBE_SPEED_FAST (HOMING_FEEDRATE_Z / 1.5)
 // Speed for the "accurate" probe of each point
-#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 2)
+#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 3)
 // Use double touch for probing
 #define PROBE_DOUBLE_TOUCH
 
@@ -565,7 +565,7 @@
 // These values specify the distance from the NOZZLE to the BED.
 //
 #define Z_PROBE_DEPLOY_HEIGHT 10 // Z position for the probe to deploy/stow
-#define Z_PROBE_TRAVEL_HEIGHT  5 // Z position for travel between points
+#define Z_PROBE_TRAVEL_HEIGHT  10 // Z position for travel between points
 
 //
 // For M851 give a range for adjusting the Z probe offset
@@ -761,7 +761,7 @@
 
 // Homing speeds (mm/m)
 #define HOMING_FEEDRATE_XY (50*60)
-#define HOMING_FEEDRATE_Z  (6*60)
+#define HOMING_FEEDRATE_Z  (12*60)
 
 //=============================================================================
 //============================= Additional Features ===========================
