@@ -35,8 +35,8 @@
   /**
    * Marlin release version identifier
    */
-  #define SHORT_BUILD_VERSION "1.1.0-R2.1.1.8"
-  #define FIRMWARE_VERSION "1.1.8"
+  #define SHORT_BUILD_VERSION "1.1.0-R2.1.1.9"
+  #define FIRMWARE_VERSION "1.1.9"
 
   /**
    * Verbose version identifier which should contain a reference to the location

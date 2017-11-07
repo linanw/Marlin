@@ -432,16 +432,16 @@
 
 #define DEFAULT_AXIS_STEPS_PER_UNIT   {80.0395,80.0395,800.24,145.5}  // default steps per unit for Robo C2
 #define DEFAULT_MAX_FEEDRATE          {300, 300, 20, 25}    // (mm/sec)
-#define DEFAULT_MAX_ACCELERATION      {3000,3000,100,500}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
+#define DEFAULT_MAX_ACCELERATION      {1000,1000,100,1000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
 
-#define DEFAULT_ACCELERATION          1000    // X, Y, Z and E acceleration in mm/s^2 for printing moves
+#define DEFAULT_ACCELERATION          500    // X, Y, Z and E acceleration in mm/s^2 for printing moves
 #define DEFAULT_RETRACT_ACCELERATION  1000    // E acceleration in mm/s^2 for retracts
 #define DEFAULT_TRAVEL_ACCELERATION   1000    // X, Y, Z acceleration in mm/s^2 for travel (non printing) moves
 
 // "Jerk" specifies the minimum speed change that requires acceleration.
 // When changing speed and direction, if the difference is less than the
 // value set here, it may happen instantaneously.
-#define DEFAULT_XYJERK                 10.0    // (mm/sec)
+#define DEFAULT_XYJERK                 8.0    // (mm/sec)
 #define DEFAULT_ZJERK                  0.4    // (mm/sec)
 #define DEFAULT_EJERK                  1       // (mm/sec)
 
