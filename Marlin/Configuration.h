@@ -126,7 +126,7 @@
  * Options are R2, C2, or R2_DUAL
  */  
 #ifndef ROBO_BOARD_VERSION 
-  #define ROBO_BOARD_VERSION BOARD_VERSION_R2_DUAL
+  #define ROBO_BOARD_VERSION BOARD_VERSION_R2
 #endif
 
 // Optional custom name for your RepStrap or other custom machine
@@ -850,7 +850,10 @@
 #endif
 
 // If enabled, axes won't move below MIN_POS in response to movement commands.
-//#define MIN_SOFTWARE_ENDSTOPS
+/*
+ * Right now we print over air when this is enabled. Disabling it gives lets us go beyond the soft limit and touch the nozzle. Let's find out why
+ */
+#define MIN_SOFTWARE_ENDSTOPS 
 // If enabled, axes won't move above MAX_POS in response to movement commands.
 #define MAX_SOFTWARE_ENDSTOPS
 

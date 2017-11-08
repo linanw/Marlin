@@ -1394,18 +1394,19 @@ bool get_target_extruder_from_command(const uint16_t code) {
    * at the same positions relative to the machine.
    */
   void update_software_endstops(const AxisEnum axis) {
-    const float offs = 0.0
-      #if HAS_HOME_OFFSET
-        + home_offset[axis]
-      #endif
-      #if HAS_POSITION_SHIFT
-        + position_shift[axis]
-      #endif
-    ;
+    //Changed this back to the way M206 was handled in pre 1.0.4 so a negative Z-Offset will work correctly. Looking at you Waldo
+    const float offs = LOGICAL_POSITION(0, axis);
+    //   #if HAS_HOME_OFFSET
+    //     + home_offset[axis]
+    //   #endif
+    //   #if HAS_POSITION_SHIFT
+    //     + position_shift[axis]
+    //   #endif
+    // ;
 
-    #if HAS_HOME_OFFSET && HAS_POSITION_SHIFT
-      workspace_offset[axis] = offs;
-    #endif
+    // #if HAS_HOME_OFFSET && HAS_POSITION_SHIFT
+    //   workspace_offset[axis] = offs;
+    // #endif
 
     #if ENABLED(DUAL_X_CARRIAGE)
       if (axis == X_AXIS) {
@@ -1470,6 +1471,7 @@ bool get_target_extruder_from_command(const uint16_t code) {
    * call sync_plan_position soon after this.
    */
   static void set_home_offset(const AxisEnum axis, const float v) {
+    //changed this to add the offset
     current_position[axis] += v - home_offset[axis];
     home_offset[axis] = v;
     update_software_endstops(axis);
