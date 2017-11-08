@@ -124,8 +124,8 @@
 
 /*
  * Options are R2, C2, or R2_DUAL
- */  
-#ifndef ROBO_BOARD_VERSION 
+ */
+#ifndef ROBO_BOARD_VERSION
   #define ROBO_BOARD_VERSION BOARD_VERSION_R2
 #endif
 
@@ -299,8 +299,8 @@
  */
 
 #if RBV(R2_DUAL)
-  #define TEMP_SENSOR_0 5
-  #define TEMP_SENSOR_1 5
+  #define TEMP_SENSOR_0 1
+  #define TEMP_SENSOR_1 1
   #define TEMP_SENSOR_2 0
   #define TEMP_SENSOR_3 0
   #define TEMP_SENSOR_4 0
@@ -308,7 +308,7 @@
 #endif
 
 #if RBV(R2)
-  #define TEMP_SENSOR_0 5
+  #define TEMP_SENSOR_0 1
   #define TEMP_SENSOR_1 0
   #define TEMP_SENSOR_2 0
   #define TEMP_SENSOR_3 0
@@ -317,7 +317,7 @@
 #endif
 
 #if RBV(C2)
-  #define TEMP_SENSOR_0 5
+  #define TEMP_SENSOR_0 1
   #define TEMP_SENSOR_1 0
   #define TEMP_SENSOR_2 0
   #define TEMP_SENSOR_3 0
@@ -575,16 +575,16 @@
   #if EXTRUDERS == 1
     //Single
     #define DEFAULT_AXIS_STEPS_PER_UNIT   {80.0395, 80.0395, 800.24, 145.5}
-    #define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 }
-    #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 500 }
+    #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25 }
+    #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 500 }
   #endif
-  
+
   #if EXTRUDERS == 2
-    //Dual 
+    //Dual
     #define DISTINCT_E_FACTORS
     #define DEFAULT_AXIS_STEPS_PER_UNIT   {80.0395, 80.0395, 800.24, 145.5, 371.5}
-    #define DEFAULT_MAX_FEEDRATE          { 300, 300, 8, 25, 100 }
-    #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 500, 1000 }
+    #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25, 100 }
+    #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 500, 1000 }
   #endif
 #endif
 
@@ -608,8 +608,8 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
-#define DEFAULT_XJERK                 10.0
-#define DEFAULT_YJERK                 10.0
+#define DEFAULT_XJERK                 8.0
+#define DEFAULT_YJERK                 8.0
 #define DEFAULT_ZJERK                  0.4
 #define DEFAULT_EJERK                  1.0
 
@@ -725,12 +725,12 @@
  *      O-- FRONT --+
  *    (0,0)
  */
-#define X_PROBE_OFFSET_FROM_EXTRUDER 0  // X offset: -left  +right  [of the nozzle]
+#define X_PROBE_OFFSET_FROM_EXTRUDER 2  // X offset: -left  +right  [of the nozzle]
 #define Y_PROBE_OFFSET_FROM_EXTRUDER 30  // Y offset: -front +behind [the nozzle]
 #define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
 
 // X and Y axis travel speed (mm/m) between probes
-#define XY_PROBE_SPEED 6000
+#define XY_PROBE_SPEED 10000
 
 // Speed for the first approach when double-probing (with PROBE_DOUBLE_TOUCH)
 #define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
@@ -808,7 +808,7 @@
 
 //#define NO_MOTION_BEFORE_HOMING  // Inhibit movement until all axes have been homed
 
-#define Z_HOMING_HEIGHT 4  // (in mm) Minimal z height before homing (G28) for Z clearance above the bed, clamps, ...
+#define Z_HOMING_HEIGHT 10  // (in mm) Minimal z height before homing (G28) for Z clearance above the bed, clamps, ...
                              // Be sure you have this distance over your Z_MAX_POS in case.
 
 // Direction of endstops when homing; 1=MAX, -1=MIN
@@ -822,8 +822,8 @@
 //Robo R2
 #if RBV(R2) || RBV(R2_DUAL)
   // The size of the print bed
-  #define X_BED_SIZE 196
-  #define Y_BED_SIZE 196
+  #define X_BED_SIZE 197
+  #define Y_BED_SIZE 197
 
   // Travel limits (mm) after homing, corresponding to endstop positions.
   #define X_MIN_POS 0
@@ -853,7 +853,7 @@
 /*
  * Right now we print over air when this is enabled. Disabling it gives lets us go beyond the soft limit and touch the nozzle. Let's find out why
  */
-#define MIN_SOFTWARE_ENDSTOPS 
+#define MIN_SOFTWARE_ENDSTOPS
 // If enabled, axes won't move above MAX_POS in response to movement commands.
 #define MAX_SOFTWARE_ENDSTOPS
 
@@ -926,7 +926,7 @@
  * Turn on with the command 'M111 S32'.
  * NOTE: Requires a lot of PROGMEM!
  */
-//#define DEBUG_LEVELING_FEATURE
+#define DEBUG_LEVELING_FEATURE
 
 #if ENABLED(MESH_BED_LEVELING) || ENABLED(AUTO_BED_LEVELING_BILINEAR) || ENABLED(AUTO_BED_LEVELING_UBL)
   // Gradually reduce leveling correction until a set height is reached,
@@ -939,7 +939,7 @@
 
   #if RBV(R2) || RBV(R2_DUAL)
     // Set the number of grid points per dimension.
-    #define GRID_MAX_POINTS_X 4
+    #define GRID_MAX_POINTS_X 3
     #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
     // Set the boundaries for probing (where the probe can reach).
@@ -1079,8 +1079,8 @@
 #endif
 
 // Homing speeds (mm/m)
-#define HOMING_FEEDRATE_XY (50*60)
-#define HOMING_FEEDRATE_Z  (6*60)
+#define HOMING_FEEDRATE_XY (55*60)
+#define HOMING_FEEDRATE_Z  (12*60)
 
 //=============================================================================
 //============================= Additional Features ===========================
