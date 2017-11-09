@@ -5352,14 +5352,14 @@ void home_all_axes() { gcode_G28(true); }
     #if RBV(C2)
       current_position[X_AXIS] = LOGICAL_X_POSITION(9.00);
       current_position[Y_AXIS] = LOGICAL_Y_POSITION(0.00);
-      feedrate_mm_s = 125.00; //set feedrate to 1000
+      feedrate_mm_s = 125.00; //set feedrate to 125
       line_to_current_position();
     #endif
 
     #if RBV(R2) || RBV(R2_DUAL)
       current_position[X_AXIS] = LOGICAL_X_POSITION(9.00);
       current_position[Y_AXIS] = LOGICAL_Y_POSITION(0.00);
-      feedrate_mm_s = 125.00; //set feedrate to 1000
+      feedrate_mm_s = 125.00; //set feedrate to 125
       line_to_current_position();
     #endif
 
