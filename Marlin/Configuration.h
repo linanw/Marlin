@@ -122,6 +122,13 @@
   #define MOTHERBOARD BOARD_ROBOMB
 #endif
 
+/*
+ * Options are R2, C2, or R2_DUAL
+ */
+#ifndef ROBO_BOARD_VERSION
+  #define ROBO_BOARD_VERSION BOARD_VERSION_R2
+#endif
+
 // Optional custom name for your RepStrap or other custom machine
 // Displayed in the LCD "Ready" message
 //#define CUSTOM_MACHINE_NAME "3D Printer"
@@ -134,7 +141,14 @@
 
 // This defines the number of extruders
 // :[1, 2, 3, 4, 5]
-#define EXTRUDERS 1
+
+#if RBV(R2_DUAL)
+  #define EXTRUDERS 2
+#endif
+
+#if RBV(R2) || RBV(C2)
+  #define EXTRUDERS 1
+#endif
 
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
 //#define SINGLENOZZLE
@@ -209,8 +223,10 @@
 // Offset of the extruders (uncomment if using more than one and relying on firmware to position when changing).
 // The offset has to be X=0, Y=0 for the extruder 0 hotend (default extruder).
 // For the other hotends it is their distance from the extruder 0 hotend.
-//#define HOTEND_OFFSET_X {0.0, 20.00} // (in mm) for each extruder, offset of the hotend on the X axis
-//#define HOTEND_OFFSET_Y {0.0, 5.00}  // (in mm) for each extruder, offset of the hotend on the Y axis
+#define HOTEND_OFFSET_X {0.0, 20.00} // (in mm) for each extruder, offset of the hotend on the X axis
+#define HOTEND_OFFSET_Y {0.0, 5.00}  // (in mm) for each extruder, offset of the hotend on the Y axis
+
+// @section machine
 
 // @section machine
 
@@ -283,13 +299,33 @@
  *
  * :{ '0': "Not used", '1':"100k / 4.7k - EPCOS", '2':"200k / 4.7k - ATC Semitec 204GT-2", '3':"Mendel-parts / 4.7k", '4':"10k !! do not use for a hotend. Bad resolution at high temp. !!", '5':"100K / 4.7k - ATC Semitec 104GT-2 (Used in ParCan & J-Head)", '6':"100k / 4.7k EPCOS - Not as accurate as Table 1", '7':"100k / 4.7k Honeywell 135-104LAG-J01", '8':"100k / 4.7k 0603 SMD Vishay NTCS0603E3104FXT", '9':"100k / 4.7k GE Sensing AL03006-58.2K-97-G1", '10':"100k / 4.7k RS 198-961", '11':"100k / 4.7k beta 3950 1%", '12':"100k / 4.7k 0603 SMD Vishay NTCS0603E3104FXT (calibrated for Makibox hot bed)", '13':"100k Hisens 3950  1% up to 300°C for hotend 'Simple ONE ' & hotend 'All In ONE'", '20':"PT100 (Ultimainboard V2.x)", '51':"100k / 1k - EPCOS", '52':"200k / 1k - ATC Semitec 204GT-2", '55':"100k / 1k - ATC Semitec 104GT-2 (Used in ParCan & J-Head)", '60':"100k Maker's Tool Works Kapton Bed Thermistor beta=3950", '66':"Dyze Design 4.7M High Temperature thermistor", '70':"the 100K thermistor found in the bq Hephestos 2", '71':"100k / 4.7k Honeywell 135-104LAF-J01", '147':"Pt100 / 4.7k", '1047':"Pt1000 / 4.7k", '110':"Pt100 / 1k (non-standard)", '1010':"Pt1000 / 1k (non standard)", '-3':"Thermocouple + MAX31855 (only for sensor 0)", '-2':"Thermocouple + MAX6675 (only for sensor 0)", '-1':"Thermocouple + AD595",'998':"Dummy 1", '999':"Dummy 2" }
  */
-#define TEMP_SENSOR_0 5
-#define TEMP_SENSOR_1 0
-#define TEMP_SENSOR_2 0
-#define TEMP_SENSOR_3 0
-#define TEMP_SENSOR_4 0
-#define TEMP_SENSOR_BED 12
 
+#if RBV(R2_DUAL)
+  #define TEMP_SENSOR_0 1
+  #define TEMP_SENSOR_1 1
+  #define TEMP_SENSOR_2 0
+  #define TEMP_SENSOR_3 0
+  #define TEMP_SENSOR_4 0
+  #define TEMP_SENSOR_BED 12
+#endif
+
+#if RBV(R2)
+  #define TEMP_SENSOR_0 1
+  #define TEMP_SENSOR_1 0
+  #define TEMP_SENSOR_2 0
+  #define TEMP_SENSOR_3 0
+  #define TEMP_SENSOR_4 0
+  #define TEMP_SENSOR_BED 12
+#endif
+
+#if RBV(C2)
+  #define TEMP_SENSOR_0 1
+  #define TEMP_SENSOR_1 0
+  #define TEMP_SENSOR_2 0
+  #define TEMP_SENSOR_3 0
+  #define TEMP_SENSOR_4 0
+  #define TEMP_SENSOR_BED 0
+#endif
 // Dummy thermistor constant temperature readings, for use with 998 and 999
 #define DUMMY_THERMISTOR_998_VALUE 25
 #define DUMMY_THERMISTOR_999_VALUE 100
@@ -327,7 +363,7 @@
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
 #define HEATER_4_MAXTEMP 275
-#define BED_MAXTEMP 120
+#define BED_MAXTEMP 125
 
 //===========================================================================
 //============================= PID Settings ================================
@@ -352,14 +388,18 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
   // Robo R2 24V
-  #define  DEFAULT_Kp 23.8
-  #define  DEFAULT_Ki 1.7
-  #define  DEFAULT_Kd 85.0
+  #if RBV(R2) || RBV(R2_DUAL)
+    #define  DEFAULT_Kp 23.8
+    #define  DEFAULT_Ki 1.7
+    #define  DEFAULT_Kd 85.0
+  #endif
 
   // Robo C2 19V
-  //#define  DEFAULT_Kp 23.75
-  //#define  DEFAULT_Ki 1.48
-  //#define  DEFAULT_Kd 95.10
+  #if RBV(C2)
+    #define  DEFAULT_Kp 23.75
+    #define  DEFAULT_Ki 1.48
+    #define  DEFAULT_Kd 95.10
+  #endif
 
 #endif // PIDTEMP
 
@@ -427,8 +467,14 @@
  * details can be tuned in Configuration_adv.h
  */
 
-#define THERMAL_PROTECTION_HOTENDS // Enable thermal protection for all extruders
-#define THERMAL_PROTECTION_BED     // Enable thermal protection for the heated bed
+#if RBV(R2) || RBV(R2_DUAL)
+  #define THERMAL_PROTECTION_HOTENDS // Enable thermal protection for all extruders
+  #define THERMAL_PROTECTION_BED     // Enable thermal protection for the heated bed
+#endif
+
+#if RBV(C2)
+  #define THERMAL_PROTECTION_HOTENDS // Enable thermal protection for all extruders
+#endif
 
 //===========================================================================
 //============================= Mechanical Settings =========================
@@ -506,29 +552,44 @@
  * following movement settings. If fewer factors are given than the
  * total number of extruders, the last value applies to the rest.
  */
-//#define DISTINCT_E_FACTORS
 
 /**
  * Default Axis Steps Per Unit (steps/mm)
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {80.0395, 80.0395, 800.24, 145.5 }
 
-/**
+
+ /**
  * Default Max Feed Rate (mm/s)
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 }
 
-/**
+ /**
  * Default Max Acceleration (change/s) change = mm/s
  * (Maximum start speed for accelerated moves)
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 500 }
+
+ // This block is an attempt to make switching the firmware from a single to a dual extruder machine as easy as changing the extruder count
+#ifdef EXTRUDERS
+  #if EXTRUDERS == 1
+    //Single
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   {80.0395, 80.0395, 800.24, 145.5}
+    #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25 }
+    #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 500 }
+  #endif
+
+  #if EXTRUDERS == 2
+    //Dual
+    #define DISTINCT_E_FACTORS
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   {80.0395, 80.0395, 800.24, 145.5, 371.5}
+    #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25, 100 }
+    #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 500, 1000 }
+  #endif
+#endif
 
 /**
  * Default Acceleration (change/s) change = mm/s
@@ -550,8 +611,9 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
-#define DEFAULT_XJERK                 10.0
-#define DEFAULT_YJERK                 10.0
+
+#define DEFAULT_XJERK                 8.0
+#define DEFAULT_YJERK                 8.0
 #define DEFAULT_ZJERK                  0.4
 #define DEFAULT_EJERK                  1.0
 
@@ -667,12 +729,14 @@
  *      O-- FRONT --+
  *    (0,0)
  */
-#define X_PROBE_OFFSET_FROM_EXTRUDER 0  // X offset: -left  +right  [of the nozzle]
+
+#define X_PROBE_OFFSET_FROM_EXTRUDER 2  // X offset: -left  +right  [of the nozzle]
 #define Y_PROBE_OFFSET_FROM_EXTRUDER 30  // Y offset: -front +behind [the nozzle]
 #define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
 
 // X and Y axis travel speed (mm/m) between probes
-#define XY_PROBE_SPEED 6000
+
+#define XY_PROBE_SPEED 10000
 
 // Speed for the first approach when double-probing (with PROBE_DOUBLE_TOUCH)
 #define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
@@ -750,7 +814,8 @@
 
 //#define NO_MOTION_BEFORE_HOMING  // Inhibit movement until all axes have been homed
 
-#define Z_HOMING_HEIGHT 4  // (in mm) Minimal z height before homing (G28) for Z clearance above the bed, clamps, ...
+
+#define Z_HOMING_HEIGHT 10  // (in mm) Minimal z height before homing (G28) for Z clearance above the bed, clamps, ...
                              // Be sure you have this distance over your Z_MAX_POS in case.
 
 // Direction of endstops when homing; 1=MAX, -1=MIN
@@ -761,19 +826,41 @@
 
 // @section machine
 
-// The size of the print bed
-#define X_BED_SIZE 196
-#define Y_BED_SIZE 196
 
-// Travel limits (mm) after homing, corresponding to endstop positions.
-#define X_MIN_POS 0
-#define Y_MIN_POS 0
-#define Z_MIN_POS 0
-#define X_MAX_POS X_BED_SIZE
-#define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 260
+//Robo R2
+#if RBV(R2) || RBV(R2_DUAL)
+  // The size of the print bed
+  #define X_BED_SIZE 197
+  #define Y_BED_SIZE 197
+
+  // Travel limits (mm) after homing, corresponding to endstop positions.
+  #define X_MIN_POS 0
+  #define Y_MIN_POS 0
+  #define Z_MIN_POS 0
+  #define X_MAX_POS X_BED_SIZE
+  #define Y_MAX_POS Y_BED_SIZE
+  #define Z_MAX_POS 260
+#endif
+
+//Robo C2
+#if RBV(C2)
+  // The size of the print bed
+  #define X_BED_SIZE 125
+  #define Y_BED_SIZE 125
+
+  // Travel limits (mm) after homing, corresponding to endstop positions.
+  #define X_MIN_POS 0
+  #define Y_MIN_POS 0
+  #define Z_MIN_POS 0
+  #define X_MAX_POS X_BED_SIZE
+  #define Y_MAX_POS Y_BED_SIZE
+  #define Z_MAX_POS 160
+#endif
 
 // If enabled, axes won't move below MIN_POS in response to movement commands.
+/*
+ * Right now we print over air when this is enabled. Disabling it gives lets us go beyond the soft limit and touch the nozzle. Let's find out why
+ */
 #define MIN_SOFTWARE_ENDSTOPS
 // If enabled, axes won't move above MAX_POS in response to movement commands.
 #define MAX_SOFTWARE_ENDSTOPS
@@ -847,7 +934,14 @@
  * Turn on with the command 'M111 S32'.
  * NOTE: Requires a lot of PROGMEM!
  */
-//#define DEBUG_LEVELING_FEATURE
+#define DEBUG_LEVELING_FEATURE
+
+#if ENABLED(MESH_BED_LEVELING) || ENABLED(AUTO_BED_LEVELING_BILINEAR) || ENABLED(AUTO_BED_LEVELING_UBL)
+  // Gradually reduce leveling correction until a set height is reached,
+  // at which point movement will be level to the machine's XY plane.
+  // The height can be set with M420 Z<height>
+  #define ENABLE_LEVELING_FADE_HEIGHT
+#endif
 
 #if ENABLED(MESH_BED_LEVELING) || ENABLED(AUTO_BED_LEVELING_BILINEAR) || ENABLED(AUTO_BED_LEVELING_UBL)
   // Gradually reduce leveling correction until a set height is reached,
@@ -858,15 +952,29 @@
 
 #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
 
-  // Set the number of grid points per dimension.
-  #define GRID_MAX_POINTS_X 4
-  #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
+  #if RBV(R2) || RBV(R2_DUAL)
+    // Set the number of grid points per dimension.
+    #define GRID_MAX_POINTS_X 3
+    #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
-  // Set the boundaries for probing (where the probe can reach).
-  #define LEFT_PROBE_BED_POSITION 10
-  #define RIGHT_PROBE_BED_POSITION 186
-  #define FRONT_PROBE_BED_POSITION 30
-  #define BACK_PROBE_BED_POSITION 186
+    // Set the boundaries for probing (where the probe can reach).
+    #define LEFT_PROBE_BED_POSITION 10
+    #define RIGHT_PROBE_BED_POSITION 186
+    #define FRONT_PROBE_BED_POSITION 30
+    #define BACK_PROBE_BED_POSITION 186
+  #endif
+
+  #if RBV(C2)
+   // Set the number of grid points per dimension.
+    #define GRID_MAX_POINTS_X 3
+    #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
+
+    // Set the boundaries for probing (where the probe can reach).
+    #define LEFT_PROBE_BED_POSITION 10
+    #define RIGHT_PROBE_BED_POSITION 115
+    #define FRONT_PROBE_BED_POSITION 30
+    #define BACK_PROBE_BED_POSITION 115
+  #endif
 
   // The Z probe minimum outer margin (to validate G29 parameters).
   #define MIN_PROBE_EDGE 10
@@ -905,6 +1013,7 @@
 
 #elif ENABLED(AUTO_BED_LEVELING_UBL)
 
+
   //===========================================================================
   //========================= Unified Bed Leveling ============================
   //===========================================================================
@@ -932,7 +1041,6 @@
   #define MESH_INSET 10          // Mesh inset margin on print area
   #define GRID_MAX_POINTS_X 3    // Don't use more than 7 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
-
   //#define MESH_G28_REST_ORIGIN // After homing all axes ('G28' or 'G28 XYZ') rest Z at Z_MIN_POS
 
 #endif // BED_LEVELING
@@ -986,8 +1094,9 @@
 #endif
 
 // Homing speeds (mm/m)
-#define HOMING_FEEDRATE_XY (50*60)
-#define HOMING_FEEDRATE_Z  (6*60)
+#define HOMING_FEEDRATE_XY (55*60)
+#define HOMING_FEEDRATE_Z  (12*60)
+
 
 //=============================================================================
 //============================= Additional Features ===========================

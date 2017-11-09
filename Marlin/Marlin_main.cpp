@@ -1394,18 +1394,19 @@ bool get_target_extruder_from_command(const uint16_t code) {
    * at the same positions relative to the machine.
    */
   void update_software_endstops(const AxisEnum axis) {
-    const float offs = 0.0
-      #if HAS_HOME_OFFSET
-        + home_offset[axis]
-      #endif
-      #if HAS_POSITION_SHIFT
-        + position_shift[axis]
-      #endif
-    ;
+    //Changed this back to the way M206 was handled in pre 1.0.4 so a negative Z-Offset will work correctly. Looking at you Waldo
+    const float offs = LOGICAL_POSITION(0, axis);
+    //   #if HAS_HOME_OFFSET
+    //     + home_offset[axis]
+    //   #endif
+    //   #if HAS_POSITION_SHIFT
+    //     + position_shift[axis]
+    //   #endif
+    // ;
 
-    #if HAS_HOME_OFFSET && HAS_POSITION_SHIFT
-      workspace_offset[axis] = offs;
-    #endif
+    // #if HAS_HOME_OFFSET && HAS_POSITION_SHIFT
+    //   workspace_offset[axis] = offs;
+    // #endif
 
     #if ENABLED(DUAL_X_CARRIAGE)
       if (axis == X_AXIS) {
@@ -1470,6 +1471,7 @@ bool get_target_extruder_from_command(const uint16_t code) {
    * call sync_plan_position soon after this.
    */
   static void set_home_offset(const AxisEnum axis, const float v) {
+    //changed this to add the offset
     current_position[axis] += v - home_offset[axis];
     home_offset[axis] = v;
     update_software_endstops(axis);
@@ -5335,6 +5337,70 @@ void home_all_axes() { gcode_G28(true); }
     clean_up_after_endstop_or_probe_move();
 
     report_current_position();
+    // Re Enable leveling after reporting position
+    #if HAS_LEVELING
+      set_bed_leveling_enabled(true);
+    #endif
+
+  }
+
+   /*
+   * This gcode was added by robo to auto adjust the M851 probe offset for ambient lighting levels
+   * This acts like a G30 command, except it will adjust the offset and re enable leveling after it is done
+   * Made by Matt Pedler
+   */
+  inline void gcode_G35(){
+    //home and level
+    home_all_axes();
+    gcode_G29();
+    //move to (0,0)
+    current_position[X_AXIS] = LOGICAL_X_POSITION(0.00);
+    current_position[Y_AXIS] = LOGICAL_Y_POSITION(0.00);
+    line_to_current_position();
+
+    //set z probe offset to 0
+    zprobe_zoffset = 0.00;
+    refresh_zprobe_zoffset();
+
+    //check to see if we moved to the correct position
+    const float xpos = parser.linearval('X', current_position[X_AXIS] + X_PROBE_OFFSET_FROM_EXTRUDER),
+                ypos = parser.linearval('Y', current_position[Y_AXIS] + Y_PROBE_OFFSET_FROM_EXTRUDER);
+
+    if (!position_is_reachable_by_probe_xy(xpos, ypos)) return;
+
+    // Disable leveling so the planner won't mess with us
+    #if HAS_LEVELING
+      set_bed_leveling_enabled(false);
+    #endif
+
+    setup_for_endstop_or_probe_move();
+
+    const float measured_z = probe_pt(xpos, ypos, parser.boolval('S', true), 1);
+
+    if (!isnan(measured_z)) {
+      SERIAL_PROTOCOLPAIR("Bed X: ", FIXFLOAT(xpos));
+      SERIAL_PROTOCOLPAIR(" Y: ", FIXFLOAT(ypos));
+      SERIAL_PROTOCOLLNPAIR(" Z: ", FIXFLOAT(measured_z));
+    }
+
+    clean_up_after_endstop_or_probe_move();
+
+
+    //report position before adjustment
+    report_current_position();
+
+    //adjust z probe offset
+    zprobe_zoffset = (measured_z - 0.1) * -1; // add a little buffer and turn it negative
+    refresh_zprobe_zoffset();
+    SERIAL_ECHO(zprobe_zoffset);
+
+    //report position after adjustment
+    report_current_position();
+
+    // Re Enable leveling after reporting position
+    #if HAS_LEVELING
+      set_bed_leveling_enabled(true);
+    #endif
   }
 
   #if ENABLED(Z_PROBE_SLED)
@@ -9625,6 +9691,7 @@ inline void gcode_M502() {
   void refresh_zprobe_zoffset(const bool no_babystep/*=false*/) {
     static float last_zoffset = NAN;
 
+    //since last_offset is static this block will only be skipped once
     if (!isnan(last_zoffset)) {
 
       #if ENABLED(AUTO_BED_LEVELING_BILINEAR) || ENABLED(BABYSTEP_ZPROBE_OFFSET) || ENABLED(DELTA)
@@ -9633,6 +9700,7 @@ inline void gcode_M502() {
 
       #if ENABLED(AUTO_BED_LEVELING_BILINEAR)
         // Correct bilinear grid for new probe offset
+        // Correct grid points for current autolevel values
         if (diff) {
           for (uint8_t x = 0; x < GRID_MAX_POINTS_X; x++)
             for (uint8_t y = 0; y < GRID_MAX_POINTS_Y; y++)
@@ -10960,6 +11028,9 @@ void process_next_command() {
 
         case 30: // G30 Single Z probe
           gcode_G30();
+          break;
+        case 35: //auto adjust IR Sensor Probe
+          gcode_G35();
           break;
 
         #if ENABLED(Z_PROBE_SLED)
@@ -13686,4 +13757,3 @@ void loop() {
   endstops.report_state();
   idle();
 }
-
