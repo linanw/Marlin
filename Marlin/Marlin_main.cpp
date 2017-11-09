@@ -67,6 +67,7 @@
  * G31  - Dock sled (Z_PROBE_SLED only)
  * G32  - Undock sled (Z_PROBE_SLED only)
  * G33  - Delta Auto-Calibration (Requires DELTA_AUTO_CALIBRATION)
+ * G36  - Same as G35 Except it will not execute G28 or G29
  * G38  - Probe in any direction using the Z_MIN_PROBE (Requires G38_PROBE_TARGET)
  * G42  - Coordinated move to a mesh point (Requires AUTO_BED_LEVELING_UBL)
  * G90  - Use Absolute Coordinates
@@ -5400,6 +5401,60 @@ void home_all_axes() { gcode_G28(true); }
     
     gcode_G29(); //finish leveling process
   }
+
+  /*
+   * G36 does the same thing that G35 does, but without the leveling added. This is for one of Robo's Wizards 
+   * So it can capture the offset by using the gcode instead of finagling the controller and parsing Input/Ouput
+   */
+  inline void gcode_G36(){
+    #if RBV(C2)
+      current_position[X_AXIS] = LOGICAL_X_POSITION(9.00);
+      current_position[Y_AXIS] = LOGICAL_Y_POSITION(0.00);
+      feedrate_mm_s = 125.00; //set feedrate to 125
+      line_to_current_position();
+    #endif
+
+    #if RBV(R2) || RBV(R2_DUAL)
+      current_position[X_AXIS] = LOGICAL_X_POSITION(9.00);
+      current_position[Y_AXIS] = LOGICAL_Y_POSITION(0.00);
+      feedrate_mm_s = 125.00; //set feedrate to 125
+      line_to_current_position();
+    #endif
+
+    //set z probe offset to 0
+    zprobe_zoffset = 0.00;
+    refresh_zprobe_zoffset();
+
+    //check to see if we moved to the correct position
+    const float xpos = parser.linearval('X', current_position[X_AXIS] + X_PROBE_OFFSET_FROM_EXTRUDER),
+                ypos = parser.linearval('Y', current_position[Y_AXIS] + Y_PROBE_OFFSET_FROM_EXTRUDER);
+
+    if (!position_is_reachable_by_probe_xy(xpos, ypos)) return;
+
+    // Disable leveling so the planner won't mess with us
+    #if HAS_LEVELING
+      set_bed_leveling_enabled(false);
+    #endif
+
+    setup_for_endstop_or_probe_move();
+
+    const float measured_z = probe_pt(xpos, ypos, parser.boolval('S', true), 1);
+
+    if (!isnan(measured_z)) {
+      SERIAL_PROTOCOLLNPAIR("Probe Bounce is Z: ", FIXFLOAT(measured_z));
+    }
+
+    clean_up_after_endstop_or_probe_move();
+
+    //adjust z probe offset
+    float temp_probe_offset = measured_z + home_offset[Z_AXIS]; //get rid of the buffer by the set z offset
+    zprobe_zoffset = (temp_probe_offset - 0.2) * -1; // offset it closer to the bed then turn it negative
+    refresh_zprobe_zoffset();
+    SERIAL_PROTOCOLLNPAIR("Probe Offset is Z: ", FIXFLOAT(zprobe_zoffset));
+    SERIAL_ECHO("Position After Adjustment ");
+    //report position after adjustment
+    report_current_position();
+}
 
   #if ENABLED(Z_PROBE_SLED)
 
@@ -11029,6 +11084,9 @@ void process_next_command() {
           break;
         case 35: //auto adjust IR Sensor Probe
           gcode_G35();
+          break;
+        case 36:
+          gcode_G36(); //Auto adjust IR sensor without leveling or homing
           break;
 
         #if ENABLED(Z_PROBE_SLED)
