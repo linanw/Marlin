@@ -1,3 +1,7 @@
+# Robo Edits
+- Added G35 command. G35 will adjust for ambient light for the IR sensor. It will first home all axis, and at the end it will run G29
+- Added G36 command. G36 will do what G35 does, but without G28/29.
+- Added Robo Configuration Variable. in Configuration.h you now only need to change ROBO_BOARD_VERSION to change the configuration for C2/R2/R2_Dual
 
 # Marlin 3D Printer Firmware
 <img align="top" width=175 src="Documentation/Logo/Marlin%20Logo%20GitHub.png" />
