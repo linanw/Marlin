@@ -5337,10 +5337,6 @@ void home_all_axes() { gcode_G28(true); }
     clean_up_after_endstop_or_probe_move();
 
     report_current_position();
-    // Re Enable leveling after reporting position
-    #if HAS_LEVELING
-      set_bed_leveling_enabled(true);
-    #endif
 
   }
 
@@ -5352,10 +5348,10 @@ void home_all_axes() { gcode_G28(true); }
   inline void gcode_G35(){
     //home and level
     home_all_axes();
-    gcode_G29();
-    //move to (0,0)
-    current_position[X_AXIS] = LOGICAL_X_POSITION(0.00);
+    //move to (10,0)
+    current_position[X_AXIS] = LOGICAL_X_POSITION(10.00);
     current_position[Y_AXIS] = LOGICAL_Y_POSITION(0.00);
+    feedrate_mm_s = 2000.00; //set feedrate to 3000
     line_to_current_position();
 
     //set z probe offset to 0
@@ -5378,22 +5374,22 @@ void home_all_axes() { gcode_G28(true); }
     const float measured_z = probe_pt(xpos, ypos, parser.boolval('S', true), 1);
 
     if (!isnan(measured_z)) {
-      SERIAL_PROTOCOLPAIR("Bed X: ", FIXFLOAT(xpos));
-      SERIAL_PROTOCOLPAIR(" Y: ", FIXFLOAT(ypos));
-      SERIAL_PROTOCOLLNPAIR(" Z: ", FIXFLOAT(measured_z));
+      SERIAL_PROTOCOLLNPAIR("Probe Bounce is Z: ", FIXFLOAT(measured_z));
     }
 
     clean_up_after_endstop_or_probe_move();
 
 
     //report position before adjustment
+    SERIAL_ECHO("Position before adjustment");
     report_current_position();
 
     //adjust z probe offset
-    zprobe_zoffset = (measured_z - 0.1) * -1; // add a little buffer and turn it negative
+    float temp_probe_offset = measured_z + home_offset[Z_AXIS]; //get rid of the buffer by the set z offset
+    zprobe_zoffset = (temp_probe_offset - 0.1) * -1; // add a little buffer and turn it negative
     refresh_zprobe_zoffset();
-    SERIAL_ECHO(zprobe_zoffset);
-
+    SERIAL_PROTOCOLLNPAIR("Probe Offset is Z: ", FIXFLOAT(zprobe_zoffset));
+    SERIAL_ECHO("Position After Adjustment");
     //report position after adjustment
     report_current_position();
 
@@ -5401,6 +5397,7 @@ void home_all_axes() { gcode_G28(true); }
     #if HAS_LEVELING
       set_bed_leveling_enabled(true);
     #endif
+    gcode_G29(); //finish leveling process
   }
 
   #if ENABLED(Z_PROBE_SLED)
@@ -10935,7 +10932,7 @@ void process_next_command() {
   switch (parser.command_letter) {
     case 'G': switch (parser.codenum) {
 
-      // G0, G1
+      // G0, 
       case 0:
       case 1:
         #if IS_SCARA
