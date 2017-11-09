@@ -5349,10 +5349,19 @@ void home_all_axes() { gcode_G28(true); }
     //home and level
     home_all_axes();
     //move to (10,0)
-    current_position[X_AXIS] = LOGICAL_X_POSITION(10.00);
-    current_position[Y_AXIS] = LOGICAL_Y_POSITION(0.00);
-    feedrate_mm_s = 2000.00; //set feedrate to 3000
-    line_to_current_position();
+    #if RBV(C2)
+      current_position[X_AXIS] = LOGICAL_X_POSITION(9.00);
+      current_position[Y_AXIS] = LOGICAL_Y_POSITION(0.00);
+      feedrate_mm_s = 125.00; //set feedrate to 1000
+      line_to_current_position();
+    #endif
+
+    #if RBV(R2) || RBV(R2_DUAL)
+      current_position[X_AXIS] = LOGICAL_X_POSITION(9.00);
+      current_position[Y_AXIS] = LOGICAL_Y_POSITION(0.00);
+      feedrate_mm_s = 125.00; //set feedrate to 1000
+      line_to_current_position();
+    #endif
 
     //set z probe offset to 0
     zprobe_zoffset = 0.00;
@@ -5386,7 +5395,7 @@ void home_all_axes() { gcode_G28(true); }
 
     //adjust z probe offset
     float temp_probe_offset = measured_z + home_offset[Z_AXIS]; //get rid of the buffer by the set z offset
-    zprobe_zoffset = (temp_probe_offset - 0.1) * -1; // add a little buffer and turn it negative
+    zprobe_zoffset = (temp_probe_offset - 0.2) * -1; // offset it closer to the bed then turn it negative
     refresh_zprobe_zoffset();
     SERIAL_PROTOCOLLNPAIR("Probe Offset is Z: ", FIXFLOAT(zprobe_zoffset));
     SERIAL_ECHO("Position After Adjustment");
@@ -5394,9 +5403,9 @@ void home_all_axes() { gcode_G28(true); }
     report_current_position();
 
     // Re Enable leveling after reporting position
-    #if HAS_LEVELING
-      set_bed_leveling_enabled(true);
-    #endif
+    // #if HAS_LEVELING
+    //   set_bed_leveling_enabled(true);
+    // #endif
     gcode_G29(); //finish leveling process
   }
 
