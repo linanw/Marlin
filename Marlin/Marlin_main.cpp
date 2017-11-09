@@ -5348,7 +5348,7 @@ void home_all_axes() { gcode_G28(true); }
   inline void gcode_G35(){
     //home and level
     home_all_axes();
-    //move to (10,0)
+    //move to (9,0)
     #if RBV(C2)
       current_position[X_AXIS] = LOGICAL_X_POSITION(9.00);
       current_position[Y_AXIS] = LOGICAL_Y_POSITION(0.00);
