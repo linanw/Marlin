@@ -126,7 +126,7 @@
  * Options are R2, C2, or R2_DUAL
  */
 #ifndef ROBO_BOARD_VERSION
-  #define ROBO_BOARD_VERSION BOARD_VERSION_C2
+  #define ROBO_BOARD_VERSION BOARD_VERSION_R2
 #endif
 
 // Optional custom name for your RepStrap or other custom machine

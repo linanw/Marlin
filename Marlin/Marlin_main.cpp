@@ -5388,24 +5388,16 @@ void home_all_axes() { gcode_G28(true); }
 
     clean_up_after_endstop_or_probe_move();
 
-
-    //report position before adjustment
-    SERIAL_ECHO("Position before adjustment");
-    report_current_position();
-
     //adjust z probe offset
     float temp_probe_offset = measured_z + home_offset[Z_AXIS]; //get rid of the buffer by the set z offset
     zprobe_zoffset = (temp_probe_offset - 0.2) * -1; // offset it closer to the bed then turn it negative
     refresh_zprobe_zoffset();
     SERIAL_PROTOCOLLNPAIR("Probe Offset is Z: ", FIXFLOAT(zprobe_zoffset));
-    SERIAL_ECHO("Position After Adjustment");
+    SERIAL_ECHO("Position After Adjustment ");
     //report position after adjustment
     report_current_position();
 
-    // Re Enable leveling after reporting position
-    // #if HAS_LEVELING
-    //   set_bed_leveling_enabled(true);
-    // #endif
+    
     gcode_G29(); //finish leveling process
   }
 
