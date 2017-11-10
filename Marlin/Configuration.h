@@ -74,7 +74,7 @@
 // User-specified version info of this build to display in [Pronterface, etc] terminal window during
 // startup. Implementation of an idea by Prof Braino to inform user that any changes made to this
 // build by the user have been successfully uploaded into firmware.
-#define STRING_CONFIG_H_AUTHOR "(none, default config)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "Matt Pedler & Allen McAfee" // Who made the changes.
 #define SHOW_BOOTSCREEN
 #define STRING_SPLASH_LINE1 SHORT_BUILD_VERSION // will be shown during bootup in line 1
 #define STRING_SPLASH_LINE2 WEBSITE_URL         // will be shown during bootup in line 2
@@ -126,12 +126,17 @@
  * Options are R2, C2, or R2_DUAL
  */
 #ifndef ROBO_BOARD_VERSION
-  #define ROBO_BOARD_VERSION BOARD_VERSION_C2
+  #define ROBO_BOARD_VERSION BOARD_VERSION_R2
 #endif
 
 // Optional custom name for your RepStrap or other custom machine
 // Displayed in the LCD "Ready" message
-//#define CUSTOM_MACHINE_NAME "3D Printer"
+#if RBV(C2)
+  #define CUSTOM_MACHINE_NAME "Robo C2 V2"
+#else
+  #define CUSTOM_MACHINE_NAME "Robo R2 V2"
+#endif
+
 
 // Define this to set a unique identifier for this printer, (Used by some programs to differentiate between machines)
 // You can use an online service to generate a random UUID. (eg http://www.uuidgenerator.net/version4)
