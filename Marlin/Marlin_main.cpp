@@ -67,7 +67,8 @@
  * G31  - Dock sled (Z_PROBE_SLED only)
  * G32  - Undock sled (Z_PROBE_SLED only)
  * G33  - Delta Auto-Calibration (Requires DELTA_AUTO_CALIBRATION)
- * G36  - Same as G35 Except it will not execute G28 or G29
+ * G35  - A combination of G28, G29 and G36 for auto leveling with an IR probe
+ * G36  - A G30 probe that auto adjusts the M851 probe offset for ambient lighting levels (For IR Probes)
  * G38  - Probe in any direction using the Z_MIN_PROBE (Requires G38_PROBE_TARGET)
  * G42  - Coordinated move to a mesh point (Requires AUTO_BED_LEVELING_UBL)
  * G90  - Use Absolute Coordinates
@@ -350,7 +351,7 @@
                            || isnan(ubl.z_values[0][0]))
 #endif
 
-#if ENABLED(NEOPIXEL_LED) 
+#if ENABLED(NEOPIXEL_LED)
   #if NEOPIXEL_TYPE == NEO_RGB || NEOPIXEL_TYPE == NEO_RBG || NEOPIXEL_TYPE == NEO_GRB || NEOPIXEL_TYPE == NEO_GBR || NEOPIXEL_TYPE == NEO_BRG || NEOPIXEL_TYPE == NEO_BGR
     #define NEO_WHITE 255, 255, 255
   #else
@@ -5398,12 +5399,12 @@ void home_all_axes() { gcode_G28(true); }
     //report position after adjustment
     report_current_position();
 
-    
+
     gcode_G29(); //finish leveling process
   }
 
   /*
-   * G36 does the same thing that G35 does, but without the leveling added. This is for one of Robo's Wizards 
+   * G36 does the same thing that G35 does, but without the leveling added. This is for one of Robo's Wizards
    * So it can capture the offset by using the gcode instead of finagling the controller and parsing Input/Ouput
    */
   inline void gcode_G36(){
@@ -10988,7 +10989,7 @@ void process_next_command() {
   switch (parser.command_letter) {
     case 'G': switch (parser.codenum) {
 
-      // G0, 
+      // G0,
       case 0:
       case 1:
         #if IS_SCARA
