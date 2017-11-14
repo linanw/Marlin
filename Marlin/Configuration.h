@@ -924,7 +924,7 @@
  *         uses G36 at the start of a print to adjust the IR sensor offset for ambient light.
  *
  *  - G36: A combination of G28 (homing), G29 (Leveling), and G35 (G30 with M851).
- *         G35 can replace both G28 and G29 in Start GCODE.  There will be 1 additional
+ *         G36 can replace both G28 and G29 in Start GCODE.  There will be 1 additional
  *         probe point added to the very start of the print.  This additional probe is G35.
  *
   
