@@ -5349,10 +5349,7 @@ void home_all_axes() { gcode_G28(true); }
 
     //get the first point based off of the probe offsets
     //This should get us the first point in the probe matrix
-    float robo_pos_x = LEFT_PROBE_BED_POSITION;
-    float robo_pos_y = FRONT_PROBE_BED_POSITION;
-
-    const float rnx = robo_pos_x - (X_PROBE_OFFSET_FROM_EXTRUDER), rny = robo_pos_y - (Y_PROBE_OFFSET_FROM_EXTRUDER);
+    const float rnx = LEFT_PROBE_BED_POSITION - (X_PROBE_OFFSET_FROM_EXTRUDER), rny = FRONT_PROBE_BED_POSITION - (Y_PROBE_OFFSET_FROM_EXTRUDER);
 
     //capture the old feedrate. Prepend with robo because I'm paranoid about clashing variables.
     float robo_old_feedrate_mm_s = feedrate_mm_s;
