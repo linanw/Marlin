@@ -351,7 +351,7 @@
                            || isnan(ubl.z_values[0][0]))
 #endif
 
-#if ENABLED(NEOPIXEL_LED) 
+#if ENABLED(NEOPIXEL_LED)
   #if NEOPIXEL_TYPE == NEO_RGB || NEOPIXEL_TYPE == NEO_RBG || NEOPIXEL_TYPE == NEO_GRB || NEOPIXEL_TYPE == NEO_GBR || NEOPIXEL_TYPE == NEO_BRG || NEOPIXEL_TYPE == NEO_BGR
     #define NEO_WHITE 255, 255, 255
   #else
@@ -10966,7 +10966,7 @@ void process_next_command() {
   switch (parser.command_letter) {
     case 'G': switch (parser.codenum) {
 
-      // G0, 
+      // G0,
       case 0:
       case 1:
         #if IS_SCARA

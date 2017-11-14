@@ -577,19 +577,27 @@
 
  // This block is an attempt to make switching the firmware from a single to a dual extruder machine as easy as changing the extruder count
 #ifdef EXTRUDERS
-  #if EXTRUDERS == 1
-    //Single
-    #define DEFAULT_AXIS_STEPS_PER_UNIT   {80.0395, 80.0395, 800.24, 145.5}
-    #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25 }
-    #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 500 }
+  #if RBV(R2)
+    #if EXTRUDERS == 1
+      //Single
+      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.24, 145.5 }
+      #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25 }
+      #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 500 }
+    #endif
+
+    #if EXTRUDERS == 2
+      //Dual
+      #define DISTINCT_E_FACTORS
+      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.24, 145.5, 371.5 }
+      #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25, 100 }
+      #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 500, 1000 }
+    #endif
   #endif
 
-  #if EXTRUDERS == 2
-    //Dual
-    #define DISTINCT_E_FACTORS
-    #define DEFAULT_AXIS_STEPS_PER_UNIT   {80.0395, 80.0395, 800.24, 145.5, 371.5}
-    #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25, 100 }
-    #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 500, 1000 }
+  #if RBV(C2)
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.24, 145.5 }
+    #define DEFAULT_MAX_FEEDRATE          { 300, 300, 12, 25 }
+    #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 500 }
   #endif
 #endif
 
@@ -613,8 +621,8 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
-#define DEFAULT_XJERK                 8.0
-#define DEFAULT_YJERK                 8.0
+#define DEFAULT_XJERK                  8.0
+#define DEFAULT_YJERK                  8.0
 #define DEFAULT_ZJERK                  0.4
 #define DEFAULT_EJERK                  1.0
 
@@ -626,6 +634,15 @@
 //
 // See http://marlinfw.org/configuration/probes.html
 //
+
+/**
+ * Robo Notes for Z probes
+ *
+ *  - All Robo printers use FIX_MOUNTED_PROBE and Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN by default.
+ *  - Probe offsets for R2 and C2 are { 2, 30, 0} while on R1 and R1+ are { 0, 0, 0}.
+ *  - PROBE_DOUBLE_TOUCH is enabled by default for accuracy.
+ *  - Auto leveling is handled differently between R1 and R2 series printers.  See Bed Leveling for details.
+ */
 
 /**
  * Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
@@ -898,6 +915,18 @@
 //=============================== Bed Leveling ==============================
 //===========================================================================
 // @section bedlevel
+
+/**
+ * Robo notes: GCODE used in Bed Leveling
+ *
+ * New GCODE cases:
+ *  - G35: A combination of G28 (homing), G29 (Leveling), and G36 (G30 with M851).
+ *         G35 can replace both G28 and G29 in Start GCODE.  There will be 1 additional
+ *         probe point added to the very start of the print.  This additional probe is G36.
+ *
+ *  - G36: A single G30 probe that calculates M851 from the M206 home offset value.  Robo
+ *         uses G36 at the start of a print to adjust the IR sensor offset for ambient light.
+
 
 /**
  * Choose one of the options below to enable G29 Bed Leveling. The parameters
