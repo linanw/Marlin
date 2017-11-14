@@ -920,14 +920,14 @@
  * Robo notes: GCODE used in Bed Leveling
  *
  * New GCODE cases:
- *  - G35: A combination of G28 (homing), G29 (Leveling), and G36 (G30 with M851).
- *         G35 can replace both G28 and G29 in Start GCODE.  There will be 1 additional
- *         probe point added to the very start of the print.  This additional probe is G36.
- *
- *  - G36: A single G30 probe that calculates M851 from the M206 home offset value.  Robo
+ *  - G35: A single G30 probe that calculates M851 from the M206 home offset value.  Robo
  *         uses G36 at the start of a print to adjust the IR sensor offset for ambient light.
-
-
+ *
+ *  - G36: A combination of G28 (homing), G29 (Leveling), and G35 (G30 with M851).
+ *         G35 can replace both G28 and G29 in Start GCODE.  There will be 1 additional
+ *         probe point added to the very start of the print.  This additional probe is G35.
+ *
+  
 /**
  * Choose one of the options below to enable G29 Bed Leveling. The parameters
  * and behavior of G29 will change depending on your selection.
