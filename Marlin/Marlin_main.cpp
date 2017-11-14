@@ -5354,9 +5354,6 @@ void home_all_axes() { gcode_G28(true); }
 
     const float rnx = robo_pos_x - (X_PROBE_OFFSET_FROM_EXTRUDER), rny = robo_pos_y - (Y_PROBE_OFFSET_FROM_EXTRUDER);
 
-    SERIAL_PROTOCOLLNPAIR("NX: ", rnx);
-    SERIAL_PROTOCOLLNPAIR("NY: ", rny);
-
     //capture the old feedrate. Prepend with robo because I'm paranoid about clashing variables.
     float robo_old_feedrate_mm_s = feedrate_mm_s;
 
