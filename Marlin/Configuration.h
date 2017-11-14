@@ -825,7 +825,7 @@
 // @section machine
 
 //Robo R2
-#if RBV(R2) || RBV(R2_DUAL)
+#if RBV(R2)
   // The size of the print bed
   #define X_BED_SIZE 197
   #define Y_BED_SIZE 197
@@ -838,6 +838,21 @@
   #define Y_MAX_POS Y_BED_SIZE
   #define Z_MAX_POS 260
 #endif
+
+//R2 Dual
+//#if RBV(R2_DUAL)
+//  // The size of the print bed
+//  #define X_BED_SIZE (197 - 21)
+//  #define Y_BED_SIZE 197
+//
+//  // Travel limits (mm) after homing, corresponding to endstop positions.
+//  #define X_MIN_POS 21
+//  #define Y_MIN_POS 0
+//  #define Z_MIN_POS 0
+//  #define X_MAX_POS X_BED_SIZE
+//  #define Y_MAX_POS Y_BED_SIZE
+//  #define Z_MAX_POS 260
+//#endif
 
 //Robo C2
 #if RBV(C2)
@@ -857,6 +872,8 @@
 // If enabled, axes won't move below MIN_POS in response to movement commands.
 /*
  * Right now we print over air when this is enabled. Disabling it gives lets us go beyond the soft limit and touch the nozzle. Let's find out why
+ *
+ * It looks like our IR sensor Triggers and somehow this makes the soft endstop trigger as well.
  */
 #define MIN_SOFTWARE_ENDSTOPS
 // If enabled, axes won't move above MAX_POS in response to movement commands.
