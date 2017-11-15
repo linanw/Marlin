@@ -874,8 +874,8 @@
 //Robo C2
 #if RBV(C2)
   // The size of the print bed
-  #define X_BED_SIZE 125
-  #define Y_BED_SIZE 125
+  #define X_BED_SIZE 127
+  #define Y_BED_SIZE 127
 
   // Travel limits (mm) after homing, corresponding to endstop positions.
   #define X_MIN_POS 0
@@ -927,7 +927,7 @@
  *         G36 can replace both G28 and G29 in Start GCODE.  There will be 1 additional
  *         probe point added to the very start of the print.  This additional probe is G35.
  *
-  
+
 /**
  * Choose one of the options below to enable G29 Bed Leveling. The parameters
  * and behavior of G29 will change depending on your selection.
