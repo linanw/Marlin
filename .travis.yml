@@ -102,6 +102,7 @@ script:
   # Test a probeless build of AUTO_BED_LEVELING_BILINEAR
   #
   - restore_configs
+  - opt_disable AUTO_BED_LEVELING_LINEAR
   - opt_enable AUTO_BED_LEVELING_BILINEAR Z_MIN_PROBE_REPEATABILITY_TEST ENABLE_LEVELING_FADE_HEIGHT EEPROM_SETTINGS
   - build_marlin
   #
