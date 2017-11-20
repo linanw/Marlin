@@ -87,8 +87,8 @@ script:
   - opt_set TEMP_SENSOR_1 1
   - opt_set TEMP_SENSOR_BED 1
   - opt_enable PIDTEMPBED FIX_MOUNTED_PROBE Z_SAFE_HOMING ARC_P_CIRCLES CNC_WORKSPACE_PLANES
-  - opt_enable REPRAP_DISCOUNT_SMART_CONTROLLER SDSUPPORT EEPROM_SETTINGS
-  - opt_enable AUTO_BED_LEVELING_LINEAR Z_MIN_PROBE_REPEATABILITY_TEST DEBUG_LEVELING_FEATURE
+  - opt_enable SDSUPPORT EEPROM_SETTINGS
+  - opt_enable FIX_MOUNTED_PROBE Z_SAFE_HOMING
   - opt_enable_adv FWRETRACT MAX7219_DEBUG
   - opt_set ABL_GRID_POINTS_X 4
   - opt_set ABL_GRID_POINTS_Y 4
@@ -97,7 +97,25 @@ script:
   # Test a probeless build of AUTO_BED_LEVELING_BILINEAR
   #
   - restore_configs
-  - opt_enable FIX_MOUNTED_PROBE Z_SAFE_HOMING
+  - opt_enable AUTO_BED_LEVELING_LINEAR Z_MIN_PROBE_REPEATABILITY_TEST DEBUG_LEVELING_FEATURE
+  - build_marlin
+  # Test a probeless build of AUTO_BED_LEVELING_BILINEAR
+  #
+  - restore_configs
   - opt_enable AUTO_BED_LEVELING_BILINEAR Z_MIN_PROBE_REPEATABILITY_TEST ENABLE_LEVELING_FADE_HEIGHT EEPROM_SETTINGS
   - build_marlin
   #
+  # Test a build of R2 version
+  #
+  - restore_configs
+  - opt_set ROBO_BOARD_VERSION BOARD_VERSION_R2
+  - opt_set EXTRUDERS 1
+  - build_marlin
+  #
+  # Test a build of C2 version
+  #
+  - restore_configs
+  - opt_set ROBO_BOARD_VERSION BOARD_VERSION_C2
+  - opt_set EXTRUDERS 1
+  - opt_set TEMP_SENSOR_BED 0
+  - build_marlin
