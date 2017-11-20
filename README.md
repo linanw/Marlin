@@ -1,6 +1,6 @@
 ## Current Status: Testing
 
-[![Travis Build Status](https://travis-ci.org/Robo3D/Marlin.svg?branch=RC)]
+![Travis Build Status](https://travis-ci.org/Robo3D/Marlin.svg?branch=RC)
 
 # Robo Edits
 
