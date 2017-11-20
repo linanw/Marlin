@@ -66,13 +66,6 @@ Proposed patches should be submitted as a Pull Request against the [RCBugFix](ht
 - Do submit questions and concerns. The "naive" question is often the one we forget to ask.
 - Follow the proper coding style. Pull requests with styling errors will be delayed. See our [Coding Standards](https://github.com/MarlinFirmware/Marlin/wiki/DNE-Coding-Standards) page for more information.
 
-## Current Status: Testing
-
-Please test this firmware and inform us if it misbehaves in any way. Volunteers are standing by!
-
-[![Coverity Scan Build Status](https://scan.coverity.com/projects/2224/badge.svg)](https://scan.coverity.com/projects/2224)
-[![Travis Build Status](https://travis-ci.org/MarlinFirmware/MarlinDev.svg)](https://travis-ci.org/MarlinFirmware/MarlinDev)
-
 ##### [RepRap.org Wiki Page](http://reprap.org/wiki/Marlin)
 
 ## Credits
