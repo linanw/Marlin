@@ -1,8 +1,6 @@
 ## Current Status: Testing
 
-Please test this firmware and inform us if it misbehaves in any way. Volunteers are standing by!
-
-[![Travis Build Status](https://travis-ci.org/MarlinFirmware/MarlinDev.svg)](https://travis-ci.org/Robo3D/Marlin.svg?branch=RC)
+[![Travis Build Status](https://travis-ci.org/Robo3D/Marlin.svg?branch=RC)]
 
 # Robo Edits
 
