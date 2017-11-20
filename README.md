@@ -1,4 +1,11 @@
+## Current Status: Testing
+
+Please test this firmware and inform us if it misbehaves in any way. Volunteers are standing by!
+
+[![Travis Build Status](https://travis-ci.org/MarlinFirmware/MarlinDev.svg)](https://travis-ci.org/Robo3D/Marlin.svg?branch=RC)
+
 # Robo Edits
+
 - Added G35 command. Auto adjust Probe Offset(M851 Z) for ambient light levels based on the trigger distance of the IR probe(Requires Home Offset Z(M206 Z) to be set)
 - Added G36 command. G36 will home, run G35, then run G29
 - Added Robo Configuration Variable. in Configuration.h you now only need to change ROBO_BOARD_VERSION to change the configuration for C2/R2/R2_Dual (R2_Dual still needs work)
