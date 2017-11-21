@@ -126,7 +126,7 @@
  * Options are R2, C2, or R2_DUAL
  */
 #ifndef ROBO_BOARD_VERSION
-  #define ROBO_BOARD_VERSION BOARD_VERSION_R2
+  #define ROBO_BOARD_VERSION BOARD_VERSION_C2
 #endif
 
 // Optional custom name for your RepStrap or other custom machine
@@ -228,8 +228,14 @@
 // Offset of the extruders (uncomment if using more than one and relying on firmware to position when changing).
 // The offset has to be X=0, Y=0 for the extruder 0 hotend (default extruder).
 // For the other hotends it is their distance from the extruder 0 hotend.
-#define HOTEND_OFFSET_X {0.0, 20.00} // (in mm) for each extruder, offset of the hotend on the X axis
-#define HOTEND_OFFSET_Y {0.0, 5.00}  // (in mm) for each extruder, offset of the hotend on the Y axis
+
+#if RBV(C2) || RBV(R2)
+  //#define HOTEND_OFFSET_X {0.0, 20.00} // (in mm) for each extruder, offset of the hotend on the X axis
+  //#define HOTEND_OFFSET_Y {0.0, 5.00}  // (in mm) for each extruder, offset of the hotend on the Y axis
+#elif RBV(R2_DUAL)
+  #define HOTEND_OFFSET_X {0.0, 20.00} // (in mm) for each extruder, offset of the hotend on the X axis
+  #define HOTEND_OFFSET_Y {0.0, 0.00}  // (in mm) for each extruder, offset of the hotend on the Y axis
+#endif
 
 // @section machine
 
@@ -577,14 +583,13 @@
 
  // This block is an attempt to make switching the firmware from a single to a dual extruder machine as easy as changing the extruder count
 #ifdef EXTRUDERS
-  #if RBV(R2)
+  #if RBV(R2) || RBV(R2_DUAL)
     #if EXTRUDERS == 1
       //Single
       #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.24, 145.5 }
       #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25 }
       #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 500 }
     #endif
-
     #if EXTRUDERS == 2
       //Dual
       #define DISTINCT_E_FACTORS
@@ -854,25 +859,23 @@
   #define X_MAX_POS X_BED_SIZE
   #define Y_MAX_POS Y_BED_SIZE
   #define Z_MAX_POS 260
-#endif
 
 //R2 Dual
-//#if RBV(R2_DUAL)
-//  // The size of the print bed
-//  #define X_BED_SIZE (197 - 21)
-//  #define Y_BED_SIZE 197
-//
-//  // Travel limits (mm) after homing, corresponding to endstop positions.
-//  #define X_MIN_POS 21
-//  #define Y_MIN_POS 0
-//  #define Z_MIN_POS 0
-//  #define X_MAX_POS X_BED_SIZE
-//  #define Y_MAX_POS Y_BED_SIZE
-//  #define Z_MAX_POS 260
-//#endif
+#elif RBV(R2_DUAL)
+ // The size of the print bed
+ #define X_BED_SIZE 197
+ #define Y_BED_SIZE 197
+
+ // Travel limits (mm) after homing, corresponding to endstop positions.
+ #define X_MIN_POS 0
+ #define Y_MIN_POS 0
+ #define Z_MIN_POS 0
+ #define X_MAX_POS X_BED_SIZE
+ #define Y_MAX_POS Y_BED_SIZE
+ #define Z_MAX_POS 260
 
 //Robo C2
-#if RBV(C2)
+#elif RBV(C2)
   // The size of the print bed
   #define X_BED_SIZE 127
   #define Y_BED_SIZE 127
@@ -988,7 +991,7 @@
 
 #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
 
-  #if RBV(R2) || RBV(R2_DUAL)
+  #if RBV(R2)
     // Set the number of grid points per dimension.
     #define GRID_MAX_POINTS_X 3
     #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
@@ -998,9 +1001,18 @@
     #define RIGHT_PROBE_BED_POSITION 186
     #define FRONT_PROBE_BED_POSITION 30
     #define BACK_PROBE_BED_POSITION 186
-  #endif
+  #elif RBV(R2_DUAL)
+    // Set the number of grid points per dimension.
+    #define GRID_MAX_POINTS_X 3
+    #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
-  #if RBV(C2)
+    // Set the boundaries for probing (where the probe can reach).
+    #define LEFT_PROBE_BED_POSITION 10
+    #define RIGHT_PROBE_BED_POSITION 186
+    #define FRONT_PROBE_BED_POSITION 30
+    #define BACK_PROBE_BED_POSITION 186
+
+  #elif RBV(C2)
    // Set the number of grid points per dimension.
     #define GRID_MAX_POINTS_X 3
     #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
