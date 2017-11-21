@@ -28,15 +28,22 @@
   #define BOARD_NAME "ROBOMB"
 #endif
 
-#ifndef DEFAULT_MACHINE_NAME
-  #define DEFAULT_MACHINE_NAME "RoboMB"
-#endif
-
 #ifndef DEFAULT_SOURCE_CODE_URL
-  #define DEFAULT_SOURCE_CODE_URL "https://github.com/Robo3D/Marlin R2 Branch"
+  #define DEFAULT_SOURCE_CODE_URL "https://github.com/Robo3D/Marlin"
 #endif
 
-#define IS_ROBOR2
+#if RBV(C2)
+  #define IS_ROBOC2
+  #define DEFAULT_MACHINE_NAME "Robo C2"
+#endif
+#if RBV(R2)
+  #define IS_ROBOR2
+  #define DEFAULT_MACHINE_NAME "Robo R2"
+#endif
+#if RBV(R2_DUAL)
+  #define IS_ROBOR2_DUAL
+  #define DEFAULT_MACHINE_NAME "Robo R2 Dual"
+#endif
 
 #define LARGE_FLASH true
 
@@ -76,7 +83,8 @@
 
 #define LED_PIN            5
 #define FAN1_PIN           6 // Pin used for the fan to cool controller
-#define FAN_PIN            7
+#define FAN_PIN            7 // PWM Fans for print cooling
+//#define E0_AUTO_FAN_PIN  11 // Ext0 and Ext1 fan as defined in Configuration_adv.h
 
 #define HEATER_0_PIN       10   // EXTRUDER 1
 #define HEATER_1_PIN       9   // EXTRUDER 2 (FAN On Sprinter)

@@ -1,4 +1,4 @@
-Thank you for submitting your feedback to the Marlin project.
+Thank you for submitting your feedback to the Marlin for Robo project.
 Please use one of the templates below to fill out this box.
 
 ------------------------------------------------------------
@@ -15,8 +15,8 @@ Paste_the_error_text_here
 ------------------------------------------------------------
 ### Bug Report
 - Description: ---
-- Expected behaviour: ---
-- Actual behaviour: ---
+- Expected behavior: ---
+- Actual behavior: ---
 - Steps to reproduce:
   - Do this
   - Do that
