@@ -74,7 +74,7 @@
 // User-specified version info of this build to display in [Pronterface, etc] terminal window during
 // startup. Implementation of an idea by Prof Braino to inform user that any changes made to this
 // build by the user have been successfully uploaded into firmware.
-#define STRING_CONFIG_H_AUTHOR "Matt Pedler & Allen McAfee" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "Robo" // Who made the changes.
 #define SHOW_BOOTSCREEN
 #define STRING_SPLASH_LINE1 SHORT_BUILD_VERSION // will be shown during bootup in line 1
 #define STRING_SPLASH_LINE2 WEBSITE_URL         // will be shown during bootup in line 2
@@ -588,21 +588,21 @@
       //Single
       #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.00, 145.5 }
       #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25 }
-      #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 500 }
+      #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 500 }
     #endif
     #if EXTRUDERS == 2
       //Dual
       #define DISTINCT_E_FACTORS
       #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.00, 145.5, 371.5 }
       #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25, 100 }
-      #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 500, 1000 }
+      #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 500, 1000 }
     #endif
   #endif
 
   #if RBV(C2)
     #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.00, 145.5 }
     #define DEFAULT_MAX_FEEDRATE          { 300, 300, 12, 25 }
-    #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 500 }
+    #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 500 }
   #endif
 #endif
 
