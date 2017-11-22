@@ -132,9 +132,9 @@
 // Optional custom name for your RepStrap or other custom machine
 // Displayed in the LCD "Ready" message
 #if RBV(C2)
-  #define CUSTOM_MACHINE_NAME "Robo C2 V2"
+  #define CUSTOM_MACHINE_NAME "Robo C2 BILINEAR"
 #else
-  #define CUSTOM_MACHINE_NAME "Robo R2 V2"
+  #define CUSTOM_MACHINE_NAME "Robo R2 BILINEAR"
 #endif
 
 
@@ -586,21 +586,21 @@
   #if RBV(R2) || RBV(R2_DUAL)
     #if EXTRUDERS == 1
       //Single
-      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.24, 145.5 }
+      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.00, 145.5 }
       #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25 }
       #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 500 }
     #endif
     #if EXTRUDERS == 2
       //Dual
       #define DISTINCT_E_FACTORS
-      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.24, 145.5, 371.5 }
+      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.00, 145.5, 371.5 }
       #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25, 100 }
       #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 500, 1000 }
     #endif
   #endif
 
   #if RBV(C2)
-    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.24, 145.5 }
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.00, 145.5 }
     #define DEFAULT_MAX_FEEDRATE          { 300, 300, 12, 25 }
     #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 500 }
   #endif
@@ -970,8 +970,8 @@
  *   With an LCD controller the process is guided step-by-step.
  */
 //#define AUTO_BED_LEVELING_3POINT
-#define AUTO_BED_LEVELING_LINEAR
-//#define AUTO_BED_LEVELING_BILINEAR
+//#define AUTO_BED_LEVELING_LINEAR
+#define AUTO_BED_LEVELING_BILINEAR
 //#define AUTO_BED_LEVELING_UBL
 //#define MESH_BED_LEVELING
 
@@ -1034,7 +1034,7 @@
 
     // Beyond the probed grid, continue the implied tilt?
     // Default is to maintain the height of the nearest edge.
-    //#define EXTRAPOLATE_BEYOND_GRID
+    #define EXTRAPOLATE_BEYOND_GRID
 
     //
     // Experimental Subdivision of the grid by Catmull-Rom method.
