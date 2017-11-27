@@ -5400,7 +5400,7 @@ void home_all_axes() { gcode_G28(true); }
     #if RBV(C2)
       zprobe_zoffset = (temp_probe_offset) * -1; // C2s only need to turn it negative
     #else
-      zprobe_zoffset = (temp_probe_offset - 0.2) * -1; // offset it closer to the bed then turn it negative
+      zprobe_zoffset = (temp_probe_offset - 0.15) * -1; // offset it closer to the bed then turn it negative
     #endif
 
     //Check if the value is actually negative. Positive Zprobe Offsets will mess this up.
@@ -5415,6 +5415,9 @@ void home_all_axes() { gcode_G28(true); }
 
     //return the feedrate to the old feedrate
     feedrate_mm_s = robo_old_feedrate_mm_s;
+
+    //save to EEPROM
+    (void)settings.save();
 }
 
    /*

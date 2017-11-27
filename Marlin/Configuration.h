@@ -126,15 +126,15 @@
  * Options are R2, C2, or R2_DUAL
  */
 #ifndef ROBO_BOARD_VERSION
-  #define ROBO_BOARD_VERSION BOARD_VERSION_C2
+  #define ROBO_BOARD_VERSION BOARD_VERSION_R2
 #endif
 
 // Optional custom name for your RepStrap or other custom machine
 // Displayed in the LCD "Ready" message
 #if RBV(C2)
-  #define CUSTOM_MACHINE_NAME "Robo C2 BILINEAR"
+  #define CUSTOM_MACHINE_NAME "Robo C2 V2"
 #else
-  #define CUSTOM_MACHINE_NAME "Robo R2 BILINEAR"
+  #define CUSTOM_MACHINE_NAME "Robo R2 V2"
 #endif
 
 
@@ -586,21 +586,21 @@
   #if RBV(R2) || RBV(R2_DUAL)
     #if EXTRUDERS == 1
       //Single
-      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.00, 145.5 }
+      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.24, 145.5 }
       #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25 }
       #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 500 }
     #endif
     #if EXTRUDERS == 2
       //Dual
       #define DISTINCT_E_FACTORS
-      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.00, 145.5, 371.5 }
+      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.24, 145.5, 371.5 }
       #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25, 100 }
       #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 500, 1000 }
     #endif
   #endif
 
   #if RBV(C2)
-    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.00, 145.5 }
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.24, 145.5 }
     #define DEFAULT_MAX_FEEDRATE          { 300, 300, 12, 25 }
     #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 500 }
   #endif
@@ -980,7 +980,7 @@
  * Turn on with the command 'M111 S32'.
  * NOTE: Requires a lot of PROGMEM!
  */
-#define DEBUG_LEVELING_FEATURE
+//#define DEBUG_LEVELING_FEATURE
 
 #if ENABLED(MESH_BED_LEVELING) || ENABLED(AUTO_BED_LEVELING_BILINEAR) || ENABLED(AUTO_BED_LEVELING_UBL)
   // Gradually reduce leveling correction until a set height is reached,
@@ -1327,7 +1327,7 @@
  *
  * :{ 'en':'English', 'an':'Aragonese', 'bg':'Bulgarian', 'ca':'Catalan', 'cn':'Chinese', 'cz':'Czech', 'cz_utf8':'Czech (UTF8)', 'de':'German', 'el':'Greek', 'el-gr':'Greek (Greece)', 'es':'Spanish', 'eu':'Basque-Euskera', 'fi':'Finnish', 'fr':'French', 'gl':'Galician', 'hr':'Croatian', 'it':'Italian', 'kana':'Japanese', 'kana_utf8':'Japanese (UTF8)', 'nl':'Dutch', 'pl':'Polish', 'pt':'Portuguese', 'pt-br':'Portuguese (Brazilian)', 'pt-br_utf8':'Portuguese (Brazilian UTF8)', 'pt_utf8':'Portuguese (UTF8)', 'ru':'Russian', 'sk_utf8':'Slovak (UTF8)', 'tr':'Turkish', 'uk':'Ukrainian', 'zh_CN':'Chinese (Simplified)', 'zh_TW':'Chinese (Taiwan)', test':'TEST' }
  */
-#define LCD_LANGUAGE en
+//#define LCD_LANGUAGE en
 
 /**
  * LCD Character Set
@@ -1351,7 +1351,7 @@
  *
  * :['JAPANESE', 'WESTERN', 'CYRILLIC']
  */
-#define DISPLAY_CHARSET_HD44780 JAPANESE
+//#define DISPLAY_CHARSET_HD44780 JAPANESE
 
 /**
  * LCD TYPE
@@ -1798,7 +1798,7 @@
 // Delay (in milliseconds) before the next move will start, to give the servo time to reach its target angle.
 // 300ms is a good value but you can try less delay.
 // If the servo can't reach the requested position, increase it.
-#define SERVO_DELAY { 300 }
+//#define SERVO_DELAY { 300 }
 
 // Servo deactivation
 //
@@ -1825,7 +1825,7 @@
  */
 //#define FILAMENT_WIDTH_SENSOR
 
-#define DEFAULT_NOMINAL_FILAMENT_DIA 3.00   // (mm) Diameter of the filament generally used (3.0 or 1.75mm), also used in the slicer. Used to validate sensor reading.
+#define DEFAULT_NOMINAL_FILAMENT_DIA 1.75   // (mm) Diameter of the filament generally used (3.0 or 1.75mm), also used in the slicer. Used to validate sensor reading.
 
 #if ENABLED(FILAMENT_WIDTH_SENSOR)
   #define FILAMENT_SENSOR_EXTRUDER_NUM 0    // Index of the extruder that has the filament sensor (0,1,2,3)
