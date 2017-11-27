@@ -132,9 +132,9 @@
 // Optional custom name for your RepStrap or other custom machine
 // Displayed in the LCD "Ready" message
 #if RBV(C2)
-  #define CUSTOM_MACHINE_NAME "Robo C2 V2"
+  #define CUSTOM_MACHINE_NAME "Robo C2 BILINEAR"
 #else
-  #define CUSTOM_MACHINE_NAME "Robo R2 V2"
+  #define CUSTOM_MACHINE_NAME "Robo R2 BILINEAR"
 #endif
 
 
