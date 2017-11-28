@@ -132,9 +132,9 @@
 // Optional custom name for your RepStrap or other custom machine
 // Displayed in the LCD "Ready" message
 #if RBV(C2)
-  #define CUSTOM_MACHINE_NAME "Robo C2 BILINEAR"
+  #define CUSTOM_MACHINE_NAME "Robo C2 LINEAR"
 #else
-  #define CUSTOM_MACHINE_NAME "Robo R2 BILINEAR"
+  #define CUSTOM_MACHINE_NAME "Robo R2 LINEAR"
 #endif
 
 
@@ -970,8 +970,8 @@
  *   With an LCD controller the process is guided step-by-step.
  */
 //#define AUTO_BED_LEVELING_3POINT
-//#define AUTO_BED_LEVELING_LINEAR
-#define AUTO_BED_LEVELING_BILINEAR
+#define AUTO_BED_LEVELING_LINEAR
+//#define AUTO_BED_LEVELING_BILINEAR
 //#define AUTO_BED_LEVELING_UBL
 //#define MESH_BED_LEVELING
 
