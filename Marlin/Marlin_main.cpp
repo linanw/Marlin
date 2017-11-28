@@ -5418,7 +5418,7 @@ void home_all_axes() { gcode_G28(true); }
 
     //save to EEPROM
     (void)settings.save();
-}
+  }
 
    /*
    * This gcode was added by robo to auto adjust the M851 probe offset for ambient lighting levels.
