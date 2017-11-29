@@ -322,6 +322,10 @@
   #include "endstop_interrupts.h"
 #endif
 
+#if ENABLED(INA19X)
+  #include "INA19x.h"
+#endif
+
 #if ENABLED(M100_FREE_MEMORY_WATCHER)
   void gcode_M100();
   void M100_dump_routine(const char * const title, const char *start, const char *end);
@@ -8996,6 +9000,14 @@ inline void gcode_M226() {
 
 #endif // EXPERIMENTAL_I2CBUS
 
+#if ENABLED(INA19X)
+  inline void gcode_M270(){
+    float current = read_INA19x();
+    SERIAL_PROTOCOLLNPAIR("Current: ", FIXFLOAT(current));
+    SERIAL_PROTOCOLLNPAIR("Pin: ", INA19x_Input_pin);
+  }
+#endif
+
 #if HAS_SERVOS
 
   /**
@@ -11539,6 +11551,12 @@ void process_next_command() {
           break;
 
       #endif // EXPERIMENTAL_I2CBUS
+
+      #if ENABLED(INA19X)
+         case 270:
+          gcode_M270();
+          break; 
+      #endif
 
       #if ENABLED(PREVENT_COLD_EXTRUSION)
         case 302: // M302: Allow cold extrudes (set the minimum extrude temperature)

@@ -96,6 +96,8 @@
 
 #define TEMP_BED_PIN       14   // ANALOG NUMBERING default 14
 
+#define INA19x_Input_pin 63 //Analog pin A9
+
 #define LCD_PINS_RS 16
     #define LCD_PINS_ENABLE 17
     #define LCD_PINS_D4 23
