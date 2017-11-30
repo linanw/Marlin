@@ -101,13 +101,12 @@
 
 // Channels available for DAC, For RoboMainboard 2.1.8 and up there are 4
 #define DAC_STEPPER_ORDER   {3,2,1,0}
-#define DAC_STEPPER_SENSE   0.05 // sense resistors on Robo stepper chips are .05 value
+#define DAC_STEPPER_SENSE   0.05 // sense resistors on RoboMainboard stepper chips are .05 value
 #define DAC_STEPPER_ADDRESS 0
 #define DAC_STEPPER_MAX     4096 // was 5000 but max allowable value is actually 4096
 #define DAC_STEPPER_VREF    1 // internal Vref, gain 2x = 4.096V
-#define DAC_STEPPER_GAIN    1 // value of 1 here sets gain of 2
-#define DAC_DISABLE_PIN     69 // set low to enable DAC
-#define DAC_OR_ADDRESS      0x01
+#define DAC_STEPPER_GAIN    0 // value of 1 here sets gain of 2
+#define DAC_OR_ADDRESS      0x00
 
 
 #define LCD_PINS_RS 16
