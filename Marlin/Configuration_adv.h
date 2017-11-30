@@ -392,11 +392,8 @@
 // @section extras
 
 // minimum time in microseconds that a movement needs to take if the buffer is emptied.
-#if RBV(R2) || RBV(C2) || RBV(R2_DUAL) //if this has anything to do with robo
-  #define DEFAULT_MINSEGMENTTIME        50000
-#else
-  #define DEFAULT_MINSEGMENTTIME        20000
-#endif
+
+#define DEFAULT_MINSEGMENTTIME        20000
 
 // If defined the movements slow down when the look ahead buffer is only half full
 #define SLOWDOWN
@@ -728,16 +725,10 @@
   #define BLOCK_BUFFER_SIZE 16 // maximize block buffer
 #endif
 
-#if RBV(R2) || RBV(C2) || RBV(R2_DUAL) // if this is a robo machine
-  #define BLOCK_BUFFER_SIZE 32 //since we do not have an LCD screen we have a little bit extra ram to play with
-  // The ASCII buffer for serial input
-  #define MAX_CMD_SIZE 96
-  #define BUFSIZE 32
-#else
-  // The ASCII buffer for serial input
-  #define MAX_CMD_SIZE 96
-  #define BUFSIZE 16
-#endif
+// The ASCII buffer for serial input
+#define MAX_CMD_SIZE 96
+#define BUFSIZE 16
+
 
 // @section serial
 
