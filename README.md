@@ -7,7 +7,6 @@
 - Added G35 command. Auto adjust Probe Offset(M851 Z) for ambient light levels based on the trigger distance of the IR probe(Requires Home Offset Z(M206 Z) to be set)
 - Added G36 command. G36 will home, run G35, then run G29
 - Added Robo Configuration Variable. in Configuration.h you now only need to change ROBO_BOARD_VERSION to change the configuration for C2/R2/R2_Dual (R2_Dual still needs work)
-- Increased the Buffer size so Octoprint can dump more data into the buffer at one time. (Still Testing)
 
 # Marlin 3D Printer Firmware
 <img align="top" width=175 src="Documentation/Logo/Marlin%20Logo%20GitHub.png" />
