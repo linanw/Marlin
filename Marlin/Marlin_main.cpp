@@ -5396,8 +5396,17 @@ void home_all_axes() { gcode_G28(true); }
     clean_up_after_endstop_or_probe_move();
 
     //adjust z probe offset
-    float temp_probe_offset = measured_z + home_offset[Z_AXIS]; //get rid of the buffer by the set z offset
-    zprobe_zoffset = (temp_probe_offset - 0.2) * -1; // offset it closer to the bed then turn it negative
+    float temp_probe_offset = measured_z + home_offset[Z_AXIS]; //get rid of the buffer by the set z offset      
+    #if RBV(C2)
+      zprobe_zoffset = (temp_probe_offset) * -1; // C2s only need to turn it negative
+    #else
+      zprobe_zoffset = (temp_probe_offset - 0.15) * -1; // offset it closer to the bed then turn it negative
+    #endif
+
+    //Check if the value is actually negative. Positive Zprobe Offsets will mess this up.
+    if (zprobe_zoffset > 0.00 ){
+      zprobe_zoffset = zprobe_zoffset * -1;
+    }
     refresh_zprobe_zoffset();
     SERIAL_PROTOCOLLNPAIR("Probe Offset is Z: ", FIXFLOAT(zprobe_zoffset));
     SERIAL_ECHO("Position After Adjustment ");
@@ -5406,7 +5415,10 @@ void home_all_axes() { gcode_G28(true); }
 
     //return the feedrate to the old feedrate
     feedrate_mm_s = robo_old_feedrate_mm_s;
-}
+
+    //save to EEPROM
+    (void)settings.save();
+  }
 
    /*
    * This gcode was added by robo to auto adjust the M851 probe offset for ambient lighting levels.

@@ -930,7 +930,6 @@
  *         G36 can replace both G28 and G29 in Start GCODE.  There will be 1 additional
  *         probe point added to the very start of the print.  This additional probe is G35.
  *
-
 /**
  * Choose one of the options below to enable G29 Bed Leveling. The parameters
  * and behavior of G29 will change depending on your selection.
