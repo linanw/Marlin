@@ -137,6 +137,8 @@
   #define CUSTOM_MACHINE_NAME "Robo R2"
 #endif
 
+//If the robo is using a INA193 enable this variable
+#define INA19X
 
 // Define this to set a unique identifier for this printer, (Used by some programs to differentiate between machines)
 // You can use an online service to generate a random UUID. (eg http://www.uuidgenerator.net/version4)
