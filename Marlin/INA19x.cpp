@@ -8,17 +8,13 @@
 
 #include "INA19x.h"
 
-// void setup_INA19x(){
-//     //Setup the pins
-//     pinMode(INA19x_Input_pin, INPUT);
+void setup_INA19x(){
+    //Setup the pins
+    pinMode(INA19x_Input_pin, INPUT);
 
-// }
+}
 
 float read_INA19x(){
-    //get vout
-    // if(!INA19x_first_setup){
-    //     setup_INA19x();
-    // }
     return ((float)analogRead(INA19x_Input_pin)) / (20* 0.033);
 }
 

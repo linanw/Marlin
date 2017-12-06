@@ -8988,7 +8988,6 @@ inline void gcode_M226() {
   inline void gcode_M270(){
     float current = read_INA19x();
     SERIAL_PROTOCOLLNPAIR("Current: ", FIXFLOAT(current));
-    SERIAL_PROTOCOLLNPAIR("Pin: ", INA19x_Input_pin);
   }
 #endif
 
@@ -13731,6 +13730,10 @@ void setup() {
     OUT_WRITE(LCD_PINS_RS, LOW);
     delay(1000);
     WRITE(LCD_PINS_RS, HIGH);
+  #endif
+
+  #if ENABLED(INA19X)
+    setup_INA19x();
   #endif
 }
 
