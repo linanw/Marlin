@@ -5359,9 +5359,9 @@ void home_all_axes() { gcode_G28(true); }
     current_position[Y_AXIS] = LOGICAL_Y_POSITION(rny);
 
     //Just in case we want to have two different feed Rates / Positioning based on C2 or R2
-    #if RBV(C2) 
-      feedrate_mm_s = 125.00; //set feedrate to 125  
-    #elif RBV(R2) || RBV(R2_DUAL) 
+    #if RBV(C2)
+      feedrate_mm_s = 125.00; //set feedrate to 125
+    #elif RBV(R2) || RBV(R2_DUAL)
       feedrate_mm_s = 125.00; //set feedrate to 125
     #else
       feedrate_mm_s = 125.00; //just in case default
@@ -5396,11 +5396,11 @@ void home_all_axes() { gcode_G28(true); }
     clean_up_after_endstop_or_probe_move();
 
     //adjust z probe offset
-    float temp_probe_offset = measured_z + home_offset[Z_AXIS]; //get rid of the buffer by the set z offset      
+    float temp_probe_offset = measured_z + home_offset[Z_AXIS]; //get rid of the buffer by the set z offset
     #if RBV(C2)
       zprobe_zoffset = (temp_probe_offset) * -1; // C2s only need to turn it negative
     #else
-      zprobe_zoffset = (temp_probe_offset - 0.15) * -1; // offset it closer to the bed then turn it negative
+      zprobe_zoffset = (temp_probe_offset) * -1; // offset it closer to the bed then turn it negative
     #endif
 
     //Check if the value is actually negative. Positive Zprobe Offsets will mess this up.
@@ -5424,18 +5424,18 @@ void home_all_axes() { gcode_G28(true); }
    * This gcode was added by robo to auto adjust the M851 probe offset for ambient lighting levels.
    * Based on outside light levels or even the color of the bed, this will probe one point on the bed
    * to measure the trigger distance of the IR sensor, then set that trigger distance as the probe offset.
-   * 
+   *
    * So this adjusts for light levels because the IR sensor will trigger at different distances based upon ambient light levels.
-   * This checks for that distance and adjusts the probe offset so that the user will experience an even first layer every time. 
+   * This checks for that distance and adjusts the probe offset so that the user will experience an even first layer every time.
    * Made by Matt Pedler
    */
   inline void gcode_G36(){
     //home and level
     home_all_axes();
     //Adjust for ambient light level
-    gcode_G35();    
+    gcode_G35();
     //finish leveling process
-    gcode_G29(); 
+    gcode_G29();
   }
 
 

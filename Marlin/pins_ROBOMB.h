@@ -34,15 +34,15 @@
 
 #if RBV(C2)
   #define IS_ROBOC2
-  #define DEFAULT_MACHINE_NAME "Robo C2"
+  #define MACHINE_NAME "Robo C2"
 #endif
 #if RBV(R2)
   #define IS_ROBOR2
-  #define DEFAULT_MACHINE_NAME "Robo R2"
+  #define MACHINE_NAME "Robo R2"
 #endif
 #if RBV(R2_DUAL)
   #define IS_ROBOR2_DUAL
-  #define DEFAULT_MACHINE_NAME "Robo R2 Dual"
+  #define MACHINE_NAME "Robo R2 Dual"
 #endif
 
 #define LARGE_FLASH true

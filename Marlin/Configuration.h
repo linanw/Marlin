@@ -588,21 +588,21 @@
       //Single
       #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.00, 145.5 }
       #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25 }
-      #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 500 }
+      #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000 }
     #endif
     #if EXTRUDERS == 2
       //Dual
       #define DISTINCT_E_FACTORS
       #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.00, 145.5, 371.5 }
       #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25, 100 }
-      #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 500, 1000 }
+      #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000, 1000 }
     #endif
   #endif
 
   #if RBV(C2)
     #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.00, 145.5 }
     #define DEFAULT_MAX_FEEDRATE          { 300, 300, 12, 25 }
-    #define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 500 }
+    #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000 }
   #endif
 #endif
 
