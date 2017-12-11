@@ -4143,7 +4143,7 @@ inline void gcode_G28(const bool always_home_all) {
         false // fetch the previous toolhead
       #else
         true
-      #endif);
+      #endif)
   #endif
 
   lcd_refresh();
