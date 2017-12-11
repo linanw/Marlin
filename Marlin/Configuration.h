@@ -137,7 +137,7 @@
   #define CUSTOM_MACHINE_NAME "Robo R2"
 #endif
 
-//If the robo is using a INA193 enable this variable
+//If the robo is using a INA193 for sensing current draw from Raspi, enable this variable
 #define INA19X
 
 // Define this to set a unique identifier for this printer, (Used by some programs to differentiate between machines)

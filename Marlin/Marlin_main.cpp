@@ -174,6 +174,7 @@
  * M250 - Set LCD contrast: "M250 C<contrast>" (0-63). (Requires LCD support)
  * M260 - i2c Send Data (Requires EXPERIMENTAL_I2CBUS)
  * M261 - i2c Request Data (Requires EXPERIMENTAL_I2CBUS)
+ * M270 - Display reading from INA193 current sense circuit
  * M280 - Set servo position absolute: "M280 P<index> S<angle|µs>". (Requires servos)
  * M300 - Play beep sound S<frequency Hz> P<duration ms>
  * M301 - Set PID parameters P I and D. (Requires PIDTEMP)
@@ -11538,7 +11539,7 @@ void process_next_command() {
       #if ENABLED(INA19X)
          case 270:
           gcode_M270();
-          break; 
+          break;
       #endif
 
       #if ENABLED(PREVENT_COLD_EXTRUSION)
