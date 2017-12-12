@@ -56,7 +56,7 @@
       OUT_WRITE(DAC_DISABLE_PIN, LOW);  // set pin low to enable DAC
     #else
       DDRJ = DDRJ | B00000010; //sets unmapped pin PJ6 to an output and low
-      PORTJ = PORTJ | B00000000;    
+      PORTJ = PORTJ | B00000000;
     #endif
 
     mcp4728_init();

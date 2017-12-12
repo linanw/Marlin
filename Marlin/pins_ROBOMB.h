@@ -82,6 +82,7 @@
 #define FILWIDTH_PIN        -1 // ANALOG NUMBERING NOT USING IN R2 or C2
 
 #define LED_PIN            -1
+#define CASE_LIGHT_PIN 5                  // Override the default pin if needed
 #define FAN1_PIN           6 // Pin used for the fan to cool controller
 #define FAN_PIN            7 // PWM Fans for print cooling
 //#define E0_AUTO_FAN_PIN  11 // Ext0 and Ext1 fan as defined in Configuration_adv.h
@@ -101,8 +102,8 @@
 #define DAC_STEPPER_CURRENT
 
 // Channels available for DAC, For RoboMainboard 2.1.8 and up there are 4
-#define DAC_STEPPER_ORDER   {3,2,1,0}
-#define DAC_STEPPER_SENSE   0.05 // sense resistors on RoboMainboard stepper chips are .05 value
+#define DAC_STEPPER_ORDER   {2,3,0,1}
+#define DAC_STEPPER_SENSE   0.1  // sense resistors on RoboMainboard stepper circuit are .1 value
 #define DAC_STEPPER_ADDRESS 0
 #define DAC_STEPPER_MAX     4096 // was 5000 but max allowable value is actually 4096
 #define DAC_STEPPER_VREF    1 // internal Vref, gain 2x = 4.096V
@@ -110,7 +111,7 @@
 //#define DAC_DISABLE_PIN     69 // set low to enable DAC
 #define DAC_OR_ADDRESS      0x00
 
-#define INA19x_Input_pin 63 //Analog pin A9
+#define INA19x_Input_pin    63   //Analog pin A9, current sensor for draw from Raspi
 
 #define LCD_PINS_RS 16
     #define LCD_PINS_ENABLE 17
