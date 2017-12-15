@@ -96,6 +96,8 @@
 
   #if RBV(R2) || RBV(C2) || RBV(R2_Dual)
   static float robo_dac_percent(AxisEnum axis){ return mcp4728_getDrvPct(dac_order[axis]);}
+
+  //This calculates the Max Motor Current
   static float robo_dac_amps(AxisEnum axis){
 
     // volts = digital_vref * ( 1 / volts per unit)
@@ -118,7 +120,7 @@
 
     #if RBV(R2) || RBV(C2) || RBV(R2_Dual)
       SERIAL_ECHO_START();
-      SERIAL_ECHOLNPGM("Stepper current values in % (Amps):");
+      SERIAL_ECHOLNPGM("Stepper current values in % (Max motor Amps):");
       SERIAL_ECHO_START();
       SERIAL_ECHOPAIR(" (A)XY:",  robo_dac_percent(XY_DAC));
       SERIAL_ECHOPAIR(" (",   robo_dac_amps(XY_DAC));
