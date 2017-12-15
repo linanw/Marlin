@@ -99,7 +99,7 @@
   static float robo_dac_amps(AxisEnum axis){
 
     // volts = digital_vref * ( 1 / volts per unit)
-    //5 represents 5 volts. I think that is the max VREF for our chip. This is just getting calculating the actual voltage that we are putting out.
+    //5 represents 5 volts. I think that is the max VREF for our chip. This is just calculating the actual voltage that we are putting out.
     float volt_ref = mcp4728_getValue(dac_order[axis]) * (1.0 / ( (DAC_STEPPER_MAX) / 5.0)); 
 
     return  volt_ref / (8.0 * (DAC_STEPPER_SENSE)); //ITripMAX = VREF /( 8×RS ) page 9 of the A4988 Datasheet
@@ -129,11 +129,6 @@
       SERIAL_ECHOPAIR(") (D)E1:", robo_dac_percent(E1_DAC));
       SERIAL_ECHOPAIR(" (",   robo_dac_amps(E1_DAC));
       SERIAL_ECHOLN(")");
-      //Added to see what these values return
-      SERIAL_ECHOPAIR("Getting Value ", mcp4728_getValue(dac_order[XY_DAC]));
-      SERIAL_ECHOLN("");
-      SERIAL_ECHOPAIR("Getting percent ", mcp4728_getDrvPct(dac_order[XY_DAC]));
-      SERIAL_ECHOLN("");
 
     #else
 
@@ -149,11 +144,7 @@
       SERIAL_ECHOPAIR(") (D)E1:", dac_perc(E1_DAC));
       SERIAL_ECHOPAIR(" (",   dac_amps(E1_DAC));
       SERIAL_ECHOLN(")");
-      //Added to see what these values return
-      SERIAL_ECHOPAIR("Getting Value ", mcp4728_getValue(dac_order[XY_DAC]));
-      SERIAL_ECHOLN("");
-      SERIAL_ECHOPAIR("Getting percent ", mcp4728_getDrvPct(dac_order[XY_DAC]));
-      SERIAL_ECHOLN("");
+     
     #endif
     
   }
