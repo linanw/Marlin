@@ -25,6 +25,7 @@
 
 #define NUM_AXIS 4
 #define XYZE 4
+#define ABCD 4
 #define ABC  3
 #define XYZ  3
 

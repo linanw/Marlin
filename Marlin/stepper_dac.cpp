@@ -54,9 +54,6 @@
   int dac_init() {
     #if PIN_EXISTS(DAC_DISABLE)
       OUT_WRITE(DAC_DISABLE_PIN, LOW);  // set pin low to enable DAC
-    #else
-      DDRJ = DDRJ | B00000010; //sets unmapped pin PJ6 to an output and low
-      PORTJ = PORTJ | B00000000;
     #endif
 
     mcp4728_init();
@@ -109,14 +106,14 @@
     SERIAL_ECHO_START();
     SERIAL_ECHOLNPGM("Stepper current values in % (Amps):");
     SERIAL_ECHO_START();
-    SERIAL_ECHOPAIR(" X:",  dac_perc(X_AXIS));
-    SERIAL_ECHOPAIR(" (",   dac_amps(X_AXIS));
-    SERIAL_ECHOPAIR(") Y:", dac_perc(Y_AXIS));
-    SERIAL_ECHOPAIR(" (",   dac_amps(Y_AXIS));
-    SERIAL_ECHOPAIR(") Z:", dac_perc(Z_AXIS));
-    SERIAL_ECHOPAIR(" (",   dac_amps(Z_AXIS));
-    SERIAL_ECHOPAIR(") E:", dac_perc(E_AXIS));
-    SERIAL_ECHOPAIR(" (",   dac_amps(E_AXIS));
+    SERIAL_ECHOPAIR(" (A)XY:",  dac_perc(XY_DAC));
+    SERIAL_ECHOPAIR(" (",   dac_amps(XY_DAC));
+    SERIAL_ECHOPAIR(") (B)Z:", dac_perc(Z_DAC));
+    SERIAL_ECHOPAIR(" (",   dac_amps(Z_DAC));
+    SERIAL_ECHOPAIR(") (C)E0:", dac_perc(E0_DAC));
+    SERIAL_ECHOPAIR(" (",   dac_amps(E0_DAC));
+    SERIAL_ECHOPAIR(") (D)E1:", dac_perc(E1_DAC));
+    SERIAL_ECHOPAIR(" (",   dac_amps(E1_DAC));
     SERIAL_ECHOLN(")");
   }
 
