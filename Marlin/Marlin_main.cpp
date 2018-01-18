@@ -2328,7 +2328,8 @@ static void clean_up_after_endstop_or_probe_move() {
     #if ENABLED(PROBE_DOUBLE_TOUCH)
 
       // Do a first probe at the fast speed
-      if (do_probe_move(-10, Z_PROBE_SPEED_FAST)) return NAN;
+      // Robo changes this value to -20 for a robo specific problem
+      if (do_probe_move(-20, Z_PROBE_SPEED_FAST)) return NAN;
 
       #if ENABLED(DEBUG_LEVELING_FEATURE)
         float first_probe_z = current_position[Z_AXIS];
@@ -2354,7 +2355,8 @@ static void clean_up_after_endstop_or_probe_move() {
     #endif
 
     // move down slowly to find bed
-    if (do_probe_move(-10 + (short_move ? 0 : -(Z_MAX_LENGTH)), Z_PROBE_SPEED_SLOW)) return NAN;
+    // changed to -20 for robo specific problem
+    if (do_probe_move(-20 + (short_move ? 0 : -(Z_MAX_LENGTH)), Z_PROBE_SPEED_SLOW)) return NAN;
 
     #if ENABLED(DEBUG_LEVELING_FEATURE)
       if (DEBUGGING(LEVELING)) DEBUG_POS("<<< run_z_probe", current_position);
@@ -5414,6 +5416,15 @@ void home_all_axes() { gcode_G28(true); }
    * Made by Matt Pedler
    */
   inline void gcode_G36(){
+    //Check home offset and throw warning if it is outside the range of 0 - (-20)
+    // int max = 0;
+    // int min = -20;
+    // int int_z_offset = int(home_offset[Z_AXIS]);
+    // if( (int_z_offset >= max) || (int_z_offset <= min) ){
+    //   SERIAL_ERROR_START();
+    //   SERIAL_ERRORLNPGM(MSG_ERR_Z_OFFSET_NOT_SET);
+    //   return;
+    // }
     //home and level
     home_all_axes();
     //Adjust for ambient light level
