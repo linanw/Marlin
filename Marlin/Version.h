@@ -35,7 +35,7 @@
   /**
    * Marlin release version identifier
    */
-  #define SHORT_BUILD_VERSION "Marlin_1.1.6_RoboVersion_1.2.3"
+  #define SHORT_BUILD_VERSION "1.1.8"
 
   /**
    * Verbose version identifier which should contain a reference to the location
@@ -48,7 +48,7 @@
    * here we define this default string as the date where the latest release
    * version was tagged.
    */
-  #define STRING_DISTRIBUTION_DATE "18 JAN 2018"
+  #define STRING_DISTRIBUTION_DATE "2017-12-25 12:00"
 
   /**
    * Required minimum Configuration.h and Configuration_adv.h file versions.
@@ -57,8 +57,8 @@
    * but not limited to: ADD, DELETE RENAME OR REPURPOSE any directive/option on
    * the configuration files.
    */
-  #define REQUIRED_CONFIGURATION_H_VERSION 010100
-  #define REQUIRED_CONFIGURATION_ADV_H_VERSION 010100
+  #define REQUIRED_CONFIGURATION_H_VERSION 010107
+  #define REQUIRED_CONFIGURATION_ADV_H_VERSION 010107
 
   /**
    * The protocol for communication to the host. Protocol indicates communication
@@ -68,12 +68,17 @@
   #define PROTOCOL_VERSION "1.0"
 
   /**
+   * Defines a generic printer name to be output to the LCD after booting Marlin.
+   */
+  #define MACHINE_NAME "3D Printer"
+
+  /**
    * The SOURCE_CODE_URL is the location where users will find the Marlin Source
    * Code which is installed on the device. In most cases —unless the manufacturer
    * has a distinct Github fork— the Source Code URL should just be the main
    * Marlin repository.
    */
-  #define SOURCE_CODE_URL "https://github.com/Robo3D/Marlin"
+  #define SOURCE_CODE_URL "https://github.com/MarlinFirmware/Marlin"
 
   /**
    * Default generic printer UUID.
