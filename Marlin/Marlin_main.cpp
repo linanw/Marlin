@@ -5349,6 +5349,88 @@ void home_all_axes() { gcode_G28(true); }
     report_current_position();
   }
 
+  /*
+   * This will adjust the probe offset based upon the trigger distance of the probe.
+   */
+  inline void gcode_G35(){
+
+    //get the first point based off of the probe offsets
+    //This should get us the first point in the probe matrix
+    const float rnx = LEFT_PROBE_BED_POSITION - (X_PROBE_OFFSET_FROM_EXTRUDER), rny = FRONT_PROBE_BED_POSITION - (Y_PROBE_OFFSET_FROM_EXTRUDER);
+
+    //capture the old feedrate. Prepend with robo because I'm paranoid about clashing variables.
+    float robo_old_feedrate_mm_s = feedrate_mm_s;
+
+    //define where we want to go
+    current_position[X_AXIS] = LOGICAL_X_POSITION(rnx);
+    current_position[Y_AXIS] = LOGICAL_Y_POSITION(rny);
+
+    //Just in case we want to have two different feed Rates / Positioning based on C2 or R2
+    #if RBV(C2)
+      feedrate_mm_s = 125.00; //set feedrate to 125
+    #elif RBV(R2) || RBV(R2_DUAL)
+      feedrate_mm_s = 125.00; //set feedrate to 125
+    #else
+      feedrate_mm_s = 125.00; //just in case default
+    #endif
+
+    //go to the defined position
+    buffer_line_to_current_position();
+
+    //set z probe offset to 0
+    zprobe_zoffset = 0.00;
+    refresh_zprobe_zoffset();
+
+    //check to see if we moved to the correct position
+    const float xpos = parser.linearval('X', current_position[X_AXIS] + X_PROBE_OFFSET_FROM_EXTRUDER),
+                ypos = parser.linearval('Y', current_position[Y_AXIS] + Y_PROBE_OFFSET_FROM_EXTRUDER);
+
+    if (!position_is_reachable_by_probe(xpos, ypos)) return
+
+    // Disable leveling so the planner won't mess with us
+    #if HAS_LEVELING
+      set_bed_leveling_enabled(false);
+    #endif
+
+    setup_for_endstop_or_probe_move();
+
+    const float measured_z = probe_pt(xpos, ypos, parser.boolval('E'), 1);
+
+    clean_up_after_endstop_or_probe_move();
+
+    float temp_probe_offset = measured_z;
+    zprobe_zoffset = (temp_probe_offset) * -1; // turn it negative
+
+    refresh_zprobe_zoffset();
+    SERIAL_PROTOCOLLNPAIR("Probe Offset is Z: ", FIXFLOAT(zprobe_zoffset));
+    //report position after adjustment
+    report_current_position();
+
+    //return the feedrate to the old feedrate
+    feedrate_mm_s = robo_old_feedrate_mm_s;
+
+    //save to EEPROM
+    (void)settings.save();
+  }
+
+   /*
+   * This gcode was added by robo to auto adjust the M851 probe offset for ambient lighting levels.
+   * Based on outside light levels or even the color of the bed, this will probe one point on the bed
+   * to measure the trigger distance of the IR sensor, then set that trigger distance as the probe offset.
+   *
+   * So this adjusts for light levels because the IR sensor will trigger at different distances based upon ambient light levels.
+   * This checks for that distance and adjusts the probe offset so that the user will experience an even first layer every time.
+   * Made by Matt Pedler
+   */
+  inline void gcode_G36(){
+    //home and level
+    home_all_axes();
+    //Adjust for ambient light level
+    gcode_G35();
+    //finish leveling process
+    gcode_G29();
+  }
+
   #if ENABLED(Z_PROBE_SLED)
 
     /**
@@ -9901,17 +9983,59 @@ inline void gcode_M502() {
 
 #if HAS_BED_PROBE
 
+void refresh_zprobe_zoffset(const bool no_babystep/*=false*/) {
+  static float last_zoffset = NAN;
+
+  //since last_offset is static this block will only be skipped once
+  if (!isnan(last_zoffset)) {
+
+    #if ENABLED(AUTO_BED_LEVELING_BILINEAR) || ENABLED(BABYSTEP_ZPROBE_OFFSET) || ENABLED(DELTA)
+      const float diff = zprobe_zoffset - last_zoffset;
+    #endif
+
+    #if ENABLED(AUTO_BED_LEVELING_BILINEAR)
+      // Correct bilinear grid for new probe offset
+      // Correct grid points for current autolevel values
+      if (diff) {
+        for (uint8_t x = 0; x < GRID_MAX_POINTS_X; x++)
+          for (uint8_t y = 0; y < GRID_MAX_POINTS_Y; y++)
+            z_values[x][y] -= diff;
+      }
+      #if ENABLED(ABL_BILINEAR_SUBDIVISION)
+        bed_level_virt_interpolate();
+      #endif
+    #endif
+
+
+      #if ENABLED(BABYSTEP_ZPROBE_OFFSET)
+        if (!no_babystep && leveling_is_active())
+          thermalManager.babystep_axis(Z_AXIS, -LROUND(diff * planner.axis_steps_per_mm[Z_AXIS]));
+      #else
+        UNUSED(no_babystep);
+      #endif
+
+      #if ENABLED(DELTA) // correct the delta_height
+        home_offset[Z_AXIS] -= diff;
+      #endif
+    }
+
+    last_zoffset = zprobe_zoffset;
+  }
+
   inline void gcode_M851() {
     SERIAL_ECHO_START();
     SERIAL_ECHOPGM(MSG_PROBE_Z_OFFSET);
     if (parser.seen('Z')) {
       const float value = parser.value_linear_units();
       if (!WITHIN(value, Z_PROBE_OFFSET_RANGE_MIN, Z_PROBE_OFFSET_RANGE_MAX)) {
-        SERIAL_ECHOLNPGM(" " MSG_Z_MIN " " STRINGIFY(Z_PROBE_OFFSET_RANGE_MIN) " " MSG_Z_MAX " " STRINGIFY(Z_PROBE_OFFSET_RANGE_MAX));
-        return;
+        zprobe_zoffset = value;
+        refresh_zprobe_zoffset();
+        SERIAL_ECHO(zprobe_zoffset);
       }
-      zprobe_zoffset = value;
-    }
+      else
+        SERIAL_ECHOLNPGM(" " MSG_Z_MIN " " STRINGIFY(Z_PROBE_OFFSET_RANGE_MIN) " " MSG_Z_MAX " " STRINGIFY(Z_PROBE_OFFSET_RANGE_MAX));
+      }
+    else
     SERIAL_ECHOLNPAIR(": ", zprobe_zoffset);
   }
 
@@ -11688,6 +11812,12 @@ void process_parsed_command() {
 
         case 30: // G30 Single Z probe
           gcode_G30();
+          break;
+        case 35: //auto adjust IR Sensor Probe
+          gcode_G35();
+          break;
+        case 36:
+          gcode_G36(); //Auto adjust IR sensor without leveling or homing
           break;
 
         #if ENABLED(Z_PROBE_SLED)
