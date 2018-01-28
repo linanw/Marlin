@@ -127,16 +127,21 @@
  */
 #ifndef ROBO_BOARD_VERSION
   #define ROBO_BOARD_VERSION BOARD_VERSION_R2
+  #ifndef ROBO_PRINTER
+    #define ROBO_PRINTER
+  #endif
 #endif
 
 // Optional custom name for your RepStrap or other custom machine
 // Displayed in the LCD "Ready" message
 #if RBV(C2)
-  #define CUSTOM_MACHINE_NAME "Robo C2 BILINEAR"
+  #define CUSTOM_MACHINE_NAME "Robo C2"
 #else
-  #define CUSTOM_MACHINE_NAME "Robo R2 BILINEAR"
+  #define CUSTOM_MACHINE_NAME "Robo R2"
 #endif
 
+//If the robo is using a INA193 for sensing current draw from Raspi, enable this variable
+#define INA19X
 
 // Define this to set a unique identifier for this printer, (Used by some programs to differentiate between machines)
 // You can use an online service to generate a random UUID. (eg http://www.uuidgenerator.net/version4)
@@ -586,23 +591,23 @@
   #if RBV(R2) || RBV(R2_DUAL)
     #if EXTRUDERS == 1
       //Single
-      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.24, 145.5 }
+      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.00, 145.5 }
       #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25 }
-      #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 500 }
+      #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000 }
     #endif
     #if EXTRUDERS == 2
       //Dual
       #define DISTINCT_E_FACTORS
-      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.24, 145.5, 371.5 }
+      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.00, 145.5, 371.5 }
       #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25, 100 }
-      #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 500, 1000 }
+      #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000, 1000 }
     #endif
   #endif
 
   #if RBV(C2)
-    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.24, 145.5 }
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.00, 145.5 }
     #define DEFAULT_MAX_FEEDRATE          { 300, 300, 12, 25 }
-    #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 500 }
+    #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000 }
   #endif
 #endif
 
@@ -930,7 +935,6 @@
  *         G36 can replace both G28 and G29 in Start GCODE.  There will be 1 additional
  *         probe point added to the very start of the print.  This additional probe is G35.
  *
-
 /**
  * Choose one of the options below to enable G29 Bed Leveling. The parameters
  * and behavior of G29 will change depending on your selection.
@@ -970,8 +974,8 @@
  *   With an LCD controller the process is guided step-by-step.
  */
 //#define AUTO_BED_LEVELING_3POINT
-//#define AUTO_BED_LEVELING_LINEAR
-#define AUTO_BED_LEVELING_BILINEAR
+#define AUTO_BED_LEVELING_LINEAR
+//#define AUTO_BED_LEVELING_BILINEAR
 //#define AUTO_BED_LEVELING_UBL
 //#define MESH_BED_LEVELING
 
@@ -980,7 +984,7 @@
  * Turn on with the command 'M111 S32'.
  * NOTE: Requires a lot of PROGMEM!
  */
-//#define DEBUG_LEVELING_FEATURE
+#define DEBUG_LEVELING_FEATURE
 
 #if ENABLED(MESH_BED_LEVELING) || ENABLED(AUTO_BED_LEVELING_BILINEAR) || ENABLED(AUTO_BED_LEVELING_UBL)
   // Gradually reduce leveling correction until a set height is reached,
@@ -1327,7 +1331,7 @@
  *
  * :{ 'en':'English', 'an':'Aragonese', 'bg':'Bulgarian', 'ca':'Catalan', 'cn':'Chinese', 'cz':'Czech', 'cz_utf8':'Czech (UTF8)', 'de':'German', 'el':'Greek', 'el-gr':'Greek (Greece)', 'es':'Spanish', 'eu':'Basque-Euskera', 'fi':'Finnish', 'fr':'French', 'gl':'Galician', 'hr':'Croatian', 'it':'Italian', 'kana':'Japanese', 'kana_utf8':'Japanese (UTF8)', 'nl':'Dutch', 'pl':'Polish', 'pt':'Portuguese', 'pt-br':'Portuguese (Brazilian)', 'pt-br_utf8':'Portuguese (Brazilian UTF8)', 'pt_utf8':'Portuguese (UTF8)', 'ru':'Russian', 'sk_utf8':'Slovak (UTF8)', 'tr':'Turkish', 'uk':'Ukrainian', 'zh_CN':'Chinese (Simplified)', 'zh_TW':'Chinese (Taiwan)', test':'TEST' }
  */
-//#define LCD_LANGUAGE en
+#define LCD_LANGUAGE en
 
 /**
  * LCD Character Set
@@ -1351,7 +1355,7 @@
  *
  * :['JAPANESE', 'WESTERN', 'CYRILLIC']
  */
-//#define DISPLAY_CHARSET_HD44780 JAPANESE
+#define DISPLAY_CHARSET_HD44780 JAPANESE
 
 /**
  * LCD TYPE
@@ -1798,7 +1802,7 @@
 // Delay (in milliseconds) before the next move will start, to give the servo time to reach its target angle.
 // 300ms is a good value but you can try less delay.
 // If the servo can't reach the requested position, increase it.
-//#define SERVO_DELAY { 300 }
+#define SERVO_DELAY { 300 }
 
 // Servo deactivation
 //
@@ -1825,7 +1829,7 @@
  */
 //#define FILAMENT_WIDTH_SENSOR
 
-#define DEFAULT_NOMINAL_FILAMENT_DIA 1.75   // (mm) Diameter of the filament generally used (3.0 or 1.75mm), also used in the slicer. Used to validate sensor reading.
+#define DEFAULT_NOMINAL_FILAMENT_DIA 3.00   // (mm) Diameter of the filament generally used (3.0 or 1.75mm), also used in the slicer. Used to validate sensor reading.
 
 #if ENABLED(FILAMENT_WIDTH_SENSOR)
   #define FILAMENT_SENSOR_EXTRUDER_NUM 0    // Index of the extruder that has the filament sensor (0,1,2,3)

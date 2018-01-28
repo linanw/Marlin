@@ -174,6 +174,7 @@
  * M250 - Set LCD contrast: "M250 C<contrast>" (0-63). (Requires LCD support)
  * M260 - i2c Send Data (Requires EXPERIMENTAL_I2CBUS)
  * M261 - i2c Request Data (Requires EXPERIMENTAL_I2CBUS)
+ * M270 - Display reading from INA193 current sense circuit
  * M280 - Set servo position absolute: "M280 P<index> S<angle|µs>". (Requires servos)
  * M300 - Play beep sound S<frequency Hz> P<duration ms>
  * M301 - Set PID parameters P I and D. (Requires PIDTEMP)
@@ -320,6 +321,10 @@
 
 #if ENABLED(ENDSTOP_INTERRUPTS_FEATURE)
   #include "endstop_interrupts.h"
+#endif
+
+#if ENABLED(INA19X)
+  #include "INA19x.h"
 #endif
 
 #if ENABLED(M100_FREE_MEMORY_WATCHER)
@@ -1396,51 +1401,49 @@ bool get_target_extruder_from_command(const uint16_t code) {
    * at the same positions relative to the machine.
    */
   void update_software_endstops(const AxisEnum axis) {
-    //Changed this back to the way M206 was handled in pre 1.0.4 so a negative Z-Offset will work correctly. Looking at you Waldo
-    const float offs = LOGICAL_POSITION(0, axis);
-    //   #if HAS_HOME_OFFSET
-    //     + home_offset[axis]
-    //   #endif
-    //   #if HAS_POSITION_SHIFT
-    //     + position_shift[axis]
-    //   #endif
-    // ;
-
-    // #if HAS_HOME_OFFSET && HAS_POSITION_SHIFT
-    //   workspace_offset[axis] = offs;
-    // #endif
-
-    #if ENABLED(DUAL_X_CARRIAGE)
-      if (axis == X_AXIS) {
-
-        // In Dual X mode hotend_offset[X] is T1's home position
-        float dual_max_x = max(hotend_offset[X_AXIS][1], X2_MAX_POS);
-
-        if (active_extruder != 0) {
-          // T1 can move from X2_MIN_POS to X2_MAX_POS or X2 home position (whichever is larger)
-          soft_endstop_min[X_AXIS] = X2_MIN_POS + offs;
-          soft_endstop_max[X_AXIS] = dual_max_x + offs;
-        }
-        else if (dual_x_carriage_mode == DXC_DUPLICATION_MODE) {
-          // In Duplication Mode, T0 can move as far left as X_MIN_POS
-          // but not so far to the right that T1 would move past the end
-          soft_endstop_min[X_AXIS] = base_min_pos(X_AXIS) + offs;
-          soft_endstop_max[X_AXIS] = min(base_max_pos(X_AXIS), dual_max_x - duplicate_extruder_x_offset) + offs;
-        }
-        else {
-          // In other modes, T0 can move from X_MIN_POS to X_MAX_POS
-          soft_endstop_min[axis] = base_min_pos(axis) + offs;
-          soft_endstop_max[axis] = base_max_pos(axis) + offs;
-        }
-      }
-    #elif ENABLED(DELTA)
-      soft_endstop_min[axis] = base_min_pos(axis) + (axis == Z_AXIS ? 0 : offs);
-      soft_endstop_max[axis] = base_max_pos(axis) + offs;
-    #else
-      soft_endstop_min[axis] = base_min_pos(axis) + offs;
-      soft_endstop_max[axis] = base_max_pos(axis) + offs;
+    //Reverted how this was handled so G1 Z0 goes to Z0 instead of Z7.20 or whatever the offset is.
+    const float offs = 0.00
+      #if HAS_HOME_OFFSET
+        + home_offset[axis]
+      #endif
+      #if HAS_POSITION_SHIFT
+        + position_shift[axis]
+      #endif
+    ;
+    #if HAS_HOME_OFFSET && HAS_POSITION_SHIFT
+      workspace_offset[axis] = offs;
     #endif
 
+    // #if ENABLED(DUAL_X_CARRIAGE)
+    //   if (axis == X_AXIS) {
+
+    //     // In Dual X mode hotend_offset[X] is T1's home position
+    //     float dual_max_x = max(hotend_offset[X_AXIS][1], X2_MAX_POS);
+
+    //     if (active_extruder != 0) {
+    //       // T1 can move from X2_MIN_POS to X2_MAX_POS or X2 home position (whichever is larger)
+    //       soft_endstop_min[X_AXIS] = X2_MIN_POS + offs;
+    //       soft_endstop_max[X_AXIS] = dual_max_x + offs;
+    //     }
+    //     else if (dual_x_carriage_mode == DXC_DUPLICATION_MODE) {
+    //       // In Duplication Mode, T0 can move as far left as X_MIN_POS
+    //       // but not so far to the right that T1 would move past the end
+    //       soft_endstop_min[X_AXIS] = base_min_pos(X_AXIS) + offs;
+    //       soft_endstop_max[X_AXIS] = min(base_max_pos(X_AXIS), dual_max_x - duplicate_extruder_x_offset) + offs;
+    //     }
+    //     else {
+    //       // In other modes, T0 can move from X_MIN_POS to X_MAX_POS
+    //       soft_endstop_min[axis] = base_min_pos(axis) + offs;
+    //       soft_endstop_max[axis] = base_max_pos(axis) + offs;
+    //     }
+    //   }
+    // #elif ENABLED(DELTA)
+    //   soft_endstop_min[axis] = base_min_pos(axis) + (axis == Z_AXIS ? 0 : offs);
+    //   soft_endstop_max[axis] = base_max_pos(axis) + offs;
+    // #else
+      soft_endstop_min[axis] = base_min_pos(axis) + offs;
+      soft_endstop_max[axis] = base_max_pos(axis) + offs;
+    //#endif
     #if ENABLED(DEBUG_LEVELING_FEATURE)
       if (DEBUGGING(LEVELING)) {
         SERIAL_ECHOPAIR("For ", axis_codes[axis]);
@@ -1454,6 +1457,7 @@ bool get_target_extruder_from_command(const uint16_t code) {
         SERIAL_ECHOLNPAIR("\n soft_endstop_max = ", soft_endstop_max[axis]);
       }
     #endif
+
 
     #if ENABLED(DELTA)
       if (axis == Z_AXIS)
@@ -2324,7 +2328,8 @@ static void clean_up_after_endstop_or_probe_move() {
     #if ENABLED(PROBE_DOUBLE_TOUCH)
 
       // Do a first probe at the fast speed
-      if (do_probe_move(-10, Z_PROBE_SPEED_FAST)) return NAN;
+      // changed to -20 to ensure Air print if home_offset[Z_AXIS] is set to the default
+      if (do_probe_move(-20, Z_PROBE_SPEED_FAST)) return NAN;
 
       #if ENABLED(DEBUG_LEVELING_FEATURE)
         float first_probe_z = current_position[Z_AXIS];
@@ -2350,7 +2355,8 @@ static void clean_up_after_endstop_or_probe_move() {
     #endif
 
     // move down slowly to find bed
-    if (do_probe_move(-10 + (short_move ? 0 : -(Z_MAX_LENGTH)), Z_PROBE_SPEED_SLOW)) return NAN;
+    // changed to -20 to ensure Air print if home_offset[Z_AXIS] is set to the default
+    if (do_probe_move(-20 + (short_move ? 0 : -(Z_MAX_LENGTH)), Z_PROBE_SPEED_SLOW)) return NAN;
 
     #if ENABLED(DEBUG_LEVELING_FEATURE)
       if (DEBUGGING(LEVELING)) DEBUG_POS("<<< run_z_probe", current_position);
@@ -4134,13 +4140,7 @@ inline void gcode_G28(const bool always_home_all) {
 
   // Restore the active tool after homing
   #if HOTENDS > 1
-    tool_change(old_tool_index, 0,
-      #if ENABLED(PARKING_EXTRUDER)
-        false // fetch the previous toolhead
-      #else
-        true
-      #endif
-    );
+    tool_change(old_tool_index, 0, true);
   #endif
 
   lcd_refresh();
@@ -5359,9 +5359,9 @@ void home_all_axes() { gcode_G28(true); }
     current_position[Y_AXIS] = LOGICAL_Y_POSITION(rny);
 
     //Just in case we want to have two different feed Rates / Positioning based on C2 or R2
-    #if RBV(C2) 
-      feedrate_mm_s = 125.00; //set feedrate to 125  
-    #elif RBV(R2) || RBV(R2_DUAL) 
+    #if RBV(C2)
+      feedrate_mm_s = 125.00; //set feedrate to 125
+    #elif RBV(R2) || RBV(R2_DUAL)
       feedrate_mm_s = 125.00; //set feedrate to 125
     #else
       feedrate_mm_s = 125.00; //just in case default
@@ -5389,27 +5389,13 @@ void home_all_axes() { gcode_G28(true); }
 
     const float measured_z = probe_pt(xpos, ypos, parser.boolval('S', true), 1);
 
-    if (!isnan(measured_z)) {
-      SERIAL_PROTOCOLLNPAIR("Probe Bounce is Z: ", FIXFLOAT(measured_z));
-    }
-
     clean_up_after_endstop_or_probe_move();
 
-    //adjust z probe offset
-    float temp_probe_offset = measured_z + home_offset[Z_AXIS]; //get rid of the buffer by the set z offset      
-    #if RBV(C2)
-      zprobe_zoffset = (temp_probe_offset) * -1; // C2s only need to turn it negative
-    #else
-      zprobe_zoffset = (temp_probe_offset - 0.15) * -1; // offset it closer to the bed then turn it negative
-    #endif
+    float temp_probe_offset = measured_z;
+    zprobe_zoffset = (temp_probe_offset) * -1; // turn it negative
 
-    //Check if the value is actually negative. Positive Zprobe Offsets will mess this up.
-    if (zprobe_zoffset > 0.00 ){
-      zprobe_zoffset = zprobe_zoffset * -1;
-    }
     refresh_zprobe_zoffset();
     SERIAL_PROTOCOLLNPAIR("Probe Offset is Z: ", FIXFLOAT(zprobe_zoffset));
-    SERIAL_ECHO("Position After Adjustment ");
     //report position after adjustment
     report_current_position();
 
@@ -5418,24 +5404,24 @@ void home_all_axes() { gcode_G28(true); }
 
     //save to EEPROM
     (void)settings.save();
-}
+  }
 
    /*
    * This gcode was added by robo to auto adjust the M851 probe offset for ambient lighting levels.
    * Based on outside light levels or even the color of the bed, this will probe one point on the bed
    * to measure the trigger distance of the IR sensor, then set that trigger distance as the probe offset.
-   * 
+   *
    * So this adjusts for light levels because the IR sensor will trigger at different distances based upon ambient light levels.
-   * This checks for that distance and adjusts the probe offset so that the user will experience an even first layer every time. 
+   * This checks for that distance and adjusts the probe offset so that the user will experience an even first layer every time.
    * Made by Matt Pedler
    */
   inline void gcode_G36(){
     //home and level
     home_all_axes();
     //Adjust for ambient light level
-    gcode_G35();    
+    gcode_G35();
     //finish leveling process
-    gcode_G29(); 
+    gcode_G29();
   }
 
 
@@ -8996,6 +8982,13 @@ inline void gcode_M226() {
 
 #endif // EXPERIMENTAL_I2CBUS
 
+#if ENABLED(INA19X)
+  inline void gcode_M270(){
+    float current = read_INA19x();
+    SERIAL_PROTOCOLLNPAIR("Current: ", FIXFLOAT(current));
+  }
+#endif
+
 #if HAS_SERVOS
 
   /**
@@ -11540,6 +11533,12 @@ void process_next_command() {
 
       #endif // EXPERIMENTAL_I2CBUS
 
+      #if ENABLED(INA19X)
+         case 270:
+          gcode_M270();
+          break;
+      #endif
+
       #if ENABLED(PREVENT_COLD_EXTRUSION)
         case 302: // M302: Allow cold extrudes (set the minimum extrude temperature)
           gcode_M302();
@@ -13729,6 +13728,10 @@ void setup() {
     OUT_WRITE(LCD_PINS_RS, LOW);
     delay(1000);
     WRITE(LCD_PINS_RS, HIGH);
+  #endif
+
+  #if ENABLED(INA19X)
+    setup_INA19x();
   #endif
 }
 

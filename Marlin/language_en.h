@@ -870,6 +870,10 @@
 #ifndef MSG_ERR_PROBING_FAILED
   #define MSG_ERR_PROBING_FAILED              _UxGT("Probing failed")
 #endif
+////////////////Robo Added Language/////////////////////////////
+#ifndef MSG_ERR_Z_OFFSET_NOT_SET
+  #define MSG_ERR_Z_OFFSET_NOT_SET            _UxGT("Z-Offset is not set. Please run the Z-Offset Wizard")
+#endif
 
 //
 // Filament Change screens show up to 3 lines on a 4-line display
