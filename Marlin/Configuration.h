@@ -591,21 +591,21 @@
   #if RBV(R2) || RBV(R2_DUAL)
     #if EXTRUDERS == 1
       //Single
-      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.00, 145.5 }
+      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800.00, 145.5 }
       #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25 }
       #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000 }
     #endif
     #if EXTRUDERS == 2
       //Dual
       #define DISTINCT_E_FACTORS
-      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.00, 145.5, 371.5 }
+      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800.00, 145.5, 371.5 }
       #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25, 100 }
       #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000, 1000 }
     #endif
   #endif
 
   #if RBV(C2)
-    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 800.00, 145.5 }
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800.00, 145.5 }
     #define DEFAULT_MAX_FEEDRATE          { 300, 300, 12, 25 }
     #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000 }
   #endif
@@ -974,8 +974,8 @@
  *   With an LCD controller the process is guided step-by-step.
  */
 //#define AUTO_BED_LEVELING_3POINT
-#define AUTO_BED_LEVELING_LINEAR
-//#define AUTO_BED_LEVELING_BILINEAR
+//#define AUTO_BED_LEVELING_LINEAR
+#define AUTO_BED_LEVELING_BILINEAR
 //#define AUTO_BED_LEVELING_UBL
 //#define MESH_BED_LEVELING
 
@@ -984,7 +984,7 @@
  * Turn on with the command 'M111 S32'.
  * NOTE: Requires a lot of PROGMEM!
  */
-#define DEBUG_LEVELING_FEATURE
+//#define DEBUG_LEVELING_FEATURE
 
 #if ENABLED(MESH_BED_LEVELING) || ENABLED(AUTO_BED_LEVELING_BILINEAR) || ENABLED(AUTO_BED_LEVELING_UBL)
   // Gradually reduce leveling correction until a set height is reached,

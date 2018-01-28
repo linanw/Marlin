@@ -391,10 +391,7 @@
 // @section extras
 
 // minimum time in microseconds that a movement needs to take if the buffer is emptied.
-<<<<<<< HEAD
 
-=======
->>>>>>> RC
 #define DEFAULT_MINSEGMENTTIME        20000
 
 // If defined the movements slow down when the look ahead buffer is only half full
@@ -727,14 +724,6 @@
   #define BLOCK_BUFFER_SIZE 16 // maximize block buffer
 #endif
 
-<<<<<<< HEAD
-// The ASCII buffer for serial input
-#define MAX_CMD_SIZE 96
-#define BUFSIZE 16
-
-
-=======
->>>>>>> RC
 // @section serial
 
 // The ASCII buffer for serial input
