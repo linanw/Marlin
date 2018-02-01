@@ -20,38 +20,36 @@
  *
  */
 
-#ifndef __SPI_H__
-#define __SPI_H__
+/**
+ * Gen7 v1.3 pin assignments
+ */
 
-#include <stdint.h>
-#include "softspi.h"
+ /**
+ * Rev B    26 DEC 2016
+ *
+ * added pointer to a current Arduino IDE extension
+ *
+ */
 
-template<uint8_t MisoPin, uint8_t MosiPin, uint8_t SckPin>
-class SPI {
-  static SoftSPI<MisoPin, MosiPin, SckPin> softSPI;
-  public:
-    FORCE_INLINE static void init() { softSPI.begin(); }
-    FORCE_INLINE static void send(uint8_t data) { softSPI.send(data); }
-    FORCE_INLINE static uint8_t receive() { return softSPI.receive(); }
-};
+/**
+ * A useable Arduino IDE extension (board manager) can be found at
+ * https://github.com/Lauszus/Sanguino
+ *
+ * This extension has been tested on Arduino 1.6.12 & 1.8.0
+ *
+ * Here's the JSON path:
+ * https://raw.githubusercontent.com/Lauszus/Sanguino/master/package_lauszus_sanguino_index.json
+ *
+ * When installing select 1.0.2
+ *
+ * Installation instructions can be found at https://learn.sparkfun.com/pages/CustomBoardsArduino
+ * Just use the above JSON URL instead of Sparkfun's JSON.
+ *
+ * Once installed select the Sanguino board and then select the CPU.
+ *
+ */
 
+#define BOARD_NAME "Gen7 v1.3"
 
-// Hardware SPI
-template<>
-class SPI<MISO_PIN, MOSI_PIN, SCK_PIN> {
-  public:
-    FORCE_INLINE static void init() {
-        OUT_WRITE(SCK_PIN, LOW);
-        OUT_WRITE(MOSI_PIN, HIGH);
-        SET_INPUT(MISO_PIN);
-        WRITE(MISO_PIN, HIGH);
-    }
-    FORCE_INLINE static uint8_t receive() {
-      SPDR = 0;
-      for (;!TEST(SPSR, SPIF););
-      return SPDR;
-    }
-
-};
-
-#endif // __SPI_H__
+#define GEN7_VERSION 13 // v1.3
+#include "pins_GEN7_12.h"
