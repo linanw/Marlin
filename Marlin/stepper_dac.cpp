@@ -49,14 +49,11 @@
 
   bool dac_present = false;
   const uint8_t dac_order[NUM_AXIS] = DAC_STEPPER_ORDER;
-  uint8_t dac_channel_pct[XYZE] = DAC_MOTOR_CURRENT_DEFAULT;
+  uint8_t dac_channel_pct[ABCD] = DAC_MOTOR_CURRENT_DEFAULT;
 
   int dac_init() {
     #if PIN_EXISTS(DAC_DISABLE)
       OUT_WRITE(DAC_DISABLE_PIN, LOW);  // set pin low to enable DAC
-    #else
-      DDRJ = DDRJ | B00000010; //sets unmapped pin PJ6 to an output and low
-      PORTJ = PORTJ | B00000000;
     #endif
 
     mcp4728_init();
@@ -97,27 +94,61 @@
   static float dac_perc(int8_t n) { return 100.0 * mcp4728_getValue(dac_order[n]) * (1.0 / (DAC_STEPPER_MAX)); }
   static float dac_amps(int8_t n) { return mcp4728_getDrvPct(dac_order[n]) * (DAC_STEPPER_MAX) * 0.125 * (1.0 / (DAC_STEPPER_SENSE)); }
 
+  #if RBV(R2) || RBV(C2) || RBV(R2_Dual)
+  static float robo_dac_percent(AxisEnum axis){ return mcp4728_getDrvPct(dac_order[axis]);}
+
+  //This calculates the Max Motor Current
+  static float robo_dac_amps(AxisEnum axis){
+
+    // volts = digital_vref * ( 1 / volts per unit)
+    //5 represents 5 volts. I think that is the max VREF for our chip. This is just calculating the actual voltage that we are putting out.
+    float volt_ref = mcp4728_getValue(dac_order[axis]) * (1.0 / ( (DAC_STEPPER_MAX) / 5.0)); 
+
+    return  volt_ref / (8.0 * (DAC_STEPPER_SENSE)); //ITripMAX = VREF /( 8×RS ) page 9 of the A4988 Datasheet
+  }
+  #endif  
+
   uint8_t dac_current_get_percent(AxisEnum axis) { return mcp4728_getDrvPct(dac_order[axis]); }
-  void dac_current_set_percents(const uint8_t pct[XYZE]) {
+  void dac_current_set_percents(const uint8_t pct[ABCD]) {
     LOOP_XYZE(i) dac_channel_pct[i] = pct[dac_order[i]];
     mcp4728_setDrvPct(dac_channel_pct);
   }
 
+
   void dac_print_values() {
     if (!dac_present) return;
 
-    SERIAL_ECHO_START();
-    SERIAL_ECHOLNPGM("Stepper current values in % (Amps):");
-    SERIAL_ECHO_START();
-    SERIAL_ECHOPAIR(" X:",  dac_perc(X_AXIS));
-    SERIAL_ECHOPAIR(" (",   dac_amps(X_AXIS));
-    SERIAL_ECHOPAIR(") Y:", dac_perc(Y_AXIS));
-    SERIAL_ECHOPAIR(" (",   dac_amps(Y_AXIS));
-    SERIAL_ECHOPAIR(") Z:", dac_perc(Z_AXIS));
-    SERIAL_ECHOPAIR(" (",   dac_amps(Z_AXIS));
-    SERIAL_ECHOPAIR(") E:", dac_perc(E_AXIS));
-    SERIAL_ECHOPAIR(" (",   dac_amps(E_AXIS));
-    SERIAL_ECHOLN(")");
+    #if RBV(R2) || RBV(C2) || RBV(R2_Dual)
+      SERIAL_ECHO_START();
+      SERIAL_ECHOLNPGM("Stepper current values in % (Max motor Amps):");
+      SERIAL_ECHO_START();
+      SERIAL_ECHOPAIR(" (A)XY:",  robo_dac_percent(XY_DAC));
+      SERIAL_ECHOPAIR(" (",   robo_dac_amps(XY_DAC));
+      SERIAL_ECHOPAIR(") (B)Z:", robo_dac_percent(Z_DAC));
+      SERIAL_ECHOPAIR(" (",   robo_dac_amps(Z_DAC));
+      SERIAL_ECHOPAIR(") (C)E0:", robo_dac_percent(E0_DAC));
+      SERIAL_ECHOPAIR(" (",   robo_dac_amps(E0_DAC));
+      SERIAL_ECHOPAIR(") (D)E1:", robo_dac_percent(E1_DAC));
+      SERIAL_ECHOPAIR(" (",   robo_dac_amps(E1_DAC));
+      SERIAL_ECHOLN(")");
+
+    #else
+
+      SERIAL_ECHO_START();
+      SERIAL_ECHOLNPGM("Stepper current values in % (Amps):");
+      SERIAL_ECHO_START();
+      SERIAL_ECHOPAIR(" (A)XY:",  dac_perc(XY_DAC));
+      SERIAL_ECHOPAIR(" (",   dac_amps(XY_DAC));
+      SERIAL_ECHOPAIR(") (B)Z:", dac_perc(Z_DAC));
+      SERIAL_ECHOPAIR(" (",   dac_amps(Z_DAC));
+      SERIAL_ECHOPAIR(") (C)E0:", dac_perc(E0_DAC));
+      SERIAL_ECHOPAIR(" (",   dac_amps(E0_DAC));
+      SERIAL_ECHOPAIR(") (D)E1:", dac_perc(E1_DAC));
+      SERIAL_ECHOPAIR(" (",   dac_amps(E1_DAC));
+      SERIAL_ECHOLN(")");
+     
+    #endif
+    
   }
 
   void dac_commit_eeprom() {
