@@ -984,7 +984,7 @@
  * Turn on with the command 'M111 S32'.
  * NOTE: Requires a lot of PROGMEM!
  */
-#define DEBUG_LEVELING_FEATURE
+//#define DEBUG_LEVELING_FEATURE
 
 #if ENABLED(MESH_BED_LEVELING) || ENABLED(AUTO_BED_LEVELING_BILINEAR) || ENABLED(AUTO_BED_LEVELING_UBL)
   // Gradually reduce leveling correction until a set height is reached,
@@ -1056,12 +1056,28 @@
 
   // 3 arbitrary points to probe.
   // A simple cross-product is used to estimate the plane of the bed.
-  #define ABL_PROBE_PT_1_X 15
-  #define ABL_PROBE_PT_1_Y 180
-  #define ABL_PROBE_PT_2_X 15
-  #define ABL_PROBE_PT_2_Y 30
-  #define ABL_PROBE_PT_3_X 170
-  #define ABL_PROBE_PT_3_Y 30
+  #if RBV(R2)
+    #define UBL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
+    #define UBL_PROBE_PT_1_Y 186
+    #define UBL_PROBE_PT_2_X 10
+    #define UBL_PROBE_PT_2_Y 30
+    #define UBL_PROBE_PT_3_X 186
+    #define UBL_PROBE_PT_3_Y 30
+  #elif RBV(R2_DUAL)
+    #define UBL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
+    #define UBL_PROBE_PT_1_Y 186
+    #define UBL_PROBE_PT_2_X 10
+    #define UBL_PROBE_PT_2_Y 30
+    #define UBL_PROBE_PT_3_X 186
+    #define UBL_PROBE_PT_3_Y 30
+  #elif RBV(C2)
+    #define UBL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
+    #define UBL_PROBE_PT_1_Y 115
+    #define UBL_PROBE_PT_2_X 10
+    #define UBL_PROBE_PT_2_Y 30
+    #define UBL_PROBE_PT_3_X 115
+    #define UBL_PROBE_PT_3_Y 30
+  #endif
 
 #elif ENABLED(AUTO_BED_LEVELING_UBL)
 
@@ -1073,12 +1089,28 @@
   #define GRID_MAX_POINTS_X 10      // Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
-  #define UBL_PROBE_PT_1_X 39       // Probing points for 3-Point leveling of the mesh
-  #define UBL_PROBE_PT_1_Y 180
-  #define UBL_PROBE_PT_2_X 39
-  #define UBL_PROBE_PT_2_Y 20
-  #define UBL_PROBE_PT_3_X 180
-  #define UBL_PROBE_PT_3_Y 20
+  #if RBV(R2)
+    #define UBL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
+    #define UBL_PROBE_PT_1_Y 186
+    #define UBL_PROBE_PT_2_X 10
+    #define UBL_PROBE_PT_2_Y 30
+    #define UBL_PROBE_PT_3_X 186
+    #define UBL_PROBE_PT_3_Y 30
+  #elif RBV(R2_DUAL)
+    #define UBL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
+    #define UBL_PROBE_PT_1_Y 186
+    #define UBL_PROBE_PT_2_X 10
+    #define UBL_PROBE_PT_2_Y 30
+    #define UBL_PROBE_PT_3_X 186
+    #define UBL_PROBE_PT_3_Y 30
+  #elif RBV(C2)
+    #define UBL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
+    #define UBL_PROBE_PT_1_Y 115
+    #define UBL_PROBE_PT_2_X 10
+    #define UBL_PROBE_PT_2_Y 30
+    #define UBL_PROBE_PT_3_X 115
+    #define UBL_PROBE_PT_3_Y 30
+  #endif
 
   //#define UBL_G26_MESH_VALIDATION // Enable G26 mesh validation
   #define UBL_MESH_EDIT_MOVES_Z     // Sophisticated users prefer no movement of nozzle
