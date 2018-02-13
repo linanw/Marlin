@@ -974,8 +974,8 @@
  *   With an LCD controller the process is guided step-by-step.
  */
 //#define AUTO_BED_LEVELING_3POINT
-#define AUTO_BED_LEVELING_LINEAR
-//#define AUTO_BED_LEVELING_BILINEAR
+//#define AUTO_BED_LEVELING_LINEAR
+#define AUTO_BED_LEVELING_BILINEAR
 //#define AUTO_BED_LEVELING_UBL
 //#define MESH_BED_LEVELING
 
@@ -990,7 +990,7 @@
   // Gradually reduce leveling correction until a set height is reached,
   // at which point movement will be level to the machine's XY plane.
   // The height can be set with M420 Z<height>
-  #define ENABLE_LEVELING_FADE_HEIGHT
+  //#define ENABLE_LEVELING_FADE_HEIGHT
 #endif
 
 #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
@@ -1057,26 +1057,26 @@
   // 3 arbitrary points to probe.
   // A simple cross-product is used to estimate the plane of the bed.
   #if RBV(R2)
-    #define UBL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
-    #define UBL_PROBE_PT_1_Y 186
-    #define UBL_PROBE_PT_2_X 10
-    #define UBL_PROBE_PT_2_Y 30
-    #define UBL_PROBE_PT_3_X 186
-    #define UBL_PROBE_PT_3_Y 30
+    #define ABL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
+    #define ABL_PROBE_PT_1_Y 186
+    #define ABL_PROBE_PT_2_X 10
+    #define ABL_PROBE_PT_2_Y 30
+    #define ABL_PROBE_PT_3_X 186
+    #define ABL_PROBE_PT_3_Y 30
   #elif RBV(R2_DUAL)
-    #define UBL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
-    #define UBL_PROBE_PT_1_Y 186
-    #define UBL_PROBE_PT_2_X 10
-    #define UBL_PROBE_PT_2_Y 30
-    #define UBL_PROBE_PT_3_X 186
-    #define UBL_PROBE_PT_3_Y 30
+    #define ABL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
+    #define ABL_PROBE_PT_1_Y 186
+    #define ABL_PROBE_PT_2_X 10
+    #define ABL_PROBE_PT_2_Y 30
+    #define ABL_PROBE_PT_3_X 186
+    #define ABL_PROBE_PT_3_Y 30
   #elif RBV(C2)
-    #define UBL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
-    #define UBL_PROBE_PT_1_Y 115
-    #define UBL_PROBE_PT_2_X 10
-    #define UBL_PROBE_PT_2_Y 30
-    #define UBL_PROBE_PT_3_X 115
-    #define UBL_PROBE_PT_3_Y 30
+    #define ABL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
+    #define ABL_PROBE_PT_1_Y 115
+    #define ABL_PROBE_PT_2_X 10
+    #define ABL_PROBE_PT_2_Y 30
+    #define ABL_PROBE_PT_3_X 115
+    #define ABL_PROBE_PT_3_Y 30
   #endif
 
 #elif ENABLED(AUTO_BED_LEVELING_UBL)
