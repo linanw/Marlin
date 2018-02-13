@@ -1,3 +1,8 @@
+## Current Status: Development
+
+[![Build Status](https://travis-ci.org/Robo3D/Marlin.svg?branch=1.1.8-dev)](https://travis-ci.org/Robo3D/Marlin)
+
+
 # Marlin 3D Printer Firmware
 <img align="right" src="../../raw/1.1.x/buildroot/share/pixmaps/logo/marlin-250.png" />
 
