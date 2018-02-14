@@ -5800,7 +5800,7 @@ void home_all_axes() { gcode_G28(true); }
 
 #endif // PROBE_SELECTED
 
-#if PROBE_SELECTED
+#if HAS_BED_PROBE
   /*
    * G35: This will adjust the probe offset based upon the trigger distance of the probe.
    */
@@ -5812,9 +5812,10 @@ void home_all_axes() { gcode_G28(true); }
     #if ENABLED(AUTO_BED_LEVELING_BILINEAR) || ENABLED(AUTO_BED_LEVELING_LINEAR)
       const float rnx = LEFT_PROBE_BED_POSITION - (X_PROBE_OFFSET_FROM_EXTRUDER), rny = FRONT_PROBE_BED_POSITION - (Y_PROBE_OFFSET_FROM_EXTRUDER);
     #elif ENABLED(AUTO_BED_LEVELING_3POINT)
-      const float rnx = ABL_PROBE_PT_1_X - (X_PROBE_OFFSET_FROM_EXTRUDER), rny = ABL_PROBE_PT_1_Y - (Y_PROBE_OFFSET_FROM_EXTRUDER);
+       const float rnx = ABL_PROBE_PT_1_X - (X_PROBE_OFFSET_FROM_EXTRUDER), rny = ABL_PROBE_PT_1_Y - (Y_PROBE_OFFSET_FROM_EXTRUDER);
     #elif ENABLED(AUTO_BED_LEVELING_UBL)
-      const float rnx = UBL_PROBE_PT_1_X - (X_PROBE_OFFSET_FROM_EXTRUDER), rny = UBL_PROBE_PT_1_Y - (Y_PROBE_OFFSET_FROM_EXTRUDER);
+       const float rnx = UBL_PROBE_PT_1_X - (X_PROBE_OFFSET_FROM_EXTRUDER), rny = UBL_PROBE_PT_1_Y - (Y_PROBE_OFFSET_FROM_EXTRUDER);
+    #endif
 
     //capture the old feedrate. Prepend with robo because I'm paranoid about clashing variables.
     float robo_old_feedrate_mm_s = feedrate_mm_s;
@@ -5870,7 +5871,6 @@ void home_all_axes() { gcode_G28(true); }
     //save to EEPROM
     (void)settings.save();
 
-    #endif // leveling options for G35
   }
 #endif // Probe selected
 
