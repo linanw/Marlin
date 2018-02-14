@@ -5872,7 +5872,7 @@ void home_all_axes() { gcode_G28(true); }
     (void)settings.save();
 
   }
-#endif // Probe selected
+
 
  /*
  * This gcode was added by robo to auto adjust the M851 probe offset for ambient lighting levels.
@@ -5891,6 +5891,7 @@ inline void gcode_G36(){
   //finish leveling process
   gcode_G29();
 }
+#endif // HAS_BED_PROBE selected
 
 #if ENABLED(G38_PROBE_TARGET)
 
