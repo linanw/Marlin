@@ -6086,7 +6086,6 @@ inline void gcode_G35(){
 
     //set z probe offset to 0
     zprobe_zoffset = 0.00;
-    refresh_zprobe_zoffset();
 
     //check to see if we moved to the correct position
     const float xpos = parser.linearval('X', current_position[X_AXIS] + X_PROBE_OFFSET_FROM_EXTRUDER),
@@ -6108,7 +6107,6 @@ inline void gcode_G35(){
     float temp_probe_offset = measured_z;
     zprobe_zoffset = (temp_probe_offset) * -1; // turn it negative
 
-    refresh_zprobe_zoffset();
     SERIAL_PROTOCOLLNPAIR("Probe Offset is Z: ", FIXFLOAT(zprobe_zoffset));
     //report position after adjustment
     report_current_position();
