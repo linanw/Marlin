@@ -6082,7 +6082,7 @@ inline void gcode_G35(){
     #endif
 
     //go to the defined position
-    line_to_current_position();
+    buffer_line_to_current_position();
 
     //set z probe offset to 0
     zprobe_zoffset = 0.00;
