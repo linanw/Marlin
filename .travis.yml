@@ -112,11 +112,14 @@ script:
   # Test a probeless build of AUTO_BED_LEVELING_3POINT
   #
   - restore_configs
+
   - opt_disable AUTO_BED_LEVELING_BILINEAR
+
   - opt_enable AUTO_BED_LEVELING_3POINT DEBUG_LEVELING_FEATURE
   - build_marlin
   #
   # Test a probeless build of MESH_BED_LEVELING
+
   #
   - restore_configs
   - opt_disable AUTO_BED_LEVELING_BILINEAR
@@ -150,6 +153,7 @@ script:
   - restore_configs
   - opt_set ROBO_BOARD_VERSION BOARD_VERSION_C2
   - opt_disable AUTO_BED_LEVELING_BILINEAR
+
   - opt_enable AUTO_BED_LEVELING_3POINT DEBUG_LEVELING_FEATURE
   - build_marlin
   #
@@ -157,7 +161,9 @@ script:
   #
   - restore_configs
   - opt_set ROBO_BOARD_VERSION BOARD_VERSION_C2
+
   - opt_disable AUTO_BED_LEVELING_BILINEAR
+
   - opt_enable MESH_BED_LEVELING DEBUG_LEVELING_FEATURE
   - build_marlin
   #
@@ -171,15 +177,19 @@ script:
   #
   - restore_configs
   - opt_set ROBO_BOARD_VERSION BOARD_VERSION_R2_DUAL
+
   - opt_disable AUTO_BED_LEVELING_BILINEAR
   - opt_enable AUTO_BED_LEVELING_LINEAR  DEBUG_LEVELING_FEATURE
   - build_marlin
   #
+
   # Test a build of AUTO_BED_LEVELING_UBL
   #
   - restore_configs
   - opt_set ROBO_BOARD_VERSION BOARD_VERSION_R2_DUAL
+
   - opt_disable AUTO_BED_LEVELING_BILINEAR
+
   - opt_enable AUTO_BED_LEVELING_UBL DEBUG_LEVELING_FEATURE
   - build_marlin
   #
@@ -187,7 +197,9 @@ script:
   #
   - restore_configs
   - opt_set ROBO_BOARD_VERSION BOARD_VERSION_R2_DUAL
+
   - opt_disable AUTO_BED_LEVELING_BILINEAR
+
   - opt_enable AUTO_BED_LEVELING_3POINT DEBUG_LEVELING_FEATURE
   - build_marlin
   #
@@ -195,6 +207,8 @@ script:
   #
   - restore_configs
   - opt_set ROBO_BOARD_VERSION BOARD_VERSION_R2_DUAL
+
   - opt_disable AUTO_BED_LEVELING_BILINEAR
+
   - opt_enable MESH_BED_LEVELING DEBUG_LEVELING_FEATURE
   - build_marlin
