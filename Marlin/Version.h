@@ -35,7 +35,7 @@
   /**
    * Marlin release version identifier
    */
-  #define SHORT_BUILD_VERSION "Marlin_1.1.6_RoboVersion_1.2.3"
+  #define SHORT_BUILD_VERSION "Marlin_1.1.6_RoboVersion_1.2.4"
 
   /**
    * Verbose version identifier which should contain a reference to the location
