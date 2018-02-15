@@ -134,10 +134,13 @@
 
 // Optional custom name for your RepStrap or other custom machine
 // Displayed in the LCD "Ready" message
+// This block will also alter the DETAILED_BUILD_VERSION to display what board this is compiled for. (M115 will show this.)
 #if RBV(C2)
-  #define CUSTOM_MACHINE_NAME "Robo C2"
+  #define CUSTOM_MACHINE_NAME " Robo C2" 
+  #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION CUSTOM_MACHINE_NAME
 #else
-  #define CUSTOM_MACHINE_NAME "Robo R2"
+  #define CUSTOM_MACHINE_NAME " Robo R2"
+  #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION CUSTOM_MACHINE_NAME
 #endif
 
 //If the robo is using a INA193 for sensing current draw from Raspi, enable this variable
@@ -974,8 +977,8 @@
  *   With an LCD controller the process is guided step-by-step.
  */
 //#define AUTO_BED_LEVELING_3POINT
-#define AUTO_BED_LEVELING_LINEAR
-//#define AUTO_BED_LEVELING_BILINEAR
+//#define AUTO_BED_LEVELING_LINEAR
+#define AUTO_BED_LEVELING_BILINEAR
 //#define AUTO_BED_LEVELING_UBL
 //#define MESH_BED_LEVELING
 
@@ -990,7 +993,7 @@
   // Gradually reduce leveling correction until a set height is reached,
   // at which point movement will be level to the machine's XY plane.
   // The height can be set with M420 Z<height>
-  #define ENABLE_LEVELING_FADE_HEIGHT
+  //#define ENABLE_LEVELING_FADE_HEIGHT
 #endif
 
 #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
@@ -1056,12 +1059,28 @@
 
   // 3 arbitrary points to probe.
   // A simple cross-product is used to estimate the plane of the bed.
-  #define ABL_PROBE_PT_1_X 15
-  #define ABL_PROBE_PT_1_Y 180
-  #define ABL_PROBE_PT_2_X 15
-  #define ABL_PROBE_PT_2_Y 30
-  #define ABL_PROBE_PT_3_X 170
-  #define ABL_PROBE_PT_3_Y 30
+  #if RBV(R2)
+    #define ABL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
+    #define ABL_PROBE_PT_1_Y 186
+    #define ABL_PROBE_PT_2_X 10
+    #define ABL_PROBE_PT_2_Y 30
+    #define ABL_PROBE_PT_3_X 186
+    #define ABL_PROBE_PT_3_Y 30
+  #elif RBV(R2_DUAL)
+    #define ABL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
+    #define ABL_PROBE_PT_1_Y 186
+    #define ABL_PROBE_PT_2_X 10
+    #define ABL_PROBE_PT_2_Y 30
+    #define ABL_PROBE_PT_3_X 186
+    #define ABL_PROBE_PT_3_Y 30
+  #elif RBV(C2)
+    #define ABL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
+    #define ABL_PROBE_PT_1_Y 115
+    #define ABL_PROBE_PT_2_X 10
+    #define ABL_PROBE_PT_2_Y 30
+    #define ABL_PROBE_PT_3_X 115
+    #define ABL_PROBE_PT_3_Y 30
+  #endif
 
 #elif ENABLED(AUTO_BED_LEVELING_UBL)
 
@@ -1073,12 +1092,28 @@
   #define GRID_MAX_POINTS_X 10      // Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
-  #define UBL_PROBE_PT_1_X 39       // Probing points for 3-Point leveling of the mesh
-  #define UBL_PROBE_PT_1_Y 180
-  #define UBL_PROBE_PT_2_X 39
-  #define UBL_PROBE_PT_2_Y 20
-  #define UBL_PROBE_PT_3_X 180
-  #define UBL_PROBE_PT_3_Y 20
+  #if RBV(R2)
+    #define UBL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
+    #define UBL_PROBE_PT_1_Y 186
+    #define UBL_PROBE_PT_2_X 10
+    #define UBL_PROBE_PT_2_Y 30
+    #define UBL_PROBE_PT_3_X 186
+    #define UBL_PROBE_PT_3_Y 30
+  #elif RBV(R2_DUAL)
+    #define UBL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
+    #define UBL_PROBE_PT_1_Y 186
+    #define UBL_PROBE_PT_2_X 10
+    #define UBL_PROBE_PT_2_Y 30
+    #define UBL_PROBE_PT_3_X 186
+    #define UBL_PROBE_PT_3_Y 30
+  #elif RBV(C2)
+    #define UBL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
+    #define UBL_PROBE_PT_1_Y 115
+    #define UBL_PROBE_PT_2_X 10
+    #define UBL_PROBE_PT_2_Y 30
+    #define UBL_PROBE_PT_3_X 115
+    #define UBL_PROBE_PT_3_Y 30
+  #endif
 
   //#define UBL_G26_MESH_VALIDATION // Enable G26 mesh validation
   #define UBL_MESH_EDIT_MOVES_Z     // Sophisticated users prefer no movement of nozzle
