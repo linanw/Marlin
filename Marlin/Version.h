@@ -34,6 +34,7 @@
 
   /**
    * Marlin release version identifier
+   * Edit the Version number in the platformio.ini
    */
   #define SHORT_BUILD_VERSION "Marlin_1.1.6_RoboVersion_1.2.4"
 

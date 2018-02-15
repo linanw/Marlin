@@ -136,11 +136,11 @@
 // Displayed in the LCD "Ready" message
 // This block will also alter the DETAILED_BUILD_VERSION to display what board this is compiled for. (M115 will show this.)
 #if RBV(C2)
-  #define CUSTOM_MACHINE_NAME "Robo C2"
-  #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION " Robo C2"
+  #define CUSTOM_MACHINE_NAME " Robo C2" 
+  #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION CUSTOM_MACHINE_NAME
 #else
-  #define CUSTOM_MACHINE_NAME "Robo R2"
-  #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION " Robo R2"
+  #define CUSTOM_MACHINE_NAME " Robo R2"
+  #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION CUSTOM_MACHINE_NAME
 #endif
 
 //If the robo is using a INA193 for sensing current draw from Raspi, enable this variable

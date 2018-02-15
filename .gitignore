@@ -142,3 +142,6 @@ cmake-build-*
 
 #platformio
 Marlin_Build/
+.pioenvs
+.piolibdeps
+platformio.sublime*
