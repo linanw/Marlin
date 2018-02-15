@@ -127,9 +127,10 @@
  */
 #ifndef ROBO_BOARD_VERSION
   #define ROBO_BOARD_VERSION BOARD_VERSION_R2
-  #ifndef ROBO_PRINTER
-    #define ROBO_PRINTER
-  #endif
+#endif
+
+#ifndef ROBO_PRINTER
+  #define ROBO_PRINTER
 #endif
 
 // Optional custom name for your RepStrap or other custom machine
