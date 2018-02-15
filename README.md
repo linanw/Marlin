@@ -12,7 +12,7 @@
 # PlatformIO
 
 ### Robo's Version of marlin has an automated building feature (Adapted from vanilla Marlin)
-Robo has extended the platformio integration put in place by the marlin team. When building with platformio a Marlin_Build directory will be made. In this directory the build for R2, C2, and R2 dual can be found. 
+Robo has extended the platformio integration put in place by the marlin team. When building with platformio a `Marlin_Build` directory will be made, in this directory the build for R2, C2, and R2 dual can be found. 
 
 More information can be found at: http://docs.platformio.org/en/latest/what-is-platformio.html
 
@@ -32,6 +32,8 @@ cd Marlin
 ```
 platformio run
 ```
+
+More detailed instructions can be found at: http://docs.platformio.org/en/latest/installation.html
 
 ### Atom
 
