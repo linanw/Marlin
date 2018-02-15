@@ -136,8 +136,10 @@
 // Displayed in the LCD "Ready" message
 #if RBV(C2)
   #define CUSTOM_MACHINE_NAME "Robo C2"
+  #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION " Robo C2"
 #else
   #define CUSTOM_MACHINE_NAME "Robo R2"
+  #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION " Robo R2"
 #endif
 
 //If the robo is using a INA193 for sensing current draw from Raspi, enable this variable
