@@ -2,12 +2,16 @@
 
 [![Build Status](https://travis-ci.org/Robo3D/Marlin.svg?branch=1.1.6-dev)](https://travis-ci.org/Robo3D/Marlin)
 
-# Robo Edits
+# Version: Marlin_1.1.6_RoboVersion_1.2.4
 
+# Robo Edits
 
 - Added G35 command. Auto adjust Probe Offset(M851 Z) for ambient light levels based on the trigger distance of the IR probe(Requires Home Offset Z(M206 Z) to be set)
 - Added G36 command. G36 will home, run G35, then run G29
 - Added Robo Configuration Variable. in Configuration.h you now only need to change ROBO_BOARD_VERSION to change the configuration for C2/R2/R2_Dual
+- Changed default Z offset (M206) to -20.00 to prevent nozzle crashes if Offset is not actually set.
+- Bilinear leveling enabled by default
+- Support for INA19x current sensor for Raspberry Pi power draw
 
 # PlatformIO
 
