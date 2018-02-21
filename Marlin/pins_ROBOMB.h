@@ -42,7 +42,11 @@
 #endif
 #if RBV(R2_DUAL)
   #define IS_ROBOR2_DUAL
-  #define MACHINE_NAME "Robo R2 Dual"
+  #define MACHINE_NAME "Robo R2 Dual Extruder"
+#endif
+#if RBV(C2_BED)
+  #define IS_ROBOC2
+  #define MACHINE_NAME "Robo C2 Heated Bed"
 #endif
 
 #define LARGE_FLASH true

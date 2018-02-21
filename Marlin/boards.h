@@ -105,6 +105,7 @@
 #define BOARD_VERSION_R2 1 //Robo R2
 #define BOARD_VERSION_C2 2 //Robo C2
 #define BOARD_VERSION_R2_DUAL 3//Robo R2 with a Dual Extrusion Kit
+#define BOARD_VERSION_C2_BED 4 //C2 with a heated Bed
 
 
 #define MB(board) (MOTHERBOARD==BOARD_##board)

@@ -123,10 +123,10 @@
 #endif
 
 /*
- * Options are R2, C2, or R2_DUAL
+ * Options are R2, C2, R2_DUAL, or C2_BED
  */
 #ifndef ROBO_BOARD_VERSION
-  #define ROBO_BOARD_VERSION BOARD_VERSION_R2
+  #define ROBO_BOARD_VERSION BOARD_VERSION_C2_BED
 #endif
 
 #ifndef ROBO_PRINTER
@@ -136,7 +136,7 @@
 // Optional custom name for your RepStrap or other custom machine
 // Displayed in the LCD "Ready" message
 // This block will also alter the DETAILED_BUILD_VERSION to display what board this is compiled for. (M115 will show this.)
-#if RBV(C2)
+#if RBV(C2) || RBV(C2_BED)
   #define CUSTOM_MACHINE_NAME " Robo C2" 
   #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION CUSTOM_MACHINE_NAME
 #else
@@ -160,7 +160,7 @@
   #define EXTRUDERS 2
 #endif
 
-#if RBV(R2) || RBV(C2)
+#if RBV(R2) || RBV(C2) || RBV(C2_BED)
   #define EXTRUDERS 1
 #endif
 
@@ -238,7 +238,7 @@
 // The offset has to be X=0, Y=0 for the extruder 0 hotend (default extruder).
 // For the other hotends it is their distance from the extruder 0 hotend.
 
-#if RBV(C2) || RBV(R2)
+#if RBV(C2) || RBV(R2) || RBV(C2_BED)
   //#define HOTEND_OFFSET_X {0.0, 20.00} // (in mm) for each extruder, offset of the hotend on the X axis
   //#define HOTEND_OFFSET_Y {0.0, 5.00}  // (in mm) for each extruder, offset of the hotend on the Y axis
 #elif RBV(R2_DUAL)
@@ -344,6 +344,15 @@
   #define TEMP_SENSOR_4 0
   #define TEMP_SENSOR_BED 0
 #endif
+
+#if RBV(C2_BED)
+  #define TEMP_SENSOR_0 1
+  #define TEMP_SENSOR_1 0
+  #define TEMP_SENSOR_2 0
+  #define TEMP_SENSOR_3 0
+  #define TEMP_SENSOR_4 0
+  #define TEMP_SENSOR_BED 12
+#endif
 // Dummy thermistor constant temperature readings, for use with 998 and 999
 #define DUMMY_THERMISTOR_998_VALUE 25
 #define DUMMY_THERMISTOR_999_VALUE 100
@@ -413,7 +422,7 @@
   #endif
 
   // Robo C2 19V
-  #if RBV(C2)
+  #if RBV(C2) || RBV(C2_BED)
     #define  DEFAULT_Kp 23.75
     #define  DEFAULT_Ki 1.48
     #define  DEFAULT_Kd 95.10
@@ -485,7 +494,7 @@
  * details can be tuned in Configuration_adv.h
  */
 
-#if RBV(R2) || RBV(R2_DUAL)
+#if RBV(R2) || RBV(R2_DUAL) || RBV(C2_BED)
   #define THERMAL_PROTECTION_HOTENDS // Enable thermal protection for all extruders
   #define THERMAL_PROTECTION_BED     // Enable thermal protection for the heated bed
 #endif
@@ -608,7 +617,7 @@
     #endif
   #endif
 
-  #if RBV(C2)
+  #if RBV(C2) || RBV(C2_BED)
     #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800.00, 145.5 }
     #define DEFAULT_MAX_FEEDRATE          { 300, 300, 12, 25 }
     #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000 }
@@ -884,7 +893,7 @@
  #define Z_MAX_POS 260
 
 //Robo C2
-#elif RBV(C2)
+#elif RBV(C2) || RBV(C2_BED)
   // The size of the print bed
   #define X_BED_SIZE 127
   #define Y_BED_SIZE 127
@@ -1020,7 +1029,7 @@
     #define FRONT_PROBE_BED_POSITION 30
     #define BACK_PROBE_BED_POSITION 186
 
-  #elif RBV(C2)
+  #elif RBV(C2) || RBV(C2_BED)
    // Set the number of grid points per dimension.
     #define GRID_MAX_POINTS_X 3
     #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
@@ -1074,7 +1083,7 @@
     #define ABL_PROBE_PT_2_Y 30
     #define ABL_PROBE_PT_3_X 186
     #define ABL_PROBE_PT_3_Y 30
-  #elif RBV(C2)
+  #elif RBV(C2) || RBV(C2_BED)
     #define ABL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
     #define ABL_PROBE_PT_1_Y 115
     #define ABL_PROBE_PT_2_X 10
@@ -1107,7 +1116,7 @@
     #define UBL_PROBE_PT_2_Y 30
     #define UBL_PROBE_PT_3_X 186
     #define UBL_PROBE_PT_3_Y 30
-  #elif RBV(C2)
+  #elif RBV(C2) || RBV(C2_BED)
     #define UBL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
     #define UBL_PROBE_PT_1_Y 115
     #define UBL_PROBE_PT_2_X 10

@@ -5826,7 +5826,7 @@ void home_all_axes() { gcode_G28(true); }
       current_position[Y_AXIS] = LOGICAL_Y_POSITION(rny);
   
       //Just in case we want to have two different feed Rates / Positioning based on C2 or R2
-      #if RBV(C2)
+      #if RBV(C2) || RBV(C2_BED)
         feedrate_mm_s = 125.00; //set feedrate to 125
       #elif RBV(R2) || RBV(R2_DUAL)
         feedrate_mm_s = 125.00; //set feedrate to 125
