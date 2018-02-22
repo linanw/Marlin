@@ -34,21 +34,23 @@
 
   /**
    * Marlin release version identifier
+   * Edit the Version number in the platformio.ini
    */
-  #define SHORT_BUILD_VERSION "Marlin_1.1.6_RoboVersion_1.2.3"
+  #define SHORT_BUILD_VERSION "Marlin_1.1.6_RoboVersion_1.2.4"
 
   /**
    * Verbose version identifier which should contain a reference to the location
    * from where the binary was downloaded or the source code was compiled.
+   * Changed to alter this variable in the Configuration.h
    */
-  #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION " (Github)"
+  //#define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION " "
 
   /**
    * The STRING_DISTRIBUTION_DATE represents when the binary file was built,
    * here we define this default string as the date where the latest release
    * version was tagged.
    */
-  #define STRING_DISTRIBUTION_DATE "18 JAN 2018"
+  #define STRING_DISTRIBUTION_DATE "14 FEB 2018"
 
   /**
    * Required minimum Configuration.h and Configuration_adv.h file versions.

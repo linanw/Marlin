@@ -73,7 +73,7 @@ script:
   - cp Marlin/Configuration_adv.h Marlin/Configuration_adv.h.backup
   - cp Marlin/pins_ROBOMB.h Marlin/pins_ROBOMB.h.backup
   #
-  # Build with the default configurations
+  # Build with the default R2 configurations
   #
   - build_marlin
   #
@@ -87,6 +87,7 @@ script:
   - opt_set TEMP_SENSOR_1 1
   - opt_set TEMP_SENSOR_BED 12
   - opt_enable PIDTEMPBED FIX_MOUNTED_PROBE Z_SAFE_HOMING ARC_P_CIRCLES CNC_WORKSPACE_PLANES
+  - opt_enable Z_MIN_PROBE_REPEATABILITY_TEST
   - opt_enable SDSUPPORT EEPROM_SETTINGS
   - opt_enable FIX_MOUNTED_PROBE Z_SAFE_HOMING
   - opt_enable_adv FWRETRACT MAX7219_DEBUG
@@ -94,29 +95,120 @@ script:
   - opt_set ABL_GRID_POINTS_Y 4
   - build_marlin
   #
-  # Test a probeless build of AUTO_BED_LEVELING_BILINEAR
+  # Test a build of AUTO_BED_LEVELING_LINEAR
   #
   - restore_configs
-  - opt_enable AUTO_BED_LEVELING_LINEAR Z_MIN_PROBE_REPEATABILITY_TEST DEBUG_LEVELING_FEATURE
+  - opt_disable AUTO_BED_LEVELING_BILINEAR
+  - opt_enable AUTO_BED_LEVELING_LINEAR DEBUG_LEVELING_FEATURE
   - build_marlin
-  # Test a probeless build of AUTO_BED_LEVELING_BILINEAR
+  #
+  # Test a build of AUTO_BED_LEVELING_UBL
   #
   - restore_configs
-  - opt_disable AUTO_BED_LEVELING_LINEAR
-  - opt_enable AUTO_BED_LEVELING_BILINEAR Z_MIN_PROBE_REPEATABILITY_TEST ENABLE_LEVELING_FADE_HEIGHT EEPROM_SETTINGS
+  - opt_disable AUTO_BED_LEVELING_BILINEAR
+  - opt_enable AUTO_BED_LEVELING_UBL DEBUG_LEVELING_FEATURE
   - build_marlin
   #
-  # Test a build of R2 version
+  # Test a probeless build of AUTO_BED_LEVELING_3POINT
   #
   - restore_configs
-  - opt_set ROBO_BOARD_VERSION BOARD_VERSION_R2
-  - opt_set EXTRUDERS 1
+
+  - opt_disable AUTO_BED_LEVELING_BILINEAR
+
+  - opt_enable AUTO_BED_LEVELING_3POINT DEBUG_LEVELING_FEATURE
   - build_marlin
   #
-  # Test a build of C2 version
+  # Test a probeless build of MESH_BED_LEVELING
+
+  #
+  - restore_configs
+  - opt_disable AUTO_BED_LEVELING_BILINEAR
+  - opt_enable MESH_BED_LEVELING DEBUG_LEVELING_FEATURE
+  - build_marlin
+  #
+  # Test a build of C2
   #
   - restore_configs
   - opt_set ROBO_BOARD_VERSION BOARD_VERSION_C2
-  - opt_set EXTRUDERS 1
-  - opt_set TEMP_SENSOR_BED 0
+  - build_marlin
+  #
+  # Test a build of AUTO_BED_LEVELING_LINEAR
+  #
+  - restore_configs
+  - opt_set ROBO_BOARD_VERSION BOARD_VERSION_C2
+  - opt_disable AUTO_BED_LEVELING_BILINEAR
+  - opt_enable AUTO_BED_LEVELING_LINEAR DEBUG_LEVELING_FEATURE
+  - build_marlin
+  #
+  # Test a build of AUTO_BED_LEVELING_UBL
+  #
+  - restore_configs
+  - opt_set ROBO_BOARD_VERSION BOARD_VERSION_C2
+  - opt_disable AUTO_BED_LEVELING_BILINEAR
+  - opt_enable AUTO_BED_LEVELING_UBL DEBUG_LEVELING_FEATURE
+  - build_marlin
+  #
+  # Test a probeless build of AUTO_BED_LEVELING_3POINT
+  #
+  - restore_configs
+  - opt_set ROBO_BOARD_VERSION BOARD_VERSION_C2
+  - opt_disable AUTO_BED_LEVELING_BILINEAR
+
+  - opt_enable AUTO_BED_LEVELING_3POINT DEBUG_LEVELING_FEATURE
+  - build_marlin
+  #
+  # Test a probeless build of AUTO_BED_LEVELING_MESH
+  #
+  - restore_configs
+  - opt_set ROBO_BOARD_VERSION BOARD_VERSION_C2
+
+  - opt_disable AUTO_BED_LEVELING_BILINEAR
+
+  - opt_enable MESH_BED_LEVELING DEBUG_LEVELING_FEATURE
+  - build_marlin
+  #
+  # Test a build of R2_DUAL
+  #
+  - restore_configs
+  - opt_set ROBO_BOARD_VERSION BOARD_VERSION_R2_DUAL
+  - build_marlin
+  #
+  # Test a build of AUTO_BED_LEVELING_LINEAR
+  #
+  - restore_configs
+  - opt_set ROBO_BOARD_VERSION BOARD_VERSION_R2_DUAL
+
+  - opt_disable AUTO_BED_LEVELING_BILINEAR
+  - opt_enable AUTO_BED_LEVELING_LINEAR  DEBUG_LEVELING_FEATURE
+  - build_marlin
+  #
+
+  # Test a build of AUTO_BED_LEVELING_UBL
+  #
+  - restore_configs
+  - opt_set ROBO_BOARD_VERSION BOARD_VERSION_R2_DUAL
+
+  - opt_disable AUTO_BED_LEVELING_BILINEAR
+
+  - opt_enable AUTO_BED_LEVELING_UBL DEBUG_LEVELING_FEATURE
+  - build_marlin
+  #
+  # Test a probeless build of AUTO_BED_LEVELING_3POINT
+  #
+  - restore_configs
+  - opt_set ROBO_BOARD_VERSION BOARD_VERSION_R2_DUAL
+
+  - opt_disable AUTO_BED_LEVELING_BILINEAR
+
+  - opt_enable AUTO_BED_LEVELING_3POINT DEBUG_LEVELING_FEATURE
+  - build_marlin
+  #
+  # Test a probeless build of AUTO_BED_LEVELING_MESH
+  #
+  - restore_configs
+  - opt_set ROBO_BOARD_VERSION BOARD_VERSION_R2_DUAL
+
+  - opt_disable AUTO_BED_LEVELING_BILINEAR
+
+  - opt_enable MESH_BED_LEVELING DEBUG_LEVELING_FEATURE
   - build_marlin
