@@ -242,7 +242,7 @@
   //#define HOTEND_OFFSET_X {0.0, 20.00} // (in mm) for each extruder, offset of the hotend on the X axis
   //#define HOTEND_OFFSET_Y {0.0, 5.00}  // (in mm) for each extruder, offset of the hotend on the Y axis
 #elif RBV(R2_DUAL)
-  #define HOTEND_OFFSET_X {0.0, 20.00} // (in mm) for each extruder, offset of the hotend on the X axis
+  #define HOTEND_OFFSET_X {0.0, 21.44} // (in mm) for each extruder, offset of the hotend on the X axis
   #define HOTEND_OFFSET_Y {0.0, 0.00}  // (in mm) for each extruder, offset of the hotend on the Y axis
 #endif
 
@@ -602,7 +602,7 @@
     #if EXTRUDERS == 2
       //Dual
       #define DISTINCT_E_FACTORS
-      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800.00, 145.5, 371.5 }
+      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800.00, 145.5, 480.0 }
       #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25, 100 }
       #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000, 1000 }
     #endif
