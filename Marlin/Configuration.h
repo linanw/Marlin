@@ -137,7 +137,7 @@
 // Displayed in the LCD "Ready" message
 // This block will also alter the DETAILED_BUILD_VERSION to display what board this is compiled for. (M115 will show this.)
 #if RBV(C2)
-  #define CUSTOM_MACHINE_NAME " Robo C2" 
+  #define CUSTOM_MACHINE_NAME " Robo C2"
   #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION CUSTOM_MACHINE_NAME
 #else
   #define CUSTOM_MACHINE_NAME " Robo R2"
@@ -399,7 +399,7 @@
   //#define SLOW_PWM_HEATERS // PWM with very low frequency (roughly 0.125Hz=8s) and minimum state time of approximately 1s useful for heaters driven by a relay
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
-  #define PID_FUNCTIONAL_RANGE 10 // If the temperature difference between the target temperature and the actual temperature
+  #define PID_FUNCTIONAL_RANGE 30 // If the temperature difference between the target temperature and the actual temperature
                                   // is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
   #define K1 0.95 //smoothing factor within the PID
 
