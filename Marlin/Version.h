@@ -36,7 +36,7 @@
    * Marlin release version identifier
    * Edit the Version number in the platformio.ini
    */
-  #define SHORT_BUILD_VERSION "Marlin_1.1.6_RoboVersion_1.2.4"
+  #define SHORT_BUILD_VERSION "Marlin_1.1.6_RoboVersion_1.2.5"
 
   /**
    * Verbose version identifier which should contain a reference to the location
@@ -50,7 +50,7 @@
    * here we define this default string as the date where the latest release
    * version was tagged.
    */
-  #define STRING_DISTRIBUTION_DATE "14 FEB 2018"
+  #define STRING_DISTRIBUTION_DATE "5 MAR 2018"
 
   /**
    * Required minimum Configuration.h and Configuration_adv.h file versions.
@@ -80,7 +80,7 @@
   /**
    * Default generic printer UUID.
    */
-  #define DEFAULT_MACHINE_UUID "cede2a2f-41a2-4748-9b12-c55c62f367ff"
+  #define DEFAULT_MACHINE_UUID "48706476-3bbe-4270-995d-6b8ca138c733"
 
   /**
    * The WEBSITE_URL is the location where users can get more information such as
