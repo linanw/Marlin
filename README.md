@@ -1,12 +1,64 @@
 ## Current Status: Testing
 
-[![Build Status](https://travis-ci.org/Robo3D/Marlin.svg?branch=RC)](https://travis-ci.org/Robo3D/Marlin)
+[![Build Status](https://travis-ci.org/Robo3D/Marlin.svg?branch=1.1.6-dev)](https://travis-ci.org/Robo3D/Marlin)
+
+# Version: Marlin_1.1.6_RoboVersion_1.2.4
 
 # Robo Edits
 
 - Added G35 command. Auto adjust Probe Offset(M851 Z) for ambient light levels based on the trigger distance of the IR probe(Requires Home Offset Z(M206 Z) to be set)
 - Added G36 command. G36 will home, run G35, then run G29
-- Added Robo Configuration Variable. in Configuration.h you now only need to change ROBO_BOARD_VERSION to change the configuration for C2/R2/R2_Dual (R2_Dual still needs work)
+- Added Robo Configuration Variable. in Configuration.h you now only need to change ROBO_BOARD_VERSION to change the configuration for C2/R2/R2_Dual
+- Changed default Z offset (M206) to -20.00 to prevent nozzle crashes if Offset is not actually set.
+- Bilinear leveling enabled by default
+- Support for INA19x current sensor for Raspberry Pi power draw
+
+# PlatformIO
+
+### Robo's Version of marlin has an automated building feature (Adapted from vanilla Marlin)
+Robo has extended the platformio integration put in place by the marlin team. When building with platformio a `Marlin_Build` directory will be made, in this directory the build for R2, C2, and R2 dual can be found. 
+
+More information can be found at: http://docs.platformio.org/en/latest/what-is-platformio.html
+
+## How to use platformio
+
+### CLI tools
+
+- Install the platformio CLI tools using pip
+```
+pip install -U platformio
+```
+- navigate to your Marlin directory
+```
+cd Marlin
+```
+- run platformio
+```
+platformio run
+```
+
+More detailed instructions can be found at: http://docs.platformio.org/en/latest/installation.html
+
+### Atom
+
+- Install PlatformIO for Atom
+http://docs.platformio.org/en/latest/ide/atom.html#ide-atom
+
+- Open the Marlin repository in Atom
+
+- Click on PlatformIO >> build to process the project
+http://docs.platformio.org/en/latest/ide/atom.html#process-project
+
+## How to configure platformio
+
+### Build targets
+By default we only have the R2 environment targeted in the `platformio.ini` file. To target all environments alter the `platformio.ini` file and look for a line that says:
+```
+env_default = R2
+```
+
+Comment out that line to build all targets (C2/R2/R2_Dual). Or target a specific environment.
+
 
 # Marlin 3D Printer Firmware
 <img align="top" width=175 src="Documentation/Logo/Marlin%20Logo%20GitHub.png" />
@@ -185,4 +237,3 @@ Marlin is published under the [GPL license](https://github.com/COPYING.md) becau
 While we can't prevent the use of this code in products (3D printers, CNC, etc.) that are closed source or crippled by a patent, we would prefer that you choose another firmware or, better yet, make your own.
 
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=ErikZalm&url=https://github.com/MarlinFirmware/Marlin&title=Marlin&language=&tags=github&category=software)
-
