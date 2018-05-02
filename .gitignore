@@ -139,3 +139,11 @@ CMakeListsPrivate.txt
 
 #CLion
 cmake-build-*
+
+#platformio
+Marlin_Build/
+.pioenvs
+.piolibdeps
+platformio.sublime*
+.clang_complete
+.gcc-flags.json
