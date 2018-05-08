@@ -67,6 +67,8 @@
  * G31  - Dock sled (Z_PROBE_SLED only)
  * G32  - Undock sled (Z_PROBE_SLED only)
  * G33  - Delta Auto-Calibration (Requires DELTA_AUTO_CALIBRATION)
+ * G35  - Auto adjust Probe Offset(M851 Z) for ambient light levels based on the trigger distance of the IR probe(Requires Home Offset Z(M206 Z) to be set)
+ * G36  - Home, run G35, then run G29
  * G38  - Probe in any direction using the Z_MIN_PROBE (Requires G38_PROBE_TARGET)
  * G42  - Coordinated move to a mesh point (Requires MESH_BED_LEVELING, AUTO_BED_LEVELING_BLINEAR, or AUTO_BED_LEVELING_UBL)
  * G90  - Use Absolute Coordinates
@@ -173,6 +175,7 @@
  * M250 - Set LCD contrast: "M250 C<contrast>" (0-63). (Requires LCD support)
  * M260 - i2c Send Data (Requires EXPERIMENTAL_I2CBUS)
  * M261 - i2c Request Data (Requires EXPERIMENTAL_I2CBUS)
+ * M270 - Display reading from INA193 current sense circuit
  * M280 - Set servo position absolute: "M280 P<index> S<angle|µs>". (Requires servos)
  * M290 - Babystepping (Requires BABYSTEPPING)
  * M300 - Play beep sound S<frequency Hz> P<duration ms>
@@ -312,6 +315,10 @@
 
 #if ENABLED(ENDSTOP_INTERRUPTS_FEATURE)
   #include "endstop_interrupts.h"
+#endif
+
+#if ENABLED(INA19X)
+  #include "INA19x.h"
 #endif
 
 #if ENABLED(M100_FREE_MEMORY_WATCHER)
@@ -2221,7 +2228,8 @@ static void clean_up_after_endstop_or_probe_move() {
     #if MULTIPLE_PROBING == 2
 
       // Do a first probe at the fast speed
-      if (do_probe_move(-10, Z_PROBE_SPEED_FAST)) return NAN;
+      // Robo - changed to -20 to ensure Air print if home_offset[Z_AXIS] is set to the default
+      if (do_probe_move(-20, Z_PROBE_SPEED_FAST)) return NAN;
 
       float first_probe_z = current_position[Z_AXIS];
 
@@ -2253,7 +2261,8 @@ static void clean_up_after_endstop_or_probe_move() {
     #endif
 
         // move down slowly to find bed
-        if (do_probe_move(-10, Z_PROBE_SPEED_SLOW)) return NAN;
+        // Robo - changed to -20 to ensure Air print if home_offset[Z_AXIS] is set to the default
+        if (do_probe_move(-20, Z_PROBE_SPEED_SLOW)) return NAN;
 
     #if MULTIPLE_PROBING > 2
         probes_total += current_position[Z_AXIS];
@@ -9233,6 +9242,17 @@ inline void gcode_M226() {
 
 #endif // EXPERIMENTAL_I2CBUS
 
+/**
+ * Serial display of current reading from INA19X for Rasbperry Pi current dac_current_raw
+ */
+
+#if ENABLED(INA19X)
+  inline void gcode_M270(){
+    float current = read_INA19x();
+    SERIAL_PROTOCOLLNPAIR("Current: ", FIXFLOAT(current));
+  }
+#endif
+
 #if HAS_SERVOS
 
   /**
@@ -12309,6 +12329,12 @@ void process_parsed_command() {
 
       #endif // EXPERIMENTAL_I2CBUS
 
+      #if ENABLED(INA19X)
+        case 270:
+          gcode_M270();
+          break;
+      #endif // INA19X
+
       #if ENABLED(PREVENT_COLD_EXTRUSION)
         case 302: // M302: Allow cold extrudes (set the minimum extrude temperature)
           gcode_M302();
@@ -14679,6 +14705,10 @@ void setup() {
     OUT_WRITE(LCD_PINS_RS, LOW);
     delay(1000);
     WRITE(LCD_PINS_RS, HIGH);
+  #endif
+
+  #if ENABLED(INA19X)
+    setup_INA19x();
   #endif
 }
 
