@@ -137,7 +137,7 @@
 // Displayed in the LCD "Ready" message
 // This block will also alter the DETAILED_BUILD_VERSION to display what board this is compiled for. (M115 will show this.)
 #if RBV(C2)
-  #define CUSTOM_MACHINE_NAME " Robo C2" 
+  #define CUSTOM_MACHINE_NAME " Robo C2"
   #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION CUSTOM_MACHINE_NAME
 #else
   #define CUSTOM_MACHINE_NAME " Robo R2"

@@ -145,3 +145,5 @@ Marlin_Build/
 .pioenvs
 .piolibdeps
 platformio.sublime*
+.clang_complete
+.gcc-flags.json
