@@ -746,12 +746,12 @@
 #define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
 
 // Speed for the "accurate" probe of each point
-#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 2)
+#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 3)
 
 // The number of probes to perform at each point.
 //   Set to 2 for a fast/slow probe, using the second probe result.
 //   Set to 3 or more for slow probes, averaging the results.
-#define MULTIPLE_PROBING 2
+#define MULTIPLE_PROBING 3
 
 /**
  * Z probes require clearance when deploying, stowing, and moving between
@@ -969,7 +969,7 @@
   // Gradually reduce leveling correction until a set height is reached,
   // at which point movement will be level to the machine's XY plane.
   // The height can be set with M420 Z<height>
-  #define ENABLE_LEVELING_FADE_HEIGHT
+  //#define ENABLE_LEVELING_FADE_HEIGHT
 
   // For Cartesian machines, instead of dividing moves on mesh boundaries,
   // split up moves into short segments like a Delta. This follows the
@@ -994,13 +994,13 @@
 
   #if RBV(R2)
     // Set the number of grid points per dimension.
-    #define GRID_MAX_POINTS_X 3
+    #define GRID_MAX_POINTS_X 4
     #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
     // Set the boundaries for probing (where the probe can reach).
     #define LEFT_PROBE_BED_POSITION 10
     #define RIGHT_PROBE_BED_POSITION 186
-    #define FRONT_PROBE_BED_POSITION 30
+    #define FRONT_PROBE_BED_POSITION 35
     #define BACK_PROBE_BED_POSITION 186
   #elif RBV(R2_DUAL)
     // Set the number of grid points per dimension.
