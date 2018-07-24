@@ -75,6 +75,13 @@
  * G91  - Use Relative Coordinates
  * G92  - Set current position to coordinates given
  *
+ * Robo Custom Commands
+ * R0   - Print out all I2C connected devices
+ * R1   - Reset the touch sensor on the CAP1188
+ * R2   - Restart the touch sensor
+ * R3   - Get the current capacitance of the selected CS port
+ * R4   - Start the Calibration for Capacitance Homing
+ *
  * "M" Codes
  *
  * M0   - Unconditional stop - Wait for user to press a button on the LCD (Only if ULTRA_LCD is enabled)
@@ -325,6 +332,10 @@
 
 #if ENABLED(INA19X)
   #include "INA19x.h"
+#endif
+
+#if ENABLED(CAP1188_ROBO)
+  #include "CAP1188_Robo.h"
 #endif
 
 #if ENABLED(M100_FREE_MEMORY_WATCHER)
@@ -6087,6 +6098,78 @@ inline void gcode_G92() {
   report_current_position();
 }
 
+/*
+ R Commands
+*/
+#if defined(ROBO_COMMANDS)
+  
+  inline void setup_Robo_Commands(){
+    #if ENABLED(CAP1188_ROBO)
+      // create the cap variable
+      CAP1188_Robo cap = CAP1188_Robo(CAP_1188_RST);
+
+      // begin on the supplied address
+      cap.begin(CAP_ADDR);
+    #endif
+  }
+
+  // Grab all Connected I2C ports
+  void gcode_R0(){
+    SERIAL_PROTOCOL("Hello Robo!");
+    SERIAL_EOL();
+    byte error, address;
+    int nDevices;
+  
+    SERIAL_PROTOCOL("Scanning...");
+    SERIAL_EOL();
+  
+    nDevices = 0;
+    Wire.begin();
+    for(address = 1; address < 127; address++ )
+    {
+      // The i2c_scanner uses the return value of
+      // the Write.endTransmisstion to see if
+      // a device did acknowledge to the address.
+      Wire.beginTransmission(address);
+      error = Wire.endTransmission();
+  
+      if (error == 0)
+      {
+        SERIAL_PROTOCOL("I2C device found at address 0x");
+        if (address<16)
+          SERIAL_PROTOCOL("0");
+        SERIAL_PROTOCOL_F(address,HEX);
+        SERIAL_PROTOCOL("  !");
+        SERIAL_EOL();
+  
+        nDevices++;
+      }
+      else if (error==4)
+      {
+        SERIAL_PROTOCOL("Unknown error at address 0x");
+        if (address<16)
+          SERIAL_PROTOCOL("0");
+        SERIAL_PROTOCOL_F(address,HEX);
+        SERIAL_EOL();
+      }    
+    }
+    if (nDevices == 0){
+      SERIAL_PROTOCOL("No I2C devices found\n");
+      SERIAL_EOL();
+    } else {
+      SERIAL_PROTOCOL("done\n");
+      SERIAL_EOL();
+    }
+    Wire.end();
+  }
+
+  inline void gcode_R1()
+
+#endif
+/*
+ End R Commands
+*/
+
 #if HAS_RESUME_CONTINUE
 
   /**
@@ -10974,7 +11057,7 @@ void process_next_command() {
   // Parse the next command in the queue
   parser.parse(current_command);
 
-  // Handle a known G, M, or T
+  // Handle a known G, M, R, or T
   switch (parser.command_letter) {
     case 'G': switch (parser.codenum) {
 
@@ -11805,6 +11888,21 @@ void process_next_command() {
     case 'T':
       gcode_T(parser.codenum);
       break;
+
+    #if defined(ROBO_COMMANDS)
+    case 'R':
+      switch (parser.codenum) {
+
+          // Start the Capacative Sensor
+          case 0:
+            gcode_R0();
+            break;
+
+          default:
+            parser.unknown_command_error();
+      }
+      break;
+    #endif
 
     default: parser.unknown_command_error();
   }
@@ -13745,6 +13843,10 @@ void setup() {
 
   #if ENABLED(INA19X)
     setup_INA19x();
+  #endif
+
+  #if defined(ROBO_COMMANDS)
+    setup_Robo_Commands();
   #endif
 }
 

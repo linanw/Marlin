@@ -137,7 +137,7 @@
 // Displayed in the LCD "Ready" message
 // This block will also alter the DETAILED_BUILD_VERSION to display what board this is compiled for. (M115 will show this.)
 #if RBV(C2)
-  #define CUSTOM_MACHINE_NAME " Robo C2" 
+  #define CUSTOM_MACHINE_NAME " Robo C2"
   #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION CUSTOM_MACHINE_NAME
 #else
   #define CUSTOM_MACHINE_NAME " Robo R2"
@@ -146,6 +146,19 @@
 
 //If the robo is using a INA193 for sensing current draw from Raspi, enable this variable
 #define INA19X
+
+//If the printer Supports Custom Robo Calibration Commands then enable this
+#define ROBO_COMMANDS
+
+#if ENABLED(ROBO_COMMANDS)
+  //If the printer is using the CAP1188 sensor, then enable this
+  #define CAP1188_ROBO
+  #if ENABLED(CAP1188_ROBO)
+    #define CAP_1188_RST 42 // Change to pin on board that controls the reset, Use -1 if there is no reset pin 
+    #define CAP_ADDR 0x29 // CAP1188 Device I2C Address
+    #define CAP_OUTPUT 7 // CAP1188 CS output (0-7) IE CS1 would be 0
+  #endif
+#endif
 
 // Define this to set a unique identifier for this printer, (Used by some programs to differentiate between machines)
 // You can use an online service to generate a random UUID. (eg http://www.uuidgenerator.net/version4)
@@ -939,7 +952,7 @@
  *         G36 can replace both G28 and G29 in Start GCODE.  There will be 1 additional
  *         probe point added to the very start of the print.  This additional probe is G35.
  *
-/**
+ *
  * Choose one of the options below to enable G29 Bed Leveling. The parameters
  * and behavior of G29 will change depending on your selection.
  *
