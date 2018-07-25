@@ -6179,10 +6179,15 @@ inline void gcode_G92() {
 
   inline void gcode_R3(){
     robo_cap.led_on();
-    SERIAL_PROTOCOL("CPV: ");
-    int8_t cap_out = robo_cap.read_Delta(7);
-    SERIAL_PROTOCOL(cap_out);
-    SERIAL_EOL();
+    
+    for (int x =0 ; x<8; x++){
+      SERIAL_PROTOCOL("CPV");
+      SERIAL_PROTOCOL(x);
+      SERIAL_PROTOCOL(": ");
+      int8_t cap_out = ::robo_cap.read_Delta(x);
+      SERIAL_PROTOCOL(cap_out);
+      SERIAL_EOL();
+    }
     robo_cap.led_off();
   }
 

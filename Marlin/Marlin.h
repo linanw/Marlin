@@ -494,4 +494,11 @@ FORCE_INLINE bool position_is_reachable_xy(const float &lx, const float &ly) {
   return position_is_reachable_raw_xy(RAW_X_POSITION(lx), RAW_Y_POSITION(ly));
 }
 
+#if ENABLED(ROBO_COMMANDS)
+  #if ENABLED(CAP1188_ROBO)
+    #include "CAP1188_Robo.h"
+    extern CAP1188_Robo robo_cap;
+  #endif
+#endif
+
 #endif // MARLIN_H

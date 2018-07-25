@@ -2,7 +2,7 @@
 * @Author: matt
 * @Date:   2018-07-23 11:31:50
 * @Last Modified by:   Matt Pedler
-* @Last Modified time: 2018-07-24 18:38:36
+* @Last Modified time: 2018-07-25 09:46:43
 */
 
 /*************************************************** 
@@ -30,14 +30,13 @@ CAP1188_Robo::CAP1188_Robo(int8_t resetpin) {
   // I2C
   _resetpin = resetpin;
   _i2c = true;
+  Wire.begin();
 
 }
 
 
 boolean CAP1188_Robo::begin(uint8_t i2caddr) {
   resetCAP(); // reset before trying to connect
-
-  Wire.begin();
   _i2caddr = i2caddr;
 
   // Check the Configuration Address to see if it is there
