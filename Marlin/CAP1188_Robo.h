@@ -6,7 +6,6 @@
  #include "WProgram.h"
 #endif
 #include <Wire.h>
-#include <SPI.h>
 #include "serial.h"
 
 // The default I2C address
@@ -28,6 +27,8 @@
 //Recalibrate touch sensors
 #define CAP1188_RECALIBRATE 0x26
 #define CAP1188_SENSITIBITY 0x1F
+#define CAP1188_LED 0x74
+#define CAP1188_LED_LINK 0x72
 
 class CAP1188_Robo
 {
@@ -55,6 +56,9 @@ public:
 
   //helpers
   void print_byte(uint8_t bytenum);
+  void blink_led();
+  void led_on();
+  void led_off();
 
   //Variables
   const int CAP1188_DELTA[8] = {0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17};

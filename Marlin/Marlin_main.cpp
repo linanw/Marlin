@@ -77,10 +77,10 @@
  *
  * Robo Custom Commands
  * R0   - Print out all I2C connected devices
- * R1   - Reset the touch sensor on the CAP1188
+ * R1   - Recalibrate the touch sensor on the CAP1188
  * R2   - Restart the touch sensor
  * R3   - Get the current capacitance of the selected CS port
- * R4   - Start the Calibration for Capacitance Homing
+ * R4   - Start the Calibration for Automated Capacitive Offset Tuning(ACOT)
  *
  * "M" Codes
  *
@@ -334,8 +334,11 @@
   #include "INA19x.h"
 #endif
 
-#if ENABLED(CAP1188_ROBO)
-  #include "CAP1188_Robo.h"
+#if ENABLED(ROBO_COMMANDS)
+  #if ENABLED(CAP1188_ROBO)
+    #include "CAP1188_Robo.h"
+    CAP1188_Robo robo_cap = CAP1188_Robo(CAP_1188_RST);
+  #endif
 #endif
 
 #if ENABLED(M100_FREE_MEMORY_WATCHER)
@@ -6105,16 +6108,13 @@ inline void gcode_G92() {
   
   inline void setup_Robo_Commands(){
     #if ENABLED(CAP1188_ROBO)
-      // create the cap variable
-      CAP1188_Robo cap = CAP1188_Robo(CAP_1188_RST);
-
       // begin on the supplied address
-      cap.begin(CAP_ADDR);
+      robo_cap.begin(CAP_ADDR);
     #endif
   }
 
   // Grab all Connected I2C ports
-  void gcode_R0(){
+  inline void gcode_R0(){
     SERIAL_PROTOCOL("Hello Robo!");
     SERIAL_EOL();
     byte error, address;
@@ -6124,7 +6124,6 @@ inline void gcode_G92() {
     SERIAL_EOL();
   
     nDevices = 0;
-    Wire.begin();
     for(address = 1; address < 127; address++ )
     {
       // The i2c_scanner uses the return value of
@@ -6160,10 +6159,37 @@ inline void gcode_G92() {
       SERIAL_PROTOCOL("done\n");
       SERIAL_EOL();
     }
-    Wire.end();
   }
 
-  inline void gcode_R1()
+  inline void gcode_R1(){
+    SERIAL_PROTOCOL("Recalibrating touch sensor");
+
+    //call the recalibrate function on the CAP1188
+    robo_cap.recalibrate_touch();
+    SERIAL_EOL();
+  }
+
+  inline void gcode_R2(){
+    SERIAL_PROTOCOL("Restarting touch sensor");
+
+    //call the recalibrate function on the CAP1188
+    robo_cap.resetCAP();
+    SERIAL_EOL();
+  }
+
+  inline void gcode_R3(){
+    robo_cap.led_on();
+    SERIAL_PROTOCOL("CPV: ");
+    int8_t cap_out = robo_cap.read_Delta(7);
+    SERIAL_PROTOCOL(cap_out);
+    SERIAL_EOL();
+    robo_cap.led_off();
+  }
+
+  inline void gcode_R4(){
+    SERIAL_PROTOCOL("Not Implemented");
+    SERIAL_EOL();
+  }
 
 #endif
 /*
@@ -11889,19 +11915,36 @@ void process_next_command() {
       gcode_T(parser.codenum);
       break;
 
-    #if defined(ROBO_COMMANDS)
+    #if ENABLED(ROBO_COMMANDS)
     case 'R':
       switch (parser.codenum) {
-
-          // Start the Capacative Sensor
           case 0:
             gcode_R0();
             break;
 
+        #if ENABLED(CAP1188_ROBO)
+          case 1:
+            gcode_R1();
+            break;
+
+          case 2:
+            gcode_R2();
+            break;
+
+          case 3:
+            gcode_R3();
+            break;
+
+          case 4:
+            gcode_R4();
+            break;
+        #endif
+
+
           default:
             parser.unknown_command_error();
       }
-      break;
+    break;
     #endif
 
     default: parser.unknown_command_error();
@@ -13845,9 +13888,10 @@ void setup() {
     setup_INA19x();
   #endif
 
-  #if defined(ROBO_COMMANDS)
+  #if ENABLED(ROBO_COMMANDS)
     setup_Robo_Commands();
   #endif
+
 }
 
 /**

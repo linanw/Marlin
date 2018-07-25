@@ -2,7 +2,7 @@
 * @Author: matt
 * @Date:   2018-07-23 11:31:50
 * @Last Modified by:   Matt Pedler
-* @Last Modified time: 2018-07-24 15:54:36
+* @Last Modified time: 2018-07-24 18:38:36
 */
 
 /*************************************************** 
@@ -36,7 +36,7 @@ CAP1188_Robo::CAP1188_Robo(int8_t resetpin) {
 
 boolean CAP1188_Robo::begin(uint8_t i2caddr) {
   resetCAP(); // reset before trying to connect
-  
+
   Wire.begin();
   _i2caddr = i2caddr;
 
@@ -61,9 +61,12 @@ boolean CAP1188_Robo::begin(uint8_t i2caddr) {
   // allow multiple touches
   writeRegister(CAP1188_MTBLK, 0); 
   // Have LEDs follow touches
-  writeRegister(CAP1188_LEDLINK, 0xFF);
+  writeRegister(CAP1188_LEDLINK, 0x80);
   // speed up a bit
   writeRegister(CAP1188_STANDBYCFG, 0x30);
+
+  blink_led();
+
   return true;
 }
 
@@ -92,10 +95,10 @@ void CAP1188_Robo::LEDpolarity(uint8_t x) {
 }
 
 int8_t CAP1188_Robo::read_Delta(int sensor) {
-  uint8_t data[1];
+  uint8_t data;
   readByte(CAP1188_DELTA[sensor], data);
 
-  return (int8_t)data[0];
+  return (int8_t)data;
 }
 
 void CAP1188_Robo::recalibrate_touch() {
@@ -175,6 +178,26 @@ void CAP1188_Robo::adjust_Sensitivity(int delta_shift, int base_shift){
 
 }
 
+void CAP1188_Robo::blink_led(){
+ uint8_t led_on = 0x01;
+ uint8_t led_off = 0x00;
+ writeByte(CAP1188_LED, led_on);
+ delay(100);
+ writeByte(CAP1188_LED, led_off);
+ delay(100);
+}
+
+void CAP1188_Robo::led_on(){
+  uint8_t led_on = 0x01;
+  writeByte(CAP1188_LED, led_on);
+}
+
+void CAP1188_Robo::led_off(){
+  uint8_t led_off = 0x00;
+  writeByte(CAP1188_LED, led_off);
+}
+
+
 void CAP1188_Robo::print_byte(uint8_t bytenum){
   for (int x = 8; x>0 ; x--){
     SERIAL_PROTOCOL(bitRead(bytenum, x));
@@ -217,7 +240,7 @@ static void i2cwrite(uint8_t x) {
 uint8_t CAP1188_Robo::readRegister(uint8_t reg) {
   
   Wire.beginTransmission(_i2caddr);
-  i2cwrite(reg);
+  Wire.write(reg);
   Wire.endTransmission();
   Wire.requestFrom(_i2caddr, 1);
   return (i2cread());
@@ -227,15 +250,10 @@ uint8_t CAP1188_Robo::readRegister(uint8_t reg) {
 void CAP1188_Robo::readBytes(uint8_t reg, int length, uint8_t *data) {
   
   Wire.beginTransmission(_i2caddr);
-  i2cwrite(reg);
+  Wire.write(reg);
   Wire.endTransmission();
   Wire.requestFrom(_i2caddr, length);
-  int count = 0;
-  while(Wire.available()){
-    data[count] = Wire.read();
-    count++;
-  }
-    
+  data = Wire.read();    
   
 }
 
