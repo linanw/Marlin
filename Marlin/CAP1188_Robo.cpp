@@ -2,7 +2,7 @@
 * @Author: matt
 * @Date:   2018-07-23 11:31:50
 * @Last Modified by:   Matt Pedler
-* @Last Modified time: 2018-07-25 09:46:43
+* @Last Modified time: 2018-08-01 10:01:34
 */
 
 /*************************************************** 
@@ -30,6 +30,7 @@ CAP1188_Robo::CAP1188_Robo(int8_t resetpin) {
   // I2C
   _resetpin = resetpin;
   _i2c = true;
+  Wire.setClock(400000L);
   Wire.begin();
 
 }
@@ -64,7 +65,7 @@ boolean CAP1188_Robo::begin(uint8_t i2caddr) {
   // speed up a bit
   writeRegister(CAP1188_STANDBYCFG, 0x30);
 
-  blink_led();
+  //blink_led();
 
   return true;
 }
@@ -94,10 +95,9 @@ void CAP1188_Robo::LEDpolarity(uint8_t x) {
 }
 
 int8_t CAP1188_Robo::read_Delta(int sensor) {
-  uint8_t data;
-  readByte(CAP1188_DELTA[sensor], data);
-
-  return (int8_t)data;
+  uint8_t data[1];
+  readBytes(CAP1188_DELTA[sensor],1, data);
+  return (int8_t)data[0];
 }
 
 void CAP1188_Robo::recalibrate_touch() {
@@ -247,12 +247,17 @@ uint8_t CAP1188_Robo::readRegister(uint8_t reg) {
 }
 
 void CAP1188_Robo::readBytes(uint8_t reg, int length, uint8_t *data) {
-  
+    
+  uint8_t buf[length];
   Wire.beginTransmission(_i2caddr);
   Wire.write(reg);
   Wire.endTransmission();
   Wire.requestFrom(_i2caddr, length);
-  data = Wire.read();    
+  for (int i=0; i<length; i++){
+    buf[i] = Wire.read(); 
+    data[i] = buf[i];
+  }
+  
   
 }
 
@@ -261,16 +266,16 @@ void CAP1188_Robo::readByte(uint8_t reg, uint8_t *data){
 }
 
 void CAP1188_Robo::writeBytes(uint8_t reg, int length, uint8_t* data){
-  uint8_t buf[128];
+  uint8_t buf[length+1];
 
   buf[0] = reg ; // Add Register to write
   memcpy(buf+1, data, length); // copy bytes into buf
 
-  if(_i2c){
-    Wire.beginTransmission(_i2caddr);
-    Wire.write(buf, length+1);
-    Wire.endTransmission();
-  }
+  
+  Wire.beginTransmission(_i2caddr);
+  Wire.write(buf, length+1);
+  Wire.endTransmission();
+  
 
 }
 

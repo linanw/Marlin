@@ -30,6 +30,10 @@
 #define CAP1188_LED 0x74
 #define CAP1188_LED_LINK 0x72
 
+#define CAP_1188_RST 42 // Change to pin on board that controls the reset, Use -1 if there is no reset pin 
+#define CAP_ADDR 0x29 // CAP1188 Device I2C Address
+#define CAP_OUTPUT 7 // CAP1188 CS output (0-7) IE CS1 would be 0
+
 class CAP1188_Robo
 {
 public:  

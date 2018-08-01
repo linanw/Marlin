@@ -6179,8 +6179,6 @@ inline void gcode_G92() {
   }
 
   inline void gcode_R3(){
-    robo_cap.led_on();
-    
     for (int x =0 ; x<8; x++){
       SERIAL_PROTOCOL("CPV");
       SERIAL_PROTOCOL(x);
@@ -6189,7 +6187,6 @@ inline void gcode_G92() {
       SERIAL_PROTOCOL(cap_out);
       SERIAL_EOL();
     }
-    robo_cap.led_off();
   }
 
   inline void gcode_R4(){
