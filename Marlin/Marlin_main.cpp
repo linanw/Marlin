@@ -6189,9 +6189,114 @@ inline void gcode_G92() {
     }
   }
 
+  // This function will raise the Z motor until the CAP1188 sensor stops changing
+  // WARNING, this is test software and actually calling this function could break
+  // the machine. 
+  float probe_pt_CAP1188(const float &lx, const float &ly){
+
+    const float old_feedrate_mm_s = feedrate_mm_s;
+
+    // Change to homing feedrate
+    feedrate_mm_s = planner.max_feedrate_mm_s[2];
+
+    // Move the probe to the given XY
+    do_blocking_move_to_xy(lx, ly);
+
+    feedrate_mm_s = Z_PROBE_SPEED_FAST;
+
+    // move Z up little by little until a max is hit
+    bool max_hit = false;
+    int8_t max_cap = 0;
+    const int history_length = 10;
+    int8_t history[history_length];
+    int counter = 0;
+    float move_z_pos = current_position[Z_AXIS];
+    while (!max_hit){
+
+      //get current cap of sensor
+      int8_t current_cap = robo_cap.read_Delta(CAP_OUTPUT);
+      SERIAL_PROTOCOL("CAP Level: ");
+      SERIAL_PROTOCOL(current_cap);
+      SERIAL_EOL();
+
+      // if we are above 30 cap then move slowly
+      if (current_cap > 30){
+        feedrate_mm_s = Z_PROBE_SPEED_SLOW;
+      }
+
+      // if we are at the max val then we have definitely hit the max
+      if (current_cap == 127){
+        SERIAL_PROTOCOL("MAX 127 HIT!");
+        SERIAL_EOL();
+        max_hit = true;
+        max_cap = current_cap;
+        break;
+      }
+
+      // check max
+      max_cap = max(max_cap, current_cap);
+      history[counter] = max_cap;
+      counter++;
+      if (counter == history_length){
+        counter = 0;
+      }
+
+      //check history for consistent output
+      for(int x = 0; x > history_length ; x++){
+        // if max cap is not the same for all values and the capacitance level is over 30
+        // break because we have not hit our max.
+        if(max_cap != history[x] && history[x] > 30){ 
+          break;
+        }
+        max_hit = true;
+      }
+
+      if(max_hit){
+        break;
+      } else{
+        //move z up by 0.2 mm
+        move_z_pos -= 0.2;
+        if(move_z_pos <= -20){
+          max_hit = true;
+          break;
+        }
+        do_blocking_move_to_z(move_z_pos , feedrate_mm_s);
+      }
+
+
+    }
+    return RAW_CURRENT_POSITION(Z);
+  }
+
   inline void gcode_R4(){
-    SERIAL_PROTOCOL("Not Implemented");
+    SERIAL_PROTOCOL("Probing Point please wait");
     SERIAL_EOL();
+    //capture the old feedrate. Prepend with robo because I'm paranoid about clashing variables.
+    float robo_old_feedrate_mm_s = feedrate_mm_s;
+
+    //define where we want to go
+    // TODO Actually define where we want to go
+    current_position[X_AXIS] = LOGICAL_X_POSITION(100);
+    current_position[Y_AXIS] = LOGICAL_Y_POSITION(100);
+
+    float xpos = current_position[X_AXIS];
+    float ypos = current_position[Y_AXIS];
+
+    //go to the defined position
+    line_to_current_position();
+
+    // Disable leveling so the planner won't mess with us
+    #if HAS_LEVELING
+      set_bed_leveling_enabled(false);
+    #endif
+
+    const float measured_z = probe_pt_CAP1188(xpos, ypos);
+    SERIAL_PROTOCOL("Measured Z: ");
+    SERIAL_PROTOCOL(measured_z);
+    SERIAL_EOL();
+
+    report_current_position();  
+    
   }
 
 #endif
