@@ -454,7 +454,7 @@
 // all forms of bed control obey this (PID, bang-bang, bang-bang with hysteresis)
 // setting this to anything other than 255 enables a form of PWM to the bed just like HEATER_BED_DUTY_CYCLE_DIVIDER did,
 // so you shouldn't use it unless you are OK with PWM on your bed.  (see the comment on enabling PIDTEMPBED)
-#define MAX_BED_POWER 255 // limits duty cycle to bed; 255=full current
+#define MAX_BED_POWER 200 // limits duty cycle to bed; 255=full current
 
 #if ENABLED(PIDTEMPBED)
 
@@ -1014,7 +1014,7 @@
 
   #if RBV(R2)
     // Set the number of grid points per dimension.
-    #define GRID_MAX_POINTS_X 3
+    #define GRID_MAX_POINTS_X 4
     #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
     // Set the boundaries for probing (where the probe can reach).
@@ -1024,7 +1024,7 @@
     #define BACK_PROBE_BED_POSITION 186
   #elif RBV(R2_DUAL)
     // Set the number of grid points per dimension.
-    #define GRID_MAX_POINTS_X 3
+    #define GRID_MAX_POINTS_X 4
     #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
     // Set the boundaries for probing (where the probe can reach).

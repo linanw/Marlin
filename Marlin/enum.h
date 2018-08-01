@@ -37,10 +37,14 @@ enum AxisEnum {
   NO_AXIS   = -1,
   X_AXIS    = 0,
   A_AXIS    = 0,
+  XY_DAC    = 0,
   Y_AXIS    = 1,
   B_AXIS    = 1,
+  Z_DAC     = 1,
+  E0_DAC    = 2,
   Z_AXIS    = 2,
   C_AXIS    = 2,
+  E1_DAC    = 3,
   E_AXIS    = 3,
   X_HEAD    = 4,
   Y_HEAD    = 5,
@@ -56,6 +60,7 @@ enum AxisEnum {
 #define LOOP_NA(VAR) LOOP_L_N(VAR, NUM_AXIS)
 #define LOOP_XYZ(VAR) LOOP_S_LE_N(VAR, X_AXIS, Z_AXIS)
 #define LOOP_XYZE(VAR) LOOP_S_LE_N(VAR, X_AXIS, E_AXIS)
+#define LOOP_DAC(VAR) LOOP_S_LE_N(VAR, XY_DAC, E1_DAC)
 #define LOOP_XYZE_N(VAR) LOOP_S_L_N(VAR, X_AXIS, XYZE_N)
 
 typedef enum {

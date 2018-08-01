@@ -54,4 +54,9 @@ void dac_commit_eeprom();
 uint8_t dac_current_get_percent(AxisEnum axis);
 void dac_current_set_percents(const uint8_t pct[XYZE]);
 
+#if RBV(R2) || RBV(C2) || RBV(R2_Dual)
+  static float robo_dac_percent(AxisEnum axis);
+  static float robo_dac_amps(AxisEnum axis);
+#endif  
+
 #endif // STEPPER_DAC_H

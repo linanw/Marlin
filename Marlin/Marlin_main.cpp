@@ -521,6 +521,7 @@ volatile bool wait_for_heatup = true;
 #endif
 
 const char axis_codes[XYZE] = { 'X', 'Y', 'Z', 'E' };
+const char dac_codes[ABCD] = {'A', 'B', 'C', 'D'};
 
 // Number of characters read in the current line of serial input
 static int serial_count = 0;
@@ -10305,12 +10306,16 @@ inline void gcode_M907() {
     for (uint8_t i = NUM_AXIS; i < DIGIPOT_I2C_NUM_CHANNELS; i++) if (parser.seen('B' + i - (NUM_AXIS))) digipot_i2c_set_current(i, parser.value_float());
   #endif
 
+
+  /*
+  This will now work off of channels ABCD. So M907 A100 will change the A channel on the DAC which is the XY Channel.
+  */
   #if ENABLED(DAC_STEPPER_CURRENT)
     if (parser.seen('S')) {
       const float dac_percent = parser.value_float();
       for (uint8_t i = 0; i <= 4; i++) dac_current_percent(i, dac_percent);
     }
-    LOOP_XYZE(i) if (parser.seen(axis_codes[i])) dac_current_percent(i, parser.value_float());
+    LOOP_DAC(i) if (parser.seen(dac_codes[i])) dac_current_percent(i, parser.value_float());
   #endif
 }
 
