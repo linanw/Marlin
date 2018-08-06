@@ -6202,15 +6202,10 @@ inline void gcode_G92() {
     // Move the probe to the given XY
     do_blocking_move_to_xy(lx, ly);
 
-    feedrate_mm_s = Z_PROBE_SPEED_FAST;
-
     // move Z up little by little until a max is hit
     bool max_hit = false;
-    int8_t max_cap = 0;
-    const int history_length = 10;
-    int8_t history[history_length];
-    int counter = 0;
     float move_z_pos = current_position[Z_AXIS];
+    float increment = 0.2;
     while (!max_hit){
 
       //get current cap of sensor
@@ -6220,42 +6215,24 @@ inline void gcode_G92() {
       SERIAL_EOL();
 
       // if we are above 30 cap then move slowly
-      if (current_cap > 30){
+      if (current_cap > 80){
         feedrate_mm_s = Z_PROBE_SPEED_SLOW;
+        increment = 0.01;
       }
 
       // if we are at the max val then we have definitely hit the max
-      if (current_cap == 127){
+      if (current_cap >= 126){
         SERIAL_PROTOCOL("MAX 127 HIT!");
         SERIAL_EOL();
         max_hit = true;
-        max_cap = current_cap;
         break;
-      }
-
-      // check max
-      max_cap = max(max_cap, current_cap);
-      history[counter] = max_cap;
-      counter++;
-      if (counter == history_length){
-        counter = 0;
-      }
-
-      //check history for consistent output
-      for(int x = 0; x > history_length ; x++){
-        // if max cap is not the same for all values and the capacitance level is over 30
-        // break because we have not hit our max.
-        if(max_cap != history[x] && history[x] > 30){ 
-          break;
-        }
-        max_hit = true;
       }
 
       if(max_hit){
         break;
       } else{
-        //move z up by 0.2 mm
-        move_z_pos -= 0.2;
+        //move z up by the defined increment
+        move_z_pos -= increment;
         if(move_z_pos <= -20){
           max_hit = true;
           break;
@@ -6276,8 +6253,8 @@ inline void gcode_G92() {
 
     //define where we want to go
     // TODO Actually define where we want to go
-    current_position[X_AXIS] = LOGICAL_X_POSITION(100);
-    current_position[Y_AXIS] = LOGICAL_Y_POSITION(100);
+    current_position[X_AXIS] = LOGICAL_X_POSITION(0);
+    current_position[Y_AXIS] = LOGICAL_Y_POSITION(0);
 
     float xpos = current_position[X_AXIS];
     float ypos = current_position[Y_AXIS];
