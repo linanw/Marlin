@@ -140,6 +140,8 @@
   #include "pins_TRIGORILLA_14.h"     // ATmega2560                                 env:megaatmega2560
 #elif MB(RAMPS_ENDER_4)
   #include "pins_RAMPS_ENDER_4.h"     // ATmega2560                                 env:megaatmega2560
+#elif MB(ROBO_MB)
+  #include "pins_ROBOMB.h"          // ATmega2560
 
 //
 // Other ATmega1280, ATmega2560

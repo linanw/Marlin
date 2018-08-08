@@ -67,6 +67,8 @@
  * G31  - Dock sled (Z_PROBE_SLED only)
  * G32  - Undock sled (Z_PROBE_SLED only)
  * G33  - Delta Auto-Calibration (Requires DELTA_AUTO_CALIBRATION)
+ * G35  - Auto adjust Probe Offset(M851 Z) for ambient light levels based on the trigger distance of the IR probe(Requires Home Offset Z(M206 Z) to be set)
+ * G36  - Home, run G35, then run G29
  * G38  - Probe in any direction using the Z_MIN_PROBE (Requires G38_PROBE_TARGET)
  * G42  - Coordinated move to a mesh point (Requires MESH_BED_LEVELING, AUTO_BED_LEVELING_BLINEAR, or AUTO_BED_LEVELING_UBL)
  * G90  - Use Absolute Coordinates
@@ -5492,6 +5494,102 @@ void home_all_axes() { gcode_G28(true); }
     report_current_position();
   }
 
+  /*
+   * G35
+   * This will adjust the probe offset based upon the trigger distance of the probe.
+   */
+  inline void gcode_G35(){
+    #if DISABLED(MESH_BED_LEVELING)
+  //get the first point based off of the probe offsets
+  //This should get us the first point in the probe matrix
+      #if ENABLED(AUTO_BED_LEVELING_BILINEAR) || ENABLED(AUTO_BED_LEVELING_LINEAR)
+        const float rnx = LEFT_PROBE_BED_POSITION - (X_PROBE_OFFSET_FROM_EXTRUDER), rny = FRONT_PROBE_BED_POSITION - (Y_PROBE_OFFSET_FROM_EXTRUDER);
+      #elif ENABLED(AUTO_BED_LEVELING_3POINT)
+        const float rnx = ABL_PROBE_PT_1_X - (X_PROBE_OFFSET_FROM_EXTRUDER), rny = ABL_PROBE_PT_1_Y - (Y_PROBE_OFFSET_FROM_EXTRUDER);
+      #elif ENABLED(AUTO_BED_LEVELING_UBL)
+        const float rnx = UBL_PROBE_PT_1_X - (X_PROBE_OFFSET_FROM_EXTRUDER), rny = UBL_PROBE_PT_1_Y - (Y_PROBE_OFFSET_FROM_EXTRUDER);
+      #endif // #endif ABL methods
+
+        //capture the old feedrate. Prepend with robo because I'm paranoid about clashing variables.
+        float robo_old_feedrate_mm_s = feedrate_mm_s;
+
+        //define where we want to go
+        current_position[X_AXIS] = LOGICAL_X_POSITION(rnx);
+        current_position[Y_AXIS] = LOGICAL_Y_POSITION(rny);
+
+        //Just in case we want to have two different feed Rates / Positioning based on C2 or R2
+        #if RBV(C2)
+          feedrate_mm_s = 125.00; //set feedrate to 125
+        #elif RBV(R2) || RBV(R2_DUAL)
+          feedrate_mm_s = 125.00; //set feedrate to 125
+        #else
+          feedrate_mm_s = 125.00; //just in case default
+        #endif
+
+        //go to the defined position
+        buffer_line_to_current_position();
+
+        //set z probe offset to 0
+        zprobe_zoffset = 0.00;
+        refresh_zprobe_zoffset();
+
+        //check to see if we moved to the correct position
+        const float xpos = parser.linearval('X', current_position[X_AXIS] + X_PROBE_OFFSET_FROM_EXTRUDER),
+                    ypos = parser.linearval('Y', current_position[Y_AXIS] + Y_PROBE_OFFSET_FROM_EXTRUDER);
+
+      if (!position_is_reachable_by_probe(xpos, ypos)) return
+
+        // Disable leveling so the planner won't mess with us
+        #if HAS_LEVELING
+          set_bed_leveling_enabled(false);
+        #endif
+
+
+        setup_for_endstop_or_probe_move();
+
+        const ProbePtRaise raise_after = parser.boolval('E', true) ? PROBE_PT_STOW : PROBE_PT_NONE;
+        const float measured_z = probe_pt(xpos, ypos, raise_after, parser.intval('V', 1));
+
+        clean_up_after_endstop_or_probe_move();
+
+
+        float temp_probe_offset = measured_z;
+        zprobe_zoffset = (temp_probe_offset) * -1; // turn it negative
+
+        refresh_zprobe_zoffset();
+        SERIAL_PROTOCOLLNPAIR("Probe Offset is Z: ", FIXFLOAT(zprobe_zoffset));
+        //report position after adjustment
+        report_current_position();
+
+        //return the feedrate to the old feedrate
+        feedrate_mm_s = robo_old_feedrate_mm_s;
+
+        //save to EEPROM
+        (void)settings.save();
+
+      #else
+        SERIAL_PROTOCOL("G35 Disabled with Mesh Leveling");
+      #endif //If disabled mesh leveling
+  }
+
+   /*
+   * This gcode was added by robo to auto adjust the M851 probe offset for ambient lighting levels.
+   * Based on outside light levels or even the color of the bed, this will probe one point on the bed
+   * to measure the trigger distance of the IR sensor, then set that trigger distance as the probe offset.
+   *
+   * So this adjusts for light levels because the IR sensor will trigger at different distances based upon ambient light levels.
+   * This checks for that distance and adjusts the probe offset so that the user will experience an even first layer every time.
+   * Made by Matt Pedler
+   */
+  inline void gcode_G36(){
+    //home and level
+    home_all_axes();
+    //Adjust for ambient light level
+    gcode_G35();
+    //finish leveling process
+    gcode_G29();
+
+  }
   #if ENABLED(Z_PROBE_SLED)
 
     /**
@@ -10899,7 +10997,7 @@ inline void gcode_M502() {
 #if ENABLED(MAX7219_GCODE)
   /**
    * M7219: Control the Max7219 LED matrix
-   * 
+   *
    *  I         - Initialize (clear) the matrix
    *  F         - Fill the matrix (set all bits)
    *  P         - Dump the LEDs[] array values
@@ -10908,7 +11006,7 @@ inline void gcode_M502() {
    *  X<pos>    - X position of an LED to set or toggle
    *  Y<pos>    - Y position of an LED to set or toggle
    *  V<value>  - The potentially 32-bit value or on/off state to set
-   *              (for example: a chain of 4 Max7219 devices can have 32 bit 
+   *              (for example: a chain of 4 Max7219 devices can have 32 bit
    *               rows or columns depending upon rotation)
    */
   inline void gcode_M7219() {
@@ -12264,6 +12362,8 @@ void process_parsed_command() {
 
       #if HAS_BED_PROBE
         case 30: gcode_G30(); break;                              // G30: Single Z probe
+        case 35: gcode_G35(); break;                              // auto adjust IR Sensor Probe
+        case 36: gcode_G36(); break;                              // Auto adjust IR sensor without leveling or homing
       #endif
 
       #if ENABLED(Z_PROBE_SLED)

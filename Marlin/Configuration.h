@@ -124,7 +124,7 @@
 // The following define selects which electronics board you have.
 // Please choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_ROBOMB
+  #define MOTHERBOARD BOARD_RAMPS
 #endif
 
 /*
