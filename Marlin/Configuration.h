@@ -144,6 +144,10 @@
 #if RBV(C2)
   #define CUSTOM_MACHINE_NAME " Robo C2"
   #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION CUSTOM_MACHINE_NAME
+#endif
+#if RBV(R2_ED3V6)
+#define CUSTOM_MACHINE_NAME " Robo R2 with E3D V6"
+#define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION CUSTOM_MACHINE_NAME
 #else
   #define CUSTOM_MACHINE_NAME " Robo R2"
   #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION CUSTOM_MACHINE_NAME
@@ -165,7 +169,7 @@
   #define EXTRUDERS 2
 #endif
 
-#if RBV(R2) || RBV(C2)
+#if RBV(R2) || RBV(C2) || RBV(R2_E3DV6)
 #define EXTRUDERS 1
 #endif
 
@@ -245,7 +249,7 @@
 // Offset of the extruders (uncomment if using more than one and relying on firmware to position when changing).
 // The offset has to be X=0, Y=0 for the extruder 0 hotend (default extruder).
 // For the other hotends it is their distance from the extruder 0 hotend.
-#if RBV(C2) || RBV(R2)
+#if RBV(C2) || RBV(R2) || RBV(R2_E3DV6)
 //#define HOTEND_OFFSET_X {0.0, 20.00} // (in mm) for each extruder, offset of the hotend on the X axis
 //#define HOTEND_OFFSET_Y {0.0, 5.00}  // (in mm) for each extruder, offset of the hotend on the Y axis
 #elif RBV(R2_DUAL)
@@ -339,29 +343,38 @@
 
  #if RBV(R2_DUAL)
 #define TEMP_SENSOR_0 1
-   #define TEMP_SENSOR_1 1
-   #define TEMP_SENSOR_2 0
-   #define TEMP_SENSOR_3 0
-   #define TEMP_SENSOR_4 0
-   #define TEMP_SENSOR_BED 12
+  #define TEMP_SENSOR_1 1
+  #define TEMP_SENSOR_2 0
+  #define TEMP_SENSOR_3 0
+  #define TEMP_SENSOR_4 0
+  #define TEMP_SENSOR_BED 12
  #endif
 
  #if RBV(R2)
-   #define TEMP_SENSOR_0 1
-#define TEMP_SENSOR_1 0
-#define TEMP_SENSOR_2 0
-#define TEMP_SENSOR_3 0
-#define TEMP_SENSOR_4 0
-   #define TEMP_SENSOR_BED 12
+  #define TEMP_SENSOR_0 1
+  #define TEMP_SENSOR_1 0
+  #define TEMP_SENSOR_2 0
+  #define TEMP_SENSOR_3 0
+  #define TEMP_SENSOR_4 0
+  #define TEMP_SENSOR_BED 12
  #endif
 
+ #if RBV(R2_E3DV6)
+  #define TEMP_SENSOR_0 5
+  #define TEMP_SENSOR_1 0
+  #define TEMP_SENSOR_2 0
+  #define TEMP_SENSOR_3 0
+  #define TEMP_SENSOR_4 0
+  #define TEMP_SENSOR_BED 12
+#endif
+
  #if RBV(C2)
-   #define TEMP_SENSOR_0 1
-   #define TEMP_SENSOR_1 0
-   #define TEMP_SENSOR_2 0
-   #define TEMP_SENSOR_3 0
-   #define TEMP_SENSOR_4 0
-#define TEMP_SENSOR_BED 0
+  #define TEMP_SENSOR_0 1
+  #define TEMP_SENSOR_1 0
+  #define TEMP_SENSOR_2 0
+  #define TEMP_SENSOR_3 0
+  #define TEMP_SENSOR_4 0
+  #define TEMP_SENSOR_BED 0
  #endif
 
 // Dummy thermistor constant temperature readings, for use with 998 and 999
@@ -427,7 +440,7 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
   // Robo R2 24V
-  #if RBV(R2) || RBV(R2_DUAL)
+  #if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6)
     #define  DEFAULT_Kp 23.8
     #define  DEFAULT_Ki 1.7
     #define  DEFAULT_Kd 85.0
@@ -530,7 +543,7 @@
  * details can be tuned in Configuration_adv.h
  */
 
- #if RBV(R2) || RBV(R2_DUAL)
+ #if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6)
 #define THERMAL_PROTECTION_HOTENDS // Enable thermal protection for all extruders
 #define THERMAL_PROTECTION_BED     // Enable thermal protection for the heated bed
  #endif
@@ -660,23 +673,39 @@
  * Default Axis Steps Per Unit (steps/mm)
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
- */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800, 145.5 }
 
-/**
  * Default Max Feed Rate (mm/s)
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
- */
-#define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25 }
 
-/**
  * Default Max Acceleration (change/s) change = mm/s
  * (Maximum start speed for accelerated moves)
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 100, 1000 }
+#ifdef EXTRUDERS
+  #if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6)
+    #if EXTRUDERS == 1
+      //Single
+      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800.00, 145.5 }
+      #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25 }
+      #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000 }
+    #endif
+    #if EXTRUDERS == 2
+      //Dual extruder using BondTech BMG
+      #define DISTINCT_E_FACTORS
+      #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800.00, 145.5, 425.0 }
+      #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25, 100 }
+      #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000, 1000 }
+    #endif
+  #endif
+
+  #if RBV(C2)
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800.00, 145.5 }
+    #define DEFAULT_MAX_FEEDRATE          { 300, 300, 12, 25 }
+    #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000 }
+  #endif
+#endif
 
 /**
  * Default Acceleration (change/s) change = mm/s
@@ -932,7 +961,7 @@
 // @section machine
 
 //Robo R2
-#if RBV(R2)
+#if RBV(R2) || RBV(R2_E3DV6)
 // The size of the print bed
   #define X_BED_SIZE 197
   #define Y_BED_SIZE 197
@@ -1103,7 +1132,7 @@
 
 #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
 
-  #if RBV(R2)
+  #if RBV(R2) || RBV(R2_E3DV6)
   // Set the number of grid points per dimension.
     #define GRID_MAX_POINTS_X 4
     #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
@@ -1165,7 +1194,7 @@
   // 3 arbitrary points to probe.
   // A simple cross-product is used to estimate the plane of the bed.
 
-  #if RBV(R2)
+  #if RBV(R2) || RBV(R2_E3DV6)
     #define ABL_PROBE_PT_1_X 10
     #define ABL_PROBE_PT_1_Y 185
     #define ABL_PROBE_PT_2_X 10
@@ -1201,7 +1230,7 @@
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
 
-  #if RBV(R2)
+  #if RBV(R2) || RBV(R2_E3DV6)
     #define UBL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
     #define UBL_PROBE_PT_1_Y 187
     #define UBL_PROBE_PT_2_X 10

@@ -32,6 +32,22 @@
   #define DEFAULT_SOURCE_CODE_URL "https://github.com/Robo3D/Marlin"
 #endif
 
+#if RBV(C2)
+  #define IS_ROBOC2
+  #define MACHINE_NAME "Robo C2"
+#endif
+#if RBV(R2)
+  #define IS_ROBOR2
+  #define MACHINE_NAME "Robo R2"
+#endif
+#if RBV(R2_E3DV6)
+  #define IS_ROBOR2_E3DV6
+  #define MACHINE_NAME "Robo R2 with E3D V6"
+#endif
+#if RBV(R2_DUAL)
+  #define IS_ROBOR2_DUAL
+  #define MACHINE_NAME "Robo R2 Dual"
+#endif
 
 #define LARGE_FLASH true
 

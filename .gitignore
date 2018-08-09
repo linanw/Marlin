@@ -110,7 +110,13 @@ tags
 *.app
 *.i*86
 *.x86_64
-*.hex
+
+# PIO Build files
+longcmd*
+*.url
+firmware.hex
+*.dblite
+*.hash
 
 # Debug files
 *.dSYM/
