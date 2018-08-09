@@ -141,7 +141,7 @@ CMakeListsPrivate.txt
 cmake-build-*
 
 #platformio
-Marlin_Build/
+#Marlin_Build/
 .pioenvs
 .piolibdeps
 platformio.sublime*
