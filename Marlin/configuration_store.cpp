@@ -1745,6 +1745,10 @@ void MarlinSettings::reset() {
     ZERO(home_offset);
   #endif
 
+  #if ENABLED(ROBO_PRINTER)
+    home_offset[Z_AXIS] = -20.00;
+  #endif
+
   #if HOTENDS > 1
     constexpr float tmp4[XYZ][HOTENDS] = {
       HOTEND_OFFSET_X,
