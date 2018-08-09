@@ -308,7 +308,7 @@ void MarlinSettings::postprocess() {
   #endif
 
   #if HAS_BED_PROBE
-    refresh_zprobe_zoffset();
+    //refresh_zprobe_zoffset();
   #endif
 
   #if ENABLED(AUTO_BED_LEVELING_BILINEAR)
