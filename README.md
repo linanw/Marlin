@@ -22,7 +22,18 @@ More information can be found at: http://docs.platformio.org/en/latest/what-is-p
 
 ## How to use platformio
 
-### CLI tools
+### Use with Atom (easy)
+- Download Atom from https://atom.io/
+
+- Install PlatformIO for Atom
+http://docs.platformio.org/en/latest/ide/atom.html#ide-atom
+
+- Open the Marlin repository in Atom
+
+- Click on PlatformIO in the menu bar, Build to process the project
+http://docs.platformio.org/en/latest/ide/atom.html#process-project
+
+### Using CLI tools
 
 - Install the platformio CLI tools using pip
 ```
@@ -39,15 +50,6 @@ platformio run
 
 More detailed instructions can be found at: http://docs.platformio.org/en/latest/installation.html
 
-### Atom
-
-- Install PlatformIO for Atom
-http://docs.platformio.org/en/latest/ide/atom.html#ide-atom
-
-- Open the Marlin repository in Atom
-
-- Click on PlatformIO >> build to process the project
-http://docs.platformio.org/en/latest/ide/atom.html#process-project
 
 ## How to configure platformio
 
