@@ -524,7 +524,7 @@
  * Note: For Bowden Extruders make this large enough to allow load/unload.
  */
 #define PREVENT_LENGTHY_EXTRUDE
-#define EXTRUDE_MAXLENGTH 700
+#define EXTRUDE_MAXLENGTH 700  // increasing to 700 for Bowden tube length
 
 //===========================================================================
 //======================== Thermal Runaway Protection =======================
@@ -715,7 +715,7 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          1000    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_ACCELERATION          500    // X, Y, Z and E acceleration for printing moves
 #define DEFAULT_RETRACT_ACCELERATION  1000    // E acceleration for retracts
 #define DEFAULT_TRAVEL_ACCELERATION   1000    // X, Y, Z acceleration for travel (non printing) moves
 
@@ -756,7 +756,7 @@
  *
  * Enable this option for a probe connected to the Z Min endstop pin.
  */
-#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
+#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN // configured for Robo IR Sensor wiring
 
 /**
  * Z_MIN_PROBE_ENDSTOP
@@ -798,7 +798,7 @@
  * A Fix-Mounted Probe either doesn't deploy or needs manual deployment.
  *   (e.g., an inductive probe or a nozzle-based probe-switch.)
  */
-#define FIX_MOUNTED_PROBE
+#define FIX_MOUNTED_PROBE  // Robo IR sensor is fixed
 
 /**
  * Z Servo Probe, such as an endstop switch on a rotating arm.
@@ -872,7 +872,7 @@
 #define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
 
 // Feedrate (mm/m) for the "accurate" probe of each point
-#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 3)
+#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 2.75)
 
 // The number of probes to perform at each point.
 //   Set to 2 for a fast/slow probe, using the second probe result.
@@ -901,11 +901,11 @@
 #define Z_PROBE_LOW_POINT          -2 // Farthest distance below the trigger-point to go before stopping
 
 // For M851 give a range for adjusting the Z probe offset
-#define Z_PROBE_OFFSET_RANGE_MIN -20
-#define Z_PROBE_OFFSET_RANGE_MAX 20
+#define Z_PROBE_OFFSET_RANGE_MIN -20  // M502 value for Z_PROBE_OFFSET_RANGE_MIN
+#define Z_PROBE_OFFSET_RANGE_MAX 20   // Z_PROBE_OFFSET_RANGE_MAX value when setting the offset manually or automatically
 
 // Enable the M48 repeatability test to test probe accuracy
-//#define Z_MIN_PROBE_REPEATABILITY_TEST
+#define Z_MIN_PROBE_REPEATABILITY_TEST
 
 // For Inverting Stepper Enable Pins (Active Low) use 0, Non Inverting (Active High) use 1
 // :{ 0:'Low', 1:'High' }
@@ -967,11 +967,11 @@
   #define Y_BED_SIZE 197
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
-#define X_MIN_POS 0
-#define Y_MIN_POS 0
-#define Z_MIN_POS 0
-#define X_MAX_POS X_BED_SIZE
-#define Y_MAX_POS Y_BED_SIZE
+  #define X_MIN_POS 0
+  #define Y_MIN_POS 0
+  #define Z_MIN_POS 0
+  #define X_MAX_POS X_BED_SIZE
+  #define Y_MAX_POS Y_BED_SIZE
   #define Z_MAX_POS 260
 
 //R2 Dual
@@ -1096,8 +1096,9 @@
  * Normally G28 leaves leveling disabled on completion. Enable
  * this option to have G28 restore the prior leveling state.
  */
-//#define RESTORE_LEVELING_AFTER_G28
-
+#if ENABLED(AUTO_BED_LEVELING_UBL)
+  #define RESTORE_LEVELING_AFTER_G28
+#endif
 /**
  * Enable detailed logging of G28, G29, M48, etc.
  * Turn on with the command 'M111 S32'.
@@ -1120,13 +1121,16 @@
   /**
    * Enable the G26 Mesh Validation Pattern tool.
    */
-  //#define G26_MESH_VALIDATION
-  #if ENABLED(G26_MESH_VALIDATION)
-    #define MESH_TEST_NOZZLE_SIZE    0.4  // (mm) Diameter of primary nozzle.
-    #define MESH_TEST_LAYER_HEIGHT   0.2  // (mm) Default layer height for the G26 Mesh Validation Tool.
-    #define MESH_TEST_HOTEND_TEMP  205.0  // (°C) Default nozzle temperature for the G26 Mesh Validation Tool.
-    #define MESH_TEST_BED_TEMP      60.0  // (°C) Default bed temperature for the G26 Mesh Validation Tool.
-  #endif
+
+  #if ENABLED(AUTO_BED_LEVELING_UBL)
+    #define G26_MESH_VALIDATION
+    #if ENABLED(G26_MESH_VALIDATION)
+      #define MESH_TEST_NOZZLE_SIZE    0.4  // (mm) Diameter of primary nozzle.
+      #define MESH_TEST_LAYER_HEIGHT   0.2  // (mm) Default layer height for the G26 Mesh Validation Tool.
+      #define MESH_TEST_HOTEND_TEMP  205.0  // (°C) Default nozzle temperature for the G26 Mesh Validation Tool.
+      #define MESH_TEST_BED_TEMP      60.0  // (°C) Default bed temperature for the G26 Mesh Validation Tool.
+    #endif // #define G26_MESH_VALIDATION
+  #endif // ENABLED(AUTO_BED_LEVELING_UBL)
 
 #endif
 
@@ -1142,9 +1146,10 @@
     #define RIGHT_PROBE_BED_POSITION 186
     #define FRONT_PROBE_BED_POSITION 35
     #define BACK_PROBE_BED_POSITION 186
+
   #elif RBV(R2_DUAL)
     // Set the number of grid points per dimension.
-  #define GRID_MAX_POINTS_X 3
+  #define GRID_MAX_POINTS_X 4
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   // Set the boundaries for probing (where the probe can reach).
@@ -1194,29 +1199,6 @@
   // 3 arbitrary points to probe.
   // A simple cross-product is used to estimate the plane of the bed.
 
-  #if RBV(R2) || RBV(R2_E3DV6)
-    #define ABL_PROBE_PT_1_X 10
-    #define ABL_PROBE_PT_1_Y 185
-    #define ABL_PROBE_PT_2_X 10
-    #define ABL_PROBE_PT_2_Y 30
-    #define ABL_PROBE_PT_3_X 185
-    #define ABL_PROBE_PT_3_Y 30
-  #elif RBV(R2_DUAL)
-    #define ABL_PROBE_PT_1_X 10
-    #define ABL_PROBE_PT_1_Y 180
-    #define ABL_PROBE_PT_2_X 10
-    #define ABL_PROBE_PT_2_Y 30
-    #define ABL_PROBE_PT_3_X 180
-    #define ABL_PROBE_PT_3_Y 30
-  #elif RBV(C2)
-    #define ABL_PROBE_PT_1_X 10
-    #define ABL_PROBE_PT_1_Y 115
-    #define ABL_PROBE_PT_2_X 10
-    #define ABL_PROBE_PT_2_Y 30
-    #define ABL_PROBE_PT_3_X 115
-    #define ABL_PROBE_PT_3_Y 30
-  #endif
-
 #elif ENABLED(AUTO_BED_LEVELING_UBL)
 
   //===========================================================================
@@ -1228,30 +1210,6 @@
   #define MESH_INSET        15  // Mesh inset margin on print area
   #define GRID_MAX_POINTS_X  5  // Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
-
-
-  #if RBV(R2) || RBV(R2_E3DV6)
-    #define UBL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
-    #define UBL_PROBE_PT_1_Y 187
-    #define UBL_PROBE_PT_2_X 10
-    #define UBL_PROBE_PT_2_Y 30
-    #define UBL_PROBE_PT_3_X 187
-    #define UBL_PROBE_PT_3_Y 30
-  #elif RBV(R2_DUAL)
-    #define UBL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
-    #define UBL_PROBE_PT_1_Y 187
-    #define UBL_PROBE_PT_2_X 10
-    #define UBL_PROBE_PT_2_Y 30
-    #define UBL_PROBE_PT_3_X 187
-    #define UBL_PROBE_PT_3_Y 30
-  #elif RBV(C2)
-    #define UBL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
-    #define UBL_PROBE_PT_1_Y 115
-    #define UBL_PROBE_PT_2_X 10
-    #define UBL_PROBE_PT_2_Y 30
-    #define UBL_PROBE_PT_3_X 115
-    #define UBL_PROBE_PT_3_Y 30
-  #endif
 
   #define UBL_MESH_EDIT_MOVES_Z     // Sophisticated users prefer no movement of nozzle
   #define UBL_SAVE_ACTIVE_ON_M500  // Save the currently active mesh in the current slot on M500
@@ -1414,7 +1372,7 @@
 // M501 - reads parameters from EEPROM (if you need reset them after you changed them temporarily).
 // M502 - reverts to the default "factory settings".  You still need to store them in EEPROM afterwards if you want to.
 //
-#define EEPROM_SETTINGS // Enable for M500 and M501 commands  [robo]
+#define EEPROM_SETTINGS // Enable for M500 and M501 commands
 //#define DISABLE_M503    // Saves ~2700 bytes of PROGMEM. Disable for release!
 #define EEPROM_CHITCHAT   // Give feedback on EEPROM commands. Disable to save PROGMEM.
 
@@ -1448,7 +1406,7 @@
 // Preheat Constants
 #define PREHEAT_1_TEMP_HOTEND 195
 #define PREHEAT_1_TEMP_BED     50
-#define PREHEAT_1_FAN_SPEED   128  // Value from 0 to 255  [robo]
+#define PREHEAT_1_FAN_SPEED     0  // Value from 0 to 255
 
 #define PREHEAT_2_TEMP_HOTEND 230
 #define PREHEAT_2_TEMP_BED     80

@@ -5507,7 +5507,7 @@ void home_all_axes() { gcode_G28(true); }
       #elif ENABLED(AUTO_BED_LEVELING_3POINT)
         const float rnx = ABL_PROBE_PT_1_X - (X_PROBE_OFFSET_FROM_EXTRUDER), rny = ABL_PROBE_PT_1_Y - (Y_PROBE_OFFSET_FROM_EXTRUDER);
       #elif ENABLED(AUTO_BED_LEVELING_UBL)
-        const float rnx = UBL_PROBE_PT_1_X - (X_PROBE_OFFSET_FROM_EXTRUDER), rny = UBL_PROBE_PT_1_Y - (Y_PROBE_OFFSET_FROM_EXTRUDER);
+        const float rnx = PROBE_PT_1_X - (X_PROBE_OFFSET_FROM_EXTRUDER), rny = PROBE_PT_1_Y - (Y_PROBE_OFFSET_FROM_EXTRUDER);
       #endif // #endif ABL methods
 
         //capture the old feedrate. Prepend with robo because I'm paranoid about clashing variables.
