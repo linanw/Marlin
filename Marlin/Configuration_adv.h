@@ -1274,7 +1274,7 @@
 /**
  * Spend 28 bytes of SRAM to optimize the GCode parser
  */
-#define FASTER_GCODE_PARSER // [robo] 
+// #define FASTER_GCODE_PARSER // [robo] 
 
 /**
  * User-defined menu items that execute custom GCode
