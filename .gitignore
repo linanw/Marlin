@@ -141,9 +141,11 @@ CMakeListsPrivate.txt
 cmake-build-*
 
 #platformio
-Marlin_Build/
+/Marlin/Marlin_Build/
 .pioenvs
 .piolibdeps
 platformio.sublime*
 .clang_complete
 .gcc-flags.json
+.structure.hash
+.dblite

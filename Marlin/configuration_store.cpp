@@ -1199,7 +1199,7 @@ void MarlinSettings::reset() {
     ZERO(home_offset);
   #endif
 
-  #if ENABLED(ROBO_PRINTER)
+  #if RBV(R2) || RBV(C2)  || RBV(R2_DUAL) || RBV(R2_ED3V6)
     home_offset[Z_AXIS] = -20.00;
   #endif
 

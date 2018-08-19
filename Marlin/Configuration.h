@@ -74,7 +74,7 @@
 // User-specified version info of this build to display in [Pronterface, etc] terminal window during
 // startup. Implementation of an idea by Prof Braino to inform user that any changes made to this
 // build by the user have been successfully uploaded into firmware.
-#define STRING_CONFIG_H_AUTHOR "Robo" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "Robo" // [robo]
 #define SHOW_BOOTSCREEN
 #define STRING_SPLASH_LINE1 SHORT_BUILD_VERSION // will be shown during bootup in line 1
 #define STRING_SPLASH_LINE2 WEBSITE_URL         // will be shown during bootup in line 2
@@ -111,35 +111,40 @@
  *
  * :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
  */
-#define BAUDRATE 115200
+
+ /* Robo uses a slower baud rate for connecting to OctoPrint
+ */
+#define BAUDRATE 115200 // [robo]
 
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
 
+// [robo]
 // The following define selects which electronics board you have.
 // Please choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
   #define MOTHERBOARD BOARD_ROBOMB
 #endif
 
-/*
- * Options are R2, C2, or R2_DUAL
- */
+// [robo]
+// BUILDING WITH ARDUINO
+// Options are _R2, _C2, _R2_DUAL, r _R2_E3DV6.
 #ifndef ROBO_BOARD_VERSION
   #define ROBO_BOARD_VERSION BOARD_VERSION_R2
 #endif
 
-#ifndef ROBO_PRINTER
-  #define ROBO_PRINTER
-#endif
-
+// [robo]
 // Optional custom name for your RepStrap or other custom machine
 // Displayed in the LCD "Ready" message
 // This block will also alter the DETAILED_BUILD_VERSION to display what board this is compiled for. (M115 will show this.)
 #if RBV(C2)
   #define CUSTOM_MACHINE_NAME " Robo C2"
   #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION CUSTOM_MACHINE_NAME
-  #endif
+#endif
+#if RBV(R2_DUAL)
+  #define CUSTOM_MACHINE_NAME " Robo R2 Dual Extruder"
+  #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION CUSTOM_MACHINE_NAME
+#endif
 #if RBV(R2_ED3V6)
   #define CUSTOM_MACHINE_NAME " Robo R2 with E3D V6"
   #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION CUSTOM_MACHINE_NAME
@@ -149,7 +154,7 @@
 #endif
 
 //If the robo is using a INA193 for sensing current draw from Raspi, enable this variable
-#define INA19X
+#define INA19X  // [robo]
 
 // Define this to set a unique identifier for this printer, (Used by some programs to differentiate between machines)
 // You can use an online service to generate a random UUID. (eg http://www.uuidgenerator.net/version4)
@@ -160,10 +165,10 @@
 // This defines the number of extruders
 // :[1, 2, 3, 4, 5]
 
+// [robo]
 #if RBV(R2_DUAL)
   #define EXTRUDERS 2
 #endif
-
 #if RBV(R2) || RBV(C2) || RBV(R2_E3DV6)
   #define EXTRUDERS 1
 #endif
@@ -245,8 +250,8 @@
 #if RBV(C2) || RBV(R2) || RBV(R2_E3DV6)
   //#define HOTEND_OFFSET_X {0.0, 20.00} // (in mm) for each extruder, offset of the hotend on the X axis
   //#define HOTEND_OFFSET_Y {0.0, 5.00}  // (in mm) for each extruder, offset of the hotend on the Y axis
-#elif RBV(R2_DUAL)
-  #define HOTEND_OFFSET_X {0.0, 20.00} // (in mm) for each extruder, offset of the hotend on the X axis
+#elif RBV(R2_DUAL)  // Center to center distance of both filaments holes is 21.5mm on the R2/C2 Extruder
+  #define HOTEND_OFFSET_X {0.0, 21.5} // (in mm) for each extruder, offset of the hotend on the X axis
   #define HOTEND_OFFSET_Y {0.0, 0.00}  // (in mm) for each extruder, offset of the hotend on the Y axis
 #endif
 
@@ -322,6 +327,8 @@
  * :{ '0': "Not used", '1':"100k / 4.7k - EPCOS", '2':"200k / 4.7k - ATC Semitec 204GT-2", '3':"Mendel-parts / 4.7k", '4':"10k !! do not use for a hotend. Bad resolution at high temp. !!", '5':"100K / 4.7k - ATC Semitec 104GT-2 (Used in ParCan & J-Head)", '6':"100k / 4.7k EPCOS - Not as accurate as Table 1", '7':"100k / 4.7k Honeywell 135-104LAG-J01", '8':"100k / 4.7k 0603 SMD Vishay NTCS0603E3104FXT", '9':"100k / 4.7k GE Sensing AL03006-58.2K-97-G1", '10':"100k / 4.7k RS 198-961", '11':"100k / 4.7k beta 3950 1%", '12':"100k / 4.7k 0603 SMD Vishay NTCS0603E3104FXT (calibrated for Makibox hot bed)", '13':"100k Hisens 3950  1% up to 300°C for hotend 'Simple ONE ' & hotend 'All In ONE'", '20':"PT100 (Ultimainboard V2.x)", '51':"100k / 1k - EPCOS", '52':"200k / 1k - ATC Semitec 204GT-2", '55':"100k / 1k - ATC Semitec 104GT-2 (Used in ParCan & J-Head)", '60':"100k Maker's Tool Works Kapton Bed Thermistor beta=3950", '66':"Dyze Design 4.7M High Temperature thermistor", '70':"the 100K thermistor found in the bq Hephestos 2", '71':"100k / 4.7k Honeywell 135-104LAF-J01", '147':"Pt100 / 4.7k", '1047':"Pt1000 / 4.7k", '110':"Pt100 / 1k (non-standard)", '1010':"Pt1000 / 1k (non standard)", '-3':"Thermocouple + MAX31855 (only for sensor 0)", '-2':"Thermocouple + MAX6675 (only for sensor 0)", '-1':"Thermocouple + AD595",'998':"Dummy 1", '999':"Dummy 2" }
  */
 
+// [robo] Thermistor values for all configurations
+
 #if RBV(R2_DUAL)
   #define TEMP_SENSOR_0 1
   #define TEMP_SENSOR_1 1
@@ -389,7 +396,7 @@
 // When temperature exceeds max temp, your heater will be switched off.
 // This feature exists to protect your hotend from overheating accidentally, but *NOT* from thermistor short/failure!
 // You should use MINTEMP for thermistor short/failure protection.
-#define HEATER_0_MAXTEMP 300
+#define HEATER_0_MAXTEMP 285  // [robo] Max temp for Epcos 100K and Semitec 104GT-2 (E3D) is 300C, so we reduce max to 285
 #define HEATER_1_MAXTEMP 300
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
@@ -418,14 +425,14 @@
 
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
-  // Robo R2 24V
+  // [robo] 24V using 30W heater
   #if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6)
     #define  DEFAULT_Kp 23.8
     #define  DEFAULT_Ki 1.7
     #define  DEFAULT_Kd 85.0
   #endif
 
-  // Robo C2 19V
+  // [robo] C2 19V using 30W heater
   #if RBV(C2)
     #define  DEFAULT_Kp 23.75
     #define  DEFAULT_Ki 1.48
@@ -446,7 +453,7 @@
 // If your configuration is significantly different than this and you don't understand the issues involved, you probably
 // shouldn't use bed PID until someone else verifies your hardware works.
 // If this is enabled, find your own PID constants below.
-#define PIDTEMPBED
+#define PIDTEMPBED // [robo]
 
 //#define BED_LIMIT_SWITCHING
 
@@ -461,9 +468,9 @@
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
   //R2 24V Heater PCBA with 3mm Aluminum plate
-  #define  DEFAULT_bedKp 107.41
-  #define  DEFAULT_bedKi 21.29
-  #define  DEFAULT_bedKd 135.50
+  #define  DEFAULT_bedKp 107.41 // [robo]
+  #define  DEFAULT_bedKi 21.29  // [robo]
+  #define  DEFAULT_bedKd 135.50 // [robo]
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -498,6 +505,7 @@
  * details can be tuned in Configuration_adv.h
  */
 
+// [robo]
 #if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6)
   #define THERMAL_PROTECTION_HOTENDS // Enable thermal protection for all extruders
   #define THERMAL_PROTECTION_BED     // Enable thermal protection for the heated bed
@@ -531,12 +539,12 @@
 // Specify here all the endstop connectors that are connected to any endstop or probe.
 // Almost all printers will be using one per axis. Probes will use one or more of the
 // extra connectors. Leave undefined any used for non-endstop and non-probe purposes.
-#define USE_XMIN_PLUG
+#define USE_XMIN_PLUG // [robo]
 //#define USE_YMIN_PLUG
-#define USE_ZMIN_PLUG
+#define USE_ZMIN_PLUG // [robo]
 //#define USE_XMAX_PLUG
-#define USE_YMAX_PLUG
-#define USE_ZMAX_PLUG
+#define USE_YMAX_PLUG // [robo]
+#define USE_ZMAX_PLUG // [robo]
 
 // coarse Endstop Settings
 #define ENDSTOPPULLUPS // Comment this out (using // at the start of the line) to disable the endstop pullup resistors
@@ -604,6 +612,7 @@
  */
 
  // This block is an attempt to make switching the firmware from a single to a dual extruder machine as easy as changing the extruder count
+ // [robo]
 #ifdef EXTRUDERS
   #if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6)
     #if EXTRUDERS == 1
@@ -636,9 +645,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          500    // X, Y, Z and E acceleration for printing moves
-#define DEFAULT_RETRACT_ACCELERATION  1000    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   1000    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_ACCELERATION          500      // [robo] X, Y, Z and E acceleration for printing moves
+#define DEFAULT_RETRACT_ACCELERATION  1000     // [robo] E acceleration for retracts
+#define DEFAULT_TRAVEL_ACCELERATION   1000     // [robo] X, Y, Z acceleration for travel (non printing) moves
 
 /**
  * Default Jerk (mm/s)
@@ -648,10 +657,12 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
-#define DEFAULT_XJERK                  8.0
-#define DEFAULT_YJERK                  8.0
-#define DEFAULT_ZJERK                  0.4
-#define DEFAULT_EJERK                  1.0
+#if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6) || RBV(C2)
+  #define DEFAULT_XJERK                  8.0  // [robo]
+  #define DEFAULT_YJERK                  8.0  // [robo]
+  #define DEFAULT_ZJERK                  0.4  // [robo]
+  #define DEFAULT_EJERK                  1.0  // [robo]
+#endif
 
 //===========================================================================
 //============================= Z Probe Options =============================
@@ -676,7 +687,7 @@
  *
  * Enable this option for a probe connected to the Z Min endstop pin.
  */
-#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
+#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN  // [robo]
 
 /**
  * Z_MIN_PROBE_ENDSTOP
@@ -717,7 +728,7 @@
  * A Fix-Mounted Probe either doesn't deploy or needs manual deployment.
  *   (e.g., an inductive probe or a nozzle-based probe-switch.)
  */
-#define FIX_MOUNTED_PROBE
+#define FIX_MOUNTED_PROBE  // [robo]
 
 /**
  * Z Servo Probe, such as an endstop switch on a rotating arm.
@@ -742,7 +753,7 @@
  */
 //#define PROBING_HEATERS_OFF       // Turn heaters off when probing
 //#define PROBING_FANS_OFF          // Turn fans off when probing
-//#define DELAY_BEFORE_PROBING 200  // (ms) To prevent vibrations from triggering piezo sensors
+#define DELAY_BEFORE_PROBING 200    // [robo] (ms) To prevent vibrations from triggering piezo sensors
 
 // A probe that is deployed and stowed with a solenoid pin (SOL1_PIN)
 //#define SOLENOID_PROBE
@@ -774,9 +785,11 @@
  *      O-- FRONT --+
  *    (0,0)
  */
-#define X_PROBE_OFFSET_FROM_EXTRUDER 2  // X offset: -left  +right  [of the nozzle]
-#define Y_PROBE_OFFSET_FROM_EXTRUDER 30  // Y offset: -front +behind [the nozzle]
-#define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
+#if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6) || RBV(C2)
+  #define X_PROBE_OFFSET_FROM_EXTRUDER 2  // X offset: -left  +right  [of the nozzle]
+  #define Y_PROBE_OFFSET_FROM_EXTRUDER 30  // Y offset: -front +behind [the nozzle]
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
+#endif
 
 // X and Y axis travel speed (mm/m) between probes
 #define XY_PROBE_SPEED 10000
@@ -785,11 +798,14 @@
 #define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
 
 // Speed for the "accurate" probe of each point
-#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 3)
+#if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6) || RBV(C2)
+  #define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 3)
+#endif
 
 // Use double touch for probing
-#define PROBE_DOUBLE_TOUCH
-
+#if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6) || RBV(C2)
+  #define PROBE_DOUBLE_TOUCH
+#endif
 /**
  * Z probes require clearance when deploying, stowing, and moving between
  * probe points to avoid hitting the bed and other hardware.
@@ -863,8 +879,8 @@
 // Direction of endstops when homing; 1=MAX, -1=MIN
 // :[-1,1]
 #define X_HOME_DIR -1
-#define Y_HOME_DIR 1
-#define Z_HOME_DIR 1
+#define Y_HOME_DIR 1  // [robo]
+#define Z_HOME_DIR 1  // [robo]
 
 // @section machine
 
@@ -917,9 +933,9 @@
  *
  * It looks like our IR sensor Triggers and somehow this makes the soft endstop trigger as well.
  */
-#define MIN_SOFTWARE_ENDSTOPS
+#define MIN_SOFTWARE_ENDSTOPS  // [robo]
 // If enabled, axes won't move above MAX_POS in response to movement commands.
-#define MAX_SOFTWARE_ENDSTOPS
+#define MAX_SOFTWARE_ENDSTOPS  // [robo]
 
 /**
  * Filament Runout Sensor
@@ -992,7 +1008,7 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-#define AUTO_BED_LEVELING_BILINEAR
+#define AUTO_BED_LEVELING_BILINEAR  // [robo]
 //#define AUTO_BED_LEVELING_UBL
 //#define MESH_BED_LEVELING
 
@@ -1055,7 +1071,7 @@
 
     // Beyond the probed grid, continue the implied tilt?
     // Default is to maintain the height of the nearest edge.
-    #define EXTRAPOLATE_BEYOND_GRID
+    #define EXTRAPOLATE_BEYOND_GRID  // [robo]
 
     //
     // Experimental Subdivision of the grid by Catmull-Rom method.
@@ -1129,7 +1145,7 @@
     #define UBL_PROBE_PT_3_Y 30
   #endif
 
-  //#define UBL_G26_MESH_VALIDATION // Enable G26 mesh validation
+  #define UBL_G26_MESH_VALIDATION // Enable G26 mesh validation
   #define UBL_MESH_EDIT_MOVES_Z     // Sophisticated users prefer no movement of nozzle
 
 #elif ENABLED(MESH_BED_LEVELING)
@@ -1195,8 +1211,8 @@
 #endif
 
 // Homing speeds (mm/m)
-#define HOMING_FEEDRATE_XY (55*60)
-#define HOMING_FEEDRATE_Z  (12*60)
+#define HOMING_FEEDRATE_XY (55*60)  // [robo]
+#define HOMING_FEEDRATE_Z  (15*60)  // [robo]
 
 //=============================================================================
 //============================= Additional Features ===========================
@@ -1212,9 +1228,9 @@
 // M501 - reads parameters from EEPROM (if you need reset them after you changed them temporarily).
 // M502 - reverts to the default "factory settings".  You still need to store them in EEPROM afterwards if you want to.
 //
-#define EEPROM_SETTINGS // Enable for M500 and M501 commands
-//#define DISABLE_M503    // Saves ~2700 bytes of PROGMEM. Disable for release!
-#define EEPROM_CHITCHAT   // Give feedback on EEPROM commands. Disable to save PROGMEM.
+#define EEPROM_SETTINGS // [robo]Enable for M500 and M501 commands
+//#define DISABLE_M503  // Saves ~2700 bytes of PROGMEM. Disable for release!
+#define EEPROM_CHITCHAT // Give feedback on EEPROM commands. Disable to save PROGMEM.
 
 //
 // Host Keepalive
@@ -1741,7 +1757,7 @@
 // Use software PWM to drive the fan, as for the heaters. This uses a very low frequency
 // which is not as annoying as with the hardware PWM. On the other hand, if this frequency
 // is too low, you should also increment SOFT_PWM_SCALE.
-#define FAN_SOFT_PWM
+#define FAN_SOFT_PWM  // [robo]
 
 // Incrementing this by 1 will double the software PWM frequency,
 // affecting heaters, and the fan if FAN_SOFT_PWM is enabled.
@@ -1878,14 +1894,14 @@
  */
 //#define FILAMENT_WIDTH_SENSOR
 
-#define DEFAULT_NOMINAL_FILAMENT_DIA 3.00   // (mm) Diameter of the filament generally used (3.0 or 1.75mm), also used in the slicer. Used to validate sensor reading.
+#define DEFAULT_NOMINAL_FILAMENT_DIA 1.75  // [robo] (mm) Diameter of the filament generally used (3.0 or 1.75mm), also used in the slicer. Used to validate sensor reading.
 
 #if ENABLED(FILAMENT_WIDTH_SENSOR)
   #define FILAMENT_SENSOR_EXTRUDER_NUM 0    // Index of the extruder that has the filament sensor (0,1,2,3)
   #define MEASUREMENT_DELAY_CM        14    // (cm) The distance from the filament sensor to the melting chamber
 
-  #define MEASURED_UPPER_LIMIT         3.30 // (mm) Upper limit used to validate sensor reading
-  #define MEASURED_LOWER_LIMIT         1.90 // (mm) Lower limit used to validate sensor reading
+  #define MEASURED_UPPER_LIMIT         1.90 // [robo] (mm) Upper limit used to validate sensor reading
+  #define MEASURED_LOWER_LIMIT         1.60 // [robo] (mm) Lower limit used to validate sensor reading
   #define MAX_MEASUREMENT_DELAY       20    // (bytes) Buffer size for stored measurements (1 byte per cm). Must be larger than MEASUREMENT_DELAY_CM.
 
   #define DEFAULT_MEASURED_FILAMENT_DIA DEFAULT_NOMINAL_FILAMENT_DIA // Set measured to nominal initially
