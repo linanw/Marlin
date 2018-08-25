@@ -138,6 +138,11 @@
   #define ROBO_PRINTER
 #endif
 
+#if RBV(R2)
+  // If you have the E3D Hotend define this
+  #define E3D_HOTEND
+#endif
+
 // Optional custom name for your RepStrap or other custom machine
 // Displayed in the LCD "Ready" message
 // This block will also alter the DETAILED_BUILD_VERSION to display what board this is compiled for. (M115 will show this.)
@@ -145,12 +150,14 @@
   #define CUSTOM_MACHINE_NAME " Robo C2"
   #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION CUSTOM_MACHINE_NAME
 #endif
-#if RBV(R2_ED3V6)
-#define CUSTOM_MACHINE_NAME " Robo R2 with E3D V6"
-#define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION CUSTOM_MACHINE_NAME
-#else
-  #define CUSTOM_MACHINE_NAME " Robo R2"
-  #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION CUSTOM_MACHINE_NAME
+#if RBV(R2)
+  #if ENABLED(E3D_HOTEND)
+    #define CUSTOM_MACHINE_NAME " Robo R2 with E3D V6"
+    #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION CUSTOM_MACHINE_NAME
+  #else
+    #define CUSTOM_MACHINE_NAME " Robo R2"
+    #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION CUSTOM_MACHINE_NAME
+  #endif
 #endif
 
 //If the robo is using a INA193 for sensing current draw from Raspi, enable this variable
@@ -169,7 +176,7 @@
   #define EXTRUDERS 2
 #endif
 
-#if RBV(R2) || RBV(C2) || RBV(R2_E3DV6)
+#if RBV(R2) || RBV(C2)
 #define EXTRUDERS 1
 #endif
 
@@ -249,7 +256,7 @@
 // Offset of the extruders (uncomment if using more than one and relying on firmware to position when changing).
 // The offset has to be X=0, Y=0 for the extruder 0 hotend (default extruder).
 // For the other hotends it is their distance from the extruder 0 hotend.
-#if RBV(C2) || RBV(R2) || RBV(R2_E3DV6)
+#if RBV(C2) || RBV(R2)
 //#define HOTEND_OFFSET_X {0.0, 20.00} // (in mm) for each extruder, offset of the hotend on the X axis
 //#define HOTEND_OFFSET_Y {0.0, 5.00}  // (in mm) for each extruder, offset of the hotend on the Y axis
 #elif RBV(R2_DUAL)
@@ -351,22 +358,17 @@
  #endif
 
  #if RBV(R2)
-  #define TEMP_SENSOR_0 1
+  #if ENABLED(E3D_HOTEND)
+    #define TEMP_SENSOR_0 5
+  #else
+    #define TEMP_SENSOR_0 1
+  #endif
   #define TEMP_SENSOR_1 0
   #define TEMP_SENSOR_2 0
   #define TEMP_SENSOR_3 0
   #define TEMP_SENSOR_4 0
   #define TEMP_SENSOR_BED 12
  #endif
-
- #if RBV(R2_E3DV6)
-  #define TEMP_SENSOR_0 5
-  #define TEMP_SENSOR_1 0
-  #define TEMP_SENSOR_2 0
-  #define TEMP_SENSOR_3 0
-  #define TEMP_SENSOR_4 0
-  #define TEMP_SENSOR_BED 12
-#endif
 
  #if RBV(C2)
   #define TEMP_SENSOR_0 1
@@ -440,7 +442,7 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
   // Robo R2 24V
-  #if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6)
+  #if RBV(R2) || RBV(R2_DUAL)
     #define  DEFAULT_Kp 23.8
     #define  DEFAULT_Ki 1.7
     #define  DEFAULT_Kd 85.0
@@ -543,14 +545,14 @@
  * details can be tuned in Configuration_adv.h
  */
 
- #if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6)
-#define THERMAL_PROTECTION_HOTENDS // Enable thermal protection for all extruders
-#define THERMAL_PROTECTION_BED     // Enable thermal protection for the heated bed
- #endif
+#if RBV(R2) || RBV(R2_DUAL)
+  #define THERMAL_PROTECTION_HOTENDS // Enable thermal protection for all extruders
+  #define THERMAL_PROTECTION_BED     // Enable thermal protection for the heated bed
+#endif
 
- #if RBV(C2)
-   #define THERMAL_PROTECTION_HOTENDS // Enable thermal protection for all extruders
- #endif
+#if RBV(C2)
+  #define THERMAL_PROTECTION_HOTENDS // Enable thermal protection for all extruders
+#endif
 
 //===========================================================================
 //============================= Mechanical Settings =========================
@@ -684,7 +686,7 @@
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
 #ifdef EXTRUDERS
-  #if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6)
+  #if RBV(R2) || RBV(R2_DUAL)
     #if EXTRUDERS == 1
       //Single
       #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800.00, 145.5 }
@@ -826,7 +828,7 @@
   //#define WAIT_FOR_BED_HEATER     // Wait for bed to heat back up between probes (to improve accuracy)
 #endif
 //#define PROBING_FANS_OFF          // Turn fans off when probing
-//#define DELAY_BEFORE_PROBING 200  // (ms) To prevent vibrations from triggering piezo sensors
+#define DELAY_BEFORE_PROBING 200  // (ms) To prevent vibrations from triggering piezo sensors
 
 // A probe that is deployed and stowed with a solenoid pin (SOL1_PIN)
 //#define SOLENOID_PROBE
@@ -872,12 +874,12 @@
 #define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
 
 // Feedrate (mm/m) for the "accurate" probe of each point
-#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 2.75)
+#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 1.75)
 
 // The number of probes to perform at each point.
 //   Set to 2 for a fast/slow probe, using the second probe result.
 //   Set to 3 or more for slow probes, averaging the results.
-#define MULTIPLE_PROBING 3
+#define MULTIPLE_PROBING 2
 
 /**
  * Z probes require clearance when deploying, stowing, and moving between
@@ -961,7 +963,7 @@
 // @section machine
 
 //Robo R2
-#if RBV(R2) || RBV(R2_E3DV6)
+#if RBV(R2)
 // The size of the print bed
   #define X_BED_SIZE 197
   #define Y_BED_SIZE 197
@@ -1136,9 +1138,9 @@
 
 #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
 
-  #if RBV(R2) || RBV(R2_E3DV6)
+  #if RBV(R2)
   // Set the number of grid points per dimension.
-    #define GRID_MAX_POINTS_X 4
+    #define GRID_MAX_POINTS_X 3
     #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
     // Set the boundaries for probing (where the probe can reach).
@@ -1149,7 +1151,7 @@
 
   #elif RBV(R2_DUAL)
     // Set the number of grid points per dimension.
-  #define GRID_MAX_POINTS_X 4
+  #define GRID_MAX_POINTS_X 3
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   // Set the boundaries for probing (where the probe can reach).
