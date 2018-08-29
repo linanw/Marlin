@@ -140,7 +140,7 @@
 
 #if RBV(R2)
   // If you have the E3D Hotend define this
-  #define E3D_HOTEND
+  //#define E3D_HOTEND
 #endif
 
 // Optional custom name for your RepStrap or other custom machine
@@ -865,7 +865,7 @@
 #define Z_PROBE_OFFSET_FROM_EXTRUDER  0  // Z offset: -below +above  [the nozzle]
 
 // Certain types of probes need to stay away from edges
-#define MIN_PROBE_EDGE 10
+#define MIN_PROBE_EDGE 9
 
 // X and Y axis travel speed (mm/m) between probes
 #define XY_PROBE_SPEED 10000
@@ -951,7 +951,7 @@
 
 //#define UNKNOWN_Z_NO_RAISE // Don't raise Z (lower the bed) if Z is "unknown." For beds that fall when Z is powered off.
 
-//#define Z_HOMING_HEIGHT 4  // (in mm) Minimal z height before homing (G28) for Z clearance above the bed, clamps, ...
+#define Z_HOMING_HEIGHT 10  // (in mm) Minimal z height before homing (G28) for Z clearance above the bed, clamps, ...
                              // Be sure you have this distance over your Z_MAX_POS in case.
 
 // Direction of endstops when homing; 1=MAX, -1=MIN
@@ -1146,7 +1146,7 @@
     // Set the boundaries for probing (where the probe can reach).
     #define LEFT_PROBE_BED_POSITION 10
     #define RIGHT_PROBE_BED_POSITION 186
-    #define FRONT_PROBE_BED_POSITION 35
+    #define FRONT_PROBE_BED_POSITION 30
     #define BACK_PROBE_BED_POSITION 186
 
   #elif RBV(R2_DUAL)
