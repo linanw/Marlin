@@ -618,7 +618,7 @@
     #if EXTRUDERS == 1
       //Single
       #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800.00, 145.5 }
-      #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25 }
+      #define DEFAULT_MAX_FEEDRATE          { 300, 300, 40, 25 }
       #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000 }
     #endif
     #if EXTRUDERS == 2
@@ -795,11 +795,11 @@
 #define XY_PROBE_SPEED 10000
 
 // Speed for the first approach when double-probing (with PROBE_DOUBLE_TOUCH)
-#define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
+#define Z_PROBE_SPEED_FAST (HOMING_FEEDRATE_Z / 2)
 
 // Speed for the "accurate" probe of each point
 #if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6) || RBV(C2)
-  #define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 3)
+  #define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 5)
 #endif
 
 // Use double touch for probing
@@ -1212,7 +1212,7 @@
 
 // Homing speeds (mm/m)
 #define HOMING_FEEDRATE_XY (55*60)  // [robo]
-#define HOMING_FEEDRATE_Z  (15*60)  // [robo]
+#define HOMING_FEEDRATE_Z  (40*60)  // [robo]
 
 //=============================================================================
 //============================= Additional Features ===========================
