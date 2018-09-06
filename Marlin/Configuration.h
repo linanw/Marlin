@@ -618,21 +618,21 @@
     #if EXTRUDERS == 1
       //Single
       #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800.00, 145.5 }
-      #define DEFAULT_MAX_FEEDRATE          { 300, 300, 40, 25 }
+      #define DEFAULT_MAX_FEEDRATE          { 300, 300, 25, 25 }
       #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000 }
     #endif
     #if EXTRUDERS == 2
       //Dual
       #define DISTINCT_E_FACTORS
       #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800.00, 145.5, 371.5 }
-      #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25, 100 }
+      #define DEFAULT_MAX_FEEDRATE          { 300, 300, 25, 25, 100 }
       #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000, 1000 }
     #endif
   #endif
 
   #if RBV(C2)
     #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800.00, 145.5 }
-    #define DEFAULT_MAX_FEEDRATE          { 300, 300, 12, 25 }
+    #define DEFAULT_MAX_FEEDRATE          { 300, 300, 25, 25 }
     #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000 }
   #endif
 #endif
@@ -752,7 +752,7 @@
  * readings with inductive probes and piezo sensors.
  */
 //#define PROBING_HEATERS_OFF       // Turn heaters off when probing
-//#define PROBING_FANS_OFF          // Turn fans off when probing
+#define PROBING_FANS_OFF          // Turn fans off when probing
 #define DELAY_BEFORE_PROBING 200    // [robo] (ms) To prevent vibrations from triggering piezo sensors
 
 // A probe that is deployed and stowed with a solenoid pin (SOL1_PIN)
@@ -792,19 +792,19 @@
 #endif
 
 // X and Y axis travel speed (mm/m) between probes
-#define XY_PROBE_SPEED 10000
+#define XY_PROBE_SPEED 8000
 
 // Speed for the first approach when double-probing (with PROBE_DOUBLE_TOUCH)
-#define Z_PROBE_SPEED_FAST (HOMING_FEEDRATE_Z / 2)
+#define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
 
 // Speed for the "accurate" probe of each point
 #if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6) || RBV(C2)
-  #define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 5)
+  #define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 3)
 #endif
 
 // Use double touch for probing
 #if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6) || RBV(C2)
-  #define PROBE_DOUBLE_TOUCH
+  //#define PROBE_DOUBLE_TOUCH
 #endif
 /**
  * Z probes require clearance when deploying, stowing, and moving between
@@ -1212,8 +1212,14 @@
 
 // Homing speeds (mm/m)
 #define HOMING_FEEDRATE_XY (55*60)  // [robo]
-#define HOMING_FEEDRATE_Z  (40*60)  // [robo]
 
+#if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6)
+  #define HOMING_FEEDRATE_Z  (15*60)  // [robo]
+#endif
+
+#if RBV(C2)
+  #define HOMING_FEEDRATE_Z  (12*60)  // [robo]
+#endif
 //=============================================================================
 //============================= Additional Features ===========================
 //=============================================================================
