@@ -618,21 +618,21 @@
     #if EXTRUDERS == 1
       //Single
       #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800.00, 145.5 }
-      #define DEFAULT_MAX_FEEDRATE          { 300, 300, 25, 25 }
+      #define DEFAULT_MAX_FEEDRATE          { 300, 300, 20, 25 }
       #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000 }
     #endif
     #if EXTRUDERS == 2
       //Dual
       #define DISTINCT_E_FACTORS
       #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800.00, 145.5, 371.5 }
-      #define DEFAULT_MAX_FEEDRATE          { 300, 300, 25, 25, 100 }
+      #define DEFAULT_MAX_FEEDRATE          { 300, 300, 20, 25, 100 }
       #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000, 1000 }
     #endif
   #endif
 
   #if RBV(C2)
     #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800.00, 145.5 }
-    #define DEFAULT_MAX_FEEDRATE          { 300, 300, 25, 25 }
+    #define DEFAULT_MAX_FEEDRATE          { 300, 300, 20, 25 }
     #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000 }
   #endif
 #endif
@@ -752,8 +752,8 @@
  * readings with inductive probes and piezo sensors.
  */
 //#define PROBING_HEATERS_OFF       // Turn heaters off when probing
-#define PROBING_FANS_OFF          // Turn fans off when probing
-#define DELAY_BEFORE_PROBING 200    // [robo] (ms) To prevent vibrations from triggering piezo sensors
+//#define PROBING_FANS_OFF          // Turn fans off when probing
+#define DELAY_BEFORE_PROBING 200    // (ms) To prevent vibrations from triggering piezo sensors // [robo]
 
 // A probe that is deployed and stowed with a solenoid pin (SOL1_PIN)
 //#define SOLENOID_PROBE
@@ -786,26 +786,29 @@
  *    (0,0)
  */
 #if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6) || RBV(C2)
-  #define X_PROBE_OFFSET_FROM_EXTRUDER 2  // X offset: -left  +right  [of the nozzle]
-  #define Y_PROBE_OFFSET_FROM_EXTRUDER 30  // Y offset: -front +behind [the nozzle]
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
+  #define X_PROBE_OFFSET_FROM_EXTRUDER 2   // X offset: -left  +right  [of the nozzle]  // [robo]
+  #define Y_PROBE_OFFSET_FROM_EXTRUDER 30  // Y offset: -front +behind [of the nozzle]  // [robo]
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [of the nozzle]
 #endif
 
 // X and Y axis travel speed (mm/m) between probes
-#define XY_PROBE_SPEED 8000
+#define XY_PROBE_SPEED 8000  // [robo]
 
 // Speed for the first approach when double-probing (with PROBE_DOUBLE_TOUCH)
-#define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
+#define Z_PROBE_SPEED_FAST (HOMING_FEEDRATE_Z / 2)  // [robo]
 
 // Speed for the "accurate" probe of each point
-#if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6) || RBV(C2)
-  #define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 3)
+#if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6)   // [robo]
+  #define Z_PROBE_SPEED_SLOW (5*60)            // [robo]
+#elif RBV(C2)                                  // [robo]
+  #define Z_PROBE_SPEED_SLOW (3.5*60)          // [robo]
+#else
+  #define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 2)
 #endif
 
 // Use double touch for probing
-#if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6) || RBV(C2)
-  //#define PROBE_DOUBLE_TOUCH
-#endif
+//#define PROBE_DOUBLE_TOUCH
+
 /**
  * Z probes require clearance when deploying, stowing, and moving between
  * probe points to avoid hitting the bed and other hardware.
@@ -820,7 +823,7 @@
  * Example: `M851 Z-5` with a CLEARANCE of 4  =>  9mm from bed to nozzle.
  *     But: `M851 Z+1` with a CLEARANCE of 2  =>  2mm from bed to nozzle.
  */
-#define Z_CLEARANCE_DEPLOY_PROBE   10 // Z Clearance for Deploy/Stow
+#define Z_CLEARANCE_DEPLOY_PROBE   5 // Z Clearance for Deploy/Stow
 #define Z_CLEARANCE_BETWEEN_PROBES  5 // Z Clearance between probe points
 
 // For M851 give a range for adjusting the Z probe offset
@@ -873,7 +876,7 @@
 
 //#define NO_MOTION_BEFORE_HOMING  // Inhibit movement until all axes have been homed
 
-#define Z_HOMING_HEIGHT 10  // (in mm) Minimal z height before homing (G28) for Z clearance above the bed, clamps, ...
+#define Z_HOMING_HEIGHT 5  // (in mm) Minimal z height before homing (G28) for Z clearance above the bed, clamps, ...
                              // Be sure you have this distance over your Z_MAX_POS in case.
 
 // Direction of endstops when homing; 1=MAX, -1=MIN
@@ -1211,14 +1214,14 @@
 #endif
 
 // Homing speeds (mm/m)
-#define HOMING_FEEDRATE_XY (55*60)  // [robo]
+#define HOMING_FEEDRATE_XY (50*60)  // [robo]
 
-#if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6)
-  #define HOMING_FEEDRATE_Z  (15*60)  // [robo]
-#endif
-
-#if RBV(C2)
+#if RBV(R2) || RBV(R2_E3DV6) || RBV(R2_DUAL)
+  #define HOMING_FEEDRATE_Z  (20*60)  // [robo]
+#elif RBV(C2)
   #define HOMING_FEEDRATE_Z  (12*60)  // [robo]
+#else
+  #define HOMING_FEEDRATE_Z  (12*60)
 #endif
 //=============================================================================
 //============================= Additional Features ===========================
