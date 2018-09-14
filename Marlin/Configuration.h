@@ -799,9 +799,9 @@
 
 // Speed for the "accurate" probe of each point
 #if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6)   // [robo]
-  #define Z_PROBE_SPEED_SLOW (5*60)            // [robo]
+  #define Z_PROBE_SPEED_SLOW (3*60)            // [robo]
 #elif RBV(C2)                                  // [robo]
-  #define Z_PROBE_SPEED_SLOW (3.5*60)          // [robo]
+  #define Z_PROBE_SPEED_SLOW (3*60)          // [robo]
 #else
   #define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 2)
 #endif
