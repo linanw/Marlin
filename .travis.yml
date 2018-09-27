@@ -20,7 +20,7 @@ before_install:
   - sleep 3
   - export DISPLAY=:1.0
   # install python and platformio
-  - apt-get update && apt-get install python python-pip
+  - sudo apt-get update && sudo apt-get install python python-pip
   - pip install -U platformio
   #
 install:
