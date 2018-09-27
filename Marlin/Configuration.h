@@ -133,6 +133,11 @@
   #define ROBO_BOARD_VERSION BOARD_VERSION_R2
 #endif
 
+// This variable will quickly move the Z-Axis to position Z30 before 
+// starting the first probe move on G36. Comment out this variable to 
+// disable this feature
+#define QUICK_ROBO_Z_MOVE 
+
 #if RBV(R2)
   // If you have the E3D Hotend define this
   //#define E3D_HOTEND
