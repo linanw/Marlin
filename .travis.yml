@@ -19,6 +19,9 @@ before_install:
   - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16"
   - sleep 3
   - export DISPLAY=:1.0
+  # install python and platformio
+  - apt-get update && apt-get install python python-pip
+  - pip install -U platformio
   #
 install:
   #
@@ -212,3 +215,7 @@ script:
 
   - opt_enable MESH_BED_LEVELING DEBUG_LEVELING_FEATURE
   - build_marlin
+  #
+  # Test if platformio will compile all targets
+  #
+  - platformio run
