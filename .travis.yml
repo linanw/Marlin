@@ -19,11 +19,14 @@ before_install:
   - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16"
   - sleep 3
   - export DISPLAY=:1.0
+  # install python and platformio
+  - sudo apt-get update && sudo apt-get install python python-pip
+  - sudo pip install -U platformio
   #
 install:
   #
   # Install arduino 1.6.10
-  - wget http://downloads-02.arduino.cc/arduino-1.6.10-linux64.tar.xz
+  - wget http://downloads.arduino.cc/arduino-1.6.10-linux64.tar.xz
   - tar xf arduino-1.6.10-linux64.tar.xz
   - sudo mv arduino-1.6.10 /usr/local/share/arduino
   - ln -s /usr/local/share/arduino/arduino ${TRAVIS_BUILD_DIR}/buildroot/bin/arduino
@@ -212,3 +215,7 @@ script:
 
   - opt_enable MESH_BED_LEVELING DEBUG_LEVELING_FEATURE
   - build_marlin
+  #
+  # Test if platformio will compile all targets
+  #
+  - platformio run

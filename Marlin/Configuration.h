@@ -128,9 +128,19 @@
 
 // [robo]
 // BUILDING WITH ARDUINO
-// Options are _R2, _C2, _R2_DUAL, r _R2_E3DV6.
+// Options are _R2, _C2, or _R2_DUAL
 #ifndef ROBO_BOARD_VERSION
   #define ROBO_BOARD_VERSION BOARD_VERSION_R2
+#endif
+
+// This variable will quickly move the Z-Axis to position Z30 before 
+// starting the first probe move on G36. Comment out this variable to 
+// disable this feature
+#define QUICK_ROBO_Z_MOVE 
+
+#if RBV(R2)
+  // If you have the E3D Hotend define this
+  //#define E3D_HOTEND
 #endif
 
 // [robo]
@@ -143,10 +153,6 @@
 #endif
 #if RBV(R2_DUAL)
   #define CUSTOM_MACHINE_NAME " Robo R2 Dual Extruder"
-  #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION CUSTOM_MACHINE_NAME
-#endif
-#if RBV(R2_ED3V6)
-  #define CUSTOM_MACHINE_NAME " Robo R2 with E3D V6"
   #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION CUSTOM_MACHINE_NAME
 #else
   #define CUSTOM_MACHINE_NAME " Robo R2"
@@ -169,7 +175,7 @@
 #if RBV(R2_DUAL)
   #define EXTRUDERS 2
 #endif
-#if RBV(R2) || RBV(C2) || RBV(R2_E3DV6)
+#if RBV(R2) || RBV(C2)
   #define EXTRUDERS 1
 #endif
 
@@ -247,7 +253,7 @@
 // The offset has to be X=0, Y=0 for the extruder 0 hotend (default extruder).
 // For the other hotends it is their distance from the extruder 0 hotend.
 
-#if RBV(C2) || RBV(R2) || RBV(R2_E3DV6)
+#if RBV(C2) || RBV(R2)
   //#define HOTEND_OFFSET_X {0.0, 20.00} // (in mm) for each extruder, offset of the hotend on the X axis
   //#define HOTEND_OFFSET_Y {0.0, 5.00}  // (in mm) for each extruder, offset of the hotend on the Y axis
 #elif RBV(R2_DUAL)  // Center to center distance of both filaments holes is 21.5mm on the R2/C2 Extruder
@@ -339,16 +345,11 @@
 #endif
 
 #if RBV(R2)
-  #define TEMP_SENSOR_0 1
-  #define TEMP_SENSOR_1 0
-  #define TEMP_SENSOR_2 0
-  #define TEMP_SENSOR_3 0
-  #define TEMP_SENSOR_4 0
-  #define TEMP_SENSOR_BED 12
-#endif
-
-#if RBV(R2_E3DV6)
-  #define TEMP_SENSOR_0 5
+  #if ENABLED(E3D_HOTEND)
+    #define TEMP_SENSOR_0 5
+  #else
+    #define TEMP_SENSOR_0 1
+  #endif
   #define TEMP_SENSOR_1 0
   #define TEMP_SENSOR_2 0
   #define TEMP_SENSOR_3 0
@@ -426,7 +427,7 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
   // [robo] 24V using 30W heater
-  #if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6)
+  #if RBV(R2) || RBV(R2_DUAL)
     #define  DEFAULT_Kp 23.8
     #define  DEFAULT_Ki 1.7
     #define  DEFAULT_Kd 85.0
@@ -506,7 +507,7 @@
  */
 
 // [robo]
-#if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6)
+#if RBV(R2) || RBV(R2_DUAL)
   #define THERMAL_PROTECTION_HOTENDS // Enable thermal protection for all extruders
   #define THERMAL_PROTECTION_BED     // Enable thermal protection for the heated bed
 #endif
@@ -614,25 +615,25 @@
  // This block is an attempt to make switching the firmware from a single to a dual extruder machine as easy as changing the extruder count
  // [robo]
 #ifdef EXTRUDERS
-  #if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6)
+  #if RBV(R2) || RBV(R2_DUAL)
     #if EXTRUDERS == 1
       //Single
       #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800.00, 145.5 }
-      #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25 }
+      #define DEFAULT_MAX_FEEDRATE          { 300, 300, 20, 25 }
       #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000 }
     #endif
     #if EXTRUDERS == 2
       //Dual
       #define DISTINCT_E_FACTORS
       #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800.00, 145.5, 371.5 }
-      #define DEFAULT_MAX_FEEDRATE          { 300, 300, 15, 25, 100 }
+      #define DEFAULT_MAX_FEEDRATE          { 300, 300, 20, 25, 100 }
       #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000, 1000 }
     #endif
   #endif
 
   #if RBV(C2)
     #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800.00, 145.5 }
-    #define DEFAULT_MAX_FEEDRATE          { 300, 300, 12, 25 }
+    #define DEFAULT_MAX_FEEDRATE          { 300, 300, 20, 25 }
     #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000 }
   #endif
 #endif
@@ -657,7 +658,7 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
-#if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6) || RBV(C2)
+#if RBV(R2) || RBV(R2_DUAL) || RBV(C2)
   #define DEFAULT_XJERK                  8.0  // [robo]
   #define DEFAULT_YJERK                  8.0  // [robo]
   #define DEFAULT_ZJERK                  0.4  // [robo]
@@ -753,7 +754,7 @@
  */
 //#define PROBING_HEATERS_OFF       // Turn heaters off when probing
 //#define PROBING_FANS_OFF          // Turn fans off when probing
-#define DELAY_BEFORE_PROBING 200    // [robo] (ms) To prevent vibrations from triggering piezo sensors
+#define DELAY_BEFORE_PROBING 200    // (ms) To prevent vibrations from triggering piezo sensors // [robo]
 
 // A probe that is deployed and stowed with a solenoid pin (SOL1_PIN)
 //#define SOLENOID_PROBE
@@ -785,27 +786,24 @@
  *      O-- FRONT --+
  *    (0,0)
  */
-#if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6) || RBV(C2)
-  #define X_PROBE_OFFSET_FROM_EXTRUDER 2  // X offset: -left  +right  [of the nozzle]
-  #define Y_PROBE_OFFSET_FROM_EXTRUDER 30  // Y offset: -front +behind [the nozzle]
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
+#if RBV(R2) || RBV(R2_DUAL) || RBV(C2)
+  #define X_PROBE_OFFSET_FROM_EXTRUDER 2   // X offset: -left  +right  [of the nozzle]  // [robo]
+  #define Y_PROBE_OFFSET_FROM_EXTRUDER 30  // Y offset: -front +behind [of the nozzle]  // [robo]
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [of the nozzle]
 #endif
 
 // X and Y axis travel speed (mm/m) between probes
-#define XY_PROBE_SPEED 10000
+#define XY_PROBE_SPEED 8000  // [robo]
 
 // Speed for the first approach when double-probing (with PROBE_DOUBLE_TOUCH)
-#define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
+#define Z_PROBE_SPEED_FAST (6*60)  // [robo]
 
 // Speed for the "accurate" probe of each point
-#if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6) || RBV(C2)
-  #define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 3)
-#endif
+#define Z_PROBE_SPEED_SLOW (3*60)            // [robo]
 
 // Use double touch for probing
-#if RBV(R2) || RBV(R2_DUAL) || RBV(R2_E3DV6) || RBV(C2)
-  #define PROBE_DOUBLE_TOUCH
-#endif
+//#define PROBE_DOUBLE_TOUCH
+
 /**
  * Z probes require clearance when deploying, stowing, and moving between
  * probe points to avoid hitting the bed and other hardware.
@@ -820,7 +818,7 @@
  * Example: `M851 Z-5` with a CLEARANCE of 4  =>  9mm from bed to nozzle.
  *     But: `M851 Z+1` with a CLEARANCE of 2  =>  2mm from bed to nozzle.
  */
-#define Z_CLEARANCE_DEPLOY_PROBE   10 // Z Clearance for Deploy/Stow
+#define Z_CLEARANCE_DEPLOY_PROBE   5 // Z Clearance for Deploy/Stow
 #define Z_CLEARANCE_BETWEEN_PROBES  5 // Z Clearance between probe points
 
 // For M851 give a range for adjusting the Z probe offset
@@ -873,7 +871,7 @@
 
 //#define NO_MOTION_BEFORE_HOMING  // Inhibit movement until all axes have been homed
 
-#define Z_HOMING_HEIGHT 10  // (in mm) Minimal z height before homing (G28) for Z clearance above the bed, clamps, ...
+#define Z_HOMING_HEIGHT 5  // (in mm) Minimal z height before homing (G28) for Z clearance above the bed, clamps, ...
                              // Be sure you have this distance over your Z_MAX_POS in case.
 
 // Direction of endstops when homing; 1=MAX, -1=MIN
@@ -885,7 +883,7 @@
 // @section machine
 
 //Robo R2
-#if RBV(R2) || RBV(R2_E3DV6)
+#if RBV(R2)
   // The size of the print bed
   #define X_BED_SIZE 197
   #define Y_BED_SIZE 197
@@ -1028,7 +1026,7 @@
 
 #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
 
-  #if RBV(R2) || RBV(R2_E3DV6)
+  #if RBV(R2)
     // Set the number of grid points per dimension.
     #define GRID_MAX_POINTS_X 3
     #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
@@ -1089,7 +1087,7 @@
 
   // 3 arbitrary points to probe.
   // A simple cross-product is used to estimate the plane of the bed.
-  #if RBV(R2) || RBV(R2_E3DV6)
+  #if RBV(R2)
     #define ABL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
     #define ABL_PROBE_PT_1_Y 186
     #define ABL_PROBE_PT_2_X 10
@@ -1122,7 +1120,7 @@
   #define GRID_MAX_POINTS_X 10      // Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
-  #if RBV(R2) || RBV(R2_E3DV6)
+  #if RBV(R2)
     #define UBL_PROBE_PT_1_X 10       // Probing points for 3-Point leveling of the mesh
     #define UBL_PROBE_PT_1_Y 186
     #define UBL_PROBE_PT_2_X 10
@@ -1211,9 +1209,15 @@
 #endif
 
 // Homing speeds (mm/m)
-#define HOMING_FEEDRATE_XY (55*60)  // [robo]
-#define HOMING_FEEDRATE_Z  (15*60)  // [robo]
+#define HOMING_FEEDRATE_XY (50*60)  // [robo]
 
+#if RBV(R2) || RBV(R2_DUAL)
+  #define HOMING_FEEDRATE_Z  (20*60)  // [robo]
+#elif RBV(C2)
+  #define HOMING_FEEDRATE_Z  (12*60)  // [robo]
+#else
+  #define HOMING_FEEDRATE_Z  (12*60)
+#endif
 //=============================================================================
 //============================= Additional Features ===========================
 //=============================================================================

@@ -5809,6 +5809,22 @@ void home_all_axes() { gcode_G28(true); }
       //get the first point based off of the probe offsets
       //This should get us the first point in the probe matrix
 
+      //capture the old feedrate. Prepend with robo because I'm paranoid about clashing variables.
+      float robo_old_feedrate_mm_s = feedrate_mm_s;
+
+      #if ENABLED(QUICK_ROBO_Z_MOVE)
+        current_position[Z_AXIS] = 30;
+        #if RBV(C2)
+          feedrate_mm_s = 900.00; //set feedrate to 900
+        #elif RBV(R2) || RBV(R2_DUAL)
+          feedrate_mm_s = 1200.00; //set feedrate to 1200
+        #else
+          feedrate_mm_s = 900.00; //just in case default
+        #endif
+        line_to_current_position();
+        feedrate_mm_s = robo_old_feedrate_mm_s;
+      #endif
+
       #if ENABLED(AUTO_BED_LEVELING_BILINEAR) || ENABLED(AUTO_BED_LEVELING_LINEAR)
         const float rnx = LEFT_PROBE_BED_POSITION - (X_PROBE_OFFSET_FROM_EXTRUDER), rny = FRONT_PROBE_BED_POSITION - (Y_PROBE_OFFSET_FROM_EXTRUDER);
       #elif ENABLED(AUTO_BED_LEVELING_3POINT)
@@ -5817,10 +5833,6 @@ void home_all_axes() { gcode_G28(true); }
          const float rnx = UBL_PROBE_PT_1_X - (X_PROBE_OFFSET_FROM_EXTRUDER), rny = UBL_PROBE_PT_1_Y - (Y_PROBE_OFFSET_FROM_EXTRUDER);
       #endif
 
-
-      //capture the old feedrate. Prepend with robo because I'm paranoid about clashing variables.
-      float robo_old_feedrate_mm_s = feedrate_mm_s;
-
       //define where we want to go
       current_position[X_AXIS] = LOGICAL_X_POSITION(rnx);
       current_position[Y_AXIS] = LOGICAL_Y_POSITION(rny);
@@ -5828,7 +5840,7 @@ void home_all_axes() { gcode_G28(true); }
       //Just in case we want to have two different feed Rates / Positioning based on C2 or R2
       #if RBV(C2)
         feedrate_mm_s = 125.00; //set feedrate to 125
-      #elif RBV(R2) || RBV(R2_DUAL)  || RBV(R2_E3DV6)
+      #elif RBV(R2) || RBV(R2_DUAL)
         feedrate_mm_s = 125.00; //set feedrate to 125
       #else
         feedrate_mm_s = 125.00; //just in case default
