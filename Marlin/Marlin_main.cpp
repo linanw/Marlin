@@ -5828,7 +5828,7 @@ void home_all_axes() { gcode_G28(true); }
       //Just in case we want to have two different feed Rates / Positioning based on C2 or R2
       #if RBV(C2)
         feedrate_mm_s = 125.00; //set feedrate to 125
-      #elif RBV(R2) || RBV(R2_DUAL)  || RBV(R2_E3DV6)
+      #elif RBV(R2) || RBV(R2_DUAL)
         feedrate_mm_s = 125.00; //set feedrate to 125
       #else
         feedrate_mm_s = 125.00; //just in case default
