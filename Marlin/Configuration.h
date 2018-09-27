@@ -133,10 +133,6 @@
   #define ROBO_BOARD_VERSION BOARD_VERSION_R2
 #endif
 
-#ifndef ROBO_PRINTER
-  #define ROBO_PRINTER
-#endif
-
 #if RBV(R2)
   // If you have the E3D Hotend define this
   //#define E3D_HOTEND
