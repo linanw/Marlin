@@ -219,3 +219,13 @@ script:
   # Test if platformio will compile all targets
   #
   - platformio run
+
+deploy:
+  provider: releases
+  api_key: $DEPLOY_TOKEN
+  skip_cleanup: true
+  on:
+    tags: true
+  file_glob: true
+  file:
+    - "Marlin_Build/*/Marlin*.hex"
