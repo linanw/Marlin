@@ -218,6 +218,7 @@ script:
   #
   # Test if platformio will compile all targets
   #
+  - restore_configs
   - platformio run
 
 deploy:
