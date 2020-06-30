@@ -633,7 +633,7 @@
 
   #if RBV(C2)
     #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800.00, 145.5 }
-    #define DEFAULT_MAX_FEEDRATE          { 300, 300, 20, 25 }
+    #define DEFAULT_MAX_FEEDRATE          { 300, 300, 43, 25 } // linanw changed from 20
     #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000 }
   #endif
 #endif
@@ -1214,7 +1214,7 @@
 #if RBV(R2) || RBV(R2_DUAL)
   #define HOMING_FEEDRATE_Z  (20*60)  // [robo]
 #elif RBV(C2)
-  #define HOMING_FEEDRATE_Z  (12*60)  // [robo]
+  #define HOMING_FEEDRATE_Z  (40*60)  // [robo] //linanw changed from 12*60
 #else
   #define HOMING_FEEDRATE_Z  (12*60)
 #endif
