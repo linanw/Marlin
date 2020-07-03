@@ -5,7 +5,7 @@
 # @Last Modified time: 2018-02-14 17:06:51
 
 Import("env")
-print env['PROGNAME']
+print(env['PROGNAME'])
 #get flags from build flags
 my_flags = env.ParseFlags(env['BUILD_FLAGS'])
 defines = {k: v for (k, v) in my_flags.get("CPPDEFINES")}
@@ -15,9 +15,9 @@ version = defines.get("ROBO_VERSION")
 model = defines.get("ROBO_MODEL")
 name = str(version) + "_" + str(model)
 
-print "\n#############################################"
-print name
-print "#############################################\n"
+print("\n#############################################")
+print(name)
+print("#############################################\n")
 
 #add custom action after hex is built. Overwriting PROGNAME did not work, This will make a hex with a custom name
 env.AddPostAction(

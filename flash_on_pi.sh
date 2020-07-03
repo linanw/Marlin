@@ -1,0 +1,1 @@
+avrdude -p m2560 -c wiring -P /dev/ttyACM0 -b 115200 -F -v -U flash:w:./Marlin_1.1.6_RoboVersion_1.2.6_C2.hex -D
